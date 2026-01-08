@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Services\Bot;
+namespace App\Modulses\Bot;
 
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 
 class Handler extends WebhookHandler
 {
-    public function start()
+
+    public function __construct(
+
+    ) {}
+
+    public function start(string $payload)
     {
 
 

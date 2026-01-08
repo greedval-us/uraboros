@@ -1,0 +1,114 @@
+{
+  "main_menu": {
+    "title": "Основное меню",
+    "buttons": {
+      "monitoring": "📡 Мониторинг",
+      "search": "🔍 Поиск",
+      "account": "👤 Аккаунт",
+      "settings": "⚙️ Настройки",
+      "help": "❓ Помощь"
+    }
+  },
+  "monitoring": {
+    "screen": "Что вы хотите мониторить?",
+    "inline": {
+      "channels": "📢 Каналы",
+      "chats": "💬 Чаты",
+      "messages": "📝 Сообщения",
+      "users": "👤 Пользователи",
+      "add_object": "➕ Добавить объект"
+    },
+    "channels": {
+      "inline": {
+        "add_channel": "➕ Добавить канал",
+        "my_channels": "📋 Мои каналы (N)",
+        "settings": "⚙️ Настройки",
+        "back": "⬅️ Назад"
+      },
+      "card": {
+        "title": "Мой канал",
+        "name": "📢 @channel_name",
+        "status": "Статус: 🟢 Активен",
+        "messages": "Сообщений: 12 340",
+        "last_message": "Последнее: 5 мин назад"
+      },
+      "card_inline": {
+        "notifications": "🔔 Уведомления",
+        "stats": "📊 Статистика",
+        "filters": "✏️ Фильтры",
+        "delete": "❌ Удалить"
+      }
+    },
+    "messages": {
+      "inline": {
+        "new_filter": "➕ Новый фильтр",
+        "my_filters": "📂 Мои фильтры",
+        "history": "📄 История",
+        "back": "⬅️ Назад"
+      },
+      "filter": {
+        "keywords": "Ключевые слова: crypto, ton",
+        "source": "Источник: 12 каналов",
+        "trigger": "Триггер: новое сообщение"
+      },
+      "filter_inline": {
+        "edit": "✏️ Изменить",
+        "toggle": "🔕 Вкл/Выкл",
+        "delete": "🗑 Удалить"
+      }
+    },
+    "users": {
+      "inline": {
+        "add_user": "➕ Добавить пользователя",
+        "list": "📋 Список",
+        "activity": "📊 Активность",
+        "back": "⬅️ Назад"
+      }
+    }
+  },
+  "search": {
+    "screen": "Поиск по базе",
+    "inline": {
+      "messages": "🔎 По сообщениям",
+      "users": "👤 По пользователям",
+      "channels": "📢 По каналам"
+    }
+  },
+  "account": {
+    "screen": "👤 Профиль",
+    "info": {
+      "id": "ID: 123456",
+      "plan": "Тариф: Free / Pro",
+      "language": "Язык: 🇷🇺 RU",
+      "objects": "Объекты: 3 / 20"
+    },
+    "inline": {
+      "plans": "💳 Тарифы",
+      "stats": "📈 Статистика",
+      "security": "🔐 Безопасность",
+      "logout": "🚪 Выйти"
+    }
+  },
+  "settings": {
+    "inline": {
+      "language": "🌐 Язык",
+      "notifications": "🔔 Уведомления",
+      "update_frequency": "⏱ Частота обновления",
+      "clear_data": "🧹 Очистка данных",
+      "back": "⬅️ Назад"
+    },
+    "language": {
+      "ru": "🇷🇺 Русский",
+      "en": "🇺🇸 English"
+    }
+  },
+  "help": {
+    "inline": {
+      "how_it_works": "📘 Как работает бот",
+      "examples": "📌 Примеры",
+      "faq": "❓ FAQ",
+      "support": "📩 Поддержка",
+      "rules": "📜 Правила"
+    }
+  }
+}
