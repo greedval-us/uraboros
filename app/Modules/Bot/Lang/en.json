@@ -1,0 +1,114 @@
+{
+  "main_menu": {
+    "title": "Main Menu",
+    "buttons": {
+      "monitoring": "📡 Monitoring",
+      "search": "🔍 Search",
+      "account": "👤 Account",
+      "settings": "⚙️ Settings",
+      "help": "❓ Help"
+    }
+  },
+  "monitoring": {
+    "screen": "What would you like to monitor?",
+    "inline": {
+      "channels": "📢 Channels",
+      "chats": "💬 Chats",
+      "messages": "📝 Messages",
+      "users": "👤 Users",
+      "add_object": "➕ Add Object"
+    },
+    "channels": {
+      "inline": {
+        "add_channel": "➕ Add Channel",
+        "my_channels": "📋 My Channels (N)",
+        "settings": "⚙️ Settings",
+        "back": "⬅️ Back"
+      },
+      "card": {
+        "title": "My Channel",
+        "name": "📢 @channel_name",
+        "status": "Status: 🟢 Active",
+        "messages": "Messages: 12,340",
+        "last_message": "Last: 5 min ago"
+      },
+      "card_inline": {
+        "notifications": "🔔 Notifications",
+        "stats": "📊 Statistics",
+        "filters": "✏️ Filters",
+        "delete": "❌ Delete"
+      }
+    },
+    "messages": {
+      "inline": {
+        "new_filter": "➕ New Filter",
+        "my_filters": "📂 My Filters",
+        "history": "📄 History",
+        "back": "⬅️ Back"
+      },
+      "filter": {
+        "keywords": "Keywords: crypto, ton",
+        "source": "Source: 12 channels",
+        "trigger": "Trigger: new message"
+      },
+      "filter_inline": {
+        "edit": "✏️ Edit",
+        "toggle": "🔕 On/Off",
+        "delete": "🗑 Delete"
+      }
+    },
+    "users": {
+      "inline": {
+        "add_user": "➕ Add User",
+        "list": "📋 List",
+        "activity": "📊 Activity",
+        "back": "⬅️ Back"
+      }
+    }
+  },
+  "search": {
+    "screen": "Database Search",
+    "inline": {
+      "messages": "🔎 By Messages",
+      "users": "👤 By Users",
+      "channels": "📢 By Channels"
+    }
+  },
+  "account": {
+    "screen": "👤 Profile",
+    "info": {
+      "id": "ID: 123456",
+      "plan": "Plan: Free / Pro",
+      "language": "Language: 🇺🇸 EN",
+      "objects": "Objects: 3 / 20"
+    },
+    "inline": {
+      "plans": "💳 Plans",
+      "stats": "📈 Statistics",
+      "security": "🔐 Security",
+      "logout": "🚪 Logout"
+    }
+  },
+  "settings": {
+    "inline": {
+      "language": "🌐 Language",
+      "notifications": "🔔 Notifications",
+      "update_frequency": "⏱ Update Frequency",
+      "clear_data": "🧹 Clear Data",
+      "back": "⬅️ Back"
+    },
+    "language": {
+      "ru": "🇷🇺 Russian",
+      "en": "🇺🇸 English"
+    }
+  },
+  "help": {
+    "inline": {
+      "how_it_works": "📘 How the Bot Works",
+      "examples": "📌 Examples",
+      "faq": "❓ FAQ",
+      "support": "📩 Support",
+      "rules": "📜 Rules"
+    }
+  }
+}
