@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\Bot\Handler;
+use App\Modules\Bot\Handler;
 use DefStudio\Telegraph\Telegraph;
 
 return [

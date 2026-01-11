@@ -90,19 +90,18 @@
     }
   },
   "settings": {
+    "screen": "Настройки",
     "inline": {
-      "language": "🌐 Язык",
-      "notifications": "🔔 Уведомления",
-      "update_frequency": "⏱ Частота обновления",
-      "clear_data": "🧹 Очистка данных",
-      "back": "⬅️ Назад"
+      "language": "🌐 Язык"
     },
     "language": {
+      "screen": "Выберите язык",
       "ru": "🇷🇺 Русский",
       "en": "🇺🇸 English"
     }
   },
   "help": {
+    "screen": "Помощь",
     "inline": {
       "how_it_works": "📘 Как работает бот",
       "examples": "📌 Примеры",

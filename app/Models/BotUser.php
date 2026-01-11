@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -91,5 +92,59 @@ class BotUser extends Model
     public function referrals()
     {
         return $this->hasMany(BotUser::class, 'referred_by');
+    }
+
+    /**
+     * Получение бессплатных запросов
+     */
+    public function activateFreeRequests(): array
+    {
+        $now = Carbon::now();
+        $nextActivation = $this->free_requests_reset_at ? $this->free_requests_reset_at->copy()->addDay() : null;
+
+        if (!$this->free_requests_reset_at || $now->greaterThanOrEqualTo($nextActivation)) {
+            $this->requests += 5;
+            $this->free_requests_reset_at = $now;
+            $this->save();
+
+            return [
+                'can_activate' => true,
+                'seconds_left' => 86400,
+            ];
+        }
+
+        $secondsLeft = $now->diffInSeconds($nextActivation, false);
+
+        return [
+            'can_activate' => false,
+            'seconds_left' => $secondsLeft,
+        ];
+    }
+
+    /**
+    * Привязать пользователя к рефереру по коду
+    */
+    public function applyReferralCode(string $referralCode): bool
+    {
+        if ($this->referral_code === $referralCode) {
+            return false;
+        }
+
+        if ($this->referred_by) {
+            return false;
+        }
+
+        $referrer = self::where('referral_code', $referralCode)->first();
+
+        if (!$referrer) {
+            return false;
+        }
+
+        $this->referred_by = $referrer->id;
+        $this->save();
+
+        $referrer->increment('referral_count');
+
+        return true;
     }
 }

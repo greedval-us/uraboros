@@ -84,12 +84,11 @@
     },
     "inline": {
       "plans": "💳 Plans",
-      "stats": "📈 Statistics",
-      "security": "🔐 Security",
-      "logout": "🚪 Logout"
+      "stats": "📈 Statistics"
     }
   },
   "settings": {
+    "screen": "Settings",
     "inline": {
       "language": "🌐 Language",
       "notifications": "🔔 Notifications",
@@ -98,6 +97,7 @@
       "back": "⬅️ Back"
     },
     "language": {
+      "screen": "Make language",
       "ru": "🇷🇺 Russian",
       "en": "🇺🇸 English"
     }

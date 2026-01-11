@@ -2,15 +2,15 @@
 
 namespace App\Modules\Bot\Enums;
 
-enum KeyboardKey: string
+enum CommandKey: string
 {
-    case ReplyMenu = 'reply_menu';
+    case Start = 'start';
     case Monitoring = 'monitoring';
-    case Search = 'search ';
+    case Search = 'search';
     case Account = 'account';
     case Settings = 'settings';
-    case Language = 'language';
     case Help = 'help';
+    case Language = 'language';
     case HowWorks = 'how_it_works';
     case Examples = 'examples';
     case Faq = 'faq';

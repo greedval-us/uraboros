@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modulses\Bot\Services;
+namespace App\Modules\Bot\Services;
 
 class LangService
 {
@@ -9,10 +9,10 @@ class LangService
     public static function get(string $lang, string $key, array $replace = []): string
     {
         if (!isset(self::$translations[$lang])) {
-            $path = base_path("app/Modulses/Bot/Lang/{$lang}.json");
+            $path = base_path("app/Modules/Bot/Lang/{$lang}.json");
 
             if (!file_exists($path)) {
-                $path = base_path("app/Modulses/Bot/Lang/en.json");
+                $path = base_path("app/Modules/Bot/Lang/en.json");
             }
 
             self::$translations[$lang] = json_decode(file_get_contents($path), true);
