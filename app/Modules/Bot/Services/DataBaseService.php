@@ -33,6 +33,19 @@ class DataBaseService
 
         $this->updateExistingUser($user, $data);
     }
+    public function getUser(int $id): BotUser|null
+    {
+        $user = BotUser::where('telegram_id', $id)->first();
+        return $user;
+    }
+
+
+    public function getFreeRequest(int $id): array
+    {
+        $user = BotUser::where('telegram_id', $id)->first();
+        return $user->activateFreeRequests();
+    }
+
 
     private function extractReferralCode(string $payload): ?string
     {

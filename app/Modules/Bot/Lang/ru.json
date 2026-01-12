@@ -4,26 +4,25 @@
     "buttons": {
       "monitoring": "📡 Мониторинг",
       "search": "🔍 Поиск",
+      "analytics": "📊 Аналитика",
       "account": "👤 Аккаунт",
       "settings": "⚙️ Настройки",
-      "help": "❓ Помощь"
+      "help": "❓ Помощь",
+      "back": "⬅️ Назад"
     }
   },
   "monitoring": {
     "screen": "Что вы хотите мониторить?",
     "inline": {
-      "channels": "📢 Каналы",
-      "chats": "💬 Чаты",
+      "channels": "📢 Каналы / 💬 Чаты",
       "messages": "📝 Сообщения",
-      "users": "👤 Пользователи",
-      "add_object": "➕ Добавить объект"
+      "users": "👤 Пользователи"
     },
     "channels": {
       "inline": {
         "add_channel": "➕ Добавить канал",
         "my_channels": "📋 Мои каналы (N)",
-        "settings": "⚙️ Настройки",
-        "back": "⬅️ Назад"
+        "settings": "⚙️ Настройки"
       },
       "card": {
         "title": "Мой канал",
@@ -43,8 +42,7 @@
       "inline": {
         "new_filter": "➕ Новый фильтр",
         "my_filters": "📂 Мои фильтры",
-        "history": "📄 История",
-        "back": "⬅️ Назад"
+        "history": "📄 История"
       },
       "filter": {
         "keywords": "Ключевые слова: crypto, ton",
@@ -61,8 +59,7 @@
       "inline": {
         "add_user": "➕ Добавить пользователя",
         "list": "📋 Список",
-        "activity": "📊 Активность",
-        "back": "⬅️ Назад"
+        "activity": "📊 Активность"
       }
     }
   },
@@ -71,22 +68,22 @@
     "inline": {
       "messages": "🔎 По сообщениям",
       "users": "👤 По пользователям",
-      "channels": "📢 По каналам"
+      "channels": "📢 По каналам / 💬 Чатам"
     }
   },
   "account": {
     "screen": "👤 Профиль",
-    "info": {
-      "id": "ID: 123456",
-      "plan": "Тариф: Free / Pro",
-      "language": "Язык: 🇷🇺 RU",
-      "objects": "Объекты: 3 / 20"
-    },
     "inline": {
+      "profile": "👤 Профиль",
       "plans": "💳 Тарифы",
-      "stats": "📈 Статистика",
-      "security": "🔐 Безопасность",
-      "logout": "🚪 Выйти"
+      "stats": "📈 Статистика"
+    }
+  },
+  "profile": {
+    "screen": "👤 <b>Профиль пользователя</b>\n<code>————————————</code>\n\n<b>ID:</b> :id\n💎 <b>Премиум:</b> :premium\n\n⏳ <b>Активен до:</b> :end\n\n📩 <b>Оставшиеся запросы:</b> <code>:requests</code>\n\n🎁 <b>Бесплатные запросы:</b> :free_requests\n <b>Получить через:  </b><code>:time</code>\n\n",
+    "inline": {
+      "free": "🎁 Бессплатные запросы",
+      "back": "⬅️ Назад"
     }
   },
   "settings": {
@@ -97,7 +94,8 @@
     "language": {
       "screen": "Выберите язык",
       "ru": "🇷🇺 Русский",
-      "en": "🇺🇸 English"
+      "en": "🇺🇸 English",
+      "back": "⬅️ Назад"
     }
   },
   "help": {
@@ -110,4 +108,5 @@
       "rules": "📜 Правила"
     }
   }
+
 }

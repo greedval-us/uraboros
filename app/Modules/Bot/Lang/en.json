@@ -4,6 +4,7 @@
     "buttons": {
       "monitoring": "📡 Monitoring",
       "search": "🔍 Search",
+      "analytics": "📊 Analytics",
       "account": "👤 Account",
       "settings": "⚙️ Settings",
       "help": "❓ Help"
@@ -12,18 +13,15 @@
   "monitoring": {
     "screen": "What would you like to monitor?",
     "inline": {
-      "channels": "📢 Channels",
-      "chats": "💬 Chats",
+      "channels": "📢 Channels / 💬 Chats",
       "messages": "📝 Messages",
-      "users": "👤 Users",
-      "add_object": "➕ Add Object"
+      "users": "👤 Users"
     },
     "channels": {
       "inline": {
         "add_channel": "➕ Add Channel",
         "my_channels": "📋 My Channels (N)",
-        "settings": "⚙️ Settings",
-        "back": "⬅️ Back"
+        "settings": "⚙️ Settings"
       },
       "card": {
         "title": "My Channel",
@@ -43,8 +41,7 @@
       "inline": {
         "new_filter": "➕ New Filter",
         "my_filters": "📂 My Filters",
-        "history": "📄 History",
-        "back": "⬅️ Back"
+        "history": "📄 History"
       },
       "filter": {
         "keywords": "Keywords: crypto, ton",
@@ -61,8 +58,7 @@
       "inline": {
         "add_user": "➕ Add User",
         "list": "📋 List",
-        "activity": "📊 Activity",
-        "back": "⬅️ Back"
+        "activity": "📊 Activity"
       }
     }
   },
@@ -76,25 +72,24 @@
   },
   "account": {
     "screen": "👤 Profile",
-    "info": {
-      "id": "ID: 123456",
-      "plan": "Plan: Free / Pro",
-      "language": "Language: 🇺🇸 EN",
-      "objects": "Objects: 3 / 20"
-    },
     "inline": {
+      "profile": "👤 Profile",
       "plans": "💳 Plans",
       "stats": "📈 Statistics"
+    }
+  },
+  "profile": {
+    "screen": "👤 <b>User Profile</b>\n<code>————————————</code>\n\n<b>User ID:</b> :id\n💎 <b>Premium status:</b> :premium\n\n⏳ <b>Active until:</b> :end\n\n📩 <b>Remaining requests:</b> <code>:requests</code>\n",
+    "inline": {
+      "free": "🎁 Бессплатные запросы",
+      "back": "⬅️ Back"
     }
   },
   "settings": {
     "screen": "Settings",
     "inline": {
       "language": "🌐 Language",
-      "notifications": "🔔 Notifications",
-      "update_frequency": "⏱ Update Frequency",
-      "clear_data": "🧹 Clear Data",
-      "back": "⬅️ Back"
+      "notifications": "🔔 Notifications"
     },
     "language": {
       "screen": "Make language",

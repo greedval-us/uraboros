@@ -18,6 +18,7 @@ class AccountKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
+            Button::make($t('account.inline.profile'))->action('account')->param('type', 'profile'),
             Button::make($t('account.inline.plans'))->action('account')->param('type', 'plans'),
             Button::make($t('account.inline.stats'))->action('account')->param('type', 'stats'),
         ]);

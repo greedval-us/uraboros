@@ -20,6 +20,7 @@ class LanguageKeyboard implements KeyboardBuilderInterface
         return Keyboard::make()->buttons([
             Button::make($t('settings.language.ru'))->action('language')->param('type', 'ru'),
             Button::make($t('settings.language.en'))->action('language')->param('type', 'en'),
+            Button::make($t('settings.language.back'))->action('language')->param('type', 'back'),
         ]);
     }
 }

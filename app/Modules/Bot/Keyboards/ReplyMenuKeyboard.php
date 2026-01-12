@@ -24,6 +24,9 @@ class ReplyMenuKeyboard implements KeyboardBuilderInterface
                 ReplyButton::make($t('main_menu.buttons.search'))
             ])
             ->row([
+                ReplyButton::make($t('main_menu.buttons.analytics'))->width(2)
+            ])
+            ->row([
                 ReplyButton::make($t('main_menu.buttons.account')),
                 ReplyButton::make($t('main_menu.buttons.settings'))
             ])

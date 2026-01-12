@@ -19,11 +19,9 @@ class MonitoringKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('monitoring.inline.channels'))->action('monitoring')->param('type', 'channels'),
-            Button::make($t('monitoring.inline.chats'))->action('monitoring')->param('type', 'chats'),
-            Button::make($t('monitoring.inline.messages'))->action('monitoring')->param('type', 'messages'),
-            Button::make($t('monitoring.inline.users'))->action('monitoring')->param('type', 'users'),
-            Button::make($t('monitoring.inline.add_object'))->action('monitoring')->param('type', 'add_object'),
+            Button::make($t('monitoring.inline.channels'))->action('monitoring')->param('type', 'm_channels'),
+            Button::make($t('monitoring.inline.messages'))->action('monitoring')->param('type', 'm_messages'),
+            Button::make($t('monitoring.inline.users'))->action('monitoring')->param('type', 'm_users'),
         ]);
     }
 }

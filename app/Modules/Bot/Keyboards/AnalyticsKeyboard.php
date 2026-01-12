@@ -7,7 +7,7 @@ use App\Modules\Bot\Services\LangService;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Keyboard\Button;
 
-class SearchKeyboard implements KeyboardBuilderInterface
+class AnalyticsKeyboard implements KeyboardBuilderInterface
 {
     public function __construct(
         private readonly LangService $langService
@@ -18,9 +18,7 @@ class SearchKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('search.inline.messages'))->action('search')->param('type', 's_messages'),
-            Button::make($t('search.inline.users'))->action('search')->param('type', 's_users'),
-            Button::make($t('search.inline.channels'))->action('search')->param('type', 's_channels'),
+            Button::make($t('account.inline.profile'))->action('account')->param('type', 'profile'),
         ]);
     }
 }

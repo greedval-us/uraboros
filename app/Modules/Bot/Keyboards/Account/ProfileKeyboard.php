@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\Bot\Keyboards;
+namespace App\Modules\Bot\Keyboards\Account;
 
 use App\Modules\Bot\Contracts\KeyboardBuilderInterface;
 use App\Modules\Bot\Services\LangService;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Keyboard\Button;
 
-class SearchKeyboard implements KeyboardBuilderInterface
+class ProfileKeyboard implements KeyboardBuilderInterface
 {
     public function __construct(
         private readonly LangService $langService
@@ -18,9 +18,8 @@ class SearchKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('search.inline.messages'))->action('search')->param('type', 's_messages'),
-            Button::make($t('search.inline.users'))->action('search')->param('type', 's_users'),
-            Button::make($t('search.inline.channels'))->action('search')->param('type', 's_channels'),
+            Button::make($t('profile.inline.free'))->action('profile')->param('type', 'free'),
+            Button::make($t('profile.inline.back'))->action('profile')->param('type', 'back'),
         ]);
     }
 }

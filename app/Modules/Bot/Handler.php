@@ -4,6 +4,7 @@ namespace App\Modules\Bot;
 
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\DataBaseService;
+use App\Modules\Bot\Services\DataMapperService;
 use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
@@ -18,7 +19,8 @@ class Handler extends WebhookHandler
         private readonly LangService $langService,
         private readonly BotActionService $botActionService,
         private readonly DataBaseService $dataBaseService,
-        private readonly StorageService $storageService
+        private readonly StorageService $storageService,
+        private readonly DataMapperService $dataMapperService
     ) {}
 
     public function start(string $payload = '')
@@ -35,11 +37,50 @@ class Handler extends WebhookHandler
 
     public function monitoring()
     {
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $message_id = $this->storageService->get($this->chat, StorageKey::MESSAGE->value);
+        $callback = $this->callbackQuery->data()->get('type');
 
+        switch ($callback) {
+            case CommandKey::ChannelsM->value:
+                
+                break;
+            case CommandKey::MessagesM->value:
+
+                break;
+            case CommandKey::UsersM->value:
+
+                break;
+            default:
+
+                break;
+        }
     }
 
     public function search()
     {
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $message_id = $this->storageService->get($this->chat, StorageKey::MESSAGE->value);
+        $callback = $this->callbackQuery->data()->get('type');
+
+        switch ($callback) {
+            case CommandKey::ChannelsS->value:
+
+                break;
+            case CommandKey::MessagesS->value:
+
+                break;
+            case CommandKey::UsersS->value:
+
+                break;
+            default:
+
+                break;
+        }
+    }
+    public function analytics()
+    {
+
 
     }
 
@@ -52,11 +93,44 @@ class Handler extends WebhookHandler
         $this->botActionService->delete($this->chat, $message_id);
 
         switch ($callback) {
+            case CommandKey::Profile->value:
+                $user = $this->dataBaseService->getUser($this->chat->chat_id);
+                $replace = $this->dataMapperService->getProfileData($user);
+                $mes_id = $this->botActionService->sendInline(CommandKey::Profile->value, $lang, $this->chat, $replace);
+                $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
+                break;
             case CommandKey::Plans->value:
 
                 break;
             case CommandKey::Stats->value:
 
+                break;
+            default:
+
+                break;
+        }
+    }
+
+    public function profile()
+    {
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $message_id = $this->storageService->get($this->chat, StorageKey::MESSAGE->value);
+        $callback = $this->callbackQuery->data()->get('type');
+
+        $this->botActionService->delete($this->chat, $message_id);
+
+        switch ($callback) {
+            case CommandKey::Free->value:
+                $user = $this->dataBaseService->getUser($this->chat->chat_id);
+                $replace = $this->dataMapperService->getProfileData($user);
+                $free = $this->dataBaseService->getFreeRequest($this->chat->chat_id);
+                $mes_id = $this->botActionService->sendInline(CommandKey::Profile->value, $lang, $this->chat, $replace);
+                $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
+                break;
+            case CommandKey::Back->value:
+                $mes_id = $this->botActionService->sendInline(CommandKey::Account->value, $lang, $this->chat);
+                
+                $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
                 break;
             default:
 
@@ -80,19 +154,25 @@ class Handler extends WebhookHandler
 
                 break;
         }
-
-
     }
 
     public function language()
     {
         $message_id = $this->storageService->get($this->chat, StorageKey::MESSAGE->value);
         $callback = $this->callbackQuery->data()->get('type');
-
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $this->botActionService->delete($this->chat, $message_id);
+        $this->storageService->set($this->chat, StorageKey::MESSAGE->value, 0);
+        
+        if($callback === CommandKey::Back->value) {
+            $mes_id = $this->botActionService->sendInline(CommandKey::Settings->value, $lang, $this->chat);
+            $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
+            return;
+        }
+
         $this->storageService->set($this->chat, StorageKey::LANG->value, $callback);
         $this->botActionService->sendReply(CommandKey::Start->value, $callback, $this->chat);
-        $this->storageService->set($this->chat, StorageKey::MESSAGE->value, 0);
+
     }
 
     public function help()

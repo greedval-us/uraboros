@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Bot\Enums\KeyboardKey;
+use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
 use App\Modules\Bot\Keyboards\HelpKeyboard;
 use App\Modules\Bot\Keyboards\MonitoringKeyboard;
@@ -15,10 +16,10 @@ return [
         KeyboardKey::Monitoring->value => MonitoringKeyboard::class,
         KeyboardKey::Search->value => SearchKeyboard::class,
         KeyboardKey::Account->value => AccountKeyboard::class,
+        KeyboardKey::Profile->value => ProfileKeyboard::class,
         KeyboardKey::Settings->value => SettingsKeyboard::class,
         KeyboardKey::Language->value => LanguageKeyboard::class,
         KeyboardKey::Help->value => HelpKeyboard::class,
-
     ],
 
     'messages' => [
@@ -30,6 +31,30 @@ return [
             'text' => 'monitoring.screen',
             'reply_keyboard' => KeyboardKey::Monitoring->value,
         ],
+        'm_channels' => [
+            'text' => 'monitoring.screen',
+            'reply_keyboard' => KeyboardKey::Monitoring->value,
+        ],
+        'm_messages' => [
+            'text' => 'monitoring.screen',
+            'reply_keyboard' => KeyboardKey::Monitoring->value,
+        ],
+        'm_users' => [
+            'text' => 'monitoring.screen',
+            'reply_keyboard' => KeyboardKey::Monitoring->value,
+        ],
+        's_channels' => [
+            'text' => 'monitoring.screen',
+            'reply_keyboard' => KeyboardKey::Monitoring->value,
+        ],
+        's_messages' => [
+            'text' => 'monitoring.screen',
+            'reply_keyboard' => KeyboardKey::Monitoring->value,
+        ],
+        's_users' => [
+            'text' => 'monitoring.screen',
+            'reply_keyboard' => KeyboardKey::Monitoring->value,
+        ],
         'search' => [
             'text' => 'search.screen',
             'reply_keyboard' => KeyboardKey::Search->value,
@@ -37,6 +62,10 @@ return [
         'account' => [
             'text' => 'account.screen',
             'reply_keyboard' => KeyboardKey::Account->value,
+        ],
+        'profile' => [
+            'text' => 'profile.screen',
+            'reply_keyboard' => KeyboardKey::Profile->value,
         ],
         'plans' => [
             'text' => 'account.screen',
