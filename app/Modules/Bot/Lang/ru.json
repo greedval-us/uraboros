@@ -21,20 +21,16 @@
     "channels": {
       "inline": {
         "add_channel": "➕ Добавить канал",
-        "my_channels": "📋 Мои каналы (N)",
-        "settings": "⚙️ Настройки"
+        "my_channels": "📋 Мои каналы (N)"
       },
       "card": {
-        "title": "Мой канал",
         "name": "📢 @channel_name",
         "status": "Статус: 🟢 Активен",
         "messages": "Сообщений: 12 340",
         "last_message": "Последнее: 5 мин назад"
       },
       "card_inline": {
-        "notifications": "🔔 Уведомления",
         "stats": "📊 Статистика",
-        "filters": "✏️ Фильтры",
         "delete": "❌ Удалить"
       }
     },

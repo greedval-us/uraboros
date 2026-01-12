@@ -41,14 +41,10 @@ class Handler extends WebhookHandler
         $message_id = $this->storageService->get($this->chat, StorageKey::MESSAGE->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $this->botActionService->delete($this->chat, $message_id);
+
         switch ($callback) {
             case CommandKey::ChannelsM->value:
-                
-                break;
-            case CommandKey::MessagesM->value:
-
-                break;
-            case CommandKey::UsersM->value:
 
                 break;
             default:
@@ -123,13 +119,13 @@ class Handler extends WebhookHandler
             case CommandKey::Free->value:
                 $user = $this->dataBaseService->getUser($this->chat->chat_id);
                 $replace = $this->dataMapperService->getProfileData($user);
-                $free = $this->dataBaseService->getFreeRequest($this->chat->chat_id);
+                $this->dataBaseService->getFreeRequest($this->chat->chat_id);
                 $mes_id = $this->botActionService->sendInline(CommandKey::Profile->value, $lang, $this->chat, $replace);
                 $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
                 break;
             case CommandKey::Back->value:
                 $mes_id = $this->botActionService->sendInline(CommandKey::Account->value, $lang, $this->chat);
-                
+
                 $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
                 break;
             default:
@@ -163,7 +159,7 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $this->botActionService->delete($this->chat, $message_id);
         $this->storageService->set($this->chat, StorageKey::MESSAGE->value, 0);
-        
+
         if($callback === CommandKey::Back->value) {
             $mes_id = $this->botActionService->sendInline(CommandKey::Settings->value, $lang, $this->chat);
             $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);

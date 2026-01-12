@@ -20,8 +20,6 @@ class MonitoringKeyboard implements KeyboardBuilderInterface
 
         return Keyboard::make()->buttons([
             Button::make($t('monitoring.inline.channels'))->action('monitoring')->param('type', 'm_channels'),
-            Button::make($t('monitoring.inline.messages'))->action('monitoring')->param('type', 'm_messages'),
-            Button::make($t('monitoring.inline.users'))->action('monitoring')->param('type', 'm_users'),
         ]);
     }
 }
