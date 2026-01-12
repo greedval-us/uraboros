@@ -14,7 +14,7 @@ class ReplyMenuKeyboard implements KeyboardBuilderInterface
         private readonly LangService $langService
     ) {}
 
-    public function execute(string $lang ): Keyboard|ReplyKeyboard
+    public function execute(string $lang, array $keyboard = []): Keyboard|ReplyKeyboard
     {
         $t = fn(string $key) => $this->langService->get($lang, $key);
 

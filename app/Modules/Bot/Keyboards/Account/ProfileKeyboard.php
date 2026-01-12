@@ -13,7 +13,7 @@ class ProfileKeyboard implements KeyboardBuilderInterface
         private readonly LangService $langService
     ) {}
 
-    public function execute(string $lang): Keyboard
+    public function execute(string $lang, array $keyboard = []): Keyboard
     {
         $t = fn (string $key) => $this->langService->get($lang, $key);
 

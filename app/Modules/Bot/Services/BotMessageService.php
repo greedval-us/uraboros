@@ -8,7 +8,7 @@ class BotMessageService
         private readonly KeyboardService $keyboardService
     ) {}
 
-    public function build(string $messageKey, string $lang, array $replace = []): array
+    public function build(string $messageKey, string $lang, array $replace = [], array $keyboard = []): array
     {
         $config = config("bot.messages.$messageKey");
 
@@ -17,7 +17,8 @@ class BotMessageService
             'reply_keyboard' => isset($config['reply_keyboard'])
                 ? $this->keyboardService->build(
                     $config['reply_keyboard'],
-                    $lang
+                    $lang,
+                    $keyboard
                 )
                 : null,
         ];

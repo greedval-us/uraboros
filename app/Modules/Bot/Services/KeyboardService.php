@@ -8,7 +8,7 @@ use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
 
 class KeyboardService
 {
-    public function build(string $key, string $lang): Keyboard|ReplyKeyboard
+    public function build(string $key, string $lang, array $keyboardReplace = []): Keyboard|ReplyKeyboard
     {
         $class = config("bot.keyboards.$key");
 
@@ -22,6 +22,6 @@ class KeyboardService
             throw new \LogicException("Invalid keyboard [$key]");
         }
 
-        return $keyboard->execute($lang);
+        return $keyboard->execute($lang, $keyboardReplace);
     }
 }

@@ -18,9 +18,9 @@ class BotActionService
     }
 
 
-    public function sendInline(string $action, string $lang, TelegraphChat $chat, $replace = []): int
+    public function sendInline(string $action, string $lang, TelegraphChat $chat, array $replace = [], array $keyboard = []): int
     {
-        $message = app(BotMessageService::class)->build($action, $lang, $replace);
+        $message = app(BotMessageService::class)->build($action, $lang, $replace, $keyboard);
 
         $result = $chat->message($message['text'])
             ->Keyboard($message['reply_keyboard'])
