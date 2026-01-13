@@ -22,8 +22,8 @@ enum CommandKey: string
     case Plans = 'plans';
     case Stats = 'stats';
     case ChannelsM = 'm_channels';
-    case MessagesM = 'm_messages';
-    case UsersM = 'm_users';
+    case AddChennel = 'add_channel';
+    case MyChennels = 'my_channels';
     case ChannelsS = 's_channels';
     case MessagesS = 's_messages';
     case UsersS = 's_users';

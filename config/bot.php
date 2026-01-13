@@ -4,6 +4,7 @@ use App\Modules\Bot\Enums\KeyboardKey;
 use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
 use App\Modules\Bot\Keyboards\HelpKeyboard;
+use App\Modules\Bot\Keyboards\Monitoring\ChannelsKeyboard;
 use App\Modules\Bot\Keyboards\MonitoringKeyboard;
 use App\Modules\Bot\Keyboards\ReplyMenuKeyboard;
 use App\Modules\Bot\Keyboards\SearchKeyboard;
@@ -14,6 +15,7 @@ return [
     'keyboards' => [
         KeyboardKey::ReplyMenu->value => ReplyMenuKeyboard::class,
         KeyboardKey::Monitoring->value => MonitoringKeyboard::class,
+        KeyboardKey::ChannelsM->value => ChannelsKeyboard::class,
         KeyboardKey::Search->value => SearchKeyboard::class,
         KeyboardKey::Account->value => AccountKeyboard::class,
         KeyboardKey::Profile->value => ProfileKeyboard::class,
@@ -31,17 +33,17 @@ return [
             'text' => 'monitoring.screen',
             'reply_keyboard' => KeyboardKey::Monitoring->value,
         ],
+        'add_channel' => [
+            'text' => 'monitoring.screen',
+            'reply_keyboard' => KeyboardKey::Monitoring->value,
+        ],
         'm_channels' => [
-            'text' => 'monitoring.screen',
-            'reply_keyboard' => KeyboardKey::Monitoring->value,
+            'text' => 'monitoring.channels.screen',
+            'reply_keyboard' => KeyboardKey::ChannelsM->value,
         ],
-        'm_messages' => [
-            'text' => 'monitoring.screen',
-            'reply_keyboard' => KeyboardKey::Monitoring->value,
-        ],
-        'm_users' => [
-            'text' => 'monitoring.screen',
-            'reply_keyboard' => KeyboardKey::Monitoring->value,
+        'search' => [
+            'text' => 'search.screen',
+            'reply_keyboard' => KeyboardKey::Search->value,
         ],
         's_channels' => [
             'text' => 'monitoring.screen',
@@ -54,10 +56,6 @@ return [
         's_users' => [
             'text' => 'monitoring.screen',
             'reply_keyboard' => KeyboardKey::Monitoring->value,
-        ],
-        'search' => [
-            'text' => 'search.screen',
-            'reply_keyboard' => KeyboardKey::Search->value,
         ],
         'account' => [
             'text' => 'account.screen',

@@ -11,6 +11,7 @@ use DefStudio\Telegraph\Handlers\WebhookHandler;
 use App\Modules\Bot\Enums\Lang;
 use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Enums\CommandKey;
+use App\Modules\Bot\Enums\StepMenuKey;
 use Throwable;
 
 class Handler extends WebhookHandler
@@ -45,8 +46,37 @@ class Handler extends WebhookHandler
 
         switch ($callback) {
             case CommandKey::ChannelsM->value:
+                $mes_id = $this->botActionService->sendInline(CommandKey::ChannelsM->value, $lang, $this->chat);
+                $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
+                break;
+            default:
 
                 break;
+        }
+    }
+
+    public function chenelsMonitoring()
+    {
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $message_id = $this->storageService->get($this->chat, StorageKey::MESSAGE->value);
+        $callback = $this->callbackQuery->data()->get('type');
+
+        $this->botActionService->delete($this->chat, $message_id);
+
+        switch ($callback) {
+            case CommandKey::AddChennel->value:
+                $mes_id = $this->botActionService->sendText($this->chat, $this->langService->get($lang, 'monitoring.channels.add_channel.screen'));
+                $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
+                $this->storageService->set($this->chat, StorageKey::MENU->value, StepMenuKey::AddChennel->value);
+                break;
+            case CommandKey::MyChennels->value:
+
+                break;
+            case CommandKey::Back->value:
+                $mes_id = $this->botActionService->sendInline(CommandKey::Monitoring->value, $lang, $this->chat);
+                $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
+                break;
+                
             default:
 
                 break;
@@ -139,10 +169,10 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $message_id = $this->storageService->get($this->chat, StorageKey::MESSAGE->value);
         $callback = $this->callbackQuery->data()->get('type');
+        $this->botActionService->delete($this->chat, $message_id);
 
         switch ($callback) {
             case CommandKey::Language->value:
-                $this->botActionService->delete($this->chat, $message_id);
                 $mes_id = $this->botActionService->sendInline(CommandKey::Language->value, $lang, $this->chat);
                 $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
                 break;
@@ -215,18 +245,31 @@ class Handler extends WebhookHandler
             'main_menu.buttons.account'    => CommandKey::Account->value,
             'main_menu.buttons.settings'   => CommandKey::Settings->value,
             'main_menu.buttons.help'       => CommandKey::Help->value,
+            'main_menu.buttons.analytics'  => CommandKey::Analytics->value,
         ];
+        
+        $this->botActionService->delete($this->chat, $this->messageId);
+        $this->botActionService->delete($this->chat, $message_id);
 
         foreach ($map as $langKey => $action) {
             if ($text === $this->langService->get($lang, $langKey)) {
-                $this->botActionService->delete($this->chat, $this->messageId);
-                $this->botActionService->delete($this->chat, $message_id);
-
                 $mes_id = $this->botActionService->sendInline($action, $lang, $this->chat);
 
                 $this->storageService->set($this->chat, StorageKey::MESSAGE->value, $mes_id);
+                $this->storageService->set($this->chat, StorageKey::MENU->value, '');
                 return;
             }
+        }
+        
+        $menu = $this->storageService->get($this->chat, StorageKey::MENU->value);
+
+        switch ($menu) {
+            case StepMenuKey::AddChennel->value:
+                
+                break;
+            default:
+
+                break;
         }
 
         $this->botActionService->sendText(

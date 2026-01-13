@@ -7,7 +7,7 @@ use App\Modules\Bot\Services\LangService;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Keyboard\Button;
 
-class AccountKeyboard implements KeyboardBuilderInterface
+class ChannelsKeyboard implements KeyboardBuilderInterface
 {
     public function __construct(
         private readonly LangService $langService
@@ -18,7 +18,10 @@ class AccountKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('settings.language.back'))->action('chenelsMonitoring')->param('type', 'back'),
+            Button::make($t('monitoring.channels.inline.add_channel'))->action('chenelsMonitoring')->param('type', 'add_channel'),
+            Button::make($t('monitoring.channels.inline.my_channels'))->action('chenelsMonitoring')->param('type', 'my_channels'),
+            Button::make($t('monitoring.channels.inline.back'))->action('chenelsMonitoring')->param('type', 'back'),
         ]);
     }
 }
+    
