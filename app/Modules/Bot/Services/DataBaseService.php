@@ -3,7 +3,9 @@
 namespace App\Modules\Bot\Services;
 
 use App\Models\BotUser;
+use App\Models\ChennelMonitoring;
 use DefStudio\Telegraph\DTO\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class DataBaseService
 {
@@ -40,12 +42,44 @@ class DataBaseService
     }
 
 
-    public function getFreeRequest(int $id): array
+    public function getFreeRequest(int $id): BotUser
     {
         $user = BotUser::where('telegram_id', $id)->first();
         return $user->activateFreeRequests();
     }
 
+    public function getMyChannels(int $id): Collection
+    {
+        return ChennelMonitoring::where('telegram_id', $id)->get();
+    }
+    public function getMyChannel(int $id): Collection
+    {
+        return ChennelMonitoring::where('id', $id)->get();
+    }
+    public function addChannelMonitoring(int $id, string $chennel, int $limit = 5,): bool
+    {
+        $count = ChennelMonitoring::where('telegram_id', $id)->count();
+    
+        if ($count >= $limit) {
+            return false;
+        }
+    
+        $exists = ChennelMonitoring::where('telegram_id', $id)
+            ->where('chennel', $chennel)
+            ->exists();
+    
+        if ($exists) {
+            return false;
+        }
+    
+        ChennelMonitoring::create([
+            'telegram_id' => $id,
+            'chennel' => $chennel,
+            'last_request' => now(),
+        ]);
+    
+        return true;
+    }
 
     private function extractReferralCode(string $payload): ?string
     {

@@ -8,6 +8,7 @@ use App\Modules\Bot\Routes\ChatMessageRouter;
 use App\Modules\Bot\Routes\HelpRouter;
 use App\Modules\Bot\Routes\LanguageRouter;
 use App\Modules\Bot\Routes\MonitoringRouter;
+use App\Modules\Bot\Routes\MyChannelsRouter;
 use App\Modules\Bot\Routes\ProfileRouter;
 use App\Modules\Bot\Routes\SearchRouter;
 use App\Modules\Bot\Routes\SettingsRouter;
@@ -20,7 +21,11 @@ use DefStudio\Telegraph\Handlers\WebhookHandler;
 use App\Modules\Bot\Enums\Lang;
 use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Enums\CommandKey;
+use Log;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 class Handler extends WebhookHandler
 {
@@ -38,7 +43,8 @@ class Handler extends WebhookHandler
         private readonly SettingsRouter $settingsRouter,
         private readonly LanguageRouter $languageRouter,
         private readonly HelpRouter $helpRouter,
-        private readonly ChatMessageRouter $chatMessageRouter
+        private readonly ChatMessageRouter $chatMessageRouter,
+        private readonly MyChannelsRouter $myChannelsRouter
     ) {}
 
     public function start(string $payload = '')
@@ -73,6 +79,15 @@ class Handler extends WebhookHandler
         $this->channelsMonitoringRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
+    public function myChannels()
+    {
+        response()->noContent()->send();
+        $this->clearMessage();
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $callback = $this->callbackQuery->data()->get('type');
+
+        $this->myChannelsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
+    }
     public function search()
     {
         response()->noContent()->send();
@@ -159,7 +174,19 @@ class Handler extends WebhookHandler
             throw $throwable;
         }
 
-        report($throwable);
-        $this->reply('sorry man, I failed');
+        if ($throwable instanceof HttpExceptionInterface) {
+            Log::warning('Bot HTTP exception', [
+                'status' => $throwable->getStatusCode(),
+                'message' => $throwable->getMessage(),
+            ]);
+        } else {
+            Log::error('Bot unhandled exception', [
+                'exception' => $throwable,
+            ]);
+        }
+
+        $this->reply(
+            __('bot.errors.generic')
+        );
     }
 }

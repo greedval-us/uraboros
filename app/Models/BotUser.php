@@ -97,28 +97,20 @@ class BotUser extends Model
     /**
      * Получение бессплатных запросов
      */
-    public function activateFreeRequests(): array
+    public function activateFreeRequests(): self
     {
         $now = Carbon::now();
-        $nextActivation = $this->free_requests_reset_at ? $this->free_requests_reset_at->copy()->addDay() : null;
-
+        $nextActivation = $this->free_requests_reset_at
+            ? $this->free_requests_reset_at->copy()->addDay()
+            : null;
+    
         if (!$this->free_requests_reset_at || $now->greaterThanOrEqualTo($nextActivation)) {
             $this->requests += 5;
             $this->free_requests_reset_at = $now;
             $this->save();
-
-            return [
-                'can_activate' => true,
-                'seconds_left' => 86400,
-            ];
         }
-
-        $secondsLeft = $now->diffInSeconds($nextActivation, false);
-
-        return [
-            'can_activate' => false,
-            'seconds_left' => $secondsLeft,
-        ];
+    
+        return $this;
     }
 
     /**

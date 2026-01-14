@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\Add;
+namespace App\Modules\Bot\Actions\Monitoring\chenelsMonitoring;
 
 use App\Modules\Bot\Enums\CommandKey;
+use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\DataBaseService;
 use App\Modules\Bot\Services\DataMapperService;
 use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;
-use App\Modules\Bot\Enums\StorageKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
-class AddChannelStepAction
+class OpenMyChannelAction
 {
     public function __construct(
         private BotActionService $botActionService,
@@ -21,19 +21,13 @@ class AddChannelStepAction
         private DataMapperService $dataService
     ) {}
 
-    public function handle(TelegraphChat $chat, string $text, string $lang): void
+    public function handle(TelegraphChat $chat, string $lang): void
     {
-        $result = $this->dataBaseService->addChannelMonitoring($chat->chat_id, $text);
-        
-        $message = $this->langService->get($lang, 'monitoring.channels.limit_false');
+        $data = $this->dataBaseService->getMyChannels($chat->chat_id);
 
-        if($result) {
-            $message = $this->langService->get($lang, 'monitoring.channels.limit_true');
-        }    
+        $keyboard = $this->dataService->getKeyboardData($data);
 
-        $messageId = $this
-            ->botActionService
-            ->sendInline(CommandKey::ChannelsM->value, $lang, $chat, $this->dataService->getMessagesData($message));
+        $messageId = $this->botActionService->sendInline(action: CommandKey::MyChennels->value, lang: $lang, chat: $chat, keyboard: $keyboard);
 
         $this->storageService->set($chat, StorageKey::MESSAGE->value, $messageId);
     }

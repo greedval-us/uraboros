@@ -2,8 +2,9 @@
 
 namespace App\Modules\Bot\Routes;
 
-use App\Modules\Bot\Actions\Profile\BackToAccountAction;
-use App\Modules\Bot\Actions\Profile\GetFreeProfileAction;
+
+use App\Modules\Bot\Actions\Account\Profile\BackToAccountAction;
+use App\Modules\Bot\Actions\Account\Profile\GetFreeProfileAction;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
 

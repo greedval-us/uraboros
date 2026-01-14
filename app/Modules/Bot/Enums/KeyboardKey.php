@@ -23,6 +23,7 @@ enum KeyboardKey: string
     case ChannelsM = 'm_channels';
     case AddChennel = 'add_channel';
     case MyChennels = 'my_channels';
+    case CardMyChennels = 'card_my_channels';
     case ChannelsS = 's_channels';
     case MessagesS = 's_messages';
     case UsersS = 's_users';

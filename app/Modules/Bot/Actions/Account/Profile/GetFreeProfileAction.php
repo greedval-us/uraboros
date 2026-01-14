@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Actions\Profile;
+namespace App\Modules\Bot\Actions\Account\Profile;
 
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\DataBaseService;
@@ -21,9 +21,7 @@ class GetFreeProfileAction
 
     public function handle(TelegraphChat $chat, string $lang): void
     {
-        $user = $this->dataBaseService->getUser($chat->chat_id);
-
-        $this->dataBaseService->getFreeRequest($chat->chat_id);
+        $user = $this->dataBaseService->getFreeRequest($chat->chat_id);
 
         $replace = $this->dataMapperService->getProfileData($user);
 

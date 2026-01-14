@@ -5,6 +5,7 @@ use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
 use App\Modules\Bot\Keyboards\HelpKeyboard;
 use App\Modules\Bot\Keyboards\Monitoring\ChannelsKeyboard;
+use App\Modules\Bot\Keyboards\Monitoring\MyChannelsKeyboard;
 use App\Modules\Bot\Keyboards\MonitoringKeyboard;
 use App\Modules\Bot\Keyboards\ReplyMenuKeyboard;
 use App\Modules\Bot\Keyboards\SearchKeyboard;
@@ -22,6 +23,7 @@ return [
         KeyboardKey::Settings->value => SettingsKeyboard::class,
         KeyboardKey::Language->value => LanguageKeyboard::class,
         KeyboardKey::Help->value => HelpKeyboard::class,
+        KeyboardKey::MyChennels->value => MyChannelsKeyboard::class,
     ],
 
     'messages' => [
@@ -40,6 +42,14 @@ return [
         'm_channels' => [
             'text' => 'monitoring.channels.screen',
             'reply_keyboard' => KeyboardKey::ChannelsM->value,
+        ],
+        'my_channels' => [
+            'text' => 'monitoring.channels.my_channel.screen',
+            'reply_keyboard' => KeyboardKey::MyChennels->value,
+        ],
+        'card_my_channels' => [
+            'text' => 'monitoring.channels.card.screen',
+            'reply_keyboard' => KeyboardKey::CardMyChennels->value,
         ],
         'search' => [
             'text' => 'search.screen',

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Actions\Profile;
+namespace App\Modules\Bot\Actions\Account\Profile;
 
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\StorageService;
