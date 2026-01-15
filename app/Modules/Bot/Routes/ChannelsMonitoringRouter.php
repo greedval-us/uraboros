@@ -2,9 +2,10 @@
 
 namespace App\Modules\Bot\Routes;
 
-use App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\AddChannelAction;
-use App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\BackToMonitoringAction;
-use App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\OpenMyChannelAction;
+
+use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\AddChannelAction;
+use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\BackToMonitoringAction;
+use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\OpenMyChannelAction;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
 

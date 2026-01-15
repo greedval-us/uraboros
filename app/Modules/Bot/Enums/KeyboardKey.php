@@ -24,6 +24,7 @@ enum KeyboardKey: string
     case AddChennel = 'add_channel';
     case MyChennels = 'my_channels';
     case CardMyChennels = 'card_my_channels';
+    case DelateChannelM = 'delate_channel_m';
     case ChannelsS = 's_channels';
     case MessagesS = 's_messages';
     case UsersS = 's_users';

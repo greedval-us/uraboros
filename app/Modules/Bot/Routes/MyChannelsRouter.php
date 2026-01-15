@@ -2,8 +2,8 @@
 
 namespace App\Modules\Bot\Routes;
 
-use App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\MyChannels\BackToMyChannelsAction;
-use App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\MyChannels\OpenMyChannelCardAction;
+use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\MyChannels\BackToMyChannelsAction;
+use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\MyChannels\OpenMyChannelCardAction;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
 

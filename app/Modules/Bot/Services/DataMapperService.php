@@ -3,6 +3,7 @@
 namespace App\Modules\Bot\Services;
 
 use App\Models\BotUser;
+use App\Models\ChennelMonitoring;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -33,7 +34,7 @@ class DataMapperService
         ];
     }
 
-    public function getMyChannelData(Collection $channel): array
+    public function getMyChannelData(ChennelMonitoring $channel): array
     {
         return [
             'name' => $channel->chennel,

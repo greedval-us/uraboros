@@ -52,9 +52,22 @@ class DataBaseService
     {
         return ChennelMonitoring::where('telegram_id', $id)->get();
     }
-    public function getMyChannel(int $id): Collection
+    public function getMyChannel(int $id): ChennelMonitoring
     {
-        return ChennelMonitoring::where('id', $id)->get();
+        return ChennelMonitoring::where('id', $id)->first();
+    }
+
+    public function deleteMyChannel(int $id, int $idTelegram): bool
+    {
+        $channel = ChennelMonitoring::where('id', $id)
+            ->where('telegram_id', operator: $idTelegram)
+            ->first();
+    
+        if (!$channel) {
+            return false;
+        }
+    
+        return (bool) $channel->delete();
     }
     public function addChannelMonitoring(int $id, string $chennel, int $limit = 5,): bool
     {

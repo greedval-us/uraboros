@@ -3,6 +3,7 @@
 namespace App\Modules\Bot;
 
 use App\Modules\Bot\Routes\AccountRouter;
+use App\Modules\Bot\Routes\CardChannelRouter;
 use App\Modules\Bot\Routes\ChannelsMonitoringRouter;
 use App\Modules\Bot\Routes\ChatMessageRouter;
 use App\Modules\Bot\Routes\HelpRouter;
@@ -44,7 +45,8 @@ class Handler extends WebhookHandler
         private readonly LanguageRouter $languageRouter,
         private readonly HelpRouter $helpRouter,
         private readonly ChatMessageRouter $chatMessageRouter,
-        private readonly MyChannelsRouter $myChannelsRouter
+        private readonly MyChannelsRouter $myChannelsRouter,
+        private readonly CardChannelRouter $cardChannelRouter,
     ) {}
 
     public function start(string $payload = '')
@@ -54,7 +56,8 @@ class Handler extends WebhookHandler
             StorageKey::LANG->value => Lang::RU->value,
             StorageKey::QUERY->value => '',
             StorageKey::MESSAGE->value => 0,
-            StorageKey::MENU->value => ''
+            StorageKey::MENU->value => '',
+            StorageKey::CHANNEL->value => 0
         ]);
         $this->botActionService->sendReply(CommandKey::Start->value, Lang::RU->value, $this->chat);
     }
@@ -85,9 +88,20 @@ class Handler extends WebhookHandler
         $this->clearMessage();
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
-
+        
         $this->myChannelsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
+
+    public function cardChannel()
+    {
+        response()->noContent()->send();
+        $this->clearMessage();
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $callback = $this->callbackQuery->data()->get('type');
+
+        $this->cardChannelRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
+    }
+
     public function search()
     {
         response()->noContent()->send();

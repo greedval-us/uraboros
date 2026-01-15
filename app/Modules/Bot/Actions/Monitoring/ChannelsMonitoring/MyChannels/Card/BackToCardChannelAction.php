@@ -1,30 +1,33 @@
 <?php
 
-namespace App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\MyChannels;
+namespace App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\MyChannels\Card;
 
 use App\Modules\Bot\Enums\CommandKey;
 use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\DataBaseService;
 use App\Modules\Bot\Services\DataMapperService;
+use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
-class OpenMyChannelCardAction
+class BackToCardChannelAction
 {
     public function __construct(
         private BotActionService $botActionService,
         private StorageService $storageService,
         private DataBaseService $dataBaseService,
-        private DataMapperService $mapperService
+        private LangService $langService,
+        private DataMapperService $dataService
     ) {}
 
-    public function handle(TelegraphChat $chat, string $lang, int $id): void
+    public function handle(TelegraphChat $chat, string $lang): void
     {
-        $data = $this->dataBaseService->getMyChannel($id);
-        $replace = $this->mapperService->getMyChannelData($data);
+        $data = $this->dataBaseService->getMyChannels($chat->chat_id);
 
-        $messageId = $this->botActionService->sendInline(action: CommandKey::CardMyChennels->value, lang: $lang, chat: $chat, replace: $replace);
+        $keyboard = $this->dataService->getKeyboardData($data);
+
+        $messageId = $this->botActionService->sendInline(action: CommandKey::MyChennels->value, lang: $lang, chat: $chat, keyboard: $keyboard);
 
         $this->storageService->set($chat, StorageKey::MESSAGE->value, $messageId);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Actions\Monitoring\chenelsMonitoring;
+namespace App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring;
 
 use App\Modules\Bot\Enums\StepMenuKey;
 use App\Modules\Bot\Enums\StorageKey;

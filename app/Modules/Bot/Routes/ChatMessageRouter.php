@@ -3,7 +3,7 @@
 namespace App\Modules\Bot\Routes;
 
 use App\Modules\Bot\Actions\MainMenuAction;
-use App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\Add\AddChannelStepAction;
+use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\Add\AddChannelStepAction;
 use App\Modules\Bot\Enums\CommandKey;
 use App\Modules\Bot\Enums\StepMenuKey;
 use App\Modules\Bot\Actions\UnknownMessageAction;

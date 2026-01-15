@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\MyChannels;
+namespace App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring;
 
 use App\Modules\Bot\Enums\CommandKey;
 use App\Modules\Bot\Enums\StorageKey;
@@ -8,7 +8,7 @@ use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\StorageService;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
-class BackToMyChannelsAction
+class BackToMonitoringAction
 {
     public function __construct(
         private BotActionService $bot,
@@ -17,7 +17,7 @@ class BackToMyChannelsAction
 
     public function handle(TelegraphChat $chat, string $lang): void
     {
-        $messageId = $this->bot->sendInline(CommandKey::ChannelsM->value, $lang, $chat);
+        $messageId = $this->bot->sendInline(CommandKey::Monitoring->value, $lang, $chat);
 
         $this->storage->set($chat, StorageKey::MESSAGE->value, $messageId);
     }

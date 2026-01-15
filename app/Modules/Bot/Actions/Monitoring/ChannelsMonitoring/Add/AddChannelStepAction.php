@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Actions\Monitoring\chenelsMonitoring\Add;
+namespace App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\Add;
 
 use App\Modules\Bot\Enums\CommandKey;
 use App\Modules\Bot\Services\BotActionService;

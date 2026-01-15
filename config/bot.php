@@ -4,6 +4,7 @@ use App\Modules\Bot\Enums\KeyboardKey;
 use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
 use App\Modules\Bot\Keyboards\HelpKeyboard;
+use App\Modules\Bot\Keyboards\Monitoring\CardChannelKeyboard;
 use App\Modules\Bot\Keyboards\Monitoring\ChannelsKeyboard;
 use App\Modules\Bot\Keyboards\Monitoring\MyChannelsKeyboard;
 use App\Modules\Bot\Keyboards\MonitoringKeyboard;
@@ -24,6 +25,7 @@ return [
         KeyboardKey::Language->value => LanguageKeyboard::class,
         KeyboardKey::Help->value => HelpKeyboard::class,
         KeyboardKey::MyChennels->value => MyChannelsKeyboard::class,
+        KeyboardKey::CardMyChennels->value => CardChannelKeyboard::class,
     ],
 
     'messages' => [
