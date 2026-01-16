@@ -40,7 +40,7 @@ return [
         /*
          * Middleware to be applied to the webhook route
          */
-        'middleware' => [],
+        'middleware' => ['throttle:20,1'],
 
         /*
          * Sets a custom domain when registering a webhook. This will allow a local telegram bot api server
@@ -75,7 +75,7 @@ return [
          *
          * @see https://core.telegram.org/bots/api#setwebhook
          */
-        'allowed_updates' => null,
+        'allowed_updates' => ['message', 'callback_query', 'pre_checkout_query'],
 
         /*
          * If enabled, Telegraph dumps received
