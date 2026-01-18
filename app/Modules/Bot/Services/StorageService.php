@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Services;
 
+use App\Modules\Bot\Enums\StorageKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
 class StorageService
@@ -30,16 +31,16 @@ class StorageService
 
     public function setStep(TelegraphChat $chat, string $step): void
     {
-        $this->set($chat, 'step', $step);
+        $this->set($chat, StorageKey::STEP->value, $step);
     }
 
     public function getStep(TelegraphChat $chat): ?string
     {
-        return $this->get($chat, 'step');
+        return $this->get($chat, StorageKey::STEP->value);
     }
 
     public function clearStep(TelegraphChat $chat): void
     {
-        $this->forget($chat, 'step');
+        $this->forget($chat, StorageKey::STEP->value);
     }
 }

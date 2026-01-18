@@ -57,7 +57,8 @@ class Handler extends WebhookHandler
             StorageKey::QUERY->value => '',
             StorageKey::MESSAGE->value => 0,
             StorageKey::MENU->value => '',
-            StorageKey::CHANNEL->value => 0
+            StorageKey::CHANNEL->value => 0,
+            StorageKey::STEP->value => ''
         ]);
         $this->botActionService->sendReply(CommandKey::Start->value, Lang::RU->value, $this->chat);
     }
@@ -88,7 +89,7 @@ class Handler extends WebhookHandler
         $this->clearMessage();
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
-        
+
         $this->myChannelsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
