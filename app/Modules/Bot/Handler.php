@@ -52,7 +52,8 @@ class Handler extends WebhookHandler
             StorageKey::QUERY->value => '',
             StorageKey::MESSAGE->value => 0,
             StorageKey::MENU->value => '',
-            StorageKey::CHANNEL->value => 0
+            StorageKey::CHANNEL->value => 0,
+            StorageKey::STEP->value => ''
         ]);
         $this->botActionService->sendReply(CommandKey::Start->value, Lang::RU->value, $this->chat);
     }

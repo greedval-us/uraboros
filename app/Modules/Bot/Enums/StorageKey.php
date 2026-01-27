@@ -9,4 +9,5 @@ enum StorageKey: string
     case MESSAGE = 'message';
     case MENU    = 'menu';
     case CHANNEL = 'channel';
+    case STEP    = 'step';
 }

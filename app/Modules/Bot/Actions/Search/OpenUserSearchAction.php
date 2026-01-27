@@ -16,10 +16,9 @@ class OpenUserSearchAction
         private StorageService $storage,
         private LangService $langService
     ) {}
-
     public function handle(TelegraphChat $chat, string $lang): void
     {
-        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'search.info.user'));
+        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'monitoring.channels.add_channel.screen'));
 
         $this->storage->set($chat, StorageKey::MESSAGE->value, $messageId);
         $this->storage->set($chat, StorageKey::MENU->value, StepMenuKey::SearchUser->value);

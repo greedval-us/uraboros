@@ -77,16 +77,14 @@
       "users": "👤 По пользователям",
       "channels": "📢 По каналам / 💬 Чатам"
     },
-    "info": {
-      "messages": "1",
-      "user": "2",
-      "channel": "3"
-    }
-  },
-    "analytics": {
-    "screen": "Аналитика данных телеграмм",
-    "inline": {
-
+    "user": {
+        "screen": "Отправте id пользователя или его username"
+    },
+    "message": {
+        "screen": "Отправте id группы или ее username, через ':' словл по которому будет собраны сообщения"
+    },
+    "channel": {
+        "screen": "Отправте id группы или ее username"
     }
   },
   "account": {
