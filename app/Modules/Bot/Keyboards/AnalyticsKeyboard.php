@@ -18,7 +18,7 @@ class AnalyticsKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('account.inline.profile'))->action('account')->param('type', 'profile'),
+            Button::make($t('1'))->action('e'),
         ]);
     }
 }

@@ -15,27 +15,22 @@ use App\Modules\Bot\Routes\SearchRouter;
 use App\Modules\Bot\Routes\SettingsRouter;
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\DataBaseService;
-use App\Modules\Bot\Services\DataMapperService;
-use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 use App\Modules\Bot\Enums\Lang;
 use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Enums\CommandKey;
-use Log;
-use Throwable;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Throwable;
 
 class Handler extends WebhookHandler
 {
     public function __construct(
-        private readonly LangService $langService,
         private readonly BotActionService $botActionService,
         private readonly DataBaseService $dataBaseService,
         private readonly StorageService $storageService,
-        private readonly DataMapperService $dataMapperService,
         private readonly MonitoringRouter $monitoringRouter,
         private readonly ChannelsMonitoringRouter $channelsMonitoringRouter,
         private readonly SearchRouter $searchRouter,
@@ -88,7 +83,7 @@ class Handler extends WebhookHandler
         $this->clearMessage();
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
-        
+
         $this->myChannelsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 

@@ -3,6 +3,7 @@
 use App\Modules\Bot\Enums\KeyboardKey;
 use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
+use App\Modules\Bot\Keyboards\AnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\HelpKeyboard;
 use App\Modules\Bot\Keyboards\Monitoring\CardChannelKeyboard;
 use App\Modules\Bot\Keyboards\Monitoring\ChannelsKeyboard;
@@ -26,6 +27,7 @@ return [
         KeyboardKey::Help->value => HelpKeyboard::class,
         KeyboardKey::MyChennels->value => MyChannelsKeyboard::class,
         KeyboardKey::CardMyChennels->value => CardChannelKeyboard::class,
+        KeyboardKey::Analytics->value => AnalyticsKeyboard::class,
     ],
 
     'messages' => [
@@ -68,6 +70,10 @@ return [
         's_users' => [
             'text' => 'monitoring.screen',
             'reply_keyboard' => KeyboardKey::Monitoring->value,
+        ],
+        'analytics' => [
+            'text' => 'analytics.screen',
+            'reply_keyboard' => KeyboardKey::Analytics->value,
         ],
         'account' => [
             'text' => 'account.screen',

@@ -4,6 +4,9 @@ namespace App\Modules\Bot\Routes;
 
 use App\Modules\Bot\Actions\MainMenuAction;
 use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\Add\AddChannelStepAction;
+use App\Modules\Bot\Actions\Search\Run\RunChannelSearchAction;
+use App\Modules\Bot\Actions\Search\Run\RunMessageSearchAction;
+use App\Modules\Bot\Actions\Search\Run\RunUserSearchAction;
 use App\Modules\Bot\Enums\CommandKey;
 use App\Modules\Bot\Enums\StepMenuKey;
 use App\Modules\Bot\Actions\UnknownMessageAction;
@@ -34,6 +37,9 @@ class ChatMessageRouter
 
         $stepActionsMap = [
             StepMenuKey::AddChennel->value => AddChannelStepAction::class,
+            StepMenuKey::SearchUser->value => RunUserSearchAction::class,
+            StepMenuKey::SearchChannel->value => RunChannelSearchAction::class,
+            StepMenuKey::SearchMessages->value => RunMessageSearchAction::class,
         ];
 
         $stepMenu = app(StorageService::class)->get($chat, StorageKey::MENU->value);
@@ -42,7 +48,6 @@ class ChatMessageRouter
             app($stepActionsMap[$stepMenu])->handle($chat, $text, $lang);
             return;
         }
-
 
         app(UnknownMessageAction::class)->handle($chat, $lang);
     }

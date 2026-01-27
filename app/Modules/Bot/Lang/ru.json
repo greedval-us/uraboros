@@ -76,6 +76,17 @@
       "messages": "🔎 По сообщениям",
       "users": "👤 По пользователям",
       "channels": "📢 По каналам / 💬 Чатам"
+    },
+    "info": {
+      "messages": "1",
+      "user": "2",
+      "channel": "3"
+    }
+  },
+    "analytics": {
+    "screen": "Аналитика данных телеграмм",
+    "inline": {
+
     }
   },
   "account": {
