@@ -22,6 +22,6 @@ class OpenMessageSearchAction
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'monitoring.channels.add_channel.screen'));
 
         $this->storage->set($chat, StorageKey::MESSAGE->value, $messageId);
-        $this->storage->set($chat, StorageKey::MENU->value, StepMenuKey::SearchWord->value);
+        $this->storage->set($chat, StorageKey::MENU->value, StepMenuKey::SearchMessages->value);
     }
 }
