@@ -20,6 +20,7 @@ use DefStudio\Telegraph\Handlers\WebhookHandler;
 use App\Modules\Bot\Enums\Lang;
 use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Enums\CommandKey;
+use App\Modules\Bot\Routes\AnalyticsRouter;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -42,6 +43,7 @@ class Handler extends WebhookHandler
         private readonly ChatMessageRouter $chatMessageRouter,
         private readonly MyChannelsRouter $myChannelsRouter,
         private readonly CardChannelRouter $cardChannelRouter,
+        private readonly AnalyticsRouter $analyticsRouter,
     ) {}
 
     public function start(string $payload = '')
@@ -106,6 +108,16 @@ class Handler extends WebhookHandler
         $callback = $this->callbackQuery->data()->get('type');
 
         $this->searchRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
+    }
+
+    public function analytics()
+    {
+        response()->noContent()->send();
+        $this->clearMessage();
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $callback = $this->callbackQuery->data()->get('type');
+
+        $this->analyticsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
     public function account()

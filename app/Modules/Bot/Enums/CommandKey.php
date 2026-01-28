@@ -29,5 +29,7 @@ enum CommandKey: string
     case ChannelsS = 's_channels';
     case MessagesS = 's_messages';
     case UsersS = 's_users';
+    case UserA = 'a_user';
+    case ChannelA = 'a_channel';
     case Back = 'back';
 }

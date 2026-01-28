@@ -87,6 +87,13 @@
         "screen": "Отправте id группы или ее username"
     }
   },
+  "analytics": {
+    "screen": "Выберите что анализировать",
+    "inline": {
+        "user": "👤 Пользователь",
+        "channel": "📢 канал / 💬 Чат"
+    }
+  },
   "account": {
     "screen": "👤 Профиль",
     "inline": {
