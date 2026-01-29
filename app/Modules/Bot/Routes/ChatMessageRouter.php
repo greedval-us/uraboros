@@ -2,6 +2,8 @@
 
 namespace App\Modules\Bot\Routes;
 
+use App\Modules\Bot\Actions\Analytics\Run\RunChannelAnalyticsAction;
+use App\Modules\Bot\Actions\Analytics\Run\RunUserAnalyticsAction;
 use App\Modules\Bot\Actions\MainMenuAction;
 use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\Add\AddChannelStepAction;
 use App\Modules\Bot\Actions\Search\Run\RunChannelSearchAction;
@@ -36,10 +38,12 @@ class ChatMessageRouter
         }
 
         $stepActionsMap = [
-            StepMenuKey::AddChennel->value => AddChannelStepAction::class,
-            StepMenuKey::SearchUser->value => RunUserSearchAction::class,
-            StepMenuKey::SearchChannel->value => RunChannelSearchAction::class,
-            StepMenuKey::SearchMessages->value => RunMessageSearchAction::class,
+            StepMenuKey::AddChennel->value         => AddChannelStepAction::class,
+            StepMenuKey::SearchUser->value         => RunUserSearchAction::class,
+            StepMenuKey::SearchChannel->value      => RunChannelSearchAction::class,
+            StepMenuKey::SearchMessages->value     => RunMessageSearchAction::class,
+            StepMenuKey::AnalyticsChannel->value   => RunChannelAnalyticsAction::class,
+            StepMenuKey::AnalyticsUser->value      => RunUserAnalyticsAction::class,
         ];
 
         $stepMenu = app(StorageService::class)->get($chat, StorageKey::MENU->value);
