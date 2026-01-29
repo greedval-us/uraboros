@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'uraboros_api' => [
+        'url'   => env('URABOROS_API_URL'),
+        'token' => env('URABOROS_API_TOKEN'),
+    ],
+
 ];
