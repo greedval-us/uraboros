@@ -39,10 +39,6 @@ return [
             'text' => 'monitoring.screen',
             'reply_keyboard' => KeyboardKey::Monitoring->value,
         ],
-        'add_channel' => [
-            'text' => 'monitoring.screen',
-            'reply_keyboard' => KeyboardKey::Monitoring->value,
-        ],
         'm_channels' => [
             'text' => 'monitoring.channels.screen',
             'reply_keyboard' => KeyboardKey::ChannelsM->value,
