@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Bot\Enums\KeyboardKey;
+use App\Modules\Bot\Keyboards\Account\PlansKeyboard;
 use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
 use App\Modules\Bot\Keyboards\AnalyticsKeyboard;
@@ -28,6 +29,7 @@ return [
         KeyboardKey::MyChennels->value => MyChannelsKeyboard::class,
         KeyboardKey::CardMyChennels->value => CardChannelKeyboard::class,
         KeyboardKey::Analytics->value => AnalyticsKeyboard::class,
+        KeyboardKey::Plans->value => PlansKeyboard::class,
     ],
 
     'messages' => [
@@ -76,12 +78,12 @@ return [
             'reply_keyboard' => KeyboardKey::Account->value,
         ],
         'profile' => [
-            'text' => 'profile.screen',
+            'text' => 'account.profile.screen',
             'reply_keyboard' => KeyboardKey::Profile->value,
         ],
         'plans' => [
-            'text' => 'account.screen',
-            'reply_keyboard' => KeyboardKey::Account->value,
+            'text' => 'account.plans.screen',
+            'reply_keyboard' => KeyboardKey::Plans->value,
         ],
         'stats' => [
             'text' => 'account.screen',

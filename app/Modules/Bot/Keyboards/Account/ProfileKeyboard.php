@@ -18,8 +18,8 @@ class ProfileKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('profile.inline.free'))->action('profile')->param('type', 'free'),
-            Button::make($t('profile.inline.back'))->action('profile')->param('type', 'back'),
+            Button::make($t('account.profile.inline.free'))->action('profile')->param('type', 'free'),
+            Button::make($t('account.profile.inline.back'))->action('profile')->param('type', 'back'),
         ]);
     }
 }

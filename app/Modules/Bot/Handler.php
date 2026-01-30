@@ -21,6 +21,7 @@ use App\Modules\Bot\Enums\Lang;
 use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Enums\CommandKey;
 use App\Modules\Bot\Routes\AnalyticsRouter;
+use App\Modules\Bot\Routes\PlansRouter;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -44,6 +45,7 @@ class Handler extends WebhookHandler
         private readonly MyChannelsRouter $myChannelsRouter,
         private readonly CardChannelRouter $cardChannelRouter,
         private readonly AnalyticsRouter $analyticsRouter,
+        private readonly PlansRouter $plansRouter,
     ) {}
 
     public function start(string $payload = '')
@@ -138,6 +140,16 @@ class Handler extends WebhookHandler
         $callback = $this->callbackQuery->data()->get('type');
 
         $this->profileRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
+    }
+
+    public function plans()
+    {
+        response()->noContent()->send();
+        $this->clearMessage();
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $callback = $this->callbackQuery->data()->get('type');
+
+        $this->plansRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
     public function settings()
