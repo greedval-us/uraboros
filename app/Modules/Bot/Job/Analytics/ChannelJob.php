@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Job\Search;
+namespace App\Modules\Bot\Job\Analytics;
 
 use DefStudio\Telegraph\Facades\Telegraph;
 use Illuminate\Bus\Queueable;

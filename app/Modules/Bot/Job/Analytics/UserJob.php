@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Job\Search;
+namespace App\Modules\Bot\Job\Analytics;
 
 use DefStudio\Telegraph\Facades\Telegraph;
 use Illuminate\Bus\Queueable;
@@ -9,7 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ChannelJob implements ShouldQueue
+class UserJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

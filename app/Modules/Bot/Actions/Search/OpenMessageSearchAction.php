@@ -19,7 +19,7 @@ class OpenMessageSearchAction
 
     public function handle(TelegraphChat $chat, string $lang): void
     {
-        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'monitoring.channels.add_channel.screen'));
+        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'search.message.screen'));
 
         $this->storage->set($chat, StorageKey::MESSAGE->value, $messageId);
         $this->storage->set($chat, StorageKey::MENU->value, StepMenuKey::SearchMessages->value);

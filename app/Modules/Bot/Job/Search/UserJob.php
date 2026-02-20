@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Job\Search;
 
+use DefStudio\Telegraph\Facades\Telegraph;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,12 +13,21 @@ class UserJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(
+    public string $lang;
+    public string $chatID;
+    public string $messageID;
 
-    ) {}
+    public function __construct(string $lang, string $chatID, string $messageID)
+    {
+        $this->lang = $lang;
+        $this->chatID = $chatID;
+        $this->messageID = $messageID;
+    }
 
     public function handle(): void
     {
-
+        Telegraph::chat($this->chatID)
+            ->message('work')
+            ->send();
     }
 }
