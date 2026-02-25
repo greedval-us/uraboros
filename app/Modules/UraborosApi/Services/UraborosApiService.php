@@ -32,11 +32,21 @@ class UraborosApiService implements UraborosApiInterface
 
         if ($response->failed()) {
             throw new UraborosApiException(
-                $response->json('message') ?? 'Partner API error',
+                $response->json('message') ?? 'Uraboros API error',
                 $response->status()
             );
         }
 
-        return $response->json();
+        return $response->json() ?? [];
+    }
+
+    public function get(string $uri, array $params = []): array
+    {
+        return $this->request('get', $uri, $params);
+    }
+
+    public function post(string $uri, array $data = []): array
+    {
+        return $this->request('post', $uri, $data);
     }
 }
