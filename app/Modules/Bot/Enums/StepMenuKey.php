@@ -8,6 +8,10 @@ enum StepMenuKey: string
     case SearchMessages = "search_messages";
     case SearchUser = "search_user";
     case SearchChannel = "search_channel";
-    case AnalyticsChannel = "analytics_channel";
     case AnalyticsUser = "analytics_user";
+    case AnalyticsBasicMetrics = 'analytics_basic_metrics';
+    case AnalyticsRretention = 'analytics_retention';
+    case AnalyticsFunnel = 'analytics_funnel';
+    case AnalyticsAudienceQuality = 'analytics_audience_quality';
+    case AnalyticsNetworkMetrics = 'analytics_network_metrics';
 }
