@@ -19,7 +19,7 @@ class OpenNetworkMetricsAnalyticsAction
 
     public function handle(TelegraphChat $chat, string $lang): void
     {
-        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.user.screen'));
+        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.screen_info'));
 
         $this->storage->set($chat, StorageKey::MESSAGE->value, $messageId);
         $this->storage->set($chat, StorageKey::MENU->value, StepMenuKey::AnalyticsNetworkMetrics->value);

@@ -31,7 +31,7 @@ enum CommandKey: string
     case UsersS = 's_users';
     case UserA = 'a_user';
     case BasicMetricsA = 'a_basic_metrics';
-    case RretentionA = 'a_retention';
+    case RetentionA = 'a_retention';
     case FunnelA = 'a_funnel';
     case AudienceQualityA = 'a_audience_quality';
     case NetworkMetricsA = 'a_network_metrics';

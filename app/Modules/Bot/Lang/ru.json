@@ -19,7 +19,6 @@
       "messages": "📝 Сообщения",
       "users": "👤 Пользователи"
     },
-
     "channels": {
       "screen": "📢 Выберите действие :message",
       "inline": {
@@ -27,38 +26,32 @@
         "my_channels": "📋 Мои каналы (N)",
         "back": "⬅️ Назад"
       },
-
       "add_channel": {
         "screen": "✍️ Отправьте username канала или чата, который хотите добавить",
         "success": "\n\n<i>✅ Канал / чат успешно добавлен.\nПерейдите в «Мои каналы» для управления.</i>",
         "limit_reached": "\n\n<i>❌ Достигнут лимит. Удалите канал / чат, чтобы добавить новый.</i>"
       },
-
       "my_channel": {
         "screen": "📋 Выберите канал / чат для работы :message",
         "delete_success": "\n\n<i>✅ Канал / чат успешно удалён.</i>",
         "delete_error": "\n\n<i>❌ Не удалось удалить канал / чат.</i>",
         "back": "⬅️ Назад"
       },
-
       "card": {
         "screen": "📢 <b>:name</b>\n\n🕓 Последний запрос:\n<code>:request</code>"
       },
-
       "card_inline": {
         "stats": "📊 Статистика",
         "delete": "❌ Удалить",
         "back": "⬅️ Назад"
       }
     },
-
     "messages": {
       "inline": {
         "new_filter": "➕ Создать фильтр",
         "my_filters": "📂 Мои фильтры",
         "history": "📄 История"
       },
-
       "filter": {
         "keywords": "🔑 Ключевые слова: crypto, ton",
         "source": "📢 Источники: 12 каналов",
@@ -107,6 +100,7 @@
 
     "analytics": {
       "screen": "📊 Выберите тип анализа",
+      "screen_info": "✍️ Отправьте ID или username",
       "inline": {
         "user": "👤 Пользователь",
         "basic_metrics": "📈 Базовые метрики группы",
@@ -117,11 +111,22 @@
     },
 
     "user": {
-      "screen": "✍️ Отправьте ID пользователя или его username"
+      "screen": "1"
     },
-
-    "channel": {
-      "screen": "✍️ Отправьте ID группы или её username"
+    "basic_metrics": {
+      "screen": "1"
+    },
+    "retention": {
+      "screen": "1"
+    },
+    "funnel": {
+      "screen": "1"
+    },
+    "audience_quality": {
+      "screen": "1"
+    },
+    "network_metrics": {
+      "screen": "1"
     }
   },
 

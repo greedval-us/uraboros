@@ -8,6 +8,12 @@ enum KeyboardKey: string
     case Monitoring = 'monitoring';
     case Search = 'search';
     case Analytics = 'analytics';
+    case UserA = 'a_user';
+    case BasicMetricsA = 'a_basic_metrics';
+    case RetentionA = 'a_retention';
+    case FunnelA = 'a_funnel';
+    case AudienceQualityA = 'a_audience_quality';
+    case NetworkMetricsA = 'a_network_metrics';
     case Account = 'account';
     case Settings = 'settings';
     case Language = 'language';

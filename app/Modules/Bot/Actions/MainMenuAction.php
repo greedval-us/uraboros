@@ -16,8 +16,9 @@ class MainMenuAction
 
     public function handle(TelegraphChat $chat, string $action, string $lang): void
     {
+        $this->storageService->set($chat, StorageKey::MENU->value, '');
         $messageId = $this->botActionService->sendInline($action, $lang, $chat);
         $this->storageService->set($chat, StorageKey::MESSAGE->value, $messageId);
-        $this->storageService->set($chat, StorageKey::MENU->value, '');
+
     }
 }

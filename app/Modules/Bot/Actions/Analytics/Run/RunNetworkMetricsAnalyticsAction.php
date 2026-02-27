@@ -2,22 +2,27 @@
 
 namespace App\Modules\Bot\Actions\Analytics\Run;
 
-use App\Modules\Bot\Job\Search\ChannelJob;
+use App\Modules\Bot\Enums\StorageKey;
+use App\Modules\Bot\Job\Analytics\NetworkMetricsJob;
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\LangService;
+use App\Modules\Bot\Services\StorageService;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
 class RunNetworkMetricsAnalyticsAction
 {
     public function __construct(
         private BotActionService $bot,
-        private LangService $langService
+        private LangService $langService,
+        private StorageService $storageService
     ) {}
 
     public function handle(TelegraphChat $chat, string $lang): void
     {
+        $this->storageService->set($chat, StorageKey::MENU->value, '');
+
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'search.channel.louding'));
 
-        ChannelJob::dispatch($lang, $chat->chat_id, $messageId);
+        NetworkMetricsJob::dispatch($lang, $chat->chat_id, $messageId);
     }
 }

@@ -35,7 +35,7 @@ class BotActionService
         return $result->telegraphMessageId();
     }
 
-    public function edit( TelegraphChat $chat, int $messageId, string $text): void {
+    public function edit(TelegraphChat $chat, int $messageId, string $text): void {
         $chat->editMessage($messageId)
             ->text($text)
             ->send();

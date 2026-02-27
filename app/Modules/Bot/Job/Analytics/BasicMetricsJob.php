@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Job\Search;
+namespace App\Modules\Bot\Job\Analytics;
 
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Bot\Enums\CommandKey;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ChannelJob implements ShouldQueue
+class BasicMetricsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, JobTrait;
 
@@ -32,6 +32,6 @@ class ChannelJob implements ShouldQueue
     {
         $this->bootServices();
 
-        $this->botServices->sendInline(CommandKey::ChannelsM->value, $this->lang, $this->chat);
+        $this->botServices->sendInline(CommandKey::BasicMetricsA->value, $this->lang, $this->chat);
     }
 }

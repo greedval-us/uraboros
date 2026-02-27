@@ -18,7 +18,7 @@ class AnalyticsRouter
         $map = [
             CommandKey::UserA->value            => OpenUserAnalyticsAction::class,
             CommandKey::BasicMetricsA->value    => OpenBasicMetricsAnalyticsAction::class,
-            CommandKey::RretentionA->value      => OpenRetentionAnalyticsAction::class,
+            CommandKey::RetentionA->value       => OpenRetentionAnalyticsAction::class,
             CommandKey::FunnelA->value          => OpenFunnelAnalyticsAction::class,
             CommandKey::AudienceQualityA->value => OpenAudienceQualityAnalyticsAction::class,
             CommandKey::NetworkMetricsA->value  => OpenNetworkMetricsAnalyticsAction::class,

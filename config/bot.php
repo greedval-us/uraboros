@@ -4,6 +4,12 @@ use App\Modules\Bot\Enums\KeyboardKey;
 use App\Modules\Bot\Keyboards\Account\PlansKeyboard;
 use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
+use App\Modules\Bot\Keyboards\Analytics\AudienceQualityAnalyticsKeyboard;
+use App\Modules\Bot\Keyboards\Analytics\BasicMetricsAnalyticsKeyboard;
+use App\Modules\Bot\Keyboards\Analytics\FunnelAnalyticsKeyboard;
+use App\Modules\Bot\Keyboards\Analytics\NetworkMetricsAnalyticsKeyboard;
+use App\Modules\Bot\Keyboards\Analytics\RetentionAnalyticsKeyboard;
+use App\Modules\Bot\Keyboards\Analytics\UserAnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\AnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\HelpKeyboard;
 use App\Modules\Bot\Keyboards\Monitoring\CardChannelKeyboard;
@@ -29,6 +35,12 @@ return [
         KeyboardKey::MyChennels->value => MyChannelsKeyboard::class,
         KeyboardKey::CardMyChennels->value => CardChannelKeyboard::class,
         KeyboardKey::Analytics->value => AnalyticsKeyboard::class,
+        KeyboardKey::UserA->value => UserAnalyticsKeyboard::class,
+        KeyboardKey::BasicMetricsA->value => BasicMetricsAnalyticsKeyboard::class,
+        KeyboardKey::RetentionA->value => RetentionAnalyticsKeyboard::class,
+        KeyboardKey::FunnelA->value => FunnelAnalyticsKeyboard::class,
+        KeyboardKey::AudienceQualityA->value => AudienceQualityAnalyticsKeyboard::class,
+        KeyboardKey::NetworkMetricsA->value => NetworkMetricsAnalyticsKeyboard::class,
         KeyboardKey::Plans->value => PlansKeyboard::class,
     ],
 
@@ -57,18 +69,6 @@ return [
             'text' => 'search.screen',
             'reply_keyboard' => KeyboardKey::Search->value,
         ],
-        's_channels' => [
-            'text' => 'monitoring.screen',
-            'reply_keyboard' => KeyboardKey::Monitoring->value,
-        ],
-        's_messages' => [
-            'text' => 'monitoring.screen',
-            'reply_keyboard' => KeyboardKey::Monitoring->value,
-        ],
-        's_users' => [
-            'text' => 'monitoring.screen',
-            'reply_keyboard' => KeyboardKey::Monitoring->value,
-        ],
         'analytics' => [
             'text' => 'analytics.screen',
             'reply_keyboard' => KeyboardKey::Analytics->value,
@@ -77,6 +77,32 @@ return [
             'text' => 'account.screen',
             'reply_keyboard' => KeyboardKey::Account->value,
         ],
+
+        'a_user' => [
+            'text' => 'analytics.user.screen',
+            'reply_keyboard' => KeyboardKey::UserA->value,
+        ],
+        'a_basic_metrics' => [
+            'text' => 'analytics.basic_metrics.screen',
+            'reply_keyboard' => KeyboardKey::BasicMetricsA->value,
+        ],
+        'a_retention' => [
+            'text' => 'analytics.retention.screen',
+            'reply_keyboard' => KeyboardKey::RetentionA->value,
+        ],
+        'a_funnel' => [
+            'text' => 'analytics.funnel.screen',
+            'reply_keyboard' => KeyboardKey::FunnelA->value,
+        ],
+        'a_audience_qualityr' => [
+            'text' => 'analytics.audience_quality.screen',
+            'reply_keyboard' => KeyboardKey::AudienceQualityA->value,
+        ],
+        'a_network_metrics' => [
+            'text' => 'analytics.network_metrics.screen',
+            'reply_keyboard' => KeyboardKey::NetworkMetricsA->value,
+        ],
+
         'profile' => [
             'text' => 'account.profile.screen',
             'reply_keyboard' => KeyboardKey::Profile->value,

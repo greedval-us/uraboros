@@ -2,7 +2,9 @@
 
 namespace App\Modules\Bot\Job\Analytics;
 
-use DefStudio\Telegraph\Facades\Telegraph;
+use App\Modules\Bot\Job\JobTrait;
+use App\Modules\Bot\Enums\CommandKey;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -11,23 +13,29 @@ use Illuminate\Queue\SerializesModels;
 
 class UserJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, JobTrait;
 
     public string $lang;
+    public TelegraphChat $chat;
     public string $chatID;
     public string $messageID;
+    public string $text;
 
-    public function __construct(string $lang, string $chatID, string $messageID)
+    public function __construct(string $lang, TelegraphChat $chat, string $chatID, string $messageID, string $text)
     {
         $this->lang = $lang;
+        $this->chat = $chat;
         $this->chatID = $chatID;
         $this->messageID = $messageID;
+        $this->text = $text;
     }
 
     public function handle(): void
     {
-        Telegraph::chat($this->chatID)
-            ->message('work')
-            ->send();
+        $this->bootServices();
+
+        $this->apiServices->get("getUser/{$this->text}");
+
+        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat);
     }
 }
