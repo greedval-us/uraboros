@@ -19,13 +19,15 @@ class RetentionJob implements ShouldQueue
     public TelegraphChat $chat;
     public string $chatID;
     public string $messageID;
+    public string $text;
 
-    public function __construct(string $lang, TelegraphChat $chat, string $chatID, string $messageID)
+    public function __construct(string $lang, TelegraphChat $chat, string $chatID, string $messageID, string $text)
     {
         $this->lang = $lang;
         $this->chat = $chat;
         $this->chatID = $chatID;
         $this->messageID = $messageID;
+        $this->text = $text;
     }
 
     public function handle(): void

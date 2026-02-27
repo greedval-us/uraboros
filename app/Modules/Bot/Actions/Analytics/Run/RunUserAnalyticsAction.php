@@ -21,7 +21,7 @@ class RunUserAnalyticsAction
     {
         $this->storageService->set($chat, StorageKey::MENU->value, '');
 
-        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'search.channel.louding'));
+        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
         UserJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text);
     }

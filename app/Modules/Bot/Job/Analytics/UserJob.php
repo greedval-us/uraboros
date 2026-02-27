@@ -29,7 +29,6 @@ class UserJob implements ShouldQueue
         $this->messageID = $messageID;
         $this->text = $text;
     }
-
     public function handle(): void
     {
         $this->bootServices();

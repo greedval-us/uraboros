@@ -11,6 +11,7 @@ use App\Modules\Bot\Routes\LanguageRouter;
 use App\Modules\Bot\Routes\MonitoringRouter;
 use App\Modules\Bot\Routes\MyChannelsRouter;
 use App\Modules\Bot\Routes\ProfileRouter;
+use App\Modules\Bot\Routes\ReportRouter;
 use App\Modules\Bot\Routes\SearchRouter;
 use App\Modules\Bot\Routes\SettingsRouter;
 use App\Modules\Bot\Services\BotActionService;
@@ -46,6 +47,7 @@ class Handler extends WebhookHandler
         private readonly CardChannelRouter $cardChannelRouter,
         private readonly AnalyticsRouter $analyticsRouter,
         private readonly PlansRouter $plansRouter,
+        private readonly ReportRouter $reportRouter,
     ) {}
 
     public function start(string $payload = '')
@@ -120,6 +122,16 @@ class Handler extends WebhookHandler
         $callback = $this->callbackQuery->data()->get('type');
 
         $this->analyticsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
+    }
+
+    public function repotr() {
+        response()->noContent()->send();
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $callback = $this->callbackQuery->data()->get('type');
+        $query = $this->callbackQuery->data()->get('query');
+        $param = $this->callbackQuery->data()->get('param');
+
+        $this->reportRouter->handle(chat: $this->chat, callback: $callback,param: $param, query: $query,  lang: $lang);
     }
 
     public function account()

@@ -17,11 +17,11 @@ class RunRetentionAnalyticsAction
         private StorageService $storageService
     ) {}
 
-    public function handle(TelegraphChat $chat, string $lang): void
+    public function handle(TelegraphChat $chat, string $text, string $lang): void
     {
         $this->storageService->set($chat, StorageKey::MENU->value, '');
 
-        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'search.channel.louding'));
+        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
         RetentionJob::dispatch($lang, $chat->chat_id, $messageId);
     }

@@ -11,7 +11,6 @@
       "back": "⬅️ Назад"
     }
   },
-
   "monitoring": {
     "screen": "📡 Что вы хотите мониторить?",
     "inline": {
@@ -57,14 +56,12 @@
         "source": "📢 Источники: 12 каналов",
         "trigger": "⚡ Триггер: новое сообщение"
       },
-
       "filter_inline": {
         "edit": "✏️ Редактировать",
         "toggle": "🔕 Вкл / Выкл",
         "delete": "🗑 Удалить"
       }
     },
-
     "users": {
       "inline": {
         "add_user": "➕ Добавить пользователя",
@@ -73,7 +70,6 @@
       }
     }
   },
-
   "search": {
     "screen": "🔍 Поиск по базе",
     "inline": {
@@ -81,35 +77,34 @@
       "users": "👤 По пользователям",
       "channels": "📢 По каналам / 💬 Чатам"
     },
-
     "user": {
       "screen": "✍️ Отправьте ID пользователя или его username",
       "louding": "Ожидайте"
     },
-
     "message": {
       "screen": "✍️ Отправьте ID группы или её username\nчерез ':' укажите ключевое слово",
       "louding": "Ожидайте"
     },
-
     "channel": {
       "screen": "✍️ Отправьте ID группы или её username",
       "louding": "Ожидайте"
     }
   },
-
-    "analytics": {
+  "analytics": {
       "screen": "📊 Выберите тип анализа",
       "screen_info": "✍️ Отправьте ID или username",
+      "louding": "Ожидайте",
       "inline": {
         "user": "👤 Пользователь",
         "basic_metrics": "📈 Базовые метрики группы",
         "retention": "🔄 Рост и удержание группы",
         "funnel": "🛠️ Воронка группы",
         "audience_quality": "🎯 Качество аудитории группы",
-        "network_metrics": "🌐 Сетевые метрики группы"
+        "network_metrics": "🌐 Сетевые метрики группы",
+        "day": "За день",
+        "week": "За неделю",
+        "month": "За месяц"
     },
-
     "user": {
       "screen": "1"
     },
@@ -129,7 +124,6 @@
       "screen": "1"
     }
   },
-
   "account": {
     "screen": "👤 Аккаунт",
     "inline": {
@@ -151,13 +145,11 @@
             }
         }
     },
-
   "settings": {
     "screen": "⚙️ Настройки",
     "inline": {
       "language": "🌐 Язык"
     },
-
     "language": {
       "screen": "🌐 Выберите язык",
       "ru": "🇷🇺 Русский",
@@ -165,7 +157,6 @@
       "back": "⬅️ Назад"
     }
   },
-
   "help": {
     "screen": "❓ Помощь",
     "inline": {
