@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Job\Analytics;
 
+use App\Midules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -39,9 +40,14 @@ class BasicMetricsJob implements ShouldQueue
         $group = $this->apiServices->get('/analytics/getGroup/' . $this->text);
 
         if(isEmpty($group) || $group == null) {
-
+            $this->botServices->sendText($this->chat, 'Нет группы todo');
+            $this->botServices->delete($this->chat, $this->messageID);
+            return;
         }
 
+        $dto = GroupDTO::fromApi($group);
+
         $this->botServices->sendInline(CommandKey::BasicMetricsA->value, $this->lang, $this->chat);
+        $this->botServices->delete($this->chat, $this->messageID);
     }
 }
