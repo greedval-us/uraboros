@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Services;
 
+use App\Midules\Bot\DTO\GroupDTO;
 use App\Models\BotUser;
 use App\Models\ChennelMonitoring;
 use Carbon\Carbon;
@@ -27,7 +28,18 @@ class DataMapperService
         ];
     }
 
-    public function getMessagesData(string $messages)
+    public function getGroupTitleData(GroupDTO $group): array
+    {
+        return [
+            'id' => $group->idGroup,
+            'title' => $group->titleGroup ?? 'Без названия',
+            'participants' => $group->participantsCount ?? 0,
+            'type' => $group->type,
+            'created' => $group->createdDate?->format('d.m.Y'),
+        ];
+    }
+
+    public function getMessagesData(string $messages): array
     {
         return [
             'message' => $messages,

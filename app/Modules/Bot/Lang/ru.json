@@ -106,22 +106,22 @@
         "month": "За месяц"
     },
     "user": {
-      "screen": "1"
+      "screen": ""
     },
     "basic_metrics": {
-      "screen": "1"
+      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
     },
     "retention": {
-      "screen": "1"
+      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
     },
     "funnel": {
-      "screen": "1"
+      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
     },
     "audience_quality": {
-      "screen": "1"
+      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
     },
     "network_metrics": {
-      "screen": "1"
+      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
     }
   },
   "account": {

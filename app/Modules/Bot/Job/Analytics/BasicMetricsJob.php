@@ -12,8 +12,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-use function PHPUnit\Framework\isEmpty;
-
 class BasicMetricsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, JobTrait;
@@ -37,17 +35,25 @@ class BasicMetricsJob implements ShouldQueue
     {
         $this->bootServices();
 
-        $group = $this->apiServices->get('/analytics/getGroup/' . $this->text);
-
-        if(isEmpty($group) || $group == null) {
-            $this->botServices->sendText($this->chat, 'Нет группы todo');
+        try {
+            $group = $this->apiServices->get('analytics/getGroup/' . $this->text);
+        } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
+            $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
+            return;
+        }
+
+        if(empty($group) || $group == null) {
+            $this->botServices->delete($this->chat, $this->messageID);
+            $this->botServices->sendText($this->chat, 'Нет группы todo');
             return;
         }
 
         $dto = GroupDTO::fromApi($group);
 
-        $this->botServices->sendInline(CommandKey::BasicMetricsA->value, $this->lang, $this->chat);
+        $replace = $this->dataMapperService->getGroupTitleData($dto);
+
         $this->botServices->delete($this->chat, $this->messageID);
+        $this->botServices->sendInline(CommandKey::BasicMetricsA->value, $this->lang, $this->chat, $replace);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Job\Analytics;
 
+use App\Midules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -34,6 +35,25 @@ class NetworkMetricsJob implements ShouldQueue
     {
         $this->bootServices();
 
-        $this->botServices->sendInline(CommandKey::NetworkMetricsA->value, $this->lang, $this->chat);
+        try {
+            $group = $this->apiServices->get('analytics/getGroup/' . $this->text);
+        } catch (\Throwable $e) {
+            $this->botServices->delete($this->chat, $this->messageID);
+            $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
+            return;
+        }
+
+        if(empty($group) || $group == null) {
+            $this->botServices->delete($this->chat, $this->messageID);
+            $this->botServices->sendText($this->chat, 'Нет группы todo');
+            return;
+        }
+
+        $dto = GroupDTO::fromApi($group);
+
+        $replace = $this->dataMapperService->getGroupTitleData($dto);
+
+        $this->botServices->delete($this->chat, $this->messageID);
+        $this->botServices->sendInline(CommandKey::NetworkMetricsA->value, $this->lang, $this->chat, $replace);
     }
 }
