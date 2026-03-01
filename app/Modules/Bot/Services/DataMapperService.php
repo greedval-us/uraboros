@@ -2,7 +2,7 @@
 
 namespace App\Modules\Bot\Services;
 
-use App\Midules\Bot\DTO\GroupDTO;
+use App\Modules\Bot\DTO\GroupDTO;
 use App\Models\BotUser;
 use App\Models\ChennelMonitoring;
 use Carbon\Carbon;

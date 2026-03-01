@@ -2,7 +2,7 @@
 
 namespace App\Modules\Bot\Job\Analytics;
 
-use App\Midules\Bot\DTO\GroupDTO;
+use App\Modules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;

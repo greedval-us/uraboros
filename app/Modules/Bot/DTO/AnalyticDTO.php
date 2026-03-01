@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO;
+namespace App\Modules\Bot\DTO;
 
 use Carbon\Carbon;
 
