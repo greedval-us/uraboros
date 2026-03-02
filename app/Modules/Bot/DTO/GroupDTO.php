@@ -42,4 +42,24 @@ class GroupDTO
             flags2: $data['flags2'] ?? null,
         );
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'idGroup' => $this->idGroup,
+            'infoGroup' => $this->infoGroup,
+            'titleGroup' => $this->titleGroup,
+            'findGroup' => $this->findGroup,
+            'hashGroup' => $this->hashGroup,
+            'type' => $this->type,
+            'handlersId' => $this->handlersId,
+            'lastUpdate' => $this->lastUpdate?->toISOString(),
+            'linkedId' => $this->linkedId,
+            'participantsCount' => $this->participantsCount,
+            'createdDate' => $this->createdDate?->toISOString(),
+            'flags' => $this->flags,
+            'flags2' => $this->flags2,
+        ];
+    }
 }
