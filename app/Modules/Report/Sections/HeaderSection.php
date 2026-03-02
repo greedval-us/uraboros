@@ -13,7 +13,7 @@ class HeaderSection implements PdfSectionContract
 
     public function view(): string
     {
-        return "pdf.{$this->context->lang}sections.header";
+        return "pdf.{$this->context->lang}.sections.header";
     }
 
     public function data(): array
