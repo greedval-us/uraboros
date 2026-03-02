@@ -28,6 +28,6 @@ class ReportRouter
             return;
         }
 
-        app($map[$callback])->handle($chat, $param, $query, $lang);
+        app($map[$callback])->handle($chat, $query, $param, $lang);
     }
 }

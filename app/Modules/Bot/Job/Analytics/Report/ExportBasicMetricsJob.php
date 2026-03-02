@@ -42,7 +42,7 @@ class ExportBasicMetricsJob implements ShouldQueue
             $to = Carbon::now('UTC');
             $from = Carbon::now('UTC')->subDays($days);
 
-            $group = $this->apiServices->get('analytics/getGroupAnalytic', ['from' => $from, 'to' => $to, 'id_group' => $this->query]);
+            $group = $this->apiServices->get('analytics/getGroupAnalytic', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
