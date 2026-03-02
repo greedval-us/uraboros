@@ -76,6 +76,7 @@ class ExportBasicMetricsJob implements ShouldQueue
 
         Storage::disk('private')->put($filePath, $pdf->output());
 
+        $this->botServices->delete($this->chat, $this->messageID);
         $this->botServices->sendFile($this->chat, $filePath);
     }
 }
