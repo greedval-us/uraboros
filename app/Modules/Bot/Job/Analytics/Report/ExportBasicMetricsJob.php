@@ -72,8 +72,10 @@ class ExportBasicMetricsJob implements ShouldQueue
 
         $pdf = $this->pdfReportServices->generate($context);
 
-        Storage::disk('private')->put('reports/group_{$groupDto->idGroup}.pdf', $pdf->output());
+        $filePath = "reports/{$this->chatID}/group_{$groupDto->idGroup}_{$to}.pdf";
 
-        $this->botServices->sendFile($this->chat, 'reports/group_{$groupDto->idGroup}.pdf');
+        Storage::disk('private')->put($filePath, $pdf->output());
+
+        $this->botServices->sendFile($this->chat, $filePath);
     }
 }

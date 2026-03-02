@@ -19,7 +19,6 @@ class HeaderSection implements PdfSectionContract
     public function data(): array
     {
         return [
-            'title' => 'Analytics report',
             'date'  => now()->format('d.m.Y'),
         ];
     }
