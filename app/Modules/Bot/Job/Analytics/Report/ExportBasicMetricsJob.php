@@ -5,6 +5,7 @@ namespace App\Modules\Bot\Job\Analytics\Report;
 use App\Modules\Bot\DTO\AnalyticDTO;
 use App\Modules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
+use App\Modules\Report\DTO\ReportContextDTO;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Bus\Queueable;
@@ -12,6 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class ExportBasicMetricsJob implements ShouldQueue
 {
@@ -61,6 +63,17 @@ class ExportBasicMetricsJob implements ShouldQueue
         $groupDto = GroupDTO::fromApi($group);
         $analyticDto = AnalyticDTO::fromApi($analytic);
 
+        $context = new ReportContextDTO(
+            group: $groupDto,
+            analytic: $analyticDto,
+            lang: $this->lang,
+            days: $days
+        );
 
+        $pdf = $this->pdfReportServices->generate($context);
+
+        Storage::disk('private')->put('reports/group_{$groupDto->idGroup}.pdf', $pdf->output());
+
+        $this->botServices->sendFile($this->chat, 'reports/group_{$groupDto->idGroup}.pdf');
     }
 }

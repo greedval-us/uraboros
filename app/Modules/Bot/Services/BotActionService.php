@@ -3,6 +3,7 @@
 namespace App\Modules\Bot\Services;
 
 use DefStudio\Telegraph\Models\TelegraphChat;
+use Illuminate\Support\Facades\Storage;
 
 class BotActionService
 {
@@ -32,6 +33,15 @@ class BotActionService
     public function sendText(TelegraphChat $chat, string $text): int
     {
         $result = $chat->message($text)->send();
+        return $result->telegraphMessageId();
+    }
+
+    public function sendFile(TelegraphChat $chat, string $filePath): int
+    {
+        $absolutePath = Storage::disk('private')->path($filePath);
+
+        $result = $chat->document($absolutePath)->send();
+
         return $result->telegraphMessageId();
     }
 
