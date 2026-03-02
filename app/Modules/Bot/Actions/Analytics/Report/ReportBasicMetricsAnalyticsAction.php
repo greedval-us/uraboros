@@ -2,7 +2,7 @@
 
 namespace App\Modules\Bot\Actions\Analytics\Report;
 
-use App\Modules\Bot\Job\Analytics\ExportBasicMetricsJob;
+use App\Modules\Bot\Job\Analytics\Report\ExportBasicMetricsJob;
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;

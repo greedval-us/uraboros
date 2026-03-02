@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Bot\Job\Analytics;
+namespace App\Modules\Bot\Job\Analytics\Report;
 
 use App\Modules\Bot\Job\JobTrait;
 use Carbon\Carbon;
