@@ -4,7 +4,7 @@ namespace App\Modules\Bot\DTO;
 
 use Carbon\Carbon;
 
-class ResultAnalyticDto
+class AnalyticDTO
 {
     public function __construct(
         /** @var array<string,int> */

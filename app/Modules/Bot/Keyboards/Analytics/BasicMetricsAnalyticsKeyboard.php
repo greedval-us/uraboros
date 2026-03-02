@@ -29,8 +29,8 @@ class BasicMetricsAnalyticsKeyboard implements KeyboardBuilderInterface
                 ->param('param', 7),
 
             Button::make($t('analytics.inline.month'))->action('report')
-                ->param('type', $keyboard['group'])
-                ->param('query', 'todo')
+                ->param('type', 'a_basic_metrics')
+                ->param('query', $keyboard['group'])
                 ->param('param', 30),
         ]);
     }

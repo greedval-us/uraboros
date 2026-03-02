@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Job\Analytics\Report;
 
+use App\Modules\Bot\DTO\AnalyticDTO;
 use App\Modules\Bot\Job\JobTrait;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -54,5 +55,9 @@ class ExportBasicMetricsJob implements ShouldQueue
             $this->botServices->sendText($this->chat, 'Нет группы todo');
             return;
         }
+
+        $dto = AnalyticDTO::fromApi($group);
+
+
     }
 }
