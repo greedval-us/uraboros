@@ -3,6 +3,7 @@
 namespace App\Modules\Bot\Job\Analytics\Report;
 
 use App\Modules\Bot\DTO\AnalyticDTO;
+use App\Modules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -43,20 +44,22 @@ class ExportBasicMetricsJob implements ShouldQueue
             $to = Carbon::now('UTC');
             $from = Carbon::now('UTC')->subDays($days);
 
-            $group = $this->apiServices->get('analytics/getGroupAnalytic', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
+            $group = $this->apiServices->get('analytics/getGroup/' . $this->query);
+            $analytic = $this->apiServices->get('analytics/getGroupAnalytic', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
             return;
         }
 
-        if(empty($group) || $group == null) {
+        if(empty($analytic) || $analytic == null) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Нет группы todo');
             return;
         }
 
-        $dto = AnalyticDTO::fromApi($group);
+        $groupDto = GroupDTO::fromApi($group);
+        $analyticDto = AnalyticDTO::fromApi($analytic);
 
 
     }
