@@ -3,6 +3,7 @@
 namespace App\Modules\Report\Pdf;
 
 use App\Modules\Report\DTO\ReportContextDTO;
+use App\Modules\Report\Sections\GroupInfoSection;
 use App\Modules\Report\Sections\HeaderSection;
 
 class PdfReportService
@@ -11,7 +12,8 @@ class PdfReportService
     {
         $builder = new PdfBuilder();
 
-        $builder->addSection(new HeaderSection($context));
+        $builder->addSection(new HeaderSection($context))
+                ->addSection(new GroupInfoSection($context));
 
         return $builder->build();
     }
