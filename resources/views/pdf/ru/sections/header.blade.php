@@ -1,3 +1,6 @@
-<h1>Отчет аналитика по группе</h1>
-<p>Дата формирования: {{ $date }}</p>
-<hr>
+<div class="report-header">
+    <div class="report-title">Отчет аналитика по группе</div>
+    <div class="report-date">
+        Дата формирования: {{ now()->format('d.m.Y') }}
+    </div>
+</div>
