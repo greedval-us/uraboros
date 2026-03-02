@@ -1,54 +1,54 @@
-<h2>Информация о группе</h2>
+<div class="section">
+    <div class="section-title">Информация о группе</div>
 
-<table class="info-table">
-    <tr>
-        <td class="label">Название</td>
-        <td class="value">{{ $title ?? '—' }}</td>
-    </tr>
+    <table class="meta-table">
+        <tr>
+            <td class="label">Название</td>
+            <td class="value">{{ $title }}</td>
+        </tr>
 
-    <tr>
-        <td class="label">Username</td>
-        <td class="value">
-            @if($username)
-                @{{ $username }}
-            @else
-                —
-            @endif
-        </td>
-    </tr>
+        <tr>
+            <td class="label">Username</td>
+            <td class="value">
+                @if($username)
+                    @{{ $username }}
+                @else
+                    —
+                @endif
+            </td>
+        </tr>
 
-    <tr>
-        <td class="label">Участников</td>
-        <td class="value">
-            {{ $participants ? number_format($participants, 0, '.', ' ') : '—' }}
-        </td>
-    </tr>
+        <tr>
+            <td class="label">Количество участников</td>
+            <td class="value">
+                {{ number_format($participants, 0, '.', ' ') }}
+            </td>
+        </tr>
 
-    <tr>
-        <td class="label">Дата создания</td>
-        <td class="value">{{ $createdAt ?? '—' }}</td>
-    </tr>
+        <tr>
+            <td class="label">Дата создания</td>
+            <td class="value">{{ $createdAt }}</td>
+        </tr>
 
-    <tr>
-        <td class="label">Последнее обновление</td>
-        <td class="value">{{ $lastUpdate ?? '—' }}</td>
-    </tr>
-</table>
+        <tr>
+            <td class="label">Последнее обновление</td>
+            <td class="value">{{ $lastUpdate }}</td>
+        </tr>
+    </table>
 
-@if(!empty($description))
-    <div class="description">
-        <strong>Описание</strong>
-        <div class="description-text">
-            {!! nl2br(e($description)) !!}
+    @if(!empty($description))
+        <div class="description-box">
+            <strong>Описание</strong>
+            <pre>{{ $description }}</pre>
         </div>
-    </div>
-@endif
+    @endif
 
-@if(!empty($flags))
-    <div class="flags">
-        <strong>Флаги</strong><br>
-        {{ $flags }}
-    </div>
-@endif
-
-<hr>
+    @if(!empty($flags))
+        <div class="tags">
+            <strong>Флаги:</strong><br>
+            @foreach(explode(',', $flags) as $flag)
+                <span class="tag">{{ trim($flag) }}</span>
+            @endforeach
+        </div>
+    @endif
+</div>
