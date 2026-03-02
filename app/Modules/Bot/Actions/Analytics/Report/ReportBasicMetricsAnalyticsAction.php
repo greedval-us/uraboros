@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Actions\Analytics\Report;
 
+use App\Modules\Bot\Job\Analytics\ExportBasicMetricsJob;
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;
@@ -15,8 +16,10 @@ class ReportBasicMetricsAnalyticsAction
         private StorageService $storageService
     ) {}
 
-    public function handle(TelegraphChat $chat, string $query, string $param, string $lang): void
+    public function handle(TelegraphChat $chat, string $query, int $param, string $lang): void
     {
+        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
+        ExportBasicMetricsJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
     }
 }

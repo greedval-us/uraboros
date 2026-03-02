@@ -20,16 +20,16 @@ class BasicMetricsAnalyticsKeyboard implements KeyboardBuilderInterface
         return Keyboard::make()->buttons([
             Button::make($t('analytics.inline.day'))->action('report')
                 ->param('type', 'a_basic_metrics')
-                ->param('query', 'todo')
+                ->param('query', $keyboard['group'])
                 ->param('param', 1),
 
             Button::make($t('analytics.inline.week'))->action('report')
                 ->param('type', 'a_basic_metrics')
-                ->param('query', 'todo')
+                ->param('query', $keyboard['group'])
                 ->param('param', 7),
 
             Button::make($t('analytics.inline.month'))->action('report')
-                ->param('type', 'a_basic_metrics')
+                ->param('type', $keyboard['group'])
                 ->param('query', 'todo')
                 ->param('param', 30),
         ]);

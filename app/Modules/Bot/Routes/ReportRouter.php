@@ -13,7 +13,7 @@ use DefStudio\Telegraph\Models\TelegraphChat;
 
 class ReportRouter
 {
-    public function handle(TelegraphChat $chat, string $callback, string $param, string $query, string $lang): void
+    public function handle(TelegraphChat $chat, string $callback, int $param, string $query, string $lang): void
     {
         $map = [
             CommandKey::UserA->value            => ReportUserAnalyticsAction::class,

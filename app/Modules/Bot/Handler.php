@@ -124,7 +124,7 @@ class Handler extends WebhookHandler
         $this->analyticsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
-    public function repotr() {
+    public function report() {
         response()->noContent()->send();
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
