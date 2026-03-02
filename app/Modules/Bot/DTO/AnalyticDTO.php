@@ -74,6 +74,40 @@ class AnalyticDTO
         );
     }
 
+    public function toArray(): array
+    {
+        return [
+            'topAutorsFromMessages' => $this->topAutorsFromMessages,
+            'topAutorsFromReactions' => $this->topAutorsFromReactions,
+            'topAutorsAll' => $this->topAutorsAll,
+            'freqMessagesSort' => $this->freqMessagesSort,
+            'freqUsersSort' => $this->freqUsersSort,
+            'membersStart' => $this->membersStart,
+            'membersEnd' => $this->membersEnd,
+            'views' => $this->views,
+            'posts' => $this->posts,
+            'comments' => $this->comments,
+            'messages' => $this->messages,
+            'reactions' => $this->reactions,
+            'participantsCount' => $this->participantsCount,
+            'uniqActions' => $this->uniqActions,
+            'au' => $this->au,
+            'postsPerDay' => $this->postsPerDay,
+            'reactionsPerPost' => $this->reactionsPerPost,
+            'commentsPerPost' => $this->commentsPerPost,
+            'engagementRate' => $this->engagementRate,
+            'reactionRate' => $this->reactionRate,
+            'viewRate' => $this->viewRate,
+            'commentRate' => $this->commentRate,
+            'erView' => $this->erView,
+            'writerToMembers' => $this->writerToMembers,
+            'writerShare' => $this->writerShare,
+            'top10Share' => $this->top10Share,
+            'timeBurstIndex' => $this->timeBurstIndex,
+            'growthRate' => $this->growthRate,
+        ];
+    }
+
     /**
      * Преобразует даты ISO → string(Carbon)
      */
