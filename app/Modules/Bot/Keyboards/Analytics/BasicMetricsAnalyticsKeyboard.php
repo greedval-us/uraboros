@@ -18,11 +18,6 @@ class BasicMetricsAnalyticsKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('analytics.inline.day'))->action('report')
-                ->param('type', 'a_basic_metrics')
-                ->param('query', $keyboard['group'])
-                ->param('param', 1),
-
             Button::make($t('analytics.inline.week'))->action('report')
                 ->param('type', 'a_basic_metrics')
                 ->param('query', $keyboard['group'])
