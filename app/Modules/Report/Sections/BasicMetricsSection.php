@@ -13,7 +13,7 @@ class BasicMetricsSection implements PdfSectionContract
 
     public function view(): string
     {
-        return "pdf.{$this->context->lang}.sections.basic-metrics.blade";
+        return "pdf.{$this->context->lang}.sections.basic-metrics";
     }
 
     public function data(): array
