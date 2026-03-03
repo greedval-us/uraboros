@@ -18,17 +18,14 @@ class BasicMetricsSection implements PdfSectionContract
 
     public function data(): array
     {
-        // === Период ===
         $periodStart = '2026-02-24';
         $periodEnd = '2026-03-03';
 
-        // === Активные пользователи ===
         $totalActive = 55;
         $commenters = 12;
         $reactors = 34;
         $both = 8;
 
-        // Активность по дням
         $activityByDay = [
             ['day' => '1', 'total' => 27, 'posts' => 15, 'reactions' => 10, 'both' => 6],
             ['day' => '2', 'total' => 24, 'posts' => 12, 'reactions' => 12, 'both' => 4],
@@ -39,7 +36,6 @@ class BasicMetricsSection implements PdfSectionContract
             ['day' => '7', 'total' => 21, 'posts' => 19, 'reactions' => 17, 'both' => 1],
         ];
 
-        // === Частота публикаций ===
         $totalPosts = 186;
         $adminPosts = 48;
         $userPosts = 138;
@@ -54,7 +50,6 @@ class BasicMetricsSection implements PdfSectionContract
             ['day' => '7', 'total' => 37, 'admin' => 17, 'users' => 20],
         ];
 
-        // === Средняя вовлеченность ===
         $avgEngagement = 6;
         $avgPostsPerPost = 5;
         $avgReactionsPerPost = 5;
@@ -69,7 +64,6 @@ class BasicMetricsSection implements PdfSectionContract
             ['day' => '7', 'engagement' => 7, 'postsPerPost' => 6, 'reactionsPerPost' => 5],
         ];
 
-        // === Генерация графиков ===
         $activityChart = $this->generateLineChart(
             $activityByDay,
             ['posts', 'reactions'],
