@@ -67,7 +67,9 @@ class ExportBasicMetricsJob implements ShouldQueue
             group: $groupDto,
             analytic: $analyticDto,
             lang: $this->lang,
-            days: $days
+            days: $days,
+            to: $to,
+            from: $from,
         );
 
         $pdf = $this->pdfReportServices->generate($context);

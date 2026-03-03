@@ -12,5 +12,7 @@ class ReportContextDTO
         public AnalyticDTO $analytic,
         public string $lang,
         public int $days,
+        public string $to = '',
+        public string $from = '',
     ) {}
 }
