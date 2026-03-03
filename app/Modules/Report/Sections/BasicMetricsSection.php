@@ -22,10 +22,12 @@ class BasicMetricsSection implements PdfSectionContract
 
         $messages = $this->prepareTop10($analytic->topAutorsFromMessages);
         $reactions = $this->prepareTop10($analytic->topAutorsFromReactions);
+        $all = $this->prepareTop10($analytic->topAutorsAll);
 
         return [
-            'messagesChart' => $this->generatePieChart($messages),
-            'reactionsChart' => $this->generatePieChart($reactions),
+            'messagesChart'  => $this->generatePieChart($messages, 'Top 10 • Messages'),
+            'reactionsChart' => $this->generatePieChart($reactions, 'Top 10 • Reactions'),
+            'allChart'       => $this->generatePieChart($all, 'Top 10 • All Activity'),
         ];
     }
 
@@ -45,22 +47,44 @@ class BasicMetricsSection implements PdfSectionContract
         return $result;
     }
 
-    private function generatePieChart(array $data): string
+    private function generatePieChart(array $data, string $title): string
     {
+        if (empty($data)) {
+            return '';
+        }
+
         $labels = array_map(fn($i) => 'ID ' . $i['user_id'], $data);
         $values = array_map(fn($i) => $i['count'], $data);
 
         $chartConfig = [
-            'type' => 'pie',
+            'type' => 'doughnut',
             'data' => [
                 'labels' => $labels,
                 'datasets' => [[
                     'data' => $values,
                 ]]
             ],
+            'options' => [
+                'plugins' => [
+                    'legend' => [
+                        'position' => 'right',
+                        'labels' => [
+                            'boxWidth' => 12
+                        ]
+                    ],
+                    'title' => [
+                        'display' => true,
+                        'text' => $title,
+                        'font' => [
+                            'size' => 18
+                        ]
+                    ]
+                ]
+            ]
         ];
 
-        $url = 'https://quickchart.io/chart?c=' . urlencode(json_encode($chartConfig));
+        $url = 'https://quickchart.io/chart?width=600&height=400&c='
+            . urlencode(json_encode($chartConfig));
 
         $image = file_get_contents($url);
 
