@@ -11,7 +11,7 @@
             <td class="label">Username</td>
             <td class="value">
                 @if($username)
-                    @{{ $username }}
+                    {{ $username }}
                 @else
                     —
                 @endif
