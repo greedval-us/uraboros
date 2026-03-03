@@ -20,17 +20,23 @@ class BasicMetricsSection implements PdfSectionContract
     {
         $analytic = $this->context->analytic;
 
-        $messages = $this->prepareTop10($analytic->topAutorsFromMessages);
-        $reactions = $this->prepareTop10($analytic->topAutorsFromReactions);
-        $all = $this->prepareTop10($analytic->topAutorsAll);
-
         return [
-            'messagesChart'  => $this->generatePieChart($messages, 'Top 10 • Messages'),
-            'reactionsChart' => $this->generatePieChart($reactions, 'Top 10 • Reactions'),
-            'allChart'       => $this->generatePieChart($all, 'Top 10 • All Activity'),
+            'messages'  => $this->buildChartBlock(
+                $analytic->topAutorsFromMessages,
+                'Топ 10 • Сообщения'
+            ),
+
+            'reactions' => $this->buildChartBlock(
+                $analytic->topAutorsFromReactions,
+                'Топ 10 • Реакции'
+            ),
+
+            'all'       => $this->buildChartBlock(
+                $analytic->topAutorsAll,
+                'Топ 10 • Вся активность'
+            ),
         ];
     }
-
     private function prepareTop10(array $data): array
     {
         $result = [];
@@ -47,16 +53,68 @@ class BasicMetricsSection implements PdfSectionContract
         return $result;
     }
 
-    private function generatePieChart(array $data, string $title): string
+    private function buildChartBlock(array $data, string $title): array
     {
-        if (empty($data)) {
-            return '';
+        $top10 = $this->prepareTop10($data);
+
+        if (empty($top10)) {
+            return [];
         }
 
-        $labels = array_map(fn($i) => 'ID ' . $i['user_id'], $data);
-        $values = array_map(fn($i) => $i['count'], $data);
+        $topTotal = 0;
+        foreach ($top10 as $item) {
+            $topTotal += (int) $item['count'];
+        }
 
-        $total = array_sum($values);
+        $fullTotal = 0;
+        foreach ($data as $row) {
+            $fullTotal += (int) reset($row);
+        }
+
+        $colors = [
+            '#D4AF37',
+            '#C0C0C0',
+            '#CD7F32',
+            '#3b82f6',
+            '#10b981',
+            '#8b5cf6',
+            '#ef4444',
+            '#f59e0b',
+            '#6366f1',
+            '#14b8a6',
+        ];
+
+        foreach ($top10 as $index => &$item) {
+            $item['rank'] = $index + 1;
+            $item['percent'] = $topTotal > 0
+                ? round($item['count'] / $topTotal * 100, 1)
+                : 0;
+
+            $item['color'] = $colors[$index] ?? '#999999';
+        }
+        unset($item);
+
+        $share = $fullTotal > 0
+            ? round($topTotal / $fullTotal * 100, 1)
+            : 0;
+
+        return [
+            'title' => $title,
+            'chart' => $this->generatePieChart($top10, $title),
+            'table' => $top10,
+            'share' => $share,
+        ];
+    }
+
+    private function generatePieChart(array $data, string $title): string
+    {
+        $labels = array_map(
+            fn($i) => '#' . $i['rank'] . ' ID ' . $i['user_id'],
+            $data
+        );
+
+        $values = array_column($data, 'count');
+        $colors = array_column($data, 'color');
 
         $chartConfig = [
             'type' => 'pie',
@@ -64,6 +122,7 @@ class BasicMetricsSection implements PdfSectionContract
                 'labels' => $labels,
                 'datasets' => [[
                     'data' => $values,
+                    'backgroundColor' => $colors,
                 ]]
             ],
             'options' => [
@@ -72,17 +131,7 @@ class BasicMetricsSection implements PdfSectionContract
                     'title' => [
                         'display' => true,
                         'text' => $title,
-                        'font' => [
-                            'size' => 20
-                        ]
-                    ],
-                    'datalabels' => [
-                        'color' => '#fff',
-                        'formatter' => "function(value, ctx) {
-                            const total = $total;
-                            const percentage = (value / total * 100).toFixed(1) + '%';
-                            return percentage;
-                        }"
+                        'font' => ['size' => 20]
                     ]
                 ]
             ]

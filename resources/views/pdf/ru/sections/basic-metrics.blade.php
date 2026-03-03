@@ -1,28 +1,55 @@
 <div class="section">
-    <div class="section-title">Топ авторов (Top 10)</div>
+    <div class="section-title">Топ авторов</div>
 
-    <table width="100%" style="border-collapse: collapse;">
-        <tr>
-            <td width="50%" style="padding-right:10px; vertical-align:top;">
-                <div class="chart-box">
-                    <div class="chart-title">По сообщениям</div>
-                    <img src="{{ $messagesChart }}" style="width:100%;">
-                </div>
-            </td>
+    @foreach([$messages, $reactions, $all] as $block)
 
-            <td width="50%" style="padding-left:10px; vertical-align:top;">
-                <div class="chart-box">
-                    <div class="chart-title">По реакциям</div>
-                    <img src="{{ $reactionsChart }}" style="width:100%;">
-                </div>
-            </td>
-        </tr>
-    </table>
+        <div class="chart-container">
 
-    <div style="margin-top:25px;">
-        <div class="chart-box">
-            <div class="chart-title">По всем действиям</div>
-            <img src="{{ $allChart }}" style="width:100%;">
+            <table width="100%">
+                <tr>
+                    <td width="60%" style="vertical-align:top;">
+                        <img src="{{ $block['chart'] }}" style="width:100%;">
+
+                        <div class="share-box">
+                            Top 10 Share: <strong>{{ $block['share'] }}%</strong>
+                        </div>
+                    </td>
+
+                    <td width="40%" style="vertical-align:top; padding-left:15px;">
+
+                        <table class="leaders-table">
+                            <tr>
+                                <th>#</th>
+                                <th>ID</th>
+                                <th>Count</th>
+                                <th>%</th>
+                            </tr>
+
+                            @foreach($block['table'] as $row)
+                                <tr>
+                                    <td>
+                                        <span class="color-dot"
+                                              style="background: {{ $row['color'] }}"></span>
+                                        {{ $row['rank'] }}
+                                    </td>
+                                    <td>{{ $row['user_id'] }}</td>
+                                    <td>{{ $row['count'] }}</td>
+                                    <td>{{ $row['percent'] }}%</td>
+                                </tr>
+                            @endforeach
+                        </table>
+
+                        <div class="mini-description">
+                            🥇🥈🥉 Лидеры выделены фирменными цветами.
+                            Цвет точки соответствует сектору диаграммы.
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+
         </div>
-    </div>
+
+    @endforeach
+
 </div>

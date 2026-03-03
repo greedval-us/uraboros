@@ -120,6 +120,51 @@
             margin-bottom: 8px;
             color: #1e3a8a;
         }
+        .chart-container {
+            margin-bottom: 35px;
+            padding: 15px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+        }
+
+        .leaders-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .leaders-table th {
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+            padding: 5px;
+        }
+
+        .leaders-table td {
+            padding: 4px 5px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .color-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 5px;
+            border-radius: 50%;
+        }
+
+        .share-box {
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .mini-description {
+            margin-top: 8px;
+            font-size: 10px;
+            color: #6b7280;
+        }
     </style>
 </head>
 <body>
