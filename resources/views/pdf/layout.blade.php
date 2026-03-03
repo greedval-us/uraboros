@@ -165,6 +165,59 @@
             font-size: 10px;
             color: #6b7280;
         }
+        .chart-container {
+            margin-bottom: 35px;
+        }
+
+        .chart-block-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .share-box {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #374151;
+            background: #f9fafb;
+            padding: 6px 8px;
+            border-radius: 4px;
+        }
+
+        .leaders-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .leaders-table th {
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 6px 4px;
+            background: #f3f4f6;
+        }
+
+        .leaders-table td {
+            padding: 5px 4px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .color-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        .mini-description {
+            font-size: 10px;
+            color: #6b7280;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>

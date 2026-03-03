@@ -1,18 +1,27 @@
-<div class="section">
+<div class="section page-break">
+
     <div class="section-title">Топ авторов</div>
 
     @foreach([$messages, $reactions, $all] as $block)
 
         <div class="chart-container">
 
+            <div class="chart-block-title">
+                {{ $block['title'] }}
+            </div>
+
             <table width="100%">
                 <tr>
                     <td width="60%" style="vertical-align:top;">
+
                         <img src="{{ $block['chart'] }}" style="width:100%;">
 
                         <div class="share-box">
-                            Top 10 Share: <strong>{{ $block['share'] }}%</strong>
+                            10 самых активных участников обеспечили
+                            <strong>{{ $block['share'] }}%</strong>
+                            всей активности
                         </div>
+
                     </td>
 
                     <td width="40%" style="vertical-align:top; padding-left:15px;">
@@ -40,8 +49,7 @@
                         </table>
 
                         <div class="mini-description">
-                            🥇🥈🥉 Лидеры выделены фирменными цветами.
-                            Цвет точки соответствует сектору диаграммы.
+                            Цвет маркера соответствует сектору диаграммы.
                         </div>
 
                     </td>
