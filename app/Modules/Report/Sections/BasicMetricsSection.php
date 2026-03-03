@@ -20,9 +20,12 @@ class BasicMetricsSection implements PdfSectionContract
     {
         $analytic = $this->context->analytic;
 
+        $messages = $this->prepareTop10($analytic->topAutorsFromMessages);
+        $reactions = $this->prepareTop10($analytic->topAutorsFromReactions);
+
         return [
-            'topMessages' => $this->prepareTop10($analytic->topAutorsFromMessages),
-            'topReactions' => $this->prepareTop10($analytic->topAutorsFromReactions),
+            'messagesChart' => $this->generatePieChart($messages),
+            'reactionsChart' => $this->generatePieChart($reactions),
         ];
     }
 
@@ -40,5 +43,27 @@ class BasicMetricsSection implements PdfSectionContract
         }
 
         return $result;
+    }
+
+    private function generatePieChart(array $data): string
+    {
+        $labels = array_map(fn($i) => 'ID ' . $i['user_id'], $data);
+        $values = array_map(fn($i) => $i['count'], $data);
+
+        $chartConfig = [
+            'type' => 'pie',
+            'data' => [
+                'labels' => $labels,
+                'datasets' => [[
+                    'data' => $values,
+                ]]
+            ],
+        ];
+
+        $url = 'https://quickchart.io/chart?c=' . urlencode(json_encode($chartConfig));
+
+        $image = file_get_contents($url);
+
+        return 'data:image/png;base64,' . base64_encode($image);
     }
 }
