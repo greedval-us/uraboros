@@ -3,7 +3,9 @@
     <div class="section-title">1. Базовые метрики</div>
 
     {{-- 1.1 Активные пользователи --}}
-    <div class="subsection-title">1.1 Активные пользователи за период {{ $periodStart ?? '****' }} - {{ $periodEnd ?? '****' }}</div>
+    <div class="subsection-title">
+        1.1 Активные пользователи за период {{ $periodStart ?? '****' }} - {{ $periodEnd ?? '****' }}
+    </div>
 
     <p>
         Общая активность: <strong>{{ $totalActive ?? 0 }}</strong> пользователей<br>
@@ -25,23 +27,23 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($activityByDay as $day => $row)
+                @foreach($activityByDay as $row)
                     <tr>
-                        <td>{{ $day }}</td>
-                        <td>{{ $row['post_or_reaction'] ?? 0 }}</td>
-                        <td>{{ $row['post'] ?? 0 }}</td>
-                        <td>{{ $row['reaction'] ?? 0 }}</td>
-                        <td>{{ $row['post_and_reaction'] ?? 0 }}</td>
+                        <td>{{ $row['day'] ?? '?' }}</td>
+                        <td>{{ $row['total'] ?? 0 }}</td>
+                        <td>{{ $row['posts'] ?? 0 }}</td>
+                        <td>{{ $row['reactions'] ?? 0 }}</td>
+                        <td>{{ $row['both'] ?? 0 }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-        {{-- График активности по дням --}}
+        {{-- График активности --}}
         @php
-            $labels = array_keys($activityByDay);
-            $dataPosts = array_map(fn($row) => $row['post'] ?? 0, $activityByDay);
-            $dataReactions = array_map(fn($row) => $row['reaction'] ?? 0, $activityByDay);
+            $labels = array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $activityByDay);
+            $dataPosts = array_map(fn($row) => $row['posts'] ?? 0, $activityByDay);
+            $dataReactions = array_map(fn($row) => $row['reactions'] ?? 0, $activityByDay);
             $chartConfig = [
                 'type' => 'line',
                 'data' => [
@@ -84,9 +86,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($postsByDay as $day => $row)
+                @foreach($postsByDay as $row)
                     <tr>
-                        <td>{{ $day }}</td>
+                        <td>{{ $row['day'] ?? '?' }}</td>
                         <td>{{ $row['total'] ?? 0 }}</td>
                         <td>{{ $row['admin'] ?? 0 }}</td>
                         <td>{{ $row['users'] ?? 0 }}</td>
@@ -97,7 +99,7 @@
 
         {{-- График публикаций --}}
         @php
-            $labels = array_keys($postsByDay);
+            $labels = array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $postsByDay);
             $dataAdmin = array_map(fn($row) => $row['admin'] ?? 0, $postsByDay);
             $dataUsers = array_map(fn($row) => $row['users'] ?? 0, $postsByDay);
             $chartConfig = [
@@ -142,9 +144,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($engagementByDay as $day => $row)
+                @foreach($engagementByDay as $row)
                     <tr>
-                        <td>{{ $day }}</td>
+                        <td>{{ $row['day'] ?? '?' }}</td>
                         <td>{{ $row['engagement'] ?? 0 }}</td>
                         <td>{{ $row['posts_ratio'] ?? 0 }}</td>
                         <td>{{ $row['reactions_ratio'] ?? 0 }}</td>
@@ -155,7 +157,7 @@
 
         {{-- График вовлеченности --}}
         @php
-            $labels = array_keys($engagementByDay);
+            $labels = array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $engagementByDay);
             $dataEngagement = array_map(fn($row) => $row['engagement'] ?? 0, $engagementByDay);
             $chartConfig = [
                 'type' => 'line',
