@@ -56,8 +56,10 @@ class BasicMetricsSection implements PdfSectionContract
         $labels = array_map(fn($i) => 'ID ' . $i['user_id'], $data);
         $values = array_map(fn($i) => $i['count'], $data);
 
+        $total = array_sum($values);
+
         $chartConfig = [
-            'type' => 'doughnut',
+            'type' => 'pie',
             'data' => [
                 'labels' => $labels,
                 'datasets' => [[
@@ -66,24 +68,27 @@ class BasicMetricsSection implements PdfSectionContract
             ],
             'options' => [
                 'plugins' => [
-                    'legend' => [
-                        'position' => 'right',
-                        'labels' => [
-                            'boxWidth' => 12
-                        ]
-                    ],
+                    'legend' => false,
                     'title' => [
                         'display' => true,
                         'text' => $title,
                         'font' => [
-                            'size' => 18
+                            'size' => 20
                         ]
+                    ],
+                    'datalabels' => [
+                        'color' => '#fff',
+                        'formatter' => "function(value, ctx) {
+                            const total = $total;
+                            const percentage = (value / total * 100).toFixed(1) + '%';
+                            return percentage;
+                        }"
                     ]
                 ]
             ]
         ];
 
-        $url = 'https://quickchart.io/chart?width=600&height=400&c='
+        $url = 'https://quickchart.io/chart?width=800&height=500&format=png&c='
             . urlencode(json_encode($chartConfig));
 
         $image = file_get_contents($url);

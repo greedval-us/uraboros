@@ -1,43 +1,28 @@
-<div style="margin-top:40px;">
+<div class="section">
+    <div class="section-title">Топ авторов (Top 10)</div>
 
-    <h1 style="
-        font-size:22px;
-        font-weight:700;
-        margin-bottom:25px;
-        border-bottom:2px solid #000;
-        padding-bottom:10px;
-    ">
-        Топ авторов
-    </h1>
+    <table width="100%" style="border-collapse: collapse;">
+        <tr>
+            <td width="50%" style="padding-right:10px; vertical-align:top;">
+                <div class="chart-box">
+                    <div class="chart-title">По сообщениям</div>
+                    <img src="{{ $messagesChart }}" style="width:100%;">
+                </div>
+            </td>
 
-    <div style="margin-bottom:40px;">
-        <div style="
-            background:#f8f9fa;
-            padding:20px;
-            border-radius:8px;
-        ">
-            <img src="{{ $messagesChart }}" style="width:100%;">
-        </div>
-    </div>
+            <td width="50%" style="padding-left:10px; vertical-align:top;">
+                <div class="chart-box">
+                    <div class="chart-title">По реакциям</div>
+                    <img src="{{ $reactionsChart }}" style="width:100%;">
+                </div>
+            </td>
+        </tr>
+    </table>
 
-    <div style="margin-bottom:40px;">
-        <div style="
-            background:#f8f9fa;
-            padding:20px;
-            border-radius:8px;
-        ">
-            <img src="{{ $reactionsChart }}" style="width:100%;">
-        </div>
-    </div>
-
-    <div style="margin-bottom:20px;">
-        <div style="
-            background:#f8f9fa;
-            padding:20px;
-            border-radius:8px;
-        ">
+    <div style="margin-top:25px;">
+        <div class="chart-box">
+            <div class="chart-title">По всем действиям</div>
             <img src="{{ $allChart }}" style="width:100%;">
         </div>
     </div>
-
 </div>

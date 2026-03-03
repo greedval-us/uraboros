@@ -107,6 +107,19 @@
             color: #6b7280;
             text-align: center;
         }
+            .chart-box {
+            background: #f8fafc;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+        }
+
+        .chart-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+        }
     </style>
 </head>
 <body>
