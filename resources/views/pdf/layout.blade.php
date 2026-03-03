@@ -10,7 +10,9 @@
             color: #1f2937;
             line-height: 1.5;
         }
-
+        .page-break {
+            page-break-before: always;
+        }
         /* ===== HEADER ===== */
         .report-header {
             margin-bottom: 20px;
