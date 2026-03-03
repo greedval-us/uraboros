@@ -1,6 +1,18 @@
 <div class="section page-break">
 
-    <div class="section-title">Топ авторов</div>
+    {{-- Основной заголовок --}}
+    <div class="section-title" style="font-size:22px; font-weight:bold; margin-bottom:5px;">
+        Базовые метрики
+    </div>
+
+    {{-- Подзаголовок / описание --}}
+    <div class="section-subtitle" style="font-size:14px; color:#6b7280; margin-bottom:20px; line-height:1.4;">
+        Секция включает:
+        <ul style="margin:5px 0 0 20px; padding:0;">
+            <li>Топ активности пользователей</li>
+            <li>Топ публикаций по времени</li>
+        </ul>
+    </div>
 
     @foreach([$messages, $reactions, $all] as $block)
         @if(!empty($block))
