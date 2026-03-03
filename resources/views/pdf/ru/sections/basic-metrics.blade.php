@@ -40,29 +40,11 @@
         </table>
 
         {{-- График активности --}}
-        @php
-            $labels = array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $activityByDay);
-            $dataPosts = array_map(fn($row) => $row['posts'] ?? 0, $activityByDay);
-            $dataReactions = array_map(fn($row) => $row['reactions'] ?? 0, $activityByDay);
-            $chartConfig = [
-                'type' => 'line',
-                'data' => [
-                    'labels' => $labels,
-                    'datasets' => [
-                        ['label' => 'Публикации', 'data' => $dataPosts, 'borderColor' => '#3b82f6', 'fill' => false],
-                        ['label' => 'Реакции', 'data' => $dataReactions, 'borderColor' => '#10b981', 'fill' => false],
-                    ],
-                ],
-                'options' => [
-                    'plugins' => ['legend' => ['display' => true]],
-                    'scales' => ['y' => ['beginAtZero' => true]]
-                ]
-            ];
-            $chartUrl = 'https://quickchart.io/chart?width=800&height=400&c=' . urlencode(json_encode($chartConfig));
-        @endphp
-        <div class="chart-container">
-            <img src="{{ $chartUrl }}" style="width:100%; margin-top:15px;">
-        </div>
+        @if(!empty($activityChart))
+            <div class="chart-container">
+                <img src="{{ $activityChart }}" style="width:100%; margin-top:15px;">
+            </div>
+        @endif
     @else
         <div style="font-size:12px; color:#6b7280;">Нет данных по активности</div>
     @endif
@@ -98,29 +80,11 @@
         </table>
 
         {{-- График публикаций --}}
-        @php
-            $labels = array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $postsByDay);
-            $dataAdmin = array_map(fn($row) => $row['admin'] ?? 0, $postsByDay);
-            $dataUsers = array_map(fn($row) => $row['users'] ?? 0, $postsByDay);
-            $chartConfig = [
-                'type' => 'bar',
-                'data' => [
-                    'labels' => $labels,
-                    'datasets' => [
-                        ['label' => 'Администратор', 'data' => $dataAdmin, 'backgroundColor' => '#ef4444'],
-                        ['label' => 'Пользователи', 'data' => $dataUsers, 'backgroundColor' => '#3b82f6'],
-                    ],
-                ],
-                'options' => [
-                    'plugins' => ['legend' => ['display' => true]],
-                    'scales' => ['y' => ['beginAtZero' => true]]
-                ]
-            ];
-            $chartUrl = 'https://quickchart.io/chart?width=800&height=400&c=' . urlencode(json_encode($chartConfig));
-        @endphp
-        <div class="chart-container">
-            <img src="{{ $chartUrl }}" style="width:100%; margin-top:15px;">
-        </div>
+        @if(!empty($postsChart))
+            <div class="chart-container">
+                <img src="{{ $postsChart }}" style="width:100%; margin-top:15px;">
+            </div>
+        @endif
     @else
         <div style="font-size:12px; color:#6b7280;">Нет данных по публикациям</div>
     @endif
@@ -148,35 +112,19 @@
                     <tr>
                         <td>{{ $row['day'] ?? '?' }}</td>
                         <td>{{ $row['engagement'] ?? 0 }}</td>
-                        <td>{{ $row['posts_ratio'] ?? 0 }}</td>
-                        <td>{{ $row['reactions_ratio'] ?? 0 }}</td>
+                        <td>{{ $row['postsPerPost'] ?? 0 }}</td>
+                        <td>{{ $row['reactionsPerPost'] ?? 0 }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
         {{-- График вовлеченности --}}
-        @php
-            $labels = array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $engagementByDay);
-            $dataEngagement = array_map(fn($row) => $row['engagement'] ?? 0, $engagementByDay);
-            $chartConfig = [
-                'type' => 'line',
-                'data' => [
-                    'labels' => $labels,
-                    'datasets' => [
-                        ['label' => 'Вовлеченность', 'data' => $dataEngagement, 'borderColor' => '#10b981', 'fill' => false],
-                    ],
-                ],
-                'options' => [
-                    'plugins' => ['legend' => ['display' => true]],
-                    'scales' => ['y' => ['beginAtZero' => true]]
-                ]
-            ];
-            $chartUrl = 'https://quickchart.io/chart?width=800&height=400&c=' . urlencode(json_encode($chartConfig));
-        @endphp
-        <div class="chart-container">
-            <img src="{{ $chartUrl }}" style="width:100%; margin-top:15px;">
-        </div>
+        @if(!empty($engagementChart))
+            <div class="chart-container">
+                <img src="{{ $engagementChart }}" style="width:100%; margin-top:15px;">
+            </div>
+        @endif
     @else
         <div style="font-size:12px; color:#6b7280;">Нет данных по вовлеченности</div>
     @endif

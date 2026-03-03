@@ -28,7 +28,7 @@ class BasicMetricsSection implements PdfSectionContract
         $reactors = 34;
         $both = 8;
 
-        // Активность по дням (Публикация или реакция / Публикация / Реакция / Публикация и реакция)
+        // Активность по дням
         $activityByDay = [
             ['day' => '1', 'total' => 27, 'posts' => 15, 'reactions' => 10, 'both' => 6],
             ['day' => '2', 'total' => 24, 'posts' => 12, 'reactions' => 12, 'both' => 4],
@@ -69,22 +69,102 @@ class BasicMetricsSection implements PdfSectionContract
             ['day' => '7', 'engagement' => 7, 'postsPerPost' => 6, 'reactionsPerPost' => 5],
         ];
 
-        return [
-            'periodStart' => $periodStart,
-            'periodEnd' => $periodEnd,
-            'totalActive' => $totalActive,
-            'commenters' => $commenters,
-            'reactors' => $reactors,
-            'both' => $both,
-            'activityByDay' => $activityByDay,
-            'totalPosts' => $totalPosts,
-            'adminPosts' => $adminPosts,
-            'userPosts' => $userPosts,
-            'postsByDay' => $postsByDay,
-            'avgEngagement' => $avgEngagement,
-            'avgPostsPerPost' => $avgPostsPerPost,
-            'avgReactionsPerPost' => $avgReactionsPerPost,
-            'engagementByDay' => $engagementByDay,
+        // === Генерация графиков ===
+        $activityChart = $this->generateLineChart(
+            $activityByDay,
+            ['posts', 'reactions'],
+            ['Публикации', 'Реакции'],
+            '#3b82f6',
+            '#10b981',
+            'Активность пользователей по дням'
+        );
+
+        $postsChart = $this->generateBarChart(
+            $postsByDay,
+            ['admin', 'users'],
+            ['Администратор', 'Пользователи'],
+            ['#ef4444', '#3b82f6'],
+            'Публикации по дням'
+        );
+
+        $engagementChart = $this->generateLineChart(
+            $engagementByDay,
+            ['engagement'],
+            ['Вовлеченность'],
+            '#10b981',
+            null,
+            'Средняя вовлеченность по дням'
+        );
+
+        return compact(
+            'periodStart','periodEnd','totalActive','commenters','reactors','both','activityByDay',
+            'totalPosts','adminPosts','userPosts','postsByDay',
+            'avgEngagement','avgPostsPerPost','avgReactionsPerPost','engagementByDay',
+            'activityChart','postsChart','engagementChart'
+        );
+    }
+
+    private function generateLineChart(array $data, array $fields, array $labels, string $color1, ?string $color2, string $title): string
+    {
+        $chartDataSets = [];
+        foreach ($fields as $i => $field) {
+            $dataset = [
+                'label' => $labels[$i] ?? $field,
+                'data' => array_map(fn($row) => $row[$field] ?? 0, $data),
+                'borderColor' => $i === 0 ? $color1 : $color2,
+                'fill' => false,
+            ];
+            $chartDataSets[] = $dataset;
+        }
+
+        $chartConfig = [
+            'type' => 'line',
+            'data' => [
+                'labels' => array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $data),
+                'datasets' => $chartDataSets,
+            ],
+            'options' => [
+                'plugins' => ['legend' => ['display' => true]],
+                'scales' => ['y' => ['beginAtZero' => true]],
+                'title' => ['display' => true, 'text' => $title]
+            ]
         ];
+
+        return $this->quickChartUrl($chartConfig);
+    }
+
+    private function generateBarChart(array $data, array $fields, array $labels, array $colors, string $title): string
+    {
+        $chartDataSets = [];
+        foreach ($fields as $i => $field) {
+            $dataset = [
+                'label' => $labels[$i] ?? $field,
+                'data' => array_map(fn($row) => $row[$field] ?? 0, $data),
+                'backgroundColor' => $colors[$i] ?? '#999999',
+            ];
+            $chartDataSets[] = $dataset;
+        }
+
+        $chartConfig = [
+            'type' => 'bar',
+            'data' => [
+                'labels' => array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $data),
+                'datasets' => $chartDataSets,
+            ],
+            'options' => [
+                'plugins' => ['legend' => ['display' => true]],
+                'scales' => ['y' => ['beginAtZero' => true]],
+                'title' => ['display' => true, 'text' => $title]
+            ]
+        ];
+
+        return $this->quickChartUrl($chartConfig);
+    }
+
+    private function quickChartUrl(array $chartConfig): string
+    {
+        $url = 'https://quickchart.io/chart?width=800&height=400&c=' . urlencode(json_encode($chartConfig));
+        $image = @file_get_contents($url);
+        return $image ? 'data:image/png;base64,' . base64_encode($image) : '';
     }
 }
