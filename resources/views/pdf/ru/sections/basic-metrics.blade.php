@@ -71,16 +71,4 @@
         @endif
     @endforeach
 
-    {{-- Временной график активности --}}
-    @if(!empty($timeChart))
-        <div class="chart-container" style="margin-top:30px;">
-            <div class="chart-block-title">Активность по времени</div>
-            <img src="{{ $timeChart }}" style="width:100%; max-height:400px;">
-        </div>
-    @else
-        <div style="width:100%; height:200px; background:#f0f0f0; text-align:center; line-height:200px; margin-top:30px;">
-            Нет данных по временной активности
-        </div>
-    @endif
-
 </div>
