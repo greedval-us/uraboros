@@ -5,7 +5,7 @@ namespace App\Modules\Report\Sections;
 use App\Modules\Report\Contracts\PdfSectionContract;
 use App\Modules\Report\DTO\ReportContextDTO;
 
-class FooterSection implements PdfSectionContract
+class FunnelSection implements PdfSectionContract
 {
     public function __construct(
         protected ReportContextDTO $context

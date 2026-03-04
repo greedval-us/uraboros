@@ -4,6 +4,7 @@ namespace App\Modules\Report\Sections;
 
 use App\Modules\Report\Contracts\PdfSectionContract;
 use App\Modules\Report\DTO\ReportContextDTO;
+use App\Modules\Report\Helper\ChartHelper;
 
 class BasicMetricsSection implements PdfSectionContract
 {
@@ -64,7 +65,7 @@ class BasicMetricsSection implements PdfSectionContract
             ['day' => '7', 'engagement' => 7, 'postsPerPost' => 6, 'reactionsPerPost' => 5],
         ];
 
-        $activityChart = $this->generateLineChart(
+        $activityChart = ChartHelper::line(
             $activityByDay,
             ['posts', 'reactions'],
             ['Публикации', 'Реакции'],
@@ -73,7 +74,7 @@ class BasicMetricsSection implements PdfSectionContract
             'Активность пользователей по дням'
         );
 
-        $postsChart = $this->generateBarChart(
+        $postsChart = ChartHelper::bar(
             $postsByDay,
             ['admin', 'users'],
             ['Администратор', 'Пользователи'],
@@ -81,7 +82,7 @@ class BasicMetricsSection implements PdfSectionContract
             'Публикации по дням'
         );
 
-        $engagementChart = $this->generateLineChart(
+        $engagementChart = ChartHelper::line(
             $engagementByDay,
             ['engagement'],
             ['Вовлеченность'],
@@ -96,69 +97,5 @@ class BasicMetricsSection implements PdfSectionContract
             'avgEngagement','avgPostsPerPost','avgReactionsPerPost','engagementByDay',
             'activityChart','postsChart','engagementChart'
         );
-    }
-
-    private function generateLineChart(array $data, array $fields, array $labels, string $color1, ?string $color2, string $title): string
-    {
-        $chartDataSets = [];
-        foreach ($fields as $i => $field) {
-            $dataset = [
-                'label' => $labels[$i] ?? $field,
-                'data' => array_map(fn($row) => $row[$field] ?? 0, $data),
-                'borderColor' => $i === 0 ? $color1 : $color2,
-                'fill' => false,
-            ];
-            $chartDataSets[] = $dataset;
-        }
-
-        $chartConfig = [
-            'type' => 'line',
-            'data' => [
-                'labels' => array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $data),
-                'datasets' => $chartDataSets,
-            ],
-            'options' => [
-                'plugins' => ['legend' => ['display' => true]],
-                'scales' => ['y' => ['beginAtZero' => true]],
-                'title' => ['display' => true, 'text' => $title]
-            ]
-        ];
-
-        return $this->quickChartUrl($chartConfig);
-    }
-
-    private function generateBarChart(array $data, array $fields, array $labels, array $colors, string $title): string
-    {
-        $chartDataSets = [];
-        foreach ($fields as $i => $field) {
-            $dataset = [
-                'label' => $labels[$i] ?? $field,
-                'data' => array_map(fn($row) => $row[$field] ?? 0, $data),
-                'backgroundColor' => $colors[$i] ?? '#999999',
-            ];
-            $chartDataSets[] = $dataset;
-        }
-
-        $chartConfig = [
-            'type' => 'bar',
-            'data' => [
-                'labels' => array_map(fn($row) => 'День ' . ($row['day'] ?? '?'), $data),
-                'datasets' => $chartDataSets,
-            ],
-            'options' => [
-                'plugins' => ['legend' => ['display' => true]],
-                'scales' => ['y' => ['beginAtZero' => true]],
-                'title' => ['display' => true, 'text' => $title]
-            ]
-        ];
-
-        return $this->quickChartUrl($chartConfig);
-    }
-
-    private function quickChartUrl(array $chartConfig): string
-    {
-        $url = 'https://quickchart.io/chart?width=800&height=400&c=' . urlencode(json_encode($chartConfig));
-        $image = @file_get_contents($url);
-        return $image ? 'data:image/png;base64,' . base64_encode($image) : '';
     }
 }

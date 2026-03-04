@@ -228,9 +228,5 @@
     @include($section->view(), $section->data())
 @endforeach
 
-<div class="report-footer">
-    Отчет сформирован автоматически • {{ config('app.name') }}
-</div>
-
 </body>
 </html>

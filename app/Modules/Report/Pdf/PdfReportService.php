@@ -3,19 +3,24 @@
 namespace App\Modules\Report\Pdf;
 
 use App\Modules\Report\DTO\ReportContextDTO;
-use App\Modules\Report\Sections\BasicMetricsSection;
-use App\Modules\Report\Sections\GroupInfoSection;
-use App\Modules\Report\Sections\HeaderSection;
+use App\Modules\Report\Enums\ReportType;
 
 class PdfReportService
 {
-    public function generate(ReportContextDTO $context)
-    {
+    public function __construct(
+        protected ReportSectionsResolver $resolver
+    ) {}
+
+    public function generate(
+        ReportContextDTO $context,
+        ReportType $type = ReportType::DEFAULT
+    ) {
         $builder = new PdfBuilder();
 
-        $builder->addSection(new HeaderSection($context))
-                ->addSection(new GroupInfoSection($context))
-                ->addSection(new BasicMetricsSection($context));
+        foreach ($this->resolver->resolve($type, $context) as $section) {
+            $builder->addSection($section);
+        }
+
         return $builder->build();
     }
 }

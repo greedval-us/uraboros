@@ -18,9 +18,15 @@ class NetworkMetricsAnalyticsKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('account.inline.profile'))->action('account')->param('type', 'profile'),
-            Button::make($t('account.inline.plans'))->action('account')->param('type', 'plans'),
-            Button::make($t('account.inline.stats'))->action('account')->param('type', 'stats'),
+            Button::make($t('analytics.inline.week'))->action('report')
+                ->param('type', 'a_network_metrics')
+                ->param('query', $keyboard['group'])
+                ->param('param', 7),
+
+            Button::make($t('analytics.inline.month'))->action('report')
+                ->param('type', 'a_network_metrics')
+                ->param('query', $keyboard['group'])
+                ->param('param', 30),
         ]);
     }
 }
