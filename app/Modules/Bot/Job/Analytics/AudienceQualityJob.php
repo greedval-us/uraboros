@@ -54,6 +54,6 @@ class AudienceQualityJob implements ShouldQueue
         $replace = $this->dataMapperService->getGroupTitleData($dto);
 
         $this->botServices->delete($this->chat, $this->messageID);
-        $this->botServices->sendInline(CommandKey::AudienceQualityA->value, $this->lang, $this->chat, $replace);
+        $this->botServices->sendInline(CommandKey::AudienceQualityA->value, $this->lang, $this->chat, $replace, ['group' => $this->text]);
     }
 }
