@@ -23,6 +23,6 @@ class RunAudienceQualityAnalyticsAction
 
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        AudienceQualityJob::dispatch($lang, $chat->chat_id, $messageId);
+        AudienceQualityJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text);
     }
 }

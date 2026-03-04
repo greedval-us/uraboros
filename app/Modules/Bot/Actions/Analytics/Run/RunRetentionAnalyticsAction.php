@@ -23,6 +23,6 @@ class RunRetentionAnalyticsAction
 
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        RetentionJob::dispatch($lang, $chat->chat_id, $messageId);
+        RetentionJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text);
     }
 }

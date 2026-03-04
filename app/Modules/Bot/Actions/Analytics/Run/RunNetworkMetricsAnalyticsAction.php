@@ -23,6 +23,6 @@ class RunNetworkMetricsAnalyticsAction
 
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        NetworkMetricsJob::dispatch($lang, $chat->chat_id, $messageId);
+        NetworkMetricsJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text);
     }
 }
