@@ -6,6 +6,7 @@ use App\Modules\Bot\DTO\AnalyticDTO;
 use App\Modules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Report\DTO\ReportContextDTO;
+use App\Modules\Report\Enums\ReportType;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Bus\Queueable;
@@ -72,7 +73,7 @@ class ExportNetworkMetricsJob implements ShouldQueue
             from: $from,
         );
 
-        $pdf = $this->pdfReportServices->generate($context);
+        $pdf = $this->pdfReportServices->generate($context, ReportType::NETWORK);
 
         $filePath = "reports/{$this->chatID}/group_{$groupDto->idGroup}_{$to}.pdf";
 
