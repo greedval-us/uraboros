@@ -18,10 +18,11 @@ class AnalyticsRouter
         $map = [
             CommandKey::UserA->value            => OpenUserAnalyticsAction::class,
             CommandKey::BasicMetricsA->value    => OpenBasicMetricsAnalyticsAction::class,
-            CommandKey::RetentionA->value       => OpenRetentionAnalyticsAction::class,
+            //CommandKey::RetentionA->value       => OpenRetentionAnalyticsAction::class,
             CommandKey::FunnelA->value          => OpenFunnelAnalyticsAction::class,
             CommandKey::AudienceQualityA->value => OpenAudienceQualityAnalyticsAction::class,
-            CommandKey::NetworkMetricsA->value  => OpenNetworkMetricsAnalyticsAction::class,
+            //CommandKey::NetworkMetricsA->value  => OpenNetworkMetricsAnalyticsAction::class,
+            CommandKey::UsersLeadersA->value    => ReportUserLeadersAction::class,
         ];
 
         if (!isset($map[$callback])) {

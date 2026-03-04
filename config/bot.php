@@ -102,6 +102,10 @@ return [
             'text' => 'analytics.network_metrics.screen',
             'reply_keyboard' => KeyboardKey::NetworkMetricsA->value,
         ],
+        'a_user_leaders' => [
+            'text' => 'analytics.network_metrics.screen',
+            'reply_keyboard' => KeyboardKey::UsersLeadersA->value,
+        ],
 
         'profile' => [
             'text' => 'account.profile.screen',

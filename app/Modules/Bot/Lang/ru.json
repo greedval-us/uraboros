@@ -122,6 +122,9 @@
     },
     "network_metrics": {
       "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
+    },
+    "user_leaders": {
+      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
     }
   },
   "account": {

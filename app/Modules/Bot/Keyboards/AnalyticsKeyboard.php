@@ -20,10 +20,11 @@ class AnalyticsKeyboard implements KeyboardBuilderInterface
         return Keyboard::make()->buttons([
             Button::make($t('analytics.inline.user'))->action('analytics')->param('type', 'a_user'),
             Button::make($t('analytics.inline.basic_metrics'))->action('analytics')->param('type', 'a_basic_metrics'),
-            Button::make($t('analytics.inline.retention'))->action('analytics')->param('type', 'a_retention'),
+            //Button::make($t('analytics.inline.retention'))->action('analytics')->param('type', 'a_retention'),
             Button::make($t('analytics.inline.funnel'))->action('analytics')->param('type', 'a_funnel'),
             Button::make($t('analytics.inline.audience_quality'))->action('analytics')->param('type', 'a_audience_quality'),
-            Button::make($t('analytics.inline.network_metrics'))->action('analytics')->param('type', 'a_network_metrics'),
+            //Button::make($t('analytics.inline.network_metrics'))->action('analytics')->param('type', 'a_network_metrics'),
+            Button::make($t('analytics.inline.network_metrics'))->action('analytics')->param('type', 'a_users_leaders'),
         ]);
     }
 }
