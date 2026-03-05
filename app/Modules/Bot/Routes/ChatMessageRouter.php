@@ -8,6 +8,7 @@ use App\Modules\Bot\Actions\Analytics\Run\RunFunnelAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Run\RunNetworkMetricsAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Run\RunRetentionAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Run\RunUserAnalyticsAction;
+use App\Modules\Bot\Actions\Analytics\Run\RunUserLeadersAction;
 use App\Modules\Bot\Actions\MainMenuAction;
 use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\Add\AddChannelStepAction;
 use App\Modules\Bot\Actions\Search\Run\RunChannelSearchAction;
@@ -50,6 +51,7 @@ class ChatMessageRouter
             StepMenuKey::AnalyticsAudienceQuality->value    => RunAudienceQualityAnalyticsAction::class,
             StepMenuKey::AnalyticsBasicMetrics->value       => RunBasicMetricsAnalyticsAction::class,
             StepMenuKey::AnalyticsFunnel->value             => RunFunnelAnalyticsAction::class,
+            StepMenuKey::AnalyticsUsersLeaders->value       => RunUserLeadersAction::class,
             //StepMenuKey::AnalyticsNetworkMetrics->value     => RunNetworkMetricsAnalyticsAction::class,
             //StepMenuKey::AnalyticsRetention->value          => RunRetentionAnalyticsAction::class,
         ];

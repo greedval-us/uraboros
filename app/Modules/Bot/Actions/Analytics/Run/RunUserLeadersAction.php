@@ -9,7 +9,7 @@ use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
-class RunRetentionAnalyticsAction
+class RunUserLeadersAction
 {
     public function __construct(
         private BotActionService $bot,
