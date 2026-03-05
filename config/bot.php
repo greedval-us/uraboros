@@ -10,6 +10,7 @@ use App\Modules\Bot\Keyboards\Analytics\FunnelAnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\Analytics\NetworkMetricsAnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\Analytics\RetentionAnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\Analytics\UserAnalyticsKeyboard;
+use App\Modules\Bot\Keyboards\Analytics\UserLeadersAnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\AnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\HelpKeyboard;
 use App\Modules\Bot\Keyboards\Monitoring\CardChannelKeyboard;
@@ -41,6 +42,7 @@ return [
         KeyboardKey::FunnelA->value => FunnelAnalyticsKeyboard::class,
         KeyboardKey::AudienceQualityA->value => AudienceQualityAnalyticsKeyboard::class,
         KeyboardKey::NetworkMetricsA->value => NetworkMetricsAnalyticsKeyboard::class,
+        KeyboardKey::UsersLeadersA->value => UserLeadersAnalyticsKeyboard::class,
         KeyboardKey::Plans->value => PlansKeyboard::class,
     ],
 
@@ -103,7 +105,7 @@ return [
             'reply_keyboard' => KeyboardKey::NetworkMetricsA->value,
         ],
         'a_user_leaders' => [
-            'text' => 'analytics.network_metrics.screen',
+            'text' => 'analytics.leaders.screen',
             'reply_keyboard' => KeyboardKey::UsersLeadersA->value,
         ],
 

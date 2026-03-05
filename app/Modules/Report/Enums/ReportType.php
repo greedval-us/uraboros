@@ -9,5 +9,6 @@ enum ReportType: string
     case FUNNEL = 'funnel';
     case NETWORK = 'network_metrics';
     case RETENTION = 'retention';
+    case USERLEADERS = 'user_leaders';
     case DEFAULT = 'default';
 }

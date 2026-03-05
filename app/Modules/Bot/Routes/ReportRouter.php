@@ -6,6 +6,7 @@ use App\Modules\Bot\Actions\Analytics\Report\ReportAudienceQualityAnalyticsActio
 use App\Modules\Bot\Actions\Analytics\Report\ReportBasicMetricsAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Report\ReportFunnelAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Report\ReportUserAnalyticsAction;
+use App\Modules\Bot\Actions\Analytics\Report\ReportUserLeadersAction;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
 

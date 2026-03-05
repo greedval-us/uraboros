@@ -8,6 +8,7 @@ use App\Modules\Bot\Actions\Analytics\OpenFunnelAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\OpenNetworkMetricsAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\OpenRetentionAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\OpenUserAnalyticsAction;
+use App\Modules\Bot\Actions\Analytics\OpenUserLeadersAction;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
@@ -22,7 +23,7 @@ class AnalyticsRouter
             CommandKey::FunnelA->value          => OpenFunnelAnalyticsAction::class,
             CommandKey::AudienceQualityA->value => OpenAudienceQualityAnalyticsAction::class,
             //CommandKey::NetworkMetricsA->value  => OpenNetworkMetricsAnalyticsAction::class,
-            CommandKey::UsersLeadersA->value    => ReportUserLeadersAction::class,
+            CommandKey::UsersLeadersA->value    => OpenUserLeadersAction::class,
         ];
 
         if (!isset($map[$callback])) {
