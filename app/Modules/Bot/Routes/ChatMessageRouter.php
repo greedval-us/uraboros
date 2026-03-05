@@ -50,8 +50,8 @@ class ChatMessageRouter
             StepMenuKey::AnalyticsAudienceQuality->value    => RunAudienceQualityAnalyticsAction::class,
             StepMenuKey::AnalyticsBasicMetrics->value       => RunBasicMetricsAnalyticsAction::class,
             StepMenuKey::AnalyticsFunnel->value             => RunFunnelAnalyticsAction::class,
-            StepMenuKey::AnalyticsNetworkMetrics->value     => RunNetworkMetricsAnalyticsAction::class,
-            StepMenuKey::AnalyticsRetention->value          => RunRetentionAnalyticsAction::class,
+            //StepMenuKey::AnalyticsNetworkMetrics->value     => RunNetworkMetricsAnalyticsAction::class,
+            //StepMenuKey::AnalyticsRetention->value          => RunRetentionAnalyticsAction::class,
         ];
 
         $stepMenu = app(StorageService::class)->get($chat, StorageKey::MENU->value);
