@@ -9,7 +9,7 @@ use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
-class OpenRetentionAnalyticsAction
+class OpenChannelAnalyticsAction
 {
     public function __construct(
         private BotActionService $bot,
@@ -22,6 +22,6 @@ class OpenRetentionAnalyticsAction
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.screen_info'));
 
         $this->storage->set($chat, StorageKey::MESSAGE->value, $messageId);
-        $this->storage->set($chat, StorageKey::MENU->value, StepMenuKey::AnalyticsRetention->value);
+        $this->storage->set($chat, StorageKey::MENU->value, StepMenuKey::AnalyticsChannel->value);
     }
 }

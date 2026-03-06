@@ -96,35 +96,21 @@
       "louding": "Ожидайте",
       "inline": {
         "user": "👤 Пользователь",
-        "basic_metrics": "📈 Базовые метрики группы",
-        "retention": "🔄 Рост и удержание группы",
-        "funnel": "🛠️ Воронка группы",
-        "audience_quality": "🎯 Качество аудитории группы",
-        "network_metrics": "🌐 Сетевые метрики группы",
-        "leaders": "👑 Лидеры мнений",
-        "day": "За день",
+        "basic_metrics_7": "📈 Метрики за день",
+        "basic_metrics_30": "📈 Метрики за месяц",
+        "funnel_7": "🛠️ Воронка за день",
+        "funnel_30": "🛠️ Воронка за месяц",
+        "audience_quality_7": "🎯 Аудитория за день",
+        "audience_quality_30": "🎯 Аудитория за месяц",
+        "leaders_7": "👑 Лидеры за день",
+        "leaders_30": "👑 Лидеры за месяц",
         "week": "За неделю",
         "month": "За месяц"
     },
     "user": {
       "screen": ""
     },
-    "basic_metrics": {
-      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
-    },
-    "retention": {
-      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
-    },
-    "funnel": {
-      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
-    },
-    "audience_quality": {
-      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
-    },
-    "network_metrics": {
-      "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
-    },
-    "leaders": {
+    "channels": {
       "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
     }
   },

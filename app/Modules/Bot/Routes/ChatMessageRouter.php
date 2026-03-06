@@ -2,13 +2,8 @@
 
 namespace App\Modules\Bot\Routes;
 
-use App\Modules\Bot\Actions\Analytics\Run\RunAudienceQualityAnalyticsAction;
-use App\Modules\Bot\Actions\Analytics\Run\RunBasicMetricsAnalyticsAction;
-use App\Modules\Bot\Actions\Analytics\Run\RunFunnelAnalyticsAction;
-use App\Modules\Bot\Actions\Analytics\Run\RunNetworkMetricsAnalyticsAction;
-use App\Modules\Bot\Actions\Analytics\Run\RunRetentionAnalyticsAction;
+use App\Modules\Bot\Actions\Analytics\Run\RunChannelAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Run\RunUserAnalyticsAction;
-use App\Modules\Bot\Actions\Analytics\Run\RunUserLeadersAction;
 use App\Modules\Bot\Actions\MainMenuAction;
 use App\Modules\Bot\Actions\Monitoring\ChannelsMonitoring\Add\AddChannelStepAction;
 use App\Modules\Bot\Actions\Search\Run\RunChannelSearchAction;
@@ -48,12 +43,7 @@ class ChatMessageRouter
             StepMenuKey::SearchChannel->value               => RunChannelSearchAction::class,
             StepMenuKey::SearchMessages->value              => RunMessageSearchAction::class,
             StepMenuKey::AnalyticsUser->value               => RunUserAnalyticsAction::class,
-            StepMenuKey::AnalyticsAudienceQuality->value    => RunAudienceQualityAnalyticsAction::class,
-            StepMenuKey::AnalyticsBasicMetrics->value       => RunBasicMetricsAnalyticsAction::class,
-            StepMenuKey::AnalyticsFunnel->value             => RunFunnelAnalyticsAction::class,
-            StepMenuKey::AnalyticsUsersLeaders->value       => RunUserLeadersAction::class,
-            //StepMenuKey::AnalyticsNetworkMetrics->value     => RunNetworkMetricsAnalyticsAction::class,
-            //StepMenuKey::AnalyticsRetention->value          => RunRetentionAnalyticsAction::class,
+            StepMenuKey::AnalyticsChannel->value            => RunChannelAnalyticsAction::class,
         ];
 
         $stepMenu = app(StorageService::class)->get($chat, StorageKey::MENU->value);

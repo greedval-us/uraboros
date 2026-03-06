@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Modules\Bot\Keyboards\Analytics;
+
+use App\Modules\Bot\Contracts\KeyboardBuilderInterface;
+use App\Modules\Bot\Services\LangService;
+use DefStudio\Telegraph\Keyboard\Keyboard;
+use DefStudio\Telegraph\Keyboard\Button;
+
+class ChannelAnalyticsKeyboard implements KeyboardBuilderInterface
+{
+    public function __construct(
+        private readonly LangService $langService
+    ) {}
+
+    public function execute(string $lang, array $keyboard = []): Keyboard
+    {
+        $t = fn (string $key) => $this->langService->get($lang, $key);
+
+        return Keyboard::make()
+        ->row([
+            Button::make($t('analytics.inline.basic_metrics_7'))->action('report')
+                ->param('type', 'a_basic_metrics')
+                ->param('query', $keyboard['group'])
+                ->param('param', 7),
+
+            Button::make($t('analytics.inline.basic_metrics_30'))->action('report')
+                ->param('type', 'a_basic_metrics')
+                ->param('query', $keyboard['group'])
+                ->param('param', 30),
+        ])
+        ->row([
+            Button::make($t('analytics.inline.funnel_7'))->action('report')
+                ->param('type', 'a_funnel')
+                ->param('query', $keyboard['group'])
+                ->param('param', 7),
+
+            Button::make($t('analytics.inline.funnel_30'))->action('report')
+                ->param('type', 'a_funnel')
+                ->param('query', $keyboard['group'])
+                ->param('param', 30),
+        ])
+        ->row([
+            Button::make($t('analytics.inline.funnel_7'))->action('report')
+                ->param('type', 'a_funnel')
+                ->param('query', $keyboard['group'])
+                ->param('param', 7),
+
+            Button::make($t('analytics.inline.funnel_30'))->action('report')
+                ->param('type', 'a_funnel')
+                ->param('query', $keyboard['group'])
+                ->param('param', 30),
+        ])
+        ->row([
+            Button::make($t('analytics.inline.audience_quality_7'))->action('report')
+                ->param('type', 'a_audience_quality')
+                ->param('query', $keyboard['group'])
+                ->param('param', 7),
+
+            Button::make($t('analytics.inline.audience_quality_30'))->action('report')
+                ->param('type', 'a_audience_quality')
+                ->param('query', $keyboard['group'])
+                ->param('param', 30),
+        ])
+        ->row([
+            Button::make($t('leaders.inline.leaders_7'))->action('report')
+                ->param('type', 'a_users_leaders')
+                ->param('query', $keyboard['group'])
+                ->param('param', 7),
+
+            Button::make($t('leaders.inline.leaders_30'))->action('report')
+                ->param('type', 'a_users_leaders')
+                ->param('query', $keyboard['group'])
+                ->param('param', 30),
+        ]);
+
+    }
+}

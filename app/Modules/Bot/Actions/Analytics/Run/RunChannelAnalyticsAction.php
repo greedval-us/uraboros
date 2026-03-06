@@ -3,13 +3,14 @@
 namespace App\Modules\Bot\Actions\Analytics\Run;
 
 use App\Modules\Bot\Enums\StorageKey;
-use App\Modules\Bot\Job\Analytics\BasicMetricsJob;
+use App\Modules\Bot\Job\Analytics\ChannelJob;
+use App\Modules\Bot\Job\Analytics\UserJob;
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\LangService;
 use App\Modules\Bot\Services\StorageService;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
-class RunBasicMetricsAnalyticsAction
+class RunChannelAnalyticsAction
 {
     public function __construct(
         private BotActionService $bot,
@@ -23,6 +24,6 @@ class RunBasicMetricsAnalyticsAction
 
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        BasicMetricsJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text);
+        ChannelJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text);
     }
 }

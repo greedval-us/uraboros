@@ -30,6 +30,7 @@ enum CommandKey: string
     case MessagesS = 's_messages';
     case UsersS = 's_users';
     case UserA = 'a_user';
+    case ChannelA = 'a_channel';
     case BasicMetricsA = 'a_basic_metrics';
     case RetentionA = 'a_retention';
     case FunnelA = 'a_funnel';

@@ -9,6 +9,7 @@ enum KeyboardKey: string
     case Search = 'search';
     case Analytics = 'analytics';
     case UserA = 'a_user';
+    case ChannelA = 'a_channel';
     case BasicMetricsA = 'a_basic_metrics';
     case RetentionA = 'a_retention';
     case FunnelA = 'a_funnel';
