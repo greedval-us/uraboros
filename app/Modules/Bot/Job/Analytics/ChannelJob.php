@@ -33,7 +33,7 @@ class ChannelJob implements ShouldQueue
     {
         $this->bootServices();
 
-        $this->apiServices->get("getUser/{$this->text}");
+        $this->apiServices->get("getGroup/{$this->text}");
 
         $this->botServices->sendInline(CommandKey::ChannelA->value, $this->lang, $this->chat);
     }
