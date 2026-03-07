@@ -34,7 +34,7 @@ class ChannelJob implements ShouldQueue
     {
         $this->bootServices();
 
-        $group = $this->apiServices->get("getGroup/{$this->text}");
+        $group = $this->apiServices->get("analytics/getGroup/{$this->text}");
 
         if(empty($group) || $group == null) {
             $this->botServices->sendText($this->chat, 'todo нет группы');
