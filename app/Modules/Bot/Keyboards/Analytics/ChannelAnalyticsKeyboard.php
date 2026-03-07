@@ -41,17 +41,6 @@ class ChannelAnalyticsKeyboard implements KeyboardBuilderInterface
                 ->param('param', 30),
         ])
         ->row([
-            Button::make($t('analytics.inline.funnel_7'))->action('report')
-                ->param('type', 'a_funnel')
-                ->param('query', $keyboard['group'])
-                ->param('param', 7),
-
-            Button::make($t('analytics.inline.funnel_30'))->action('report')
-                ->param('type', 'a_funnel')
-                ->param('query', $keyboard['group'])
-                ->param('param', 30),
-        ])
-        ->row([
             Button::make($t('analytics.inline.audience_quality_7'))->action('report')
                 ->param('type', 'a_audience_quality')
                 ->param('query', $keyboard['group'])
@@ -63,12 +52,12 @@ class ChannelAnalyticsKeyboard implements KeyboardBuilderInterface
                 ->param('param', 30),
         ])
         ->row([
-            Button::make($t('leaders.inline.leaders_7'))->action('report')
+            Button::make($t('analytics.inline.leaders_7'))->action('report')
                 ->param('type', 'a_users_leaders')
                 ->param('query', $keyboard['group'])
                 ->param('param', 7),
 
-            Button::make($t('leaders.inline.leaders_30'))->action('report')
+            Button::make($t('analytics.inline.leaders_30'))->action('report')
                 ->param('type', 'a_users_leaders')
                 ->param('query', $keyboard['group'])
                 ->param('param', 30),

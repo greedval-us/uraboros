@@ -104,14 +104,12 @@
         "audience_quality_7": "🎯 Аудитория за день",
         "audience_quality_30": "🎯 Аудитория за месяц",
         "leaders_7": "👑 Лидеры за день",
-        "leaders_30": "👑 Лидеры за месяц",
-        "week": "За неделю",
-        "month": "За месяц"
+        "leaders_30": "👑 Лидеры за месяц"
     },
     "user": {
       "screen": ""
     },
-    "channels": {
+    "channel": {
       "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
 
     }
