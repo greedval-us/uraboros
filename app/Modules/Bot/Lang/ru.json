@@ -96,6 +96,7 @@
       "louding": "Ожидайте",
       "inline": {
         "user": "👤 Пользователь",
+        "channel": "📢 Каналы / 💬 Чаты",
         "basic_metrics_7": "📈 Метрики за день",
         "basic_metrics_30": "📈 Метрики за месяц",
         "funnel_7": "🛠️ Воронка за день",
@@ -112,6 +113,7 @@
     },
     "channels": {
       "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
+
     }
   },
   "account": {

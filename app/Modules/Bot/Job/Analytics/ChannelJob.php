@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Job\Analytics;
 
+use App\Modules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -33,8 +34,15 @@ class ChannelJob implements ShouldQueue
     {
         $this->bootServices();
 
-        $this->apiServices->get("getGroup/{$this->text}");
+        $group = $this->apiServices->get("getGroup/{$this->text}");
 
-        $this->botServices->sendInline(CommandKey::ChannelA->value, $this->lang, $this->chat);
+        if(empty($group) || $group == null) {
+            $this->botServices->sendText($this->chat, 'todo нет группы');
+            return;
+        }
+
+        $infoGroup = $this->dataMapperService->getGroupTitleData(GroupDTO::fromApi($group));
+
+        $this->botServices->sendInline(CommandKey::ChannelA->value, $this->lang, $this->chat, $infoGroup, ['group' => $this->text]);
     }
 }
