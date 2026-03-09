@@ -1,4 +1,4 @@
-<div class="section page-break">
+<div class="section">
     <div class="section-title">Введение</div>
 
     <div class="description-box">

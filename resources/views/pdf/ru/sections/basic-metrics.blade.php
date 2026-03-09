@@ -2,8 +2,25 @@
 
     <div class="section-title">1. Базовые метрики</div>
 
+    <p>
+        Базовые метрики позволяют оценить общий уровень активности и вовлеченности пользователей внутри анализируемого сообщества.
+        Показатели отражают реальные действия пользователей и помогают определить фактическую «живую» аудиторию, уровень публикационной активности и характер взаимодействия участников с контентом.
+    </p>
+
     {{-- 1.1 Активные пользователи --}}
     <div class="subsection-title">1.1 Активные пользователи за период {{ $periodStart ?? '****' }} - {{ $periodEnd ?? '****' }}</div>
+
+    <p>
+        Метрика отражает количество уникальных пользователей, принимавших участие в активности сообщества за период.
+    </p>
+
+    <ul>
+        <li>публикация сообщения</li>
+        <li>написание комментария</li>
+        <li>постановка реакции</li>
+        <li>отправка подарка</li>
+        <li>другое взаимодействие, кроме просмотров</li>
+    </ul>
 
     @if(!empty($activityChart))
         <div class="chart-container">
@@ -13,13 +30,76 @@
     @endif
 
     <p>
-        Общая активность: <strong>{{ $totalActive ?? 0 }}</strong> пользователей<br>
-        Оставили хотя бы 1 комментарий: <strong>{{ $commenters ?? 0 }}</strong><br>
-        Оставили хотя бы одну реакцию: <strong>{{ $reactors ?? 0 }}</strong><br>
-        Оставили хотя бы один комментарий и реакцию: <strong>{{ $both ?? 0 }}</strong>
+        Общие данные за период:
+        <br>Всего активных уникальных пользователей: <strong>{{ $totalActive ?? 0 }}</strong>
+        <br>Оставили хотя бы один комментарий: <strong>{{ $commenters ?? 0 }}</strong>
+        <br>Оставили хотя бы одну реакцию: <strong>{{ $reactors ?? 0 }}</strong>
+        <br>Оставили хотя бы один комментарий и реакцию: <strong>{{ $both ?? 0 }}</strong>
     </p>
 
+    {{-- 1.2 Частота публикаций --}}
+    <div class="subsection-title">1.2 Частота публикаций</div>
+
+    <p>
+        Метрика характеризует интенсивность публикационной активности и позволяет оценить регулярность появления нового контента.
+        Разделяет публикации по источнику:
+    </p>
+
+    <ul>
+        <li>публикации администраторов (AdminPosts)</li>
+        <li>публикации пользователей (UserPosts)</li>
+    </ul>
+
+    @if(!empty($postsChart))
+        <div class="chart-container">
+            <div class="chart-block-title">График публикаций</div>
+            <img src="{{ $postsChart }}" style="width:100%; margin-top:10px;">
+        </div>
+    @endif
+
+    <p>
+        Общие данные за период:
+        <br>Всего публикаций: <strong>{{ $totalPosts ?? 0 }}</strong>
+        <br>Администратор: <strong>{{ $adminPosts ?? 0 }}</strong>
+        <br>Пользователи: <strong>{{ $userPosts ?? 0 }}</strong>
+    </p>
+
+    {{-- 1.3 Средняя вовлеченность --}}
+    <div class="subsection-title">1.3 Средняя вовлеченность на пост</div>
+
+    <p>
+        Метрика показывает, насколько аудитория взаимодействует с контентом:
+    </p>
+
+    <ul>
+        <li>интерес аудитории к контенту (ReactionsPerPost)</li>
+        <li>активность пользователей в комментариях (CommentsPerPost)</li>
+        <li>общее вовлечение аудитории (EngagementRate)</li>
+    </ul>
+
+    @if(!empty($engagementChart))
+        <div class="chart-container">
+            <div class="chart-block-title">График вовлеченности</div>
+            <img src="{{ $engagementChart }}" style="width:100%; margin-top:10px;">
+        </div>
+    @endif
+
+    <p>
+        Общие данные за период:
+        <br>Средняя вовлеченность: <strong>{{ $avgEngagement ?? 0 }}</strong>
+        <br>Публикаций/пост: <strong>{{ $avgPostsPerPost ?? 0 }}</strong>
+        <br>Реакций/пост: <strong>{{ $avgReactionsPerPost ?? 0 }}</strong>
+    </p>
+
+</div>
+
+{{-- Таблицы с числовыми значениями в конце отчета --}}
+<div class="section page-break">
+    <div class="section-title">Таблицы с данными по дням</div>
+
+    {{-- Таблица 1.1 Активные пользователи --}}
     @if(!empty($activityByDay))
+        <div class="chart-block-title">Таблица №1.1 «Активность по пользователям»</div>
         <table class="leaders-table">
             <thead>
                 <tr>
@@ -42,27 +122,11 @@
                 @endforeach
             </tbody>
         </table>
-    @else
-        <div class="mini-description">Нет данных по активности</div>
     @endif
 
-    {{-- 1.2 Частота публикаций --}}
-    <div class="subsection-title">1.2 Частота публикаций</div>
-
-    @if(!empty($postsChart))
-        <div class="chart-container">
-            <div class="chart-block-title">График публикаций</div>
-            <img src="{{ $postsChart }}" style="width:100%; margin-top:10px;">
-        </div>
-    @endif
-
-    <p>
-        Общее количество публикаций за период: <strong>{{ $totalPosts ?? 0 }}</strong><br>
-        Администратор: <strong>{{ $adminPosts ?? 0 }}</strong><br>
-        Пользователи: <strong>{{ $userPosts ?? 0 }}</strong>
-    </p>
-
+    {{-- Таблица 1.2 Частота публикаций --}}
     @if(!empty($postsByDay))
+        <div class="chart-block-title">Таблица №1.2 «Частота публикаций»</div>
         <table class="leaders-table">
             <thead>
                 <tr>
@@ -83,27 +147,11 @@
                 @endforeach
             </tbody>
         </table>
-    @else
-        <div class="mini-description">Нет данных по публикациям</div>
     @endif
 
-    {{-- 1.3 Средняя вовлеченность --}}
-    <div class="subsection-title">1.3 Средняя вовлеченность на пост</div>
-
-    @if(!empty($engagementChart))
-        <div class="chart-container">
-            <div class="chart-block-title">График вовлеченности</div>
-            <img src="{{ $engagementChart }}" style="width:100%; margin-top:10px;">
-        </div>
-    @endif
-
-    <p>
-        Средняя вовлеченность: <strong>{{ $avgEngagement ?? 0 }}</strong><br>
-        Публикаций/пост: <strong>{{ $avgPostsPerPost ?? 0 }}</strong><br>
-        Реакций/пост: <strong>{{ $avgReactionsPerPost ?? 0 }}</strong>
-    </p>
-
+    {{-- Таблица 1.3 Средняя вовлеченность --}}
     @if(!empty($engagementByDay))
+        <div class="chart-block-title">Таблица №1.3 «Средняя вовлеченность»</div>
         <table class="leaders-table">
             <thead>
                 <tr>
@@ -124,8 +172,5 @@
                 @endforeach
             </tbody>
         </table>
-    @else
-        <div class="mini-description">Нет данных по вовлеченности</div>
     @endif
-
 </div>
