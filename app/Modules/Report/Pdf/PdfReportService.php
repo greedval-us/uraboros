@@ -11,7 +11,7 @@ class PdfReportService
     ) {}
 
     public function generate(
-        $context,
+        object $context,
         ReportType $type = ReportType::DEFAULT
     ) {
         $builder = new PdfBuilder();
