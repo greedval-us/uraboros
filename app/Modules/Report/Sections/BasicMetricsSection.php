@@ -50,27 +50,38 @@ class BasicMetricsSection implements PdfSectionContract
 
         $activityChart = ChartHelper::line(
             $activityByDay,
-            ['posts','reactions'],
-            ['Публикации','Реакции'],
-            '#3b82f6',
-            '#10b981',
+            ['total','posts','reactions','both'],
+            [
+                'Публикация или реакция',
+                'Публикация',
+                'Реакция',
+                'Публикация и реакция'
+            ],
+            ['#6366f1','#3b82f6','#10b981','#f59e0b'],
             'Активность пользователей по дням'
         );
 
         $postsChart = ChartHelper::bar(
             $postsByDay,
-            ['admin','users'],
-            ['Администратор','Пользователи'],
-            ['#ef4444','#3b82f6'],
+            ['total','admin','users'],
+            [
+                'Всего публикаций',
+                'Администратор',
+                'Пользователи'
+            ],
+            ['#6366f1','#ef4444','#3b82f6'],
             'Публикации по дням'
         );
 
         $engagementChart = ChartHelper::line(
             $engagementByDay,
-            ['engagement'],
-            ['Вовлеченность'],
-            '#10b981',
-            null,
+            ['engagement','postsPerPost','reactionsPerPost'],
+            [
+                'Вовлеченность',
+                'Комментарии / пост',
+                'Реакции / пост'
+            ],
+            ['#10b981','#3b82f6','#f59e0b'],
             'Средняя вовлеченность по дням'
         );
 

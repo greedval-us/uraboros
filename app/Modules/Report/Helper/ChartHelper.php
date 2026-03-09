@@ -5,20 +5,11 @@ namespace App\Modules\Report\Helper;
 
 class ChartHelper
 {
-    /**
-     * @param array<int, array{
-     *     day: string|int,
-     *     [key: string]: int|string|null
-     * }> $data
-     * @param array<int, string> $fields
-     * @param array<int, string> $labels
-     */
     public static function line(
         array $data,
         array $fields,
         array $labels,
-        string $color1,
-        ?string $color2,
+        array $colors,
         string $title
     ): string {
         $datasets = [];
@@ -30,7 +21,7 @@ class ChartHelper
                     fn(array $row): int => (int) ($row[$field] ?? 0),
                     $data
                 ),
-                'borderColor' => $i === 0 ? $color1 : $color2,
+                'borderColor' => $colors[$i] ?? '#999999',
                 'fill' => false,
             ];
         }
