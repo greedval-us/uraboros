@@ -2,7 +2,6 @@
 
 namespace App\Modules\Report\Pdf;
 
-use App\Modules\Report\DTO\ReportContextDTO;
 use App\Modules\Report\Enums\ReportType;
 use App\Modules\Report\Sections\AudienceQualitySection;
 use App\Modules\Report\Sections\BasicMetricsSection;
@@ -15,7 +14,7 @@ use App\Modules\Report\Sections\RetentionSection;
 
 class ReportSectionsResolver
 {
-    public function resolve(ReportType $type, ReportContextDTO $context): array
+    public function resolve(ReportType $type, object $context): array
     {
         return match ($type) {
             ReportType::BASIC => [

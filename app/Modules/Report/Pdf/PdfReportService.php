@@ -2,7 +2,6 @@
 
 namespace App\Modules\Report\Pdf;
 
-use App\Modules\Report\DTO\ReportContextDTO;
 use App\Modules\Report\Enums\ReportType;
 
 class PdfReportService
@@ -12,7 +11,7 @@ class PdfReportService
     ) {}
 
     public function generate(
-        ReportContextDTO $context,
+        $context,
         ReportType $type = ReportType::DEFAULT
     ) {
         $builder = new PdfBuilder();

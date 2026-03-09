@@ -114,9 +114,11 @@ class BasicMetriicsDTO
 
         foreach ($data as $item) {
             foreach ($item as $date => $value) {
-                $result[Carbon::parse($date)->toISOString()] = $value;
+                $result[$date] = $value;
             }
         }
+
+        ksort($result);
 
         return $result;
     }

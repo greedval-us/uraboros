@@ -5,7 +5,7 @@ namespace App\Modules\Bot\Job\Analytics\Report;
 use App\Modules\Bot\DTO\BasicMetriicsDTO;
 use App\Modules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
-use App\Modules\Report\DTO\ReportContextDTO;
+use App\Modules\Report\DTO\BasicMetricsContextDTO;
 use App\Modules\Report\Enums\ReportType;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -64,7 +64,7 @@ class ExportBasicMetricsJob implements ShouldQueue
         $groupDto = GroupDTO::fromApi($group);
         $basicMetriicsDto = BasicMetriicsDTO::fromApi($analytic);
 
-        $context = new ReportContextDTO(
+        $context = new BasicMetricsContextDTO(
             group: $groupDto,
             analytic: $basicMetriicsDto,
             lang: $this->lang,

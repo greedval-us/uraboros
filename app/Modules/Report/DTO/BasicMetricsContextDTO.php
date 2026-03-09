@@ -6,7 +6,7 @@ use App\Modules\Bot\DTO\BasicMetriicsDTO;
 use App\Modules\Bot\DTO\GroupDTO;
 
 
-class ReportContextDTO
+class BasicMetricsContextDTO
 {
     public function __construct(
         public GroupDTO $group,
