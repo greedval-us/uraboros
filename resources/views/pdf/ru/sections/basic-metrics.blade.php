@@ -38,33 +38,35 @@
     </p>
 
     {{-- 1.2 Частота публикаций --}}
-    <div class="subsection-title">1.2 Частота публикаций</div>
+    <div class="section page-break" >
+        <div class="subsection-title">1.2 Частота публикаций</div>
 
-    <p>
-        Метрика характеризует интенсивность публикационной активности и позволяет оценить регулярность появления нового контента.
-        Разделяет публикации по источнику:
-    </p>
+        <p>
+            Метрика характеризует интенсивность публикационной активности и позволяет оценить регулярность появления нового контента.
+            Разделяет публикации по источнику:
+        </p>
 
-    <ul>
-        <li>публикации администраторов (AdminPosts)</li>
-        <li>публикации пользователей (UserPosts)</li>
-    </ul>
+        <ul>
+            <li>публикации администраторов (AdminPosts)</li>
+            <li>публикации пользователей (UserPosts)</li>
+        </ul>
 
-    @if(!empty($postsChart))
-        <div class="chart-container">
-            <div class="chart-block-title">График публикаций</div>
-            <img src="{{ $postsChart }}" style="width:100%; margin-top:10px;">
-        </div>
-    @endif
+        @if(!empty($postsChart))
+            <div class="chart-container">
+                <div class="chart-block-title">График публикаций</div>
+                <img src="{{ $postsChart }}" style="width:100%; margin-top:10px;">
+            </div>
+        @endif
 
-    <p>
-        Общие данные за период:
-        <br>Всего публикаций: <strong>{{ $totalPosts ?? 0 }}</strong>
-        <br>Администратор: <strong>{{ $adminPosts ?? 0 }}</strong>
-        <br>Пользователи: <strong>{{ $userPosts ?? 0 }}</strong>
-    </p>
-
+        <p>
+            Общие данные за период:
+            <br>Всего публикаций: <strong>{{ $totalPosts ?? 0 }}</strong>
+            <br>Администратор: <strong>{{ $adminPosts ?? 0 }}</strong>
+            <br>Пользователи: <strong>{{ $userPosts ?? 0 }}</strong>
+        </p>
+    </div>
     {{-- 1.3 Средняя вовлеченность --}}
+        <div class="section page-break" >
     <div class="subsection-title">1.3 Средняя вовлеченность на пост</div>
 
     <p>
@@ -92,7 +94,7 @@
     </p>
 
 </div>
-
+</div>
 {{-- Таблицы с числовыми значениями в конце отчета --}}
 <div class="section page-break">
     <div class="section-title">Таблицы с данными по дням</div>

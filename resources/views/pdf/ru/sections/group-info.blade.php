@@ -1,4 +1,4 @@
-<div class="section">
+<div class="section page-break">
     <div class="section-title">Информация о группе</div>
 
     <table class="meta-table">
