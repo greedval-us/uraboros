@@ -12,7 +12,7 @@ class IntroSection implements PdfSectionContract
 
     public function view(): string
     {
-        return "pdf.{$this->context->lang}.sections.footer";
+        return "pdf.{$this->context->lang}.sections.intro";
     }
 
     public function data(): array
