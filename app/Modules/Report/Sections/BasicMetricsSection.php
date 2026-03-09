@@ -73,7 +73,7 @@ class BasicMetricsSection implements PdfSectionContract
             'Публикации по дням'
         );
 
-        $engagementChart = ChartHelper::line(
+        $engagementChart = ChartHelper::bar(
             $engagementByDay,
             ['engagement','postsPerPost','reactionsPerPost'],
             [
