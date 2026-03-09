@@ -22,8 +22,8 @@ class UraborosApiService implements UraborosApiInterface
         return Http::baseUrl($this->baseUrl)
             ->withToken($this->token)
             ->acceptJson()
-            ->timeout(5)
-            ->retry(3, 200);
+            ->timeout(60)
+            ->retry(2, 200);
     }
 
     protected function request(string $method, string $uri, array $data = []): array

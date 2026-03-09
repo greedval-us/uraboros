@@ -9,6 +9,7 @@ use App\Modules\Report\Sections\FooterSection;
 use App\Modules\Report\Sections\FunnelSection;
 use App\Modules\Report\Sections\GroupInfoSection;
 use App\Modules\Report\Sections\HeaderSection;
+use App\Modules\Report\Sections\IntroSection;
 use App\Modules\Report\Sections\NetworkMetricsSection;
 use App\Modules\Report\Sections\RetentionSection;
 
@@ -19,6 +20,7 @@ class ReportSectionsResolver
         return match ($type) {
             ReportType::BASIC => [
                 new HeaderSection($context),
+                new IntroSection($context),
                 new GroupInfoSection($context),
                 new BasicMetricsSection($context),
                 new FooterSection($context),
@@ -26,6 +28,7 @@ class ReportSectionsResolver
 
             ReportType::AUDIENCE => [
                 new HeaderSection($context),
+                new IntroSection($context),
                 new GroupInfoSection($context),
                 new AudienceQualitySection($context),
                 new FooterSection($context),
@@ -33,6 +36,7 @@ class ReportSectionsResolver
 
             ReportType::FUNNEL => [
                 new HeaderSection($context),
+                new IntroSection($context),
                 new GroupInfoSection($context),
                 new FunnelSection($context),
                 new FooterSection($context),
@@ -40,6 +44,7 @@ class ReportSectionsResolver
 
             ReportType::NETWORK => [
                 new HeaderSection($context),
+                new IntroSection($context),
                 new GroupInfoSection($context),
                 new NetworkMetricsSection($context),
                 new FooterSection($context),
@@ -47,6 +52,7 @@ class ReportSectionsResolver
 
             ReportType::RETENTION => [
                 new HeaderSection($context),
+                new IntroSection($context),
                 new GroupInfoSection($context),
                 new RetentionSection($context),
                 new FooterSection($context),
