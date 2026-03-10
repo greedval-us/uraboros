@@ -25,46 +25,7 @@ class FunnelSection implements PdfSectionContract
         $periodStart = $this->context->from;
         $periodEnd   = $this->context->to;
 
-        $funnelByDay = PeriodTableHelper::build(
-            $a->viewRatePeriod,
-            [
-                'reactionRate' => $a->reactionRatePeriod,
-                'commentRate'  => $a->commentRatePeriod,
-                'erView'       => $a->ERviewPeriod,
-            ]
-        );
 
-        $viewRateChart = ChartHelper::line(
-            $funnelByDay,
-            ['total'],
-            ['ViewRate'],
-            ['#3b82f6'],
-            'Просмотр публикаций (ViewRate)'
-        );
-
-        $reactionRateChart = ChartHelper::line(
-            $funnelByDay,
-            ['reactionRate'],
-            ['ReactionRate'],
-            ['#3b82f6'],
-            'Доля реакций (ReactionRate)'
-        );
-
-        $commentRateChart = ChartHelper::line(
-            $funnelByDay,
-            ['commentRate'],
-            ['CommentRate'],
-            ['#3b82f6'],
-            'Доля комментариев (CommentRate)'
-        );
-
-        $erViewChart = ChartHelper::line(
-            $funnelByDay,
-            ['erView'],
-            ['ERview'],
-            ['#3b82f6'],
-            'Вовлеченность от просмотров (ERview)'
-        );
 
         return [
 
