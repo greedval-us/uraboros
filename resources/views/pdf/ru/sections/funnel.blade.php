@@ -1,217 +1,198 @@
 <div class="section page-break">
 
-    <div class="section-title">3. Воронка «Участники → Просмотры → Реакции → Комментарии»</div>
+    <div class="section-title">2. Воронка вовлечённости</div>
 
-    {{-- 3.0 Общая воронка --}}
+    <p>
+        Данный раздел анализирует поведенческую воронку взаимодействия пользователей с контентом.
+        Показывает эффективность контента, глубину вовлеченности аудитории и как аудитория проходит
+        последовательные этапы взаимодействия:
+    </p>
+
+    <ul>
+        <li>просмотр публикации (ViewRate)</li>
+        <li>реакция на публикацию (ReactionRate)</li>
+        <li>участие в обсуждении (CommentRate)</li>
+        <li>вовлеченность от просмотров (ERview)</li>
+    </ul>
+
+    <p>
+        Общие данные за период {{ $periodStart ?? '****' }} – {{ $periodEnd ?? '****' }}:
+        <br>Просмотры публикаций (ViewRate): <strong>{{ $avgViewRate ?? 0 }}</strong>
+        <br>Реакции на публикации (ReactionRate): <strong>{{ $avgReactionRate ?? 0 }}</strong>
+        <br>Участия в обсуждении (CommentRate): <strong>{{ $avgCommentRate ?? 0 }}</strong>
+        <br>Вовлеченность от просмотров (ERview): <strong>{{ $avgERview ?? 0 }}</strong>
+    </p>
+
+</div>
+
+
+{{-- 2.1 Просмотры --}}
+<div class="section page-break">
+
     <div class="subsection-title">
-        3.0 Динамика воронки за период {{ $periodStart ?? '****' }} - {{ $periodEnd ?? '****' }}
+        2.1 Просмотр публикаций (ViewRate)
     </div>
 
     <p>
-        Общее количество участников: <strong>{{ $totalMembers ?? 0 }}</strong><br>
-        Суммарное количество просмотров: <strong>{{ $totalViews ?? 0 }}</strong><br>
-        Суммарное количество реакций: <strong>{{ $totalReactions ?? 0 }}</strong><br>
-        Суммарное количество комментариев: <strong>{{ $totalComments ?? 0 }}</strong>
+        Метрика характеризует долю аудитории сообщества, которая фактически просматривает
+        публикуемый контент. Показатель используется для оценки реального охвата публикаций
+        и эффективности распространения контента внутри аудитории.
     </p>
 
+    @if(!empty($viewRateChart))
+        <div class="chart-container">
+            <div class="chart-block-title">График просмотров публикаций</div>
+
+            <img
+                src="{{ $viewRateChart }}"
+                style="width:100%; margin-top:10px;"
+            >
+        </div>
+    @endif
+
+    <p>
+        Числовые значения метрики представлены в таблице №2.1
+        «Просмотр публикаций (по публикациям)».
+    </p>
+
+</div>
+
+
+{{-- 2.2 Реакции --}}
+<div class="section page-break">
+
+    <div class="subsection-title">
+        2.2 Доля реакций (ReactionRate)
+    </div>
+
+    <p>
+        Метрика отражает долю пользователей, просмотревших публикацию и поставивших реакцию на неё.
+        Показатель позволяет определить, насколько контент стимулирует эмоциональные реакции аудитории.
+    </p>
+
+    @if(!empty($reactionRateChart))
+        <div class="chart-container">
+            <div class="chart-block-title">График реакций</div>
+
+            <img
+                src="{{ $reactionRateChart }}"
+                style="width:100%; margin-top:10px;"
+            >
+        </div>
+    @endif
+
+    <p>
+        Числовые значения метрики представлены в таблице №2.2
+        «Доля реакций (по публикациям)».
+    </p>
+
+</div>
+
+
+{{-- 2.3 Комментарии --}}
+<div class="section page-break">
+
+    <div class="subsection-title">
+        2.3 Доля комментариев (CommentRate)
+    </div>
+
+    <p>
+        Метрика показывает частоту перехода аудитории от пассивного просмотра контента
+        к активному обсуждению публикаций.
+    </p>
+
+    @if(!empty($commentRateChart))
+        <div class="chart-container">
+            <div class="chart-block-title">График комментариев</div>
+
+            <img
+                src="{{ $commentRateChart }}"
+                style="width:100%; margin-top:10px;"
+            >
+        </div>
+    @endif
+
+    <p>
+        Числовые значения метрики представлены в таблице №2.3
+        «Доля комментариев (по публикациям)».
+    </p>
+
+</div>
+
+
+{{-- 2.4 Вовлеченность --}}
+<div class="section page-break">
+
+    <div class="subsection-title">
+        2.4 Вовлеченность от просмотров (ERview)
+    </div>
+
+    <p>
+        Метрика отражает долю пользователей, которые совершили действие
+        (реакцию или комментарий) после просмотра публикации.
+        Показатель позволяет оценить конверсию просмотров в активное взаимодействие.
+    </p>
+
+    @if(!empty($erViewChart))
+        <div class="chart-container">
+            <div class="chart-block-title">График вовлеченности</div>
+
+            <img
+                src="{{ $erViewChart }}"
+                style="width:100%; margin-top:10px;"
+            >
+        </div>
+    @endif
+
+    <p>
+        Числовые значения метрики представлены в таблице №2.4
+        «Вовлеченность от просмотров (по публикациям)».
+    </p>
+
+</div>
+
+
+{{-- Таблицы --}}
+<div class="section page-break">
+
+    <div class="section-title">
+        Таблицы с числовыми значениями
+    </div>
+
     @if(!empty($funnelByDay))
-        <table width="100%" style="border-collapse:collapse; text-align:center;">
-            <thead style="background:#f3f4f6;">
+
+        <div class="chart-block-title">
+            Таблица №2 «Воронка вовлечённости»
+        </div>
+
+        <table class="leaders-table">
+
+            <thead>
                 <tr>
                     <th>День</th>
-                    <th>Пост</th>
-                    <th>Автор</th>
-                    <th>Просмотры</th>
-                    <th>Реакции</th>
-                    <th>Комментарии</th>
+                    <th>ViewRate</th>
+                    <th>ReactionRate</th>
+                    <th>CommentRate</th>
+                    <th>ERview</th>
                 </tr>
             </thead>
+
             <tbody>
+
                 @foreach($funnelByDay as $row)
                     <tr>
                         <td>{{ $row['day'] ?? '?' }}</td>
-                        <td>{{ $row['post_time'] ?? '-' }}</td>
-                        <td>{{ $row['author'] ?? '-' }}</td>
-                        <td>{{ $row['views'] ?? 0 }}</td>
-                        <td>{{ $row['reactions'] ?? 0 }}</td>
-                        <td>{{ $row['comments'] ?? 0 }}</td>
+                        <td>{{ $row['total'] ?? 0 }}</td>
+                        <td>{{ $row['reactionRate'] ?? 0 }}</td>
+                        <td>{{ $row['commentRate'] ?? 0 }}</td>
+                        <td>{{ $row['erView'] ?? 0 }}</td>
                     </tr>
                 @endforeach
+
             </tbody>
+
         </table>
 
-        {{-- График воронки --}}
-        @if(!empty($funnelChart))
-            <div class="chart-container">
-                <img src="{{ $funnelChart }}" style="width:100%; margin-top:15px;">
-            </div>
-        @endif
-    @else
-        <div style="font-size:12px; color:#6b7280;">Нет данных по воронке</div>
-    @endif
-
-
-    {{-- 3.1 ReactionRate --}}
-    <div class="subsection-title">3.1 Доля реакций (ReactionRate)</div>
-
-    <p>
-        За период: <strong>{{ $reactionRatePeriod ?? 0 }}%</strong>
-    </p>
-
-    @if(!empty($reactionRateByPost))
-        <table width="100%" style="border-collapse:collapse; text-align:center;">
-            <thead style="background:#f3f4f6;">
-                <tr>
-                    <th>Дата</th>
-                    <th>Автор</th>
-                    <th>Просмотры</th>
-                    <th>Реакции</th>
-                    <th>ReactionRate (%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($reactionRateByPost as $row)
-                    <tr>
-                        <td>{{ $row['date'] ?? '?' }}</td>
-                        <td>{{ $row['author'] ?? '-' }}</td>
-                        <td>{{ $row['views'] ?? 0 }}</td>
-                        <td>{{ $row['reactions'] ?? 0 }}</td>
-                        <td>{{ $row['rate'] ?? 0 }}%</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        @if(!empty($reactionRateChart))
-            <div class="chart-container">
-                <img src="{{ $reactionRateChart }}" style="width:100%; margin-top:15px;">
-            </div>
-        @endif
-    @else
-        <div style="font-size:12px; color:#6b7280;">Нет данных по ReactionRate</div>
-    @endif
-
-
-    {{-- 3.2 CommentRate --}}
-    <div class="subsection-title">3.2 Доля комментариев (CommentRate)</div>
-
-    <p>
-        За период: <strong>{{ $commentRatePeriod ?? 0 }}%</strong>
-    </p>
-
-    @if(!empty($commentRateByPost))
-        <table width="100%" style="border-collapse:collapse; text-align:center;">
-            <thead style="background:#f3f4f6;">
-                <tr>
-                    <th>Дата</th>
-                    <th>Автор</th>
-                    <th>Просмотры</th>
-                    <th>Комментарии</th>
-                    <th>CommentRate (%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($commentRateByPost as $row)
-                    <tr>
-                        <td>{{ $row['date'] ?? '?' }}</td>
-                        <td>{{ $row['author'] ?? '-' }}</td>
-                        <td>{{ $row['views'] ?? 0 }}</td>
-                        <td>{{ $row['comments'] ?? 0 }}</td>
-                        <td>{{ $row['rate'] ?? 0 }}%</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        @if(!empty($commentRateChart))
-            <div class="chart-container">
-                <img src="{{ $commentRateChart }}" style="width:100%; margin-top:15px;">
-            </div>
-        @endif
-    @else
-        <div style="font-size:12px; color:#6b7280;">Нет данных по CommentRate</div>
-    @endif
-
-
-    {{-- 3.3 ERview --}}
-    <div class="subsection-title">3.3 Вовлеченность от просмотров (ERview)</div>
-
-    <p>
-        За период: <strong>{{ $erViewPeriod ?? 0 }}%</strong>
-    </p>
-
-    @if(!empty($erViewByPost))
-        <table width="100%" style="border-collapse:collapse; text-align:center;">
-            <thead style="background:#f3f4f6;">
-                <tr>
-                    <th>Дата</th>
-                    <th>Автор</th>
-                    <th>Просмотры</th>
-                    <th>Реакции + Комментарии</th>
-                    <th>ERview (%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($erViewByPost as $row)
-                    <tr>
-                        <td>{{ $row['date'] ?? '?' }}</td>
-                        <td>{{ $row['author'] ?? '-' }}</td>
-                        <td>{{ $row['views'] ?? 0 }}</td>
-                        <td>{{ ($row['reactions'] ?? 0) + ($row['comments'] ?? 0) }}</td>
-                        <td>{{ $row['rate'] ?? 0 }}%</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        @if(!empty($erViewChart))
-            <div class="chart-container">
-                <img src="{{ $erViewChart }}" style="width:100%; margin-top:15px;">
-            </div>
-        @endif
-    @else
-        <div style="font-size:12px; color:#6b7280;">Нет данных по ERview</div>
-    @endif
-
-
-    {{-- 3.4 ViewRate --}}
-    <div class="subsection-title">3.4 Охват просмотров (ViewRate)</div>
-
-    <p>
-        Средний процент просмотра аудитории за период: <strong>{{ $viewRatePeriod ?? 0 }}%</strong>
-    </p>
-
-    @if(!empty($viewRateByPost))
-        <table width="100%" style="border-collapse:collapse; text-align:center;">
-            <thead style="background:#f3f4f6;">
-                <tr>
-                    <th>Дата</th>
-                    <th>Автор</th>
-                    <th>Просмотры</th>
-                    <th>Участники</th>
-                    <th>ViewRate (%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($viewRateByPost as $row)
-                    <tr>
-                        <td>{{ $row['date'] ?? '?' }}</td>
-                        <td>{{ $row['author'] ?? '-' }}</td>
-                        <td>{{ $row['views'] ?? 0 }}</td>
-                        <td>{{ $row['members'] ?? 0 }}</td>
-                        <td>{{ $row['rate'] ?? 0 }}%</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        @if(!empty($viewRateChart))
-            <div class="chart-container">
-                <img src="{{ $viewRateChart }}" style="width:100%; margin-top:15px;">
-            </div>
-        @endif
-    @else
-        <div style="font-size:12px; color:#6b7280;">Нет данных по ViewRate</div>
     @endif
 
 </div>

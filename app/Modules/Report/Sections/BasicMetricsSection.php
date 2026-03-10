@@ -57,7 +57,7 @@ class BasicMetricsSection implements PdfSectionContract
                 'Реакция',
                 'Публикация и реакция'
             ],
-            ['#6366f1','#3b82f6','#10b981','#f59e0b'],
+            ['#ef4444','#3b82f6','#10b981','#f59e0b'],
             'Активность пользователей по дням'
         );
 
@@ -69,7 +69,7 @@ class BasicMetricsSection implements PdfSectionContract
                 'Администратор',
                 'Пользователи'
             ],
-            ['#6366f1','#ef4444','#3b82f6'],
+            ['#10b981','#ef4444','#3b82f6'],
             'Публикации по дням'
         );
 
