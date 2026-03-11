@@ -48,7 +48,7 @@ class ExportUserLeadersJob implements ShouldQueue
             $from = Carbon::now('UTC')->subDays($days);
 
             $group = $this->apiServices->get('analytics/getGroup/' . $this->query);
-            $analytic = $this->apiServices->get('analytics/getGroupAnalytic', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
+            $analytic = $this->apiServices->get('analytics/getActivityLeaders', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Ошибка при получении данных');

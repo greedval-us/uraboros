@@ -51,7 +51,6 @@ class FunnelSection implements PdfSectionContract
             'Воронка вовлеченности'
         );
 
-
         return [
             'periodStart' => $periodStart,
             'periodEnd' => $periodEnd,
