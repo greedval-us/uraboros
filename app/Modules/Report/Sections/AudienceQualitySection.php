@@ -87,21 +87,6 @@ class AudienceQualitySection implements PdfSectionContract
             'Доля пишущих среди активных пользователей (по дням)'
         );
 
-        // Преобразуем для Blade (associative array)
-        $writerToMembersByDayAssoc = [];
-        foreach ($writerToMembersRows as $row) {
-            $writerToMembersByDayAssoc[$row['day']] = $row['value'];
-        }
-
-        $writerShareByDayAssoc = [];
-        foreach ($writerToShareRows as $row) {
-            $writerShareByDayAssoc[$row['day']] = $row['value'];
-        }
-
-        $timeBurstByDayAssoc = [];
-        foreach ($timeBurstRows as $row) {
-            $timeBurstByDayAssoc[$row['day']] = $row['value'];
-        }
 
         // Возвращаем все данные для Blade
         return [
@@ -115,9 +100,9 @@ class AudienceQualitySection implements PdfSectionContract
             'writerShareChart' => $writerToShareChart,
 
             // Таблицы
-            'timeBurstIndexByDay' => $timeBurstByDayAssoc,
-            'writerToMembersByDay' => $writerToMembersByDayAssoc,
-            'writerShareByDay' => $writerShareByDayAssoc,
+            'timeBurstIndexByDay' => $timeBurstChart,
+            'writerToMembersByDay' => $writerToMembersChart,
+            'writerShareByDay' => $writerToShareChart,
 
             // Итоговые показатели
             'writerToMembers' => round($writerToMembersAll, 4),
