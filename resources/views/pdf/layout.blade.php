@@ -12,6 +12,10 @@ body {
     line-height: 1.5;
 }
 
+.page-break {
+    page-break-before: always;
+}
+
 .report-section {
     margin-bottom: 25px;
     padding: 20px;
@@ -85,6 +89,13 @@ body {
 
 .report-table tbody tr:nth-child(even) {
     background-color: #f9fafb;
+}
+
+.description-box pre {
+    font-family: 'DejaVu Sans', 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
 }
 
 .report-section-footer {
