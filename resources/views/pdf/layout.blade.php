@@ -5,126 +5,110 @@
 
 <style>
 
+/* ===== Общие стили документа ===== */
 body {
     font-family: DejaVu Sans, sans-serif;
     font-size: 12px;
     color: #1f2937;
     line-height: 1.5;
+    background-color: #f9fafb;
+    margin: 0;
+    padding: 0;
 }
 
-/* PAGE BREAK */
-
+/* ===== PAGE BREAK ===== */
 .page-break {
     page-break-before: always;
 }
 
 /* ===== HEADER ===== */
-
 .report-header {
     margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #2563eb;
+    padding: 12px 20px;
+    background-color: #e0f2fe;
+    border-left: 6px solid #2563eb;
+    border-radius: 6px;
 }
 
 .report-title {
     font-size: 20px;
     font-weight: bold;
     color: #1e3a8a;
+    margin: 0;
 }
 
 .report-date {
     font-size: 11px;
     color: #6b7280;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
-/* ===== SECTION ===== */
-
+/* ===== SECTIONS ===== */
 .section {
-    margin-bottom: 22px;
+    margin: 25px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    page-break-inside: avoid;
 }
 
 .section-title {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: #111827;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     border-left: 4px solid #2563eb;
+    padding-left: 10px;
+}
+
+.subsection-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin: 18px 0 10px;
+    border-left: 3px solid #3b82f6;
     padding-left: 8px;
 }
 
-/* ===== TABLE META ===== */
-
-table.meta-table {
-    width: 100%;
-    border-collapse: collapse;
+/* ===== TEXT & LISTS ===== */
+p {
+    margin: 10px 0;
 }
 
-table.meta-table td {
-    padding: 7px 10px;
-    border-bottom: 1px solid #e5e7eb;
-    vertical-align: top;
+ul {
+    margin: 8px 0 12px 20px;
+    color: #4b5563;
 }
 
-table.meta-table td.label {
-    width: 30%;
-    font-weight: bold;
-    color: #374151;
-    background-color: #f9fafb;
+ul li {
+    margin-bottom: 5px;
 }
 
-table.meta-table td.value {
-    width: 70%;
-}
-
-/* ===== DESCRIPTION ===== */
-
+/* ===== DESCRIPTION BOX ===== */
 .description-box {
-    margin-top: 12px;
-    padding: 10px;
-    background: #f9fafb;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #f3f4f6;
     border: 1px solid #e5e7eb;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 12px;
 }
 
 .description-box pre {
-    font-family: DejaVu Sans, sans-serif;
     white-space: pre-wrap;
     word-wrap: break-word;
     margin: 0;
 }
 
-/* ===== TAGS ===== */
-
-.tags {
-    margin-top: 8px;
-}
-
-.tag {
-    display: inline-block;
-    font-size: 10px;
-    padding: 3px 6px;
-    margin: 2px 4px 2px 0;
-    background: #e5e7eb;
-    color: #374151;
-    border-radius: 3px;
-}
-
-/* ===== CHARTS ===== */
-
+/* ===== CHART CONTAINERS ===== */
 .chart-container {
-    margin-bottom: 35px;
-    padding: 15px;
-    background: #f8fafc;
+    margin-top: 18px;
+    padding: 12px;
+    background-color: #f8fafc;
     border: 1px solid #e5e7eb;
-    border-radius: 6px;
-}
-
-.chart-title {
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #1e3a8a;
+    border-radius: 8px;
+    text-align: center;
 }
 
 .chart-block-title {
@@ -132,8 +116,8 @@ table.meta-table td.value {
     font-weight: bold;
     color: #1e3a8a;
     margin-bottom: 10px;
-    padding-bottom: 6px;
     border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 4px;
 }
 
 .mini-description {
@@ -142,26 +126,37 @@ table.meta-table td.value {
     margin-top: 6px;
 }
 
-/* ===== LEADERS TABLE ===== */
-
+/* ===== TABLES ===== */
 .leaders-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 11px;
+    margin-top: 12px;
 }
 
 .leaders-table th {
     text-align: left;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 6px 4px;
-    background: #f3f4f6;
+    padding: 6px 8px;
+    background-color: #e0f2fe;
+    color: #1e3a8a;
+    border-bottom: 1px solid #cbd5e1;
 }
 
 .leaders-table td {
-    padding: 5px 4px;
-    border-bottom: 1px solid #f1f1f1;
+    padding: 5px 8px;
+    border-bottom: 1px solid #f1f5f9;
 }
 
+.leaders-table tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.leaders-table tbody tr:hover {
+    background-color: #e0f2fe;
+    transition: background-color 0.2s ease;
+}
+
+/* ===== COLOR DOT (для визуализации) ===== */
 .color-dot {
     display: inline-block;
     width: 8px;
@@ -170,22 +165,31 @@ table.meta-table td.value {
     margin-right: 4px;
 }
 
-/* ===== SHARE BOX ===== */
+/* ===== TAGS ===== */
+.tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 6px;
+    margin: 2px 3px 2px 0;
+    background-color: #e5e7eb;
+    color: #374151;
+    border-radius: 4px;
+}
 
+/* ===== SHARE BOX ===== */
 .share-box {
     margin-top: 10px;
     font-size: 11px;
     color: #374151;
-    background: #f9fafb;
-    padding: 6px 8px;
-    border-radius: 4px;
+    background-color: #f3f4f6;
+    padding: 6px 10px;
+    border-radius: 6px;
 }
 
 /* ===== FOOTER ===== */
-
 .report-footer {
     margin-top: 30px;
-    padding-top: 10px;
+    padding: 12px 0;
     border-top: 1px solid #e5e7eb;
     font-size: 10px;
     color: #6b7280;
