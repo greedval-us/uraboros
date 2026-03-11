@@ -61,7 +61,7 @@ class ExportFullReportJob implements ShouldQueue
             return;
         }
 
-        if(empty($analytic) || $analytic == null) {
+        if(empty($getBaseMetrics) || $getBaseMetrics == null) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Нет группы todo');
             return;

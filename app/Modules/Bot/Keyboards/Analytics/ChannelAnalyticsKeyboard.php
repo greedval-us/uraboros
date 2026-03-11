@@ -64,12 +64,12 @@ class ChannelAnalyticsKeyboard implements KeyboardBuilderInterface
 
         ])
         ->row([
-            Button::make($t('analytics.inline.fill_report_7'))->action('report')
+            Button::make($t('analytics.inline.full_report_7'))->action('report')
                 ->param('type', 'a_report_full')
                 ->param('query', $keyboard['group'])
                 ->param('param', 7),
 
-            Button::make($t('analytics.inline.fill_report_30'))->action('report')
+            Button::make($t('analytics.inline.full_report_30'))->action('report')
                 ->param('type', 'a_report_full')
                 ->param('query', $keyboard['group'])
                 ->param('param', 30),
