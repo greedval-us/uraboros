@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
 <meta charset="utf-8">
 
@@ -36,7 +36,7 @@ body {
 
 .report-subsection-title {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: bold;
     color: #1e3a8a;
     margin: 15px 0 8px;
     border-left: 3px solid #3b82f6;
@@ -110,8 +110,6 @@ body {
 </head>
 
 <body>
-
-{{-- ===== RENDER REPORT SECTIONS ===== --}}
 
 @foreach($sections as $section)
 
