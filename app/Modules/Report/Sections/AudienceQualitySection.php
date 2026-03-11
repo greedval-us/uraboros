@@ -57,6 +57,10 @@ class AudienceQualitySection implements PdfSectionContract
             $this->context->writerToSharePeriod ?? []
         );
 
+        Log::info($this->context->writerToSharePeriod);
+        Log::info($this->context->writerToMembersPeriod);
+        Log::info($this->context->timeBurstIndexPeriod);
+
         Log::info($timeBurstRows);
         Log::info($writerToMembersRows);
         Log::info($writerToShareRows);
