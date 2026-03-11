@@ -12,6 +12,7 @@ use App\Modules\Report\Sections\HeaderSection;
 use App\Modules\Report\Sections\IntroSection;
 use App\Modules\Report\Sections\NetworkMetricsSection;
 use App\Modules\Report\Sections\RetentionSection;
+use App\Modules\Report\Sections\UserLeaders;
 
 class ReportSectionsResolver
 {
@@ -39,6 +40,14 @@ class ReportSectionsResolver
                 new IntroSection($context),
                 new GroupInfoSection($context),
                 new FunnelSection($context),
+                new FooterSection($context),
+            ],
+
+            ReportType::USERLEADERS => [
+                new HeaderSection($context),
+                new IntroSection($context),
+                new GroupInfoSection($context),
+                new UserLeaders($context),
                 new FooterSection($context),
             ],
 

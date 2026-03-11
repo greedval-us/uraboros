@@ -4,8 +4,10 @@ namespace App\Modules\Bot\Job\Analytics\Report;
 
 use App\Modules\Bot\DTO\AnalyticDTO;
 use App\Modules\Bot\DTO\GroupDTO;
+use App\Modules\Bot\DTO\UserLeadersDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Report\DTO\ReportContextDTO;
+use App\Modules\Report\DTO\UserLeadersContextDTO;
 use App\Modules\Report\Enums\ReportType;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -62,11 +64,11 @@ class ExportUserLeadersJob implements ShouldQueue
         }
 
         $groupDto = GroupDTO::fromApi($group);
-        $analyticDto = AnalyticDTO::fromApi($analytic);
+        $userLeadersDto = UserLeadersDTO::fromApi($analytic);
 
-        $context = new ReportContextDTO(
+        $context = new UserLeadersContextDTO(
             group: $groupDto,
-            analytic: $analyticDto,
+            analytic: $userLeadersDto,
             lang: $this->lang,
             days: $days,
             to: $to,
