@@ -58,12 +58,12 @@ class FunnelSection implements PdfSectionContract
             'avgCommentRate' => round($a->allCommentRate ?? 0, 4),
             'avgERview' => round($a->allERview ?? 0, 4),
 
-            'funnelByDay' => $funnelByDay,
+            'funnelByDay' => $funnelChart,
 
-            'viewRateChart' => $funnelByDay,
-            'reactionRateChart' => $funnelByDay,
-            'commentRateChart' => $funnelByDay,
-            'erViewChart' => $funnelByDay,
+            'viewRateChart' => $funnelChart,
+            'reactionRateChart' => $funnelChart,
+            'commentRateChart' => $funnelChart,
+            'erViewChart' => $funnelChart,
         ];
     }
 }
