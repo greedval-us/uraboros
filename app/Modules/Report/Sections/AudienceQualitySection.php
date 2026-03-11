@@ -18,10 +18,13 @@ class AudienceQualitySection implements PdfSectionContract
 
     public function data(): array
     {
+        $writerToMembersAll = ($this->context->writerToMembersAll ?? 0) * 100;
+        $writerToShareAll = ($this->context->writerToShareAll ?? 0) * 100;
+
         $writerToMembersAllChart = ChartHelper::pie(
             [
-                ['label' => 'Пишущие', 'value' => $this->context->writerToMembersAll * 100],
-                ['label' => 'Не пишущие', 'value' => 100 - $this->context->writerToMembersAll * 100],
+                ['label' => 'Пишущие', 'value' => $writerToMembersAll],
+                ['label' => 'Не пишущие', 'value' => 100 - $writerToMembersAll],
             ],
             ['value'],
             ['Пишущие','Не пишущие'],
@@ -31,8 +34,8 @@ class AudienceQualitySection implements PdfSectionContract
 
         $writerToShareAllChart = ChartHelper::pie(
             [
-                ['label' => 'Пишущие среди активных', 'value' => $this->context->writerToShareAll * 100],
-                ['label' => 'Не пишущие среди активных', 'value' => 100 - $this->context->writerToShareAll * 100],
+                ['label' => 'Пишущие среди активных', 'value' => $writerToShareAll],
+                ['label' => 'Не пишущие среди активных', 'value' => 100 - $writerToShareAll],
             ],
             ['value'],
             ['Пишущие','Не пишущие'],
@@ -45,12 +48,19 @@ class AudienceQualitySection implements PdfSectionContract
         $writerToMembers = [];
         $writerToShare = [];
 
-        foreach ($this->context->timeBurstIndexPeriod as $i => $row) {
+        foreach (($this->context->timeBurstIndexPeriod ?? []) as $i => $row) {
+
             $day = array_key_first($row);
+
             $days[] = $day;
+
             $timeBurst[] = $row[$day] ?? 0;
-            $writerToMembers[] = $this->context->writerToMembersPeriod[$i][$day] ?? 0;
-            $writerToShare[] = $this->context->writerToSharePeriod[$i][$day] ?? 0;
+
+            $writerToMembers[] =
+                (($this->context->writerToMembersPeriod[$i][$day] ?? 0) * 100);
+
+            $writerToShare[] =
+                (($this->context->writerToSharePeriod[$i][$day] ?? 0) * 100);
         }
 
         $timeBurstChart = ChartHelper::line(
@@ -80,9 +90,9 @@ class AudienceQualitySection implements PdfSectionContract
         return [
             'writerToMembersAllChart' => $writerToMembersAllChart,
             'writerToShareAllChart' => $writerToShareAllChart,
-            'timeBurstChart' => $timeBurstChart,
+            'timeBurstIndexChart' => $timeBurstChart,
             'writerToMembersChart' => $writerToMembersChart,
-            'writerToShareChart' => $writerToShareChart,
+            'writerShareChart' => $writerToShareChart,
         ];
     }
 }
