@@ -18,44 +18,50 @@ class UserLeadersSection implements PdfSectionContract
         return "pdf.{$this->lang}.sections.user-leaders";
     }
 
-    public function data(): array
-    {
-        $top10ByMessage = $this->userLeaders->analytic->top10ByMessage;
-        $top10ByReaction = $this->userLeaders->analytic->top10ByReaction;
-        $top10ByTotal = $this->userLeaders->analytic->top10ByMessageAndReaction;
+public function data(): array
+{
+    $top10ByMessage = $this->userLeaders->analytic->top10ByMessage;
+    $top10ByReaction = $this->userLeaders->analytic->top10ByReaction;
+    $top10ByTotal = $this->userLeaders->analytic->top10ByMessageAndReaction;
 
-        // Генерация графиков
-        $messageChart = ChartHelper::pie(
-            [$top10ByMessage],
-            ['total'],
-            ['Количество сообщений'],
-            ['#3b82f6'],
-            'Топ-10 пользователей по сообщениям'
-        );
+    // Преобразуем массив в формат [['label' => 'ID', 'value' => count], ...]
+    $formatTop10 = fn(array $data): array => array_map(
+        fn($id, $count) => ['label' => (string)$id, 'value' => $count],
+        array_keys($data),
+        array_values($data)
+    );
 
-        $reactionChart = ChartHelper::pie(
-            [$top10ByReaction],
-            ['total'],
-            ['Количество реакций'],
-            ['#10b981'],
-            'Топ-10 пользователей по реакциям'
-        );
+    $messageChart = ChartHelper::pie(
+        $formatTop10($top10ByMessage),
+        ['value'],
+        array_column($formatTop10($top10ByMessage), 'label'),
+        ['#3b82f6','#3b82f6','#3b82f6','#3b82f6','#3b82f6','#3b82f6','#3b82f6','#3b82f6','#3b82f6','#3b82f6'],
+        'Топ-10 пользователей по сообщениям'
+    );
 
-        $totalChart = ChartHelper::pie(
-            [$top10ByTotal],
-            ['total'],
-            ['Совокупная активность'],
-            ['#ef4444'],
-            'Топ-10 пользователей по совокупной активности'
-        );
+    $reactionChart = ChartHelper::pie(
+        $formatTop10($top10ByReaction),
+        ['value'],
+        array_column($formatTop10($top10ByReaction), 'label'),
+        ['#10b981','#10b981','#10b981','#10b981','#10b981','#10b981','#10b981','#10b981','#10b981','#10b981'],
+        'Топ-10 пользователей по реакциям'
+    );
 
-        return [
-            'top10ByMessage' => $top10ByMessage,
-            'top10ByReaction' => $top10ByReaction,
-            'top10ByTotal' => $top10ByTotal,
-            'messageChart' => $messageChart,
-            'reactionChart' => $reactionChart,
-            'totalChart' => $totalChart,
-        ];
-    }
+    $totalChart = ChartHelper::pie(
+        $formatTop10($top10ByTotal),
+        ['value'],
+        array_column($formatTop10($top10ByTotal), 'label'),
+        ['#ef4444','#ef4444','#ef4444','#ef4444','#ef4444','#ef4444','#ef4444','#ef4444','#ef4444','#ef4444'],
+        'Топ-10 пользователей по совокупной активности'
+    );
+
+    return [
+        'top10ByMessage' => $top10ByMessage,
+        'top10ByReaction' => $top10ByReaction,
+        'top10ByTotal' => $top10ByTotal,
+        'messageChart' => $messageChart,
+        'reactionChart' => $reactionChart,
+        'totalChart' => $totalChart,
+    ];
+}
 }
