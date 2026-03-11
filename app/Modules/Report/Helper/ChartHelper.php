@@ -107,6 +107,50 @@ class ChartHelper
         return self::quickChartUrl($config);
     }
 
+    public static function pie(
+        array $data,
+        array $fields,
+        array $labels,
+        array $colors,
+        string $title
+    ): string {
+        $datasets = [];
+
+        foreach ($fields as $i => $field) {
+            $datasets[] = [
+                'label' => $labels[$i] ?? $field,
+                'data' => array_map(
+                    fn(array $row): int => (int) ($row[$field] ?? 0),
+                    $data
+                ),
+                'backgroundColor' => $colors[$i] ?? '#999999',
+            ];
+        }
+
+        $config = [
+            'type' => 'pie',
+            'data' => [
+                'labels' => array_map(
+                    fn(array $row, $i): string => $labels[$i] ?? 'Item ' . ($i + 1),
+                    $data,
+                    array_keys($data)
+                ),
+                'datasets' => $datasets,
+            ],
+            'options' => [
+                'plugins' => [
+                    'legend' => ['display' => true],
+                    'title' => [
+                        'display' => true,
+                        'text' => $title
+                    ]
+                ]
+            ]
+        ];
+
+        return self::quickChartUrl($config);
+    }
+
     /**
      * @param array<string, mixed> $chartConfig
      */
