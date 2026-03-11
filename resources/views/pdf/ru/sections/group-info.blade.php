@@ -1,45 +1,45 @@
-<div class="section page-break">
-    <div class="section-title">Информация о группе</div>
+<div class="report-section page-break">
+    <div class="report-section-title">Информация о группе</div>
 
-    <table class="meta-table">
+    <table class="report-table">
         <tr>
-            <td class="label">Название</td>
-            <td class="value">{{ $title }}</td>
+            <td class="report-table-label">Название</td>
+            <td class="report-table-value">{{ $title }}</td>
         </tr>
 
         <tr>
-            <td class="label">Username</td>
-            <td class="value">{{ $username ?? '—' }}</td>
+            <td class="report-table-label">Username</td>
+            <td class="report-table-value">{{ $username ?? '—' }}</td>
         </tr>
 
         <tr>
-            <td class="label">Количество участников</td>
-            <td class="value">{{ number_format($participants ?? 0, 0, '.', ' ') }}</td>
+            <td class="report-table-label">Количество участников</td>
+            <td class="report-table-value">{{ number_format($participants ?? 0, 0, '.', ' ') }}</td>
         </tr>
 
         <tr>
-            <td class="label">Дата создания</td>
-            <td class="value">{{ $createdAt ?? '—' }}</td>
+            <td class="report-table-label">Дата создания</td>
+            <td class="report-table-value">{{ $createdAt ?? '—' }}</td>
         </tr>
 
         <tr>
-            <td class="label">Последнее обновление</td>
-            <td class="value">{{ $lastUpdate ?? '—' }}</td>
+            <td class="report-table-label">Последнее обновление</td>
+            <td class="report-table-value">{{ $lastUpdate ?? '—' }}</td>
         </tr>
     </table>
 
     @if(!empty($description))
-        <div class="description-box" style="margin-top:15px;">
+        <div class="report-description" style="margin-top:15px;">
             <strong>Описание</strong>
             <pre>{{ $description }}</pre>
         </div>
     @endif
 
     @if(!empty($flags))
-        <div class="tags" style="margin-top:10px;">
+        <div class="report-tags" style="margin-top:10px;">
             <strong>Флаги:</strong><br>
             @foreach(explode(',', $flags) as $flag)
-                <span class="tag">{{ trim($flag) }}</span>
+                <span class="report-tag">{{ trim($flag) }}</span>
             @endforeach
         </div>
     @endif
