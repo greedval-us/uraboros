@@ -96,11 +96,10 @@
 </div>
 </div>
 {{-- Таблицы с числовыми значениями в конце отчета --}}
+<div class="section page-break">
     <div class="section-title">Таблицы с данными по дням</div>
-
     {{-- Таблица 1.1 Активные пользователи --}}
     @if(!empty($activityByDay))
-        <div class="section page-break">
             <div class="chart-block-title">Таблица №1.1 «Активность по пользователям»</div>
             <table class="leaders-table">
                 <thead>
@@ -124,7 +123,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
     @endif
 
     {{-- Таблица 1.2 Частота публикаций --}}
@@ -180,3 +178,4 @@
             </table>
         </div>
     @endif
+</div>
