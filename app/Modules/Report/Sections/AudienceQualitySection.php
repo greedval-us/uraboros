@@ -20,9 +20,11 @@ class AudienceQualitySection implements PdfSectionContract
 
     public function data(): array
     {
+        // Общие показатели
         $writerToMembersAll = ($this->context->writerToMembersAll ?? 0) * 100;
         $writerToShareAll = ($this->context->writerToShareAll ?? 0) * 100;
 
+        // Круговые графики общей структуры
         $writerToMembersAllChart = ChartHelper::pie(
             [
                 ['label' => 'Пишущие', 'value' => $writerToMembersAll],
@@ -45,6 +47,7 @@ class AudienceQualitySection implements PdfSectionContract
             'Доля пишущих среди активных'
         );
 
+        // Подготовка данных для графиков по дням
         $timeBurstRows = AudienceQualityTableHelper::build(
             $this->context->timeBurstIndexPeriod ?? []
         );
@@ -57,14 +60,12 @@ class AudienceQualitySection implements PdfSectionContract
             $this->context->writerToSharePeriod ?? []
         );
 
-        Log::info($this->context->writerToSharePeriod);
-        Log::info($this->context->writerToMembersPeriod);
-        Log::info($this->context->timeBurstIndexPeriod);
+        // Логирование для проверки
+        Log::info('timeBurstRows', $timeBurstRows);
+        Log::info('writerToMembersRows', $writerToMembersRows);
+        Log::info('writerToShareRows', $writerToShareRows);
 
-        Log::info($timeBurstRows);
-        Log::info($writerToMembersRows);
-        Log::info($writerToShareRows);
-
+        // Линейные графики
         $timeBurstChart = ChartHelper::line(
             $timeBurstRows,
             ['value'],
@@ -89,12 +90,25 @@ class AudienceQualitySection implements PdfSectionContract
             'Доля пишущих среди активных пользователей (по дням)'
         );
 
+        // Возвращаем данные для графиков и таблиц
         return [
+            // Круговые графики
             'writerToMembersAllChart' => $writerToMembersAllChart,
             'writerToShareAllChart' => $writerToShareAllChart,
+
+            // Линейные графики
             'timeBurstIndexChart' => $timeBurstChart,
             'writerToMembersChart' => $writerToMembersChart,
             'writerShareChart' => $writerToShareChart,
+
+            // Данные для таблиц в Blade
+            'timeBurstIndexByDay' => $timeBurstRows,
+            'writerToMembersByDay' => $writerToMembersRows,
+            'writerShareByDay' => $writerToShareRows,
+
+            // Общие числовые показатели
+            'writerToMembers' => round($writerToMembersAll, 4),
+            'writerShare' => round($writerToShareAll, 4),
         ];
     }
 }
