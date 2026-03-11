@@ -7,32 +7,20 @@ use Carbon\Carbon;
 class AudienceQualityTableHelper
 {
     /**
-     * Строит массив для графика/таблицы (линейный график).
-     * Работает с плоским массивом ['2026-03-04' => 0.2, ...] или массивом массивов.
+     * Для индекса временных всплесков
      */
     public static function build(array $period): array
     {
         $rows = [];
 
-        foreach ($period as $key => $value) {
-
-            if (is_array($value) && !empty($value)) {
-                // если это массив, берем ключ первого элемента
-                $day = array_key_first($value);
-                $val = $value[$day] ?? 0;
-            } else {
-                // если плоский массив
-                $day = $key;
-                $val = $value ?? 0;
-            }
-
+        foreach ($period as $day => $value) {
             if (!$day || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $day)) {
                 continue;
             }
 
             $rows[] = [
                 'day' => Carbon::parse($day)->format('d.m'),
-                'value' => $val,
+                'value' => $value ?? 0,
             ];
         }
 
@@ -40,29 +28,20 @@ class AudienceQualityTableHelper
     }
 
     /**
-     * То же самое, но в процентах
+     * Для процентов (WriterToMembers, WriterShare)
      */
     public static function buildPercent(array $period): array
     {
         $rows = [];
 
-        foreach ($period as $key => $value) {
-
-            if (is_array($value) && !empty($value)) {
-                $day = array_key_first($value);
-                $val = $value[$day] ?? 0;
-            } else {
-                $day = $key;
-                $val = $value ?? 0;
-            }
-
+        foreach ($period as $day => $value) {
             if (!$day || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $day)) {
                 continue;
             }
 
             $rows[] = [
                 'day' => Carbon::parse($day)->format('d.m'),
-                'value' => round($val * 100, 4),
+                'value' => round(($value ?? 0) * 100, 4),
             ];
         }
 

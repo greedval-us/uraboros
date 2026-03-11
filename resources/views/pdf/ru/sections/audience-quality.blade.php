@@ -24,7 +24,6 @@
     </p>
 
     {{-- Круговые графики общей структуры --}}
-
     @if(!empty($writerToMembersAllChart))
         <div class="chart-container">
             <div class="chart-block-title">Структура аудитории (WriterToMembers)</div>
@@ -41,12 +40,7 @@
         </div>
     @endif
 
-
-
-    {{-- ===================== --}}
     {{-- 3.1 Линейный график --}}
-    {{-- ===================== --}}
-
     <div class="subsection-title">
         3.1 Доля пишущих от всей аудитории
     </div>
@@ -70,12 +64,7 @@
         </div>
     @endif
 
-
-
-    {{-- ===================== --}}
     {{-- 3.2 Линейный график --}}
-    {{-- ===================== --}}
-
     <div class="subsection-title">
         3.2 Доля пишущих среди активных пользователей
     </div>
@@ -86,7 +75,6 @@
 
     @if(!empty($writerShareChart))
         <div class="chart-container">
-
             <div class="chart-block-title">
                 График доли пишущих среди активных
             </div>
@@ -96,16 +84,10 @@
             <div class="mini-description">
                 Таблица №3.2 «Доля пишущих среди активных»
             </div>
-
         </div>
     @endif
 
-
-
-    {{-- ===================== --}}
     {{-- 3.3 Линейный график --}}
-    {{-- ===================== --}}
-
     <div class="subsection-title">
         3.3 Индекс временных всплесков (по дням)
     </div>
@@ -117,7 +99,6 @@
 
     @if(!empty($timeBurstIndexChart))
         <div class="chart-container">
-
             <div class="chart-block-title">
                 График индекса временных всплесков
             </div>
@@ -127,138 +108,96 @@
             <div class="mini-description">
                 Таблица №3.3 «Индекс временных всплесков»
             </div>
-
         </div>
     @endif
 
-
-
-    {{-- ===================================================== --}}
-    {{-- ВСЕ ТАБЛИЦЫ В КОНЦЕ РАЗДЕЛА --}}
-    {{-- ===================================================== --}}
-
+    {{-- Таблицы с числовыми значениями --}}
     <div class="section page-break">
-
         <div class="section-title">
             Таблицы с числовыми значениями
         </div>
 
-
-
         {{-- Таблица 3 --}}
-
         <div class="chart-block-title">
             Таблица №3 «Качество аудитории»
         </div>
-
         <table class="leaders-table">
-
             <thead>
                 <tr>
                     <th>WriterToMembers</th>
                     <th>WriterShare</th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr>
                     <td>{{ $writerToMembers ?? 0 }}</td>
                     <td>{{ $writerShare ?? 0 }}</td>
                 </tr>
             </tbody>
-
         </table>
 
-
-
         {{-- Таблица 3.1 --}}
-
         <div class="chart-block-title">
             Таблица №3.1 «Доля пишущих от аудитории»
         </div>
-
         <table class="leaders-table">
-
             <thead>
                 <tr>
                     <th>День</th>
                     <th>WriterToMembers</th>
                 </tr>
             </thead>
-
             <tbody>
-
-                @foreach(($writerToMembersByDay ?? []) as $day => $value)
+                @foreach($writerToMembersByDay ?? [] as $row)
                     <tr>
-                        <td>{{ $day }}</td>
-                        <td>{{ $value }}</td>
+                        <td>{{ $row['day'] }}</td>
+                        <td>{{ $row['value'] }}</td>
                     </tr>
                 @endforeach
-
             </tbody>
-
         </table>
 
-
-
         {{-- Таблица 3.2 --}}
-
         <div class="chart-block-title">
             Таблица №3.2 «Доля пишущих среди активных»
         </div>
-
         <table class="leaders-table">
-
             <thead>
                 <tr>
                     <th>День</th>
                     <th>WriterShare</th>
                 </tr>
             </thead>
-
             <tbody>
-
-                @foreach(($writerShareByDay ?? []) as $day => $value)
+                @foreach($writerShareByDay ?? [] as $row)
                     <tr>
-                        <td>{{ $day }}</td>
-                        <td>{{ $value }}</td>
+                        <td>{{ $row['day'] }}</td>
+                        <td>{{ $row['value'] }}</td>
                     </tr>
                 @endforeach
-
             </tbody>
-
         </table>
 
-
-
         {{-- Таблица 3.3 --}}
-
         <div class="chart-block-title">
             Таблица №3.3 «Индекс временных всплесков»
         </div>
-
         <table class="leaders-table">
-
             <thead>
                 <tr>
                     <th>День</th>
                     <th>TimeBurstIndex</th>
                 </tr>
             </thead>
-
             <tbody>
-
-                @foreach(($timeBurstIndexByDay ?? []) as $day => $value)
+                @foreach($timeBurstIndexByDay ?? [] as $row)
                     <tr>
-                        <td>{{ $day }}</td>
-                        <td>{{ $value }}</td>
+                        <td>{{ $row['day'] }}</td>
+                        <td>{{ $row['value'] }}</td>
                     </tr>
                 @endforeach
-
             </tbody>
-
         </table>
-
     </div>
 
 </div>

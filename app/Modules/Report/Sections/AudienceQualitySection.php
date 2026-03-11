@@ -6,7 +6,6 @@ use App\Modules\Report\Contracts\PdfSectionContract;
 use App\Modules\Report\DTO\AudienceQualityContextDTO;
 use App\Modules\Report\Helper\AudienceQualityTableHelper;
 use App\Modules\Report\Helper\ChartHelper;
-use Illuminate\Support\Facades\Log;
 
 class AudienceQualitySection implements PdfSectionContract
 {
@@ -21,9 +20,13 @@ class AudienceQualitySection implements PdfSectionContract
 
     public function data(): array
     {
-        $writerToMembersAll = ($this->context->analytic->writerToMembersAll ?? 0) * 100;
-        $writerToShareAll = ($this->context->analytic->writerToShareAll ?? 0) * 100;
+        $analytic = $this->context->analytic;
 
+        // Доли пишущих в процентах
+        $writerToMembersAll = ($analytic->writerToMembersAll ?? 0) * 100;
+        $writerToShareAll = ($analytic->writerToShareAll ?? 0) * 100;
+
+        // Круговые графики
         $writerToMembersAllChart = ChartHelper::pie(
             [
                 ['label' => 'Пишущие', 'value' => $writerToMembersAll],
@@ -46,18 +49,20 @@ class AudienceQualitySection implements PdfSectionContract
             'Доля пишущих среди активных'
         );
 
+        // Линейные данные
         $timeBurstRows = AudienceQualityTableHelper::build(
-            $this->context->analytic->timeBurstIndexPeriod ?? []
+            $analytic->timeBurstIndexPeriod ?? []
         );
 
         $writerToMembersRows = AudienceQualityTableHelper::buildPercent(
-            $this->context->analytic->writerToMembersPeriod ?? []
+            $analytic->writerToMembersPeriod ?? []
         );
 
         $writerToShareRows = AudienceQualityTableHelper::buildPercent(
-            $this->context->analytic->writerToSharePeriod ?? []
+            $analytic->writerToSharePeriod ?? []
         );
 
+        // Линейные графики
         $timeBurstChart = ChartHelper::line(
             $timeBurstRows,
             ['value'],
@@ -82,18 +87,39 @@ class AudienceQualitySection implements PdfSectionContract
             'Доля пишущих среди активных пользователей (по дням)'
         );
 
+        // Преобразуем для Blade (associative array)
+        $writerToMembersByDayAssoc = [];
+        foreach ($writerToMembersRows as $row) {
+            $writerToMembersByDayAssoc[$row['day']] = $row['value'];
+        }
+
+        $writerShareByDayAssoc = [];
+        foreach ($writerToShareRows as $row) {
+            $writerShareByDayAssoc[$row['day']] = $row['value'];
+        }
+
+        $timeBurstByDayAssoc = [];
+        foreach ($timeBurstRows as $row) {
+            $timeBurstByDayAssoc[$row['day']] = $row['value'];
+        }
+
+        // Возвращаем все данные для Blade
         return [
+            // Круговые графики
             'writerToMembersAllChart' => $writerToMembersAllChart,
             'writerToShareAllChart' => $writerToShareAllChart,
 
+            // Линейные графики
             'timeBurstIndexChart' => $timeBurstChart,
             'writerToMembersChart' => $writerToMembersChart,
             'writerShareChart' => $writerToShareChart,
 
-            'timeBurstIndexByDay' => $timeBurstRows,
-            'writerToMembersByDay' => $writerToMembersRows,
-            'writerShareByDay' => $writerToShareRows,
+            // Таблицы
+            'timeBurstIndexByDay' => $timeBurstByDayAssoc,
+            'writerToMembersByDay' => $writerToMembersByDayAssoc,
+            'writerShareByDay' => $writerShareByDayAssoc,
 
+            // Итоговые показатели
             'writerToMembers' => round($writerToMembersAll, 4),
             'writerShare' => round($writerToShareAll, 4),
         ];
