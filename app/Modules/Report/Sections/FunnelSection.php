@@ -7,6 +7,7 @@ use App\Modules\Report\DTO\FunnelContextDTO;
 use App\Modules\Report\Helper\ChartHelper;
 use App\Modules\Report\Helper\FunnelTableHelper;
 use App\Modules\Report\Helper\PeriodTableHelper;
+use Illuminate\Support\Facades\Log;
 
 class FunnelSection implements PdfSectionContract
 {
@@ -29,6 +30,8 @@ class FunnelSection implements PdfSectionContract
         $funnelByDay = FunnelTableHelper::build(
             $a->ERperDay ?? []
         );
+
+        Log::info($funnelByDay);
 
         $funnelChart = ChartHelper::bar(
             $funnelByDay,
