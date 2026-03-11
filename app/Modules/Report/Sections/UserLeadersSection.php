@@ -30,7 +30,7 @@ class UserLeadersSection implements PdfSectionContract
             array_values($data)
         );
 
-        $generateColors = fn(int $n): array => [
+        $colors = [
             '#3b82f6','#10b981','#ef4444','#f59e0b','#8b5cf6',
             '#06b6d4','#e11d48','#facc15','#22c55e','#0ea5e9'
         ];
@@ -39,7 +39,7 @@ class UserLeadersSection implements PdfSectionContract
             $formatTop10($top10ByMessage),
             ['value'],
             array_column($formatTop10($top10ByMessage), 'label'),
-            $generateColors(10),
+            $colors,
             'Топ-10 пользователей по сообщениям'
         );
 
@@ -47,7 +47,7 @@ class UserLeadersSection implements PdfSectionContract
             $formatTop10($top10ByReaction),
             ['value'],
             array_column($formatTop10($top10ByReaction), 'label'),
-            $generateColors(10),
+            $colors,
             'Топ-10 пользователей по реакциям'
         );
 
@@ -55,7 +55,7 @@ class UserLeadersSection implements PdfSectionContract
             $formatTop10($top10ByTotal),
             ['value'],
             array_column($formatTop10($top10ByTotal), 'label'),
-            $generateColors(10),
+            $colors,
             'Топ-10 пользователей по совокупной активности'
         );
 
