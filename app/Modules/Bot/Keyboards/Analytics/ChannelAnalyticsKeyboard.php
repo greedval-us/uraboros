@@ -61,6 +61,18 @@ class ChannelAnalyticsKeyboard implements KeyboardBuilderInterface
                 ->param('type', 'a_users_leaders')
                 ->param('query', $keyboard['group'])
                 ->param('param', 30),
+
+        ])
+        ->row([
+            Button::make($t('analytics.inline.fill_report_7'))->action('report')
+                ->param('type', 'a_report_full')
+                ->param('query', $keyboard['group'])
+                ->param('param', 7),
+
+            Button::make($t('analytics.inline.fill_report_30'))->action('report')
+                ->param('type', 'a_report_full')
+                ->param('query', $keyboard['group'])
+                ->param('param', 30),
         ]);
 
     }

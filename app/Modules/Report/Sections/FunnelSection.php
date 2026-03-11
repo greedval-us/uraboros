@@ -6,8 +6,6 @@ use App\Modules\Report\Contracts\PdfSectionContract;
 use App\Modules\Report\DTO\FunnelContextDTO;
 use App\Modules\Report\Helper\ChartHelper;
 use App\Modules\Report\Helper\FunnelTableHelper;
-use App\Modules\Report\Helper\PeriodTableHelper;
-use Illuminate\Support\Facades\Log;
 
 class FunnelSection implements PdfSectionContract
 {
@@ -22,7 +20,7 @@ class FunnelSection implements PdfSectionContract
 
     public function data(): array
     {
-        $a = $this->context->analytic;
+        $a = $this->context->funnelDTO;
 
         $periodStart = $this->context->from;
         $periodEnd   = $this->context->to;

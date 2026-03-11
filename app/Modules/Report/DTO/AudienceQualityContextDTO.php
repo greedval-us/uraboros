@@ -10,7 +10,7 @@ class AudienceQualityContextDTO
 {
     public function __construct(
         public GroupDTO $group,
-        public AudienceQualityDTO $analytic,
+        public AudienceQualityDTO $audienceQualityDTO,
         public string $lang,
         public int $days,
         public string $to = '',

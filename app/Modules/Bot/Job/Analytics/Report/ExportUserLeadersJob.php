@@ -68,7 +68,7 @@ class ExportUserLeadersJob implements ShouldQueue
 
         $context = new UserLeadersContextDTO(
             group: $groupDto,
-            analytic: $userLeadersDto,
+            userLeadersDTO: $userLeadersDto,
             lang: $this->lang,
             days: $days,
             to: $to,

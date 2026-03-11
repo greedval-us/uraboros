@@ -10,5 +10,6 @@ enum ReportType: string
     case NETWORK = 'network_metrics';
     case RETENTION = 'retention';
     case USERLEADERS = 'user_leaders';
+    case FULLREPORT = 'full_report';
     case DEFAULT = 'default';
 }

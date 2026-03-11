@@ -20,7 +20,7 @@ class AudienceQualitySection implements PdfSectionContract
 
     public function data(): array
     {
-        $analytic = $this->context->analytic;
+        $analytic = $this->context->audienceQualityDTO;
 
         $writerToMembersAll = ($analytic->writerToMembersAll ?? 0) * 100;
         $writerToShareAll = ($analytic->writerToShareAll ?? 0) * 100;

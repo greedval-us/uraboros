@@ -67,6 +67,17 @@ class ReportSectionsResolver
                 new FooterSection($context),
             ],
 
+            ReportType::FULLREPORT => [
+                new HeaderSection($context),
+                new IntroSection($context),
+                new GroupInfoSection($context),
+                new BasicMetricsSection($context),
+                new FunnelSection($context),
+                new AudienceQualitySection($context),
+                new UserLeadersSection ($context),
+                new FooterSection($context),
+            ],
+
             ReportType::DEFAULT => [
                 new HeaderSection($context),
                 new FooterSection($context),

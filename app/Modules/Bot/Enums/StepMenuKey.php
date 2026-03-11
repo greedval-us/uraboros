@@ -16,4 +16,5 @@ enum StepMenuKey: string
     case AnalyticsAudienceQuality = 'analytics_audience_quality';
     case AnalyticsNetworkMetrics = 'analytics_network_metrics';
     case AnalyticsUsersLeaders = 'analytics_users_leaders';
+    case AnalyticsFullReport = 'analytics_full_report';
 }

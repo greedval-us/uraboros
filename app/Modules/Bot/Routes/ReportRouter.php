@@ -4,6 +4,7 @@ namespace App\Modules\Bot\Routes;
 
 use App\Modules\Bot\Actions\Analytics\Report\ReportAudienceQualityAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Report\ReportBasicMetricsAnalyticsAction;
+use App\Modules\Bot\Actions\Analytics\Report\ReportFullReporAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Report\ReportFunnelAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Report\ReportUserAnalyticsAction;
 use App\Modules\Bot\Actions\Analytics\Report\ReportUserLeadersAction;
@@ -22,6 +23,7 @@ class ReportRouter
             CommandKey::AudienceQualityA->value => ReportAudienceQualityAnalyticsAction::class,
             //CommandKey::NetworkMetricsA->value  => ReportNetworkMetricsAnalyticsAction::class,
             CommandKey::UsersLeadersA->value    => ReportUserLeadersAction::class,
+            CommandKey::FullReportA->value      => ReportFullReporAnalyticsAction::class,
         ];
 
         if (!isset($map[$callback])) {

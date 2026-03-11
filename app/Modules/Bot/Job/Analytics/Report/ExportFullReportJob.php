@@ -2,10 +2,13 @@
 
 namespace App\Modules\Bot\Job\Analytics\Report;
 
+use App\Modules\Bot\DTO\AudienceQualityDTO;
+use App\Modules\Bot\DTO\BasicMetriicsDTO;
 use App\Modules\Bot\DTO\FunnelDTO;
 use App\Modules\Bot\DTO\GroupDTO;
+use App\Modules\Bot\DTO\UserLeadersDTO;
 use App\Modules\Bot\Job\JobTrait;
-use App\Modules\Report\DTO\FunnelContextDTO;
+use App\Modules\Report\DTO\FullReportContextDTO;
 use App\Modules\Report\Enums\ReportType;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -16,7 +19,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 
-class ExportFunnelJob implements ShouldQueue
+class ExportFullReportJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, JobTrait;
 
@@ -48,7 +51,10 @@ class ExportFunnelJob implements ShouldQueue
             $from = Carbon::now('UTC')->subDays($days);
 
             $group = $this->apiServices->get('analytics/getGroup/' . $this->query);
-            $analytic = $this->apiServices->get('analytics/getEngagementFunnel', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
+            $getBaseMetrics = $this->apiServices->get('analytics/getBaseMetrics', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
+            $getAudienceQuality = $this->apiServices->get('analytics/getAudienceQuality', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
+            $getEngagementFunnel = $this->apiServices->get('analytics/getEngagementFunnel', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
+            $getActivityLeaders = $this->apiServices->get('analytics/getActivityLeaders', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
@@ -62,18 +68,24 @@ class ExportFunnelJob implements ShouldQueue
         }
 
         $groupDto = GroupDTO::fromApi($group);
-        $funnelDto = FunnelDTO::fromApi($analytic);
+        $basicMetriicsDto = BasicMetriicsDTO::fromApi($getBaseMetrics);
+        $userLeadersDto = UserLeadersDTO::fromApi($getActivityLeaders);
+        $audienceQualityDto = AudienceQualityDTO::fromApi($getAudienceQuality);
+        $funnelDto = FunnelDTO::fromApi($getEngagementFunnel);
 
-        $context = new FunnelContextDTO(
+        $context = new FullReportContextDTO(
             group: $groupDto,
             funnelDTO: $funnelDto,
+            audienceQualityDTO: $audienceQualityDto,
+            basicMetriicsDTO: $basicMetriicsDto,
+            userLeadersDTO: $userLeadersDto,
             lang: $this->lang,
             days: $days,
             to: $to,
             from: $from,
         );
 
-        $pdf = $this->pdfReportServices->generate($context, ReportType::FUNNEL);
+        $pdf = $this->pdfReportServices->generate($context, ReportType::FULLREPORT);
 
         $filePath = "reports/{$this->chatID}/group_{$groupDto->idGroup}_{$to}.pdf";
 

@@ -66,7 +66,7 @@ class ExportAudienceQualityJob implements ShouldQueue
 
         $context = new AudienceQualityContextDTO(
             group: $groupDto,
-            analytic: $audienceQualityDto,
+            audienceQualityDTO: $audienceQualityDto,
             lang: $this->lang,
             days: $days,
             to: $to,

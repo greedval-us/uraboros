@@ -9,7 +9,7 @@ class UserLeadersContextDTO
 {
     public function __construct(
         public GroupDTO $group,
-        public UserLeadersDTO $analytic ,
+        public UserLeadersDTO $userLeadersDTO,
         public string $lang,
         public int $days,
         public string $to = '',

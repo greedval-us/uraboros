@@ -10,7 +10,7 @@ class BasicMetricsContextDTO
 {
     public function __construct(
         public GroupDTO $group,
-        public BasicMetriicsDTO $analytic ,
+        public BasicMetriicsDTO $basicMetriicsDTO,
         public string $lang,
         public int $days,
         public string $to = '',

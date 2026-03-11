@@ -20,9 +20,9 @@ class UserLeadersSection implements PdfSectionContract
 
     public function data(): array
     {
-        $top10ByMessage = $this->userLeaders->analytic->top10ByMessage;
-        $top10ByReaction = $this->userLeaders->analytic->top10ByReaction;
-        $top10ByTotal = $this->userLeaders->analytic->top10ByMessageAndReaction;
+        $top10ByMessage = $this->userLeaders->userLeadersDTO->top10ByMessage;
+        $top10ByReaction = $this->userLeaders->userLeadersDTO->top10ByReaction;
+        $top10ByTotal = $this->userLeaders->userLeadersDTO->top10ByMessageAndReaction;
 
         $formatTop10 = fn(array $data): array => array_map(
             fn($id, $count) => ['label' => (string)$id, 'value' => $count],

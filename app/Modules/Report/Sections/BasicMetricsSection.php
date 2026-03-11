@@ -20,7 +20,7 @@ class BasicMetricsSection implements PdfSectionContract
 
     public function data(): array
     {
-        $a = $this->context->analytic;
+        $a = $this->context->basicMetriicsDTO;
 
         $periodStart = $this->context->from;
         $periodEnd   = $this->context->to;

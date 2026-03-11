@@ -66,7 +66,7 @@ class ExportBasicMetricsJob implements ShouldQueue
 
         $context = new BasicMetricsContextDTO(
             group: $groupDto,
-            analytic: $basicMetriicsDto,
+            basicMetriicsDTO: $basicMetriicsDto,
             lang: $this->lang,
             days: $days,
             to: $to,

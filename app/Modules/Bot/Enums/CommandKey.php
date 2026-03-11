@@ -34,6 +34,7 @@ enum CommandKey: string
     case BasicMetricsA = 'a_basic_metrics';
     case RetentionA = 'a_retention';
     case FunnelA = 'a_funnel';
+    case FullReportA = 'a_report_full';
     case AudienceQualityA = 'a_audience_quality';
     case NetworkMetricsA = 'a_network_metrics';
     case UsersLeadersA = 'a_users_leaders';

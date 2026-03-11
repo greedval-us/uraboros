@@ -16,6 +16,7 @@ enum KeyboardKey: string
     case AudienceQualityA = 'a_audience_quality';
     case NetworkMetricsA = 'a_network_metrics';
     case UsersLeadersA = 'a_users_leaders';
+    case FullReportA = 'a_report_full';
     case Account = 'account';
     case Settings = 'settings';
     case Language = 'language';
