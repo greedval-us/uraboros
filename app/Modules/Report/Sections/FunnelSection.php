@@ -60,10 +60,10 @@ class FunnelSection implements PdfSectionContract
 
             'funnelByDay' => $funnelByDay,
 
-            'viewRateChart' => [],//$viewRateChart,
-            'reactionRateChart' =>[],// $reactionRateChart,
-            'commentRateChart' =>[],// $commentRateChart,
-            'erViewChart' =>[],// $erViewChart,
+            'viewRateChart' => $funnelByDay,
+            'reactionRateChart' => $funnelByDay,
+            'commentRateChart' => $funnelByDay,
+            'erViewChart' => $funnelByDay,
         ];
     }
 }
