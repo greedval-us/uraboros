@@ -18,10 +18,6 @@ class FunnelTableHelper
 
             foreach ($item as $date => $metrics) {
 
-                if (!is_array($metrics)) {
-                    continue;
-                }
-
                 $rows[] = [
                     'day' => Carbon::createFromFormat('Y-m-d', $date)->format('d.m'),
 
