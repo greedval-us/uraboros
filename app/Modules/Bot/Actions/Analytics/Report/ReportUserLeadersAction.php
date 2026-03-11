@@ -18,7 +18,7 @@ class ReportUserLeadersAction
 
     public function handle(TelegraphChat $chat, string $query, string $param, string $lang): void
     {
-        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'leaders.louding'));
+        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
         ExportUserLeadersJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
     }
