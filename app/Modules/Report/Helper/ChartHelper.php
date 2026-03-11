@@ -114,28 +114,21 @@ class ChartHelper
         array $colors,
         string $title
     ): string {
-        $datasets = [];
+        // Берем только одно поле value для pie
+        $field = $fields[0] ?? 'value';
 
-        foreach ($fields as $i => $field) {
-            $datasets[] = [
-                'label' => $labels[$i] ?? $field,
-                'data' => array_map(
-                    fn(array $row): int => (int) ($row[$field] ?? 0),
-                    $data
-                ),
-                'backgroundColor' => $colors[$i] ?? '#999999',
-            ];
-        }
+        $values = array_map(fn($row) => (int)($row[$field] ?? 0), $data);
+        $segmentLabels = array_column($data, 'label');
+        $backgroundColors = array_slice($colors, 0, count($values));
 
         $config = [
             'type' => 'pie',
             'data' => [
-                'labels' => array_map(
-                    fn(array $row, $i): string => $labels[$i] ?? 'Item ' . ($i + 1),
-                    $data,
-                    array_keys($data)
-                ),
-                'datasets' => $datasets,
+                'labels' => $segmentLabels,
+                'datasets' => [[
+                    'data' => $values,
+                    'backgroundColor' => $backgroundColors,
+                ]]
             ],
             'options' => [
                 'plugins' => [
