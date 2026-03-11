@@ -185,12 +185,6 @@
     <div class="report-section-title">
         Таблицы с числовыми значениями
     </div>
-
-</div>
-
-
-<div class="report-section page-break">
-
     <div class="report-table-title">
         Таблица №3 «Качество аудитории»
     </div>
@@ -209,9 +203,7 @@
             </tr>
         </tbody>
     </table>
-
 </div>
-
 
 <div class="report-section page-break">
 

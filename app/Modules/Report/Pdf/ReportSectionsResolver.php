@@ -6,6 +6,7 @@ use App\Modules\Report\Enums\ReportType;
 use App\Modules\Report\Sections\AudienceQualitySection;
 use App\Modules\Report\Sections\BasicMetricsSection;
 use App\Modules\Report\Sections\FooterSection;
+use App\Modules\Report\Sections\FullIntroSection;
 use App\Modules\Report\Sections\FunnelSection;
 use App\Modules\Report\Sections\GroupInfoSection;
 use App\Modules\Report\Sections\HeaderSection;
@@ -69,7 +70,7 @@ class ReportSectionsResolver
 
             ReportType::FULLREPORT => [
                 new HeaderSection($context),
-                new IntroSection($context),
+                new FullIntroSection($context),
                 new GroupInfoSection($context),
                 new BasicMetricsSection($context),
                 new FunnelSection($context),
