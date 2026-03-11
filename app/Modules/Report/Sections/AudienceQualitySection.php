@@ -7,6 +7,7 @@ use App\Modules\Report\DTO\AudienceQualityContextDTO;
 use App\Modules\Report\DTO\FullReportContextDTO;
 use App\Modules\Report\Helper\AudienceQualityTableHelper;
 use App\Modules\Report\Helper\ChartHelper;
+use Illuminate\Support\Facades\Log;
 
 class AudienceQualitySection implements PdfSectionContract
 {
@@ -22,6 +23,9 @@ class AudienceQualitySection implements PdfSectionContract
     public function data(): array
     {
         $analytic = $this->context->audienceQualityDTO;
+
+        $periodStart = $this->context->from;
+        $periodEnd   = $this->context->to;
 
         $writerToMembersAll = ($analytic->writerToMembersAll ?? 0) * 100;
         $writerToShareAll = ($analytic->writerToShareAll ?? 0) * 100;
@@ -60,6 +64,10 @@ class AudienceQualitySection implements PdfSectionContract
             $analytic->writerToSharePeriod ?? []
         );
 
+        Log::info($timeBurstRows);
+        Log::info($writerToMembersRows);
+        Log::info($writerToShareRows);
+
         $timeBurstChart = ChartHelper::line(
             $timeBurstRows,
             ['value'],
@@ -86,6 +94,9 @@ class AudienceQualitySection implements PdfSectionContract
 
 
         return [
+            'periodStart' => $periodStart,
+            'periodEnd' => $periodEnd,
+
             'writerToMembersAllChart' => $writerToMembersAllChart,
             'writerToShareAllChart' => $writerToShareAllChart,
 
