@@ -30,7 +30,7 @@ class FunnelSection implements PdfSectionContract
         $funnelByDay = FunnelTableHelper::build(
             $a->ERperDay ?? []
         );
-
+        Log::info($a->ERperDay);
         Log::info($funnelByDay);
 
         $funnelChart = ChartHelper::bar(
