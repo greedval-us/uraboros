@@ -11,15 +11,10 @@ class FunnelTableHelper
         $rows = [];
 
         foreach ($ERperDay as $item) {
-
-            if (!is_array($item)) {
-                continue;
-            }
-
             foreach ($item as $date => $metrics) {
 
                 $rows[] = [
-                    'day' => Carbon::createFromFormat('Y-m-d', $date)->format('d.m'),
+                    'day' => Carbon::parse($date)->format('d.m'),
 
                     'viewRate' => round($metrics['viewRate'] ?? 0, 2),
                     'reactionRate' => round($metrics['reactionRate'] ?? 0, 2),
