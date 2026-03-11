@@ -6,7 +6,7 @@
 <style>
 
 body {
-    font-family: 'DejaVu Sans', sans-serif;
+    font-family: dejavusans, sans-serif;
     font-size: 12px;
     color: #1f2937;
     line-height: 1.5;
@@ -35,6 +35,7 @@ body {
 }
 
 .report-subsection-title {
+    font-family: dejavusans, sans-serif;
     font-size: 14px;
     font-weight: 600;
     color: #1e3a8a;
