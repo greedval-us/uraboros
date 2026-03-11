@@ -3,7 +3,6 @@
 namespace App\Modules\Report\Sections;
 
 use App\Modules\Report\Contracts\PdfSectionContract;
-use App\Modules\Bot\DTO\Top10MetricsDTO;
 use App\Modules\Report\DTO\UserLeadersContextDTO;
 use App\Modules\Report\Helper\ChartHelper;
 
