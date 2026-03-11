@@ -12,6 +12,17 @@ body {
     line-height: 1.5;
 }
 
+.description-box pre {
+    font-family: dejavusans, monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.report-section-title,
+.report-subsection-title {
+    font-family: dejavusans, sans-serif;
+}
+
 .page-break {
     page-break-before: always;
 }
