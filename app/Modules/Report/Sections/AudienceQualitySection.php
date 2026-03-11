@@ -57,9 +57,7 @@ class AudienceQualitySection implements PdfSectionContract
         $writerToShareRows = AudienceQualityTableHelper::buildPercent(
             $this->context->analytic->writerToSharePeriod ?? []
         );
-        Log::info($this->context->analytic->writerToSharePeriod);
-        Log::info( $writerToMembersRows);
-        Log::info($writerToShareRows);
+
         $timeBurstChart = ChartHelper::line(
             $timeBurstRows,
             ['value'],
