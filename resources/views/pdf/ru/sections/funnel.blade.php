@@ -24,10 +24,10 @@
         Общие данные за период с {{ $periodStart ?? '****' }} по {{ $periodEnd ?? '****' }}:
     </p>
 
-    @if(!empty($funnelChart))
+    @if(!empty($funnelByDay))
         <div class="report-chart">
             <div class="report-chart-title">Воронка вовлечённости</div>
-            <img src="{{ $funnelChart }}" style="width:100%; margin-top:10px;">
+            <img src="{{ $funnelByDay }}" style="width:100%; margin-top:10px;">
         </div>
     @endif
 
