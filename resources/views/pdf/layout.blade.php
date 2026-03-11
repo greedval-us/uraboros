@@ -6,7 +6,7 @@
 <style>
 
 body {
-    font-family: 'DejaVu Sans', sans-serif;
+    font-family: sans-serif; /* стандартный шрифт, кириллица поддерживается DomPDF */
     font-size: 12px;
     color: #1f2937;
     line-height: 1.5;
@@ -91,11 +91,10 @@ body {
     background-color: #f9fafb;
 }
 
-.description-box pre {
-    font-family: 'DejaVu Sans', 'Courier New', monospace;
+.description-box {
     white-space: pre-wrap;
     word-wrap: break-word;
-    margin: 0;
+    margin-top: 10px;
 }
 
 .report-section-footer {
@@ -114,9 +113,7 @@ body {
 {{-- ===== RENDER REPORT SECTIONS ===== --}}
 
 @foreach($sections as $section)
-
     @include($section->view(), $section->data())
-
 @endforeach
 
 </body>
