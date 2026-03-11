@@ -3,13 +3,14 @@
 namespace App\Modules\Report\Sections;
 
 use App\Modules\Report\Contracts\PdfSectionContract;
+use App\Modules\Report\DTO\FullReportContextDTO;
 use App\Modules\Report\DTO\UserLeadersContextDTO;
 use App\Modules\Report\Helper\ChartHelper;
 
 class UserLeadersSection implements PdfSectionContract
 {
     public function __construct(
-        protected UserLeadersContextDTO $userLeaders,
+        protected UserLeadersContextDTO|FullReportContextDTO $userLeaders,
         protected string $lang = 'ru'
     ) {}
 

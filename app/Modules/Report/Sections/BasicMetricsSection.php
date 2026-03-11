@@ -4,13 +4,14 @@ namespace App\Modules\Report\Sections;
 
 use App\Modules\Report\Contracts\PdfSectionContract;
 use App\Modules\Report\DTO\BasicMetricsContextDTO;
+use App\Modules\Report\DTO\FullReportContextDTO;
 use App\Modules\Report\Helper\ChartHelper;
 use App\Modules\Report\Helper\PeriodTableHelper;
 
 class BasicMetricsSection implements PdfSectionContract
 {
     public function __construct(
-        protected BasicMetricsContextDTO $context
+        protected BasicMetricsContextDTO|FullReportContextDTO $context
     ) {}
 
     public function view(): string

@@ -3,6 +3,7 @@
 namespace App\Modules\Report\Sections;
 
 use App\Modules\Report\Contracts\PdfSectionContract;
+use App\Modules\Report\DTO\FullReportContextDTO;
 use App\Modules\Report\DTO\FunnelContextDTO;
 use App\Modules\Report\Helper\ChartHelper;
 use App\Modules\Report\Helper\FunnelTableHelper;
@@ -10,7 +11,7 @@ use App\Modules\Report\Helper\FunnelTableHelper;
 class FunnelSection implements PdfSectionContract
 {
     public function __construct(
-        protected FunnelContextDTO $context
+        protected FunnelContextDTO|FullReportContextDTO $context
     ) {}
 
     public function view(): string

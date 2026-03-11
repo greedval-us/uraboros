@@ -4,13 +4,14 @@ namespace App\Modules\Report\Sections;
 
 use App\Modules\Report\Contracts\PdfSectionContract;
 use App\Modules\Report\DTO\AudienceQualityContextDTO;
+use App\Modules\Report\DTO\FullReportContextDTO;
 use App\Modules\Report\Helper\AudienceQualityTableHelper;
 use App\Modules\Report\Helper\ChartHelper;
 
 class AudienceQualitySection implements PdfSectionContract
 {
     public function __construct(
-        protected AudienceQualityContextDTO $context
+        protected AudienceQualityContextDTO|FullReportContextDTO $context
     ) {}
 
     public function view(): string
