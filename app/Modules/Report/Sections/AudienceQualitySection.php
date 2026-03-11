@@ -22,11 +22,9 @@ class AudienceQualitySection implements PdfSectionContract
     {
         $analytic = $this->context->analytic;
 
-        // Доли пишущих в процентах
         $writerToMembersAll = ($analytic->writerToMembersAll ?? 0) * 100;
         $writerToShareAll = ($analytic->writerToShareAll ?? 0) * 100;
 
-        // Круговые графики
         $writerToMembersAllChart = ChartHelper::pie(
             [
                 ['label' => 'Пишущие', 'value' => $writerToMembersAll],
@@ -49,7 +47,6 @@ class AudienceQualitySection implements PdfSectionContract
             'Доля пишущих среди активных'
         );
 
-        // Линейные данные
         $timeBurstRows = AudienceQualityTableHelper::build(
             $analytic->timeBurstIndexPeriod ?? []
         );
@@ -62,7 +59,6 @@ class AudienceQualitySection implements PdfSectionContract
             $analytic->writerToSharePeriod ?? []
         );
 
-        // Линейные графики
         $timeBurstChart = ChartHelper::line(
             $timeBurstRows,
             ['value'],
@@ -88,25 +84,13 @@ class AudienceQualitySection implements PdfSectionContract
         );
 
 
-        // Возвращаем все данные для Blade
         return [
-            // Круговые графики
             'writerToMembersAllChart' => $writerToMembersAllChart,
             'writerToShareAllChart' => $writerToShareAllChart,
 
-            // Линейные графики
             'timeBurstIndexChart' => $timeBurstChart,
             'writerToMembersChart' => $writerToMembersChart,
             'writerShareChart' => $writerToShareChart,
-
-            // Таблицы
-            'timeBurstIndexByDay' => $timeBurstChart,
-            'writerToMembersByDay' => $writerToMembersChart,
-            'writerShareByDay' => $writerToShareChart,
-
-            // Итоговые показатели
-            'writerToMembers' => round($writerToMembersAll, 4),
-            'writerShare' => round($writerToShareAll, 4),
         ];
     }
 }

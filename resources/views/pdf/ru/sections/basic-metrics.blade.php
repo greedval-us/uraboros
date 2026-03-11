@@ -101,78 +101,84 @@
 
     {{-- Таблица 1.1 Активные пользователи --}}
     @if(!empty($activityByDay))
-        <div class="chart-block-title">Таблица №1.1 «Активность по пользователям»</div>
-        <table class="leaders-table">
-            <thead>
-                <tr>
-                    <th>День</th>
-                    <th>Публикация или реакция</th>
-                    <th>Публикация</th>
-                    <th>Реакция</th>
-                    <th>Публикация и реакция</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($activityByDay as $row)
+        <div class="section page-break">
+            <div class="chart-block-title">Таблица №1.1 «Активность по пользователям»</div>
+            <table class="leaders-table">
+                <thead>
                     <tr>
-                        <td>{{ $row['day'] ?? '?' }}</td>
-                        <td>{{ $row['total'] ?? 0 }}</td>
-                        <td>{{ $row['posts'] ?? 0 }}</td>
-                        <td>{{ $row['reactions'] ?? 0 }}</td>
-                        <td>{{ $row['both'] ?? 0 }}</td>
+                        <th>День</th>
+                        <th>Публикация или реакция</th>
+                        <th>Публикация</th>
+                        <th>Реакция</th>
+                        <th>Публикация и реакция</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($activityByDay as $row)
+                        <tr>
+                            <td>{{ $row['day'] ?? '?' }}</td>
+                            <td>{{ $row['total'] ?? 0 }}</td>
+                            <td>{{ $row['posts'] ?? 0 }}</td>
+                            <td>{{ $row['reactions'] ?? 0 }}</td>
+                            <td>{{ $row['both'] ?? 0 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     @endif
 
     {{-- Таблица 1.2 Частота публикаций --}}
     @if(!empty($postsByDay))
-        <div class="chart-block-title">Таблица №1.2 «Частота публикаций»</div>
-        <table class="leaders-table">
-            <thead>
-                <tr>
-                    <th>День</th>
-                    <th>Общее</th>
-                    <th>Администратор</th>
-                    <th>Пользователи</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($postsByDay as $row)
+        <div class="section page-break">
+            <div class="chart-block-title">Таблица №1.2 «Частота публикаций»</div>
+            <table class="leaders-table">
+                <thead>
                     <tr>
-                        <td>{{ $row['day'] ?? '?' }}</td>
-                        <td>{{ $row['total'] ?? 0 }}</td>
-                        <td>{{ $row['admin'] ?? 0 }}</td>
-                        <td>{{ $row['users'] ?? 0 }}</td>
+                        <th>День</th>
+                        <th>Общее</th>
+                        <th>Администратор</th>
+                        <th>Пользователи</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($postsByDay as $row)
+                        <tr>
+                            <td>{{ $row['day'] ?? '?' }}</td>
+                            <td>{{ $row['total'] ?? 0 }}</td>
+                            <td>{{ $row['admin'] ?? 0 }}</td>
+                            <td>{{ $row['users'] ?? 0 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     @endif
 
     {{-- Таблица 1.3 Средняя вовлеченность --}}
     @if(!empty($engagementByDay))
-        <div class="chart-block-title">Таблица №1.3 «Средняя вовлеченность»</div>
-        <table class="leaders-table">
-            <thead>
-                <tr>
-                    <th>День</th>
-                    <th>Среднее вовлеченность</th>
-                    <th>Среднее публикаций/пост</th>
-                    <th>Среднее реакций/пост</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($engagementByDay as $row)
+        <div class="section page-break">
+            <div class="chart-block-title">Таблица №1.3 «Средняя вовлеченность»</div>
+            <table class="leaders-table">
+                <thead>
                     <tr>
-                        <td>{{ $row['day'] ?? '?' }}</td>
-                        <td>{{ $row['engagement'] ?? 0 }}</td>
-                        <td>{{ $row['postsPerPost'] ?? 0 }}</td>
-                        <td>{{ $row['reactionsPerPost'] ?? 0 }}</td>
+                        <th>День</th>
+                        <th>Среднее вовлеченность</th>
+                        <th>Среднее публикаций/пост</th>
+                        <th>Среднее реакций/пост</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($engagementByDay as $row)
+                        <tr>
+                            <td>{{ $row['day'] ?? '?' }}</td>
+                            <td>{{ $row['engagement'] ?? 0 }}</td>
+                            <td>{{ $row['postsPerPost'] ?? 0 }}</td>
+                            <td>{{ $row['reactionsPerPost'] ?? 0 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     @endif
 </div>
