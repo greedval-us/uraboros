@@ -56,21 +56,13 @@ class AudienceQualitySection implements PdfSectionContract
             $analytic->timeBurstIndexPerDay ?? []
         );
 
-        $writerToMembersRows = AudienceQualityTableHelper::buildPercent(
+        $writerToMembersRows = AudienceQualityTableHelper::build(
             $analytic->writerToMembersPeriod ?? []
         );
 
-        $writerToShareRows = AudienceQualityTableHelper::buildPercent(
+        $writerToShareRows = AudienceQualityTableHelper::build(
             $analytic->writerToSharePeriod ?? []
         );
-
-        Log::info($analytic->timeBurstIndexPerDay);
-        Log::info($analytic->writerToMembersPeriod);
-        Log::info($analytic->writerToSharePeriod);
-
-        Log::info($timeBurstRows);
-        Log::info($writerToMembersRows);
-        Log::info($writerToShareRows);
 
         $timeBurstChart = ChartHelper::line(
             $timeBurstRows,
