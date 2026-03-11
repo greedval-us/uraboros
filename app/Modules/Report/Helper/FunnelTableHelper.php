@@ -22,10 +22,10 @@ class FunnelTableHelper
 
             $rows[] = [
                 'day' => Carbon::parse($date)->format('d.m'),
-                'viewRate' => round($metrics['viewRate'] ?? 0, 6),
-                'reactionRate' => round($metrics['reactionRate'] ?? 0, 6),
-                'commentRate' => round($metrics['commentRate'] ?? 0, 6),
-                'erView' => round($metrics['ERview'] ?? 0, 6),
+                'viewRate' => round($metrics['viewRate'] ?? 0, 6) * 100,
+                'reactionRate' => round($metrics['reactionRate'] ?? 0, 6) * 100,
+                'commentRate' => round($metrics['commentRate'] ?? 0, 6) * 100,
+                'erView' => round($metrics['ERview'] ?? 0, 6) * 100,
             ];
         }
 

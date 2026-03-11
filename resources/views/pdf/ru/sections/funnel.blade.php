@@ -26,16 +26,16 @@
 
     @if(!empty($funnelByDay))
         <div class="report-chart">
-            <div class="report-chart-title">Воронка вовлечённости</div>
+            <div class="report-chart-title">Воронка вовлечённости в %</div>
             <img src="{{ $funnelByDay }}" style="width:100%; margin-top:10px;">
         </div>
     @endif
 
     <ul>
-        <li>общее количество просмотра публикаций (ViewRate) – <strong>{{ $avgViewRate ?? 0 }}</strong></li>
-        <li>среднее количество реакций на публикации (ReactionRate) – <strong>{{ $avgReactionRate ?? 0 }}</strong></li>
-        <li>среднее количество участий в обсуждении (CommentRate) – <strong>{{ $avgCommentRate ?? 0 }}</strong></li>
-        <li>общий охват просмотров (ERview) – <strong>{{ $avgERview ?? 0 }}</strong></li>
+        <li>общее количество просмотра публикаций (ViewRate) – <strong>{{ $avgViewRate ?? 0 }}%</strong></li>
+        <li>среднее количество реакций на публикации (ReactionRate) – <strong>{{ $avgReactionRate ?? 0 }}%</strong></li>
+        <li>среднее количество участий в обсуждении (CommentRate) – <strong>{{ $avgCommentRate ?? 0 }}%</strong></li>
+        <li>общий охват просмотров (ERview) – <strong>{{ $avgERview ?? 0 }}%</strong></li>
     </ul>
 
 </div>
