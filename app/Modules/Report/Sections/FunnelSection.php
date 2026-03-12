@@ -55,7 +55,7 @@ class FunnelSection implements PdfSectionContract
 
 
     $viewRateChart = ChartHelper::line(
-        $a->viewRatePeriod ?? [],
+        $viewRatePeriod,
             ['value'],
             ['Просмотры'],
             ['#3b82f6'],
@@ -63,7 +63,7 @@ class FunnelSection implements PdfSectionContract
     );
 
     $reactionRateChart = ChartHelper::line(
-        $a->reactionRatePeriod ?? [],
+        $reactionRatePeriod,
             ['value'],
             ['Реакции'],
             ['#3b82f6'],
@@ -71,7 +71,7 @@ class FunnelSection implements PdfSectionContract
     );
 
     $commentRateChart = ChartHelper::line(
-        $a->commentRatePeriod ?? [],
+        $commentRatePeriod,
             ['value'],
             ['Коментарии'],
             ['#3b82f6'],
@@ -79,7 +79,7 @@ class FunnelSection implements PdfSectionContract
     );
 
     $erViewChart = ChartHelper::line(
-        $a->ERviewPeriod ?? [],
+        $ERviewPeriod,
             ['value'],
             ['Пользователи'],
             ['#3b82f6'],
