@@ -92,7 +92,7 @@ class BasicMetricsSection implements PdfSectionContract
             $participantChanged,
             ['value'],
             [
-                'Период',
+                'Участники',
             ],
             ['#3b82f6'],
             'Изменения аудитории'
