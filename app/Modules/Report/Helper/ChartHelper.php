@@ -2,7 +2,6 @@
 
 namespace App\Modules\Report\Helper;
 
-
 class ChartHelper
 {
     public static function line(
@@ -12,17 +11,23 @@ class ChartHelper
         array $colors,
         string $title
     ): string {
+
+        // уменьшаем количество точек если их слишком много
+        $data = self::downsample($data, 40);
+
         $datasets = [];
 
         foreach ($fields as $i => $field) {
             $datasets[] = [
                 'label' => $labels[$i] ?? $field,
                 'data' => array_map(
-                    fn(array $row): int => (int) ($row[$field] ?? 0),
+                    fn(array $row): float =>
+                        round((float)($row[$field] ?? 0) * 100, 2),
                     $data
                 ),
                 'borderColor' => $colors[$i] ?? '#999999',
                 'fill' => false,
+                'tension' => 0.3
             ];
         }
 
@@ -36,8 +41,18 @@ class ChartHelper
                 'datasets' => $datasets,
             ],
             'options' => [
+                'elements' => [
+                    'point' => [
+                        'radius' => 2
+                    ]
+                ],
                 'scales' => [
-                    'y' => ['beginAtZero' => true]
+                    'y' => [
+                        'beginAtZero' => true,
+                        'ticks' => [
+                            'callback' => "function(value){return value + '%'}"
+                        ]
+                    ]
                 ],
                 'plugins' => [
                     'legend' => ['display' => true],
@@ -52,15 +67,6 @@ class ChartHelper
         return self::quickChartUrl($config);
     }
 
-    /**
-     * @param array<int, array{
-     *     day: string|int,
-     *     [key: string]: int|string|null
-     * }> $data
-     * @param array<int, string> $fields
-     * @param array<int, string> $labels
-     * @param array<int, string> $colors
-     */
     public static function bar(
         array $data,
         array $fields,
@@ -68,13 +74,15 @@ class ChartHelper
         array $colors,
         string $title
     ): string {
+
         $datasets = [];
 
         foreach ($fields as $i => $field) {
             $datasets[] = [
                 'label' => $labels[$i] ?? $field,
                 'data' => array_map(
-                    fn(array $row): int => (int) ($row[$field] ?? 0),
+                    fn(array $row): float =>
+                        round((float)($row[$field] ?? 0), 2),
                     $data
                 ),
                 'backgroundColor' => $colors[$i] ?? '#999999',
@@ -114,10 +122,14 @@ class ChartHelper
         array $colors,
         string $title
     ): string {
-        // Берем только одно поле value для pie
+
         $field = $fields[0] ?? 'value';
 
-        $values = array_map(fn($row) => (int)($row[$field] ?? 0), $data);
+        $values = array_map(
+            fn($row) => (float)($row[$field] ?? 0),
+            $data
+        );
+
         $segmentLabels = array_column($data, 'label');
         $backgroundColors = array_slice($colors, 0, count($values));
 
@@ -145,11 +157,31 @@ class ChartHelper
     }
 
     /**
-     * @param array<string, mixed> $chartConfig
+     * Уменьшает количество точек на графике
+     */
+    private static function downsample(array $data, int $maxPoints): array
+    {
+        $count = count($data);
+
+        if ($count <= $maxPoints) {
+            return $data;
+        }
+
+        $step = ceil($count / $maxPoints);
+
+        return array_values(array_filter(
+            $data,
+            fn($_, $i) => $i % $step === 0,
+            ARRAY_FILTER_USE_BOTH
+        ));
+    }
+
+    /**
+     * Генерация графика через QuickChart
      */
     private static function quickChartUrl(array $chartConfig): string
     {
-        $url = 'https://quickchart.io/chart?width=800&height=400&c='
+        $url = 'https://quickchart.io/chart?width=900&height=420&c='
             . urlencode(json_encode($chartConfig));
 
         $image = @file_get_contents($url);
