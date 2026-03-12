@@ -20,56 +20,92 @@ class FunnelSection implements PdfSectionContract
     }
 
     public function data(): array
-    {
-        $a = $this->context->funnelDTO;
+{
+    $a = $this->context->funnelDTO;
 
-        $periodStart = $this->context->from;
-        $periodEnd   = $this->context->to;
+    $periodStart = $this->context->from;
+    $periodEnd   = $this->context->to;
 
-        $funnelByDay = FunnelTableHelper::build(
-            $a->ERperDay ?? []
-        );
+    $funnelByDay = FunnelTableHelper::build(
+        $a->ERperDay ?? []
+    );
 
-        $reactionRateChart = 2;
+    $viewRatePeriod = FunnelTableHelper::buildRate($a->viewRatePeriod ?? []);
+    $reactionRatePeriod = FunnelTableHelper::buildRate($a->reactionRatePeriod ?? []);
+    $commentRatePeriod = FunnelTableHelper::buildRate($a->commentRatePeriod ?? []);
+    $ERviewPeriod = FunnelTableHelper::buildRate($a->ERviewPeriod ?? []);
 
-        $commentRateChart = 2;
+    $funnelChart = ChartHelper::bar(
+        $funnelByDay,
+        ['viewRate','reactionRate','commentRate','erView'],
+        [
+            'Просмотр публикации',
+            'Реакция на публикацию',
+            'Участие в обсуждении',
+            'Охват просмотров'
+        ],
+        [
+            '#3b82f6',
+            '#10b981',
+            '#f59e0b',
+            '#ef4444'
+        ],
+        'Воронка вовлеченности'
+    );
 
-        $erViewChart = 2;
 
+    $viewRateChart = ChartHelper::line(
+        $a->viewRatePeriod ?? [],
+            ['value'],
+            ['Просмотры'],
+            ['#3b82f6'],
+            'Просмотр публикаций'
+    );
 
-        $funnelChart = ChartHelper::bar(
-            $funnelByDay,
-            ['viewRate','reactionRate','commentRate','erView'],
-            [
-                'Просмотр публикации',
-                'Реакция на публикацию',
-                'Участие в обсуждении',
-                'Охват просмотров'
-            ],
-            [
-                '#3b82f6',
-                '#10b981',
-                '#f59e0b',
-                '#ef4444'
-            ],
-            'Воронка вовлеченности'
-        );
+    $reactionRateChart = ChartHelper::line(
+        $a->reactionRatePeriod ?? [],
+            ['value'],
+            ['Реакции'],
+            ['#3b82f6'],
+            'Доля реакций '
+    );
 
-        return [
-            'periodStart' => $periodStart,
-            'periodEnd' => $periodEnd,
+    $commentRateChart = ChartHelper::line(
+        $a->commentRatePeriod ?? [],
+            ['value'],
+            ['Коментарии'],
+            ['#3b82f6'],
+            'Доля комментариев'
+    );
 
-            'avgViewRate' => round($a->allViewRate ?? 0, 4) * 100,
-            'avgReactionRate' => round($a->allReactionRate ?? 0, 4) * 100,
-            'avgCommentRate' => round($a->allCommentRate ?? 0, 4) * 100,
-            'avgERview' => round($a->allERview ?? 0, 4) * 100,
+    $erViewChart = ChartHelper::line(
+        $a->ERviewPeriod ?? [],
+            ['value'],
+            ['Пользователи'],
+            ['#3b82f6'],
+            'Вовлеченность от просмотров'
+    );
 
-            'funnelByDay' => $funnelChart,
+    return [
+        'periodStart' => $periodStart,
+        'periodEnd' => $periodEnd,
 
-            'viewRateChart' => $funnelChart,
-            'reactionRateChart' => $funnelChart,
-            'commentRateChart' => $funnelChart,
-            'erViewChart' => $funnelChart,
-        ];
-    }
+        'avgViewRate' => round($a->allViewRate ?? 0, 4) * 100,
+        'avgReactionRate' => round($a->allReactionRate ?? 0, 4) * 100,
+        'avgCommentRate' => round($a->allCommentRate ?? 0, 4) * 100,
+        'avgERview' => round($a->allERview ?? 0, 4) * 100,
+
+        'funnelChart' => $funnelChart,
+
+        'viewRatePeriod' => $viewRatePeriod,
+        'reactionRatePeriod' => $reactionRatePeriod,
+        'commentRatePeriod' => $commentRatePeriod,
+        'ERviewPeriod' => $ERviewPeriod,
+
+        'viewRateChart' => $viewRateChart,
+        'reactionRateChart' => $reactionRateChart,
+        'commentRateChart' => $commentRateChart,
+        'erViewChart' => $erViewChart,
+    ];
+}
 }

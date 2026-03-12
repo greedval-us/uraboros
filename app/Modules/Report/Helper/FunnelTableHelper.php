@@ -31,4 +31,23 @@ class FunnelTableHelper
 
         return $rows;
     }
+
+    public static function buildRate(array $rate): array
+    {
+        $rows = [];
+
+        foreach ($rate as $date => $metrics) {
+
+            if (empty($metrics)) {
+                continue;
+            }
+
+            $rows[] = [
+                'day' => $date,
+                'value' => round($metrics, 6),
+            ];
+        }
+
+        return $rows;
+    }
 }
