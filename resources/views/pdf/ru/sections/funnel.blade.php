@@ -184,7 +184,110 @@
             <li>стабильные значения могут свидетельствовать о сформированной аудитории;</li>
             <li>значительные отклонения могут быть связаны с резонансным контентом или внешним распространением публикаций.</li>
         </ul>
+    </div>
 
+    <div class="report-section page-break">
+        @if(!empty($funnelByDay))
+            <div class="">Таблица 2. Воронка вовлечённости</div>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>День</th>
+                        <th>Просмотр публикации</th>
+                        <th>Реакция на публикацию</th>
+                        <th>Участие в обсуждении</th>
+                        <th>Охват просмотров</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($funnelByDay as $row)
+                        <tr>
+                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['viewRate'] ?? 0 }}</td>
+                            <td>{{ $row['reactionRate'] ?? 0 }}</td>
+                            <td>{{ $row['commentRate'] ?? 0 }}</td>
+                            <td>{{ $row['erView'] ?? 0 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+        @if(!empty($viewRatePeriod))
+            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>ID поста</th>
+                        <th>Просмотр публикации</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($viewRatePeriod as $row)
+                        <tr>
+                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['value'] ?? 0 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+        @if(!empty($reactionRatePeriod))
+            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>ID поста</th>
+                        <th>Просмотр публикации</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($reactionRatePeriod as $row)
+                        <tr>
+                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['value'] ?? 0 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+        @if(!empty($commentRatePeriod))
+            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>ID поста</th>
+                        <th>Просмотр публикации</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($commentRatePeriod as $row)
+                        <tr>
+                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['value'] ?? 0 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+        @if(!empty($ERviewPeriod))
+            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>ID поста</th>
+                        <th>Просмотр публикации</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($ERviewPeriod as $row)
+                        <tr>
+                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['value'] ?? 0 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 </div>
 
