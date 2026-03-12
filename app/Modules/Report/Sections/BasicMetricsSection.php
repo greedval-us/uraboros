@@ -49,6 +49,8 @@ class BasicMetricsSection implements PdfSectionContract
             $a->reactionsPerPostPeriod
         );
 
+        $participantChanged = PeriodTableHelper::buildParticipantChanged($a->participantChanged);
+
         $activityChart = ChartHelper::line(
             $activityByDay,
             ['total','posts','reactions','both'],
@@ -86,6 +88,16 @@ class BasicMetricsSection implements PdfSectionContract
             'Средняя вовлеченность по дням'
         );
 
+        $participantChangedChart = ChartHelper::line(
+            $participantChanged,
+            ['value'],
+            [
+                'Период',
+            ],
+            ['#3b82f6'],
+            'Изменения аудитории'
+        );
+
         return [
             'periodStart' => $periodStart,
             'periodEnd' => $periodEnd,
@@ -100,6 +112,7 @@ class BasicMetricsSection implements PdfSectionContract
             'totalPosts' => $a->allPublications,
             'adminPosts' => $a->publicationsFromAdmin,
             'userPosts' => $a->publicationsFromUser,
+            'participantChanged' => $participantChanged,
 
             'postsByDay' => $postsByDay,
 
@@ -112,6 +125,7 @@ class BasicMetricsSection implements PdfSectionContract
             'activityChart' => $activityChart,
             'postsChart' => $postsChart,
             'engagementChart' => $engagementChart,
+            'participantChangedChart' => $participantChangedChart,
         ];
     }
 }

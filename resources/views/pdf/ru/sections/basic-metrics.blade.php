@@ -85,6 +85,19 @@
             <br>Реакций/пост: <strong>{{ $avgReactionsPerPost ?? 0 }}</strong>
         </p>
     </div>
+
+    <div class="report-section page-break">
+        <div class="report-subsection-title">1.4 Изменения аудитории</div>
+
+        @if(!empty($participantChangedChart))
+            <div class="report-chart">
+                <div class="report-chart-title">Изменения аудитории</div>
+                <img src="{{ $participantChangedChart }}" style="width:100%; margin-top:10px;">
+            </div>
+        @endif
+
+
+    </div>
 </div>
 
 <div class="report-section page-break">

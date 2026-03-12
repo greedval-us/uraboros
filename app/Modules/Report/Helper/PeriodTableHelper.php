@@ -27,6 +27,21 @@ class PeriodTableHelper
         return $rows;
     }
 
+    public static function buildParticipantChanged(array $data): array
+    {
+        $rows = [];
+
+        foreach ($data as $datetime => $value) {
+
+            $rows[] = [
+                'day' => Carbon::parse($datetime)->format('d.m.Y H:i:s'),
+                'value' => $value,
+            ];
+        }
+
+        return $rows;
+    }
+
     public static function buildEngagement(
         array $engagement,
         array $commentsPerPost,

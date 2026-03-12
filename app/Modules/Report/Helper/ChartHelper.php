@@ -30,7 +30,7 @@ class ChartHelper
             'type' => 'line',
             'data' => [
                 'labels' => array_map(
-                    fn(array $row): string => 'День ' . ($row['day'] ?? '?'),
+                    fn(array $row): string => ($row['day'] ?? '?'),
                     $data
                 ),
                 'datasets' => $datasets,
@@ -85,7 +85,7 @@ class ChartHelper
             'type' => 'bar',
             'data' => [
                 'labels' => array_map(
-                    fn(array $row): string => 'День ' . ($row['day'] ?? '?'),
+                    fn(array $row): string => ($row['day'] ?? '?'),
                     $data
                 ),
                 'datasets' => $datasets,
