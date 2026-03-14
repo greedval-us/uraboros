@@ -20,6 +20,6 @@ class ReportFunnelAnalyticsAction
     {
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        ExportFunnelJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
+        ExportFunnelJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param)->onQueue('report-analytics');
     }
 }

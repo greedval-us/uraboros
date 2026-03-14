@@ -20,6 +20,6 @@ class ReportRetentionAnalyticsAction
     {
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        ExportRetentionJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
+        ExportRetentionJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param)->onQueue('report-analytics');
     }
 }

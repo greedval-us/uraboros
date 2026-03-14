@@ -18,6 +18,6 @@ class ReportUserLeadersAction
     {
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        ExportUserLeadersJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
+        ExportUserLeadersJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param)->onQueue('report-analytics');
     }
 }
