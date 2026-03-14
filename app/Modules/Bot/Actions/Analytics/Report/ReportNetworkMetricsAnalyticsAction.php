@@ -20,6 +20,6 @@ class ReportNetworkMetricsAnalyticsAction
     {
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        ExportNetworkMetricsJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param)->onQueue('report-analytics');
+        ExportNetworkMetricsJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
     }
 }

@@ -18,6 +18,6 @@ class ReportFullReporAnalyticsAction
     {
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        ExportFullReportJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param)->onQueue('report-analytics');
+        ExportFullReportJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
     }
 }

@@ -23,6 +23,6 @@ class RunUserAnalyticsAction
 
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        UserJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text)->onQueue('run-analytics');
+        UserJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text);
     }
 }

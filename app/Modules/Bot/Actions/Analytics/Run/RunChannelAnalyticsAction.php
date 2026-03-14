@@ -23,6 +23,6 @@ class RunChannelAnalyticsAction
 
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        ChannelJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text)->onQueue('run-analytics');
+        ChannelJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $text);
     }
 }
