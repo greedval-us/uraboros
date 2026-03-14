@@ -20,7 +20,9 @@ class UserJob implements ShouldQueue
     public string $chatID;
     public string $messageID;
     public string $text;
-
+    public $tries = 1;
+    public $timeout = 120;
+    public $failOnTimeout = true;
     public function __construct(string $lang, TelegraphChat $chat, string $chatID, string $messageID, string $text)
     {
         $this->lang = $lang;

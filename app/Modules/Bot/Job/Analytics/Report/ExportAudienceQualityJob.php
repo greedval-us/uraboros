@@ -26,7 +26,9 @@ class ExportAudienceQualityJob implements ShouldQueue
     public string $messageID;
     public string $query;
     public string $param;
-
+    public $tries = 1;
+    public $timeout = 120;
+    public $failOnTimeout = true;
     public function __construct(string $lang, TelegraphChat $chat, string $chatID, string $messageID, string $query, int $param)
     {
         $this->lang = $lang;

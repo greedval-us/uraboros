@@ -2,11 +2,9 @@
 
 namespace App\Modules\Bot\Job\Analytics\Report;
 
-use App\Modules\Bot\DTO\AnalyticDTO;
 use App\Modules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\DTO\UserLeadersDTO;
 use App\Modules\Bot\Job\JobTrait;
-use App\Modules\Report\DTO\ReportContextDTO;
 use App\Modules\Report\DTO\UserLeadersContextDTO;
 use App\Modules\Report\Enums\ReportType;
 use Carbon\Carbon;
@@ -28,7 +26,9 @@ class ExportUserLeadersJob implements ShouldQueue
     public string $messageID;
     public string $query;
     public string $param;
-
+    public $tries = 1;
+    public $timeout = 120;
+    public $failOnTimeout = true;
     public function __construct(string $lang, TelegraphChat $chat, string $chatID, string $messageID, string $query, int $param)
     {
         $this->lang = $lang;
