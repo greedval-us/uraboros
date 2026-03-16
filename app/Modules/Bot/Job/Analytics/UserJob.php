@@ -34,9 +34,19 @@ class UserJob implements ShouldQueue
     public function handle(): void
     {
         $this->bootServices();
+        try {
+            $user = $this->apiServices->get("analytics/getUser/{$this->text}");
+        } catch (\Throwable $e) {
+            $this->botServices->delete($this->chat, $this->messageID);
+            $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
+            return;
+        }
 
-        $this->apiServices->get("getUser/{$this->text}");
+        if(empty($user) || $user == null) {
+            $this->botServices->sendText($this->chat, 'todo нет группы');
+            return;
+        }
 
-        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat);
+        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat, [], ['group' => $user]);
     }
 }
