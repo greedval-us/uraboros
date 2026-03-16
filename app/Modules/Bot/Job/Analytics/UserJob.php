@@ -47,6 +47,6 @@ class UserJob implements ShouldQueue
             return;
         }
 
-        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat, [], ['group' => $user]);
+        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat, [], ['user' => $this->text]);
     }
 }

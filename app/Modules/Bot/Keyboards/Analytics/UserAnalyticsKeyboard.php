@@ -20,12 +20,12 @@ class UserAnalyticsKeyboard implements KeyboardBuilderInterface
         return Keyboard::make()->buttons([
             Button::make($t('analytics.inline.week'))->action('report')
                 ->param('type', 'a_user')
-                ->param('query', $keyboard['group'])
+                ->param('query', $keyboard['user'])
                 ->param('param', 7),
 
             Button::make($t('analytics.inline.month'))->action('report')
                 ->param('type', 'a_user')
-                ->param('query', $keyboard['group'])
+                ->param('query', $keyboard['user'])
                 ->param('param', 30),
         ]);
     }
