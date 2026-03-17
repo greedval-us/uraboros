@@ -27,7 +27,7 @@ class BotActionService
             ->Keyboard($message['reply_keyboard'])
             ->send();
 
-        return $result->telegraphMessageId();
+        return $result->telegraphMessageId() ?? 0;
     }
 
     public function sendText(TelegraphChat $chat, string $text): int
