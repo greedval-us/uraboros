@@ -36,7 +36,6 @@ class ChannelJob implements ShouldQueue
     {
         $this->bootServices();
 
-
         try {
             $group = $this->apiServices->get("analytics/getGroup/{$this->text}");
         } catch (\Throwable $e) {
