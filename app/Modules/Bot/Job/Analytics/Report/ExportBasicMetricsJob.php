@@ -23,7 +23,6 @@ class ExportBasicMetricsJob implements ShouldQueue
     public $tries = 1;
     public $timeout = 120;
     public $failOnTimeout = true;
-
     public string $lang;
     public TelegraphChat $chat;
     public string $chatID;
