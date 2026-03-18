@@ -24,16 +24,14 @@ class AddChannelStepAction
     public function handle(TelegraphChat $chat, string $text, string $lang): void
     {
         $result = $this->dataBaseService->addChannelMonitoring($chat->chat_id, $text);
-        
+
         $message = $this->langService->get($lang, 'monitoring.channels.limit_false');
 
         if($result) {
             $message = $this->langService->get($lang, 'monitoring.channels.limit_true');
-        }    
+        }
 
-        $messageId = $this
-            ->botActionService
-            ->sendInline(CommandKey::ChannelsM->value, $lang, $chat, $this->dataService->getMessagesData($message));
+        $messageId = $this->botActionService->sendInline(CommandKey::ChannelsM->value, $lang, $chat, $this->dataService->getMessagesData($message));
 
         $this->storageService->set($chat, StorageKey::MESSAGE->value, $messageId);
     }
