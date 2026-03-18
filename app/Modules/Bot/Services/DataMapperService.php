@@ -43,13 +43,13 @@ class DataMapperService
     {
         return [
             'id_user' => $user->idUser,
-            'first_name' => $user->firstName ?? '—',
-            'last_name' => $user->lastName ?? '—',
+            'first_name' => $user->firstName ?? '',
+            'last_name' => $user->lastName ?? '',
             'username' => $user->username ?? '—',
             'about' => $user->about ?? '—',
             'birthday' => $user->birthday
                 ? Carbon::parse($user->birthday)->format('d.m.Y')
-                : '—',
+                : '',
         ];
     }
     public function getMessagesData(string $messages): array

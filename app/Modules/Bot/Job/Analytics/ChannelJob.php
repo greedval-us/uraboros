@@ -52,5 +52,6 @@ class ChannelJob implements ShouldQueue
         $infoGroup = $this->dataMapperService->getGroupTitleData(GroupDTO::fromApi($group));
 
         $this->botServices->sendInline(CommandKey::ChannelA->value, $this->lang, $this->chat, $infoGroup, ['group' => $this->text]);
+        $this->botServices->delete($this->chat, $this->messageID);
     }
 }

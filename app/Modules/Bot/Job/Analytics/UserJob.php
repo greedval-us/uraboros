@@ -51,5 +51,6 @@ class UserJob implements ShouldQueue
         $infoUser = $this->dataMapperService->getUserTitleData(UserDTO::fromApi($user));
 
         $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat, $infoUser, ['user' => $this->text]);
+        $this->botServices->delete($this->chat, $this->messageID);
     }
 }
