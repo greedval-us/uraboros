@@ -5,6 +5,7 @@ namespace App\Modules\Bot\Services;
 use App\Modules\Bot\DTO\GroupDTO;
 use App\Models\BotUser;
 use App\Models\ChennelMonitoring;
+use App\Modules\Bot\DTO\UserDTO;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -38,7 +39,19 @@ class DataMapperService
             'created' => $group->createdDate?->format('d.m.Y'),
         ];
     }
-
+    public function getUserTitleData(UserDTO $user): array
+    {
+        return [
+            'id_user' => $user->idUser,
+            'first_name' => $user->firstName ?? '—',
+            'last_name' => $user->lastName ?? '—',
+            'username' => $user->username ?? '—',
+            'about' => $user->about ?? '—',
+            'birthday' => $user->birthday
+                ? Carbon::parse($user->birthday)->format('d.m.Y')
+                : '—',
+        ];
+    }
     public function getMessagesData(string $messages): array
     {
         return [

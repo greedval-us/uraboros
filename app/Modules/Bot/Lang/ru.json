@@ -109,11 +109,10 @@
         "full_report_30": "📑 Полный отчет за месяц"
     },
     "user": {
-      "screen": ""
+      "screen": "👤 <b>Профиль пользователя</b>\n<code>————————————</code>\n\n🆔 <b>ID:</b> <code>:id_user</code>\n\n👤 <b>Имя:</b>\n<b>:first_name :last_name</b>\n\n🔗 <b>Username:</b> @:username\n\n📝 <b>О себе:</b>\n:about\n\n🎂 <b>Дата рождения:</b> <code>:birthday</code>\n"
     },
     "channel": {
       "screen": "👥 <b>Профиль группы</b>\n<code>————————————</code>\n\n<b>ID группы:</b> <code>:id</code>\n\n🏷 <b>Название:</b>\n<b>:title</b>\n\n👤 <b>Участников:</b> <code>:participants</code>\n\n📌 <b>Тип:</b> :type\n\n📅 <b>Создана:</b> <code>:created</code>\n"
-
     }
   },
   "account": {

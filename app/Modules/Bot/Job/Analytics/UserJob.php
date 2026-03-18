@@ -2,6 +2,7 @@
 
 namespace App\Modules\Bot\Job\Analytics;
 
+use App\Modules\Bot\DTO\UserDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Bot\Enums\CommandKey;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -47,6 +48,8 @@ class UserJob implements ShouldQueue
             return;
         }
 
-        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat, [], ['user' => $this->text]);
+        $infoUser = $this->dataMapperService->getUserTitleData(UserDTO::fromApi($user));
+
+        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat, $infoUser, ['user' => $this->text]);
     }
 }
