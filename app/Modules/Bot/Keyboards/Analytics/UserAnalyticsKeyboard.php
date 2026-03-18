@@ -18,15 +18,20 @@ class UserAnalyticsKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('analytics.inline.week'))->action('report')
+            Button::make($t('analytics.inline.user_7'))->action('report')
                 ->param('type', 'a_user')
                 ->param('query', $keyboard['user'])
                 ->param('param', 7),
 
-            Button::make($t('analytics.inline.month'))->action('report')
+            Button::make($t('analytics.inline.user_30'))->action('report')
                 ->param('type', 'a_user')
                 ->param('query', $keyboard['user'])
                 ->param('param', 30),
+
+            Button::make($t('analytics.inline.user_365'))->action('report')
+                ->param('type', 'a_user')
+                ->param('query', $keyboard['user'])
+                ->param('param', 365),
         ]);
     }
 }
