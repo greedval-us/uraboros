@@ -21,7 +21,7 @@ class ReportBasicMetricsAnalyticsAction
 
     public function handle(TelegraphChat $chat, string $query, int $param, string $lang): void
     {
-        $prise = $this->dataBaseService->canMakeAction($chat->telegram_id);
+        $prise = $this->dataBaseService->canMakeAction($chat->chat_id);
 
         if (!$prise) {
             $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.no_prise'));
