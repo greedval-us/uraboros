@@ -62,35 +62,35 @@ class DataBaseService
         $channel = ChennelMonitoring::where('id', $id)
             ->where('telegram_id', operator: $idTelegram)
             ->first();
-    
+
         if (!$channel) {
             return false;
         }
-    
+
         return (bool) $channel->delete();
     }
     public function addChannelMonitoring(int $id, string $chennel, int $limit = 5,): bool
     {
         $count = ChennelMonitoring::where('telegram_id', $id)->count();
-    
+
         if ($count >= $limit) {
             return false;
         }
-    
+
         $exists = ChennelMonitoring::where('telegram_id', $id)
             ->where('chennel', $chennel)
             ->exists();
-    
+
         if ($exists) {
             return false;
         }
-    
+
         ChennelMonitoring::create([
             'telegram_id' => $id,
             'chennel' => $chennel,
             'last_request' => now(),
         ]);
-    
+
         return true;
     }
 
@@ -102,6 +102,17 @@ class DataBaseService
 
         BotUser::applyReferralCode((string) $payload);
         return (string) $payload;
+    }
+
+    public function canMakeAction(int $telegramId, int $cost = 1): bool
+    {
+        $user = $this->getUser($telegramId);
+
+        if (!$user) {
+            return false;
+        }
+
+        return $user->tryConsumeRequest($cost);
     }
 
     private function updateExistingUser(BotUser $user, User $data): void

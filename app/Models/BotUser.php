@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class BotUser extends Model
@@ -103,13 +104,13 @@ class BotUser extends Model
         $nextActivation = $this->free_requests_reset_at
             ? $this->free_requests_reset_at->copy()->addDay()
             : null;
-    
+
         if (!$this->free_requests_reset_at || $now->greaterThanOrEqualTo($nextActivation)) {
             $this->requests += 5;
             $this->free_requests_reset_at = $now;
             $this->save();
         }
-    
+
         return $this;
     }
 
@@ -138,5 +139,31 @@ class BotUser extends Model
         $referrer->increment('referral_count');
 
         return true;
+    }
+
+    public function hasRequests(int $amount = 1): bool
+    {
+        if ($this->blocked) {
+            return false;
+        }
+
+        return $this->requests >= $amount;
+    }
+
+    public function consumeRequest(int $amount = 1): bool
+    {
+        if ($this->blocked) {
+            return false;
+        }
+
+        $updated = self::where('telegram_id', $this->id)
+            ->where('requests', '>=', $amount)
+            ->update([
+                'requests' => DB::raw("requests - $amount"),
+                'count_requests' => DB::raw("count_requests + $amount"),
+                'last_request_at' => now(),
+            ]);
+
+        return $updated > 0;
     }
 }
