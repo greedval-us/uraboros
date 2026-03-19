@@ -17,6 +17,6 @@ class ReportUserAnalyticsAction
 
     public function handle(TelegraphChat $chat, string $query, string $param, string $lang): void
     {
-
+        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'В разработке todo'));
     }
 }
