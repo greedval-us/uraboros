@@ -126,9 +126,9 @@
       "stats": "📈 Статистика"
     },
       "profile": {
-        "screen": "👤 <b>Профиль пользователя</b>\n<code>————————————</code>\n\n<b>ID:</b> :id\n💎 <b>Премиум:</b> :premium\n\n⏳ <b>Активен до:</b> :end\n\n📩 <b>Оставшиеся запросы:</b> <code>:requests</code>\n\n🎁 <b>Бесплатные запросы:</b> :free_requests\n<b>Доступны через:</b> <code>:time</code>",
+        "screen": "👤 <b>Профиль пользователя</b>\n<code>————————————</code>\n\n<b>ID:</b> :id\n⭐ <b>Премиум:</b> :premium\n\n⏳ <b>Активен до:</b> :end\n\n💎 <b>Оставшиеся кристалы:</b> <code>:requests</code>\n\n🎁 <b>Бесплатные кристалы:</b> :free_requests\n<b>Доступны через:</b> <code>:time</code>",
         "inline": {
-            "free": "🎁 Получить бесплатные запросы",
+            "free": "🎁 Получить бесплатные кристалы",
             "back": "⬅️ Назад"
             }
         },
