@@ -112,7 +112,7 @@ class DataBaseService
             return false;
         }
 
-        return $user->tryConsumeRequest($cost);
+        return $user->consumeRequest($cost);
     }
 
     private function updateExistingUser(BotUser $user, User $data): void
