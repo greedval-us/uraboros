@@ -156,7 +156,7 @@ class BotUser extends Model
             return false;
         }
 
-        $updated = self::where('telegram_id', $this->id)
+        $updated = self::where('id', $this->id)
             ->where('requests', '>=', $amount)
             ->update([
                 'requests' => DB::raw("requests - $amount"),
