@@ -31,6 +31,6 @@ class ReportBasicMetricsAnalyticsAction
 
         $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
-        //ExportBasicMetricsJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
+        ExportBasicMetricsJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
     }
 }
