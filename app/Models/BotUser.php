@@ -141,22 +141,14 @@ class BotUser extends Model
         return true;
     }
 
-    public function hasRequests(int $amount = 1): bool
-    {
-        if ($this->blocked) {
-            return false;
-        }
-
-        return $this->requests >= $amount;
-    }
-
     public function consumeRequest(int $amount = 1): bool
     {
-        if ($this->blocked) {
+        if (!$this->id || $this->blocked) {
             return false;
         }
 
-        $updated = self::where('id', $this->id)
+        $updated = self::query()
+            ->whereKey($this->id)
             ->where('requests', '>=', $amount)
             ->update([
                 'requests' => DB::raw("requests - $amount"),
