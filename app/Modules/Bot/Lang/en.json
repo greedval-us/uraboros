@@ -1,105 +1,161 @@
 {
   "main_menu": {
-    "title": "Main Menu",
+    "title": "📋 Main Menu",
     "buttons": {
       "monitoring": "📡 Monitoring",
       "search": "🔍 Search",
       "analytics": "📊 Analytics",
       "account": "👤 Account",
       "settings": "⚙️ Settings",
-      "help": "❓ Help"
+      "help": "❓ Help",
+      "back": "⬅️ Back"
     }
   },
   "monitoring": {
-    "screen": "What would you like to monitor?",
+    "screen": "📡 What do you want to monitor?",
     "inline": {
       "channels": "📢 Channels / 💬 Chats",
       "messages": "📝 Messages",
       "users": "👤 Users"
     },
     "channels": {
+      "screen": "📢 Select an action :message",
       "inline": {
-        "add_channel": "➕ Add Channel",
-        "my_channels": "📋 My Channels (N)",
-        "settings": "⚙️ Settings"
+        "add_channel": "➕ Add channel / chat",
+        "my_channels": "📋 My channels (N)",
+        "back": "⬅️ Back"
+      },
+      "add_channel": {
+        "screen": "✍️ Send the username of the channel or chat you want to add",
+        "success": "\n\n<i>✅ Channel / chat added successfully.\nGo to «My channels» to manage.</i>",
+        "limit_reached": "\n\n<i>❌ Limit reached. Remove a channel / chat to add a new one.</i>"
+      },
+      "my_channel": {
+        "screen": "📋 Select a channel / chat to work with :message",
+        "delete_success": "\n\n<i>✅ Channel / chat deleted successfully.</i>",
+        "delete_error": "\n\n<i>❌ Failed to delete channel / chat.</i>",
+        "back": "⬅️ Back"
       },
       "card": {
-        "title": "My Channel",
-        "name": "📢 @channel_name",
-        "status": "Status: 🟢 Active",
-        "messages": "Messages: 12,340",
-        "last_message": "Last: 5 min ago"
+        "screen": "📢 <b>:name</b>\n\n🕓 Last request:\n<code>:request</code>"
       },
       "card_inline": {
-        "notifications": "🔔 Notifications",
-        "stats": "📊 Statistics",
-        "filters": "✏️ Filters",
-        "delete": "❌ Delete"
+        "stats": "📊 Stats",
+        "delete": "❌ Delete",
+        "back": "⬅️ Back"
       }
     },
     "messages": {
       "inline": {
-        "new_filter": "➕ New Filter",
-        "my_filters": "📂 My Filters",
+        "new_filter": "➕ Create filter",
+        "my_filters": "📂 My filters",
         "history": "📄 History"
       },
       "filter": {
-        "keywords": "Keywords: crypto, ton",
-        "source": "Source: 12 channels",
-        "trigger": "Trigger: new message"
+        "keywords": "🔑 Keywords: crypto, ton",
+        "source": "📢 Sources: 12 channels",
+        "trigger": "⚡ Trigger: new message"
       },
       "filter_inline": {
         "edit": "✏️ Edit",
-        "toggle": "🔕 On/Off",
+        "toggle": "🔕 On / Off",
         "delete": "🗑 Delete"
       }
     },
     "users": {
       "inline": {
-        "add_user": "➕ Add User",
-        "list": "📋 List",
+        "add_user": "➕ Add user",
+        "list": "📋 User list",
         "activity": "📊 Activity"
       }
     }
   },
   "search": {
-    "screen": "Database Search",
+    "screen": "🔍 Search the database",
     "inline": {
-      "messages": "🔎 By Messages",
-      "users": "👤 By Users",
-      "channels": "📢 By Channels"
+      "messages": "📝 By messages",
+      "users": "👤 By users",
+      "channels": "📢 By channels / 💬 chats"
+    },
+    "user": {
+      "screen": "✍️ Send user ID or username",
+      "louding": "Please wait"
+    },
+    "message": {
+      "screen": "✍️ Send group ID or username\nuse ':' to specify keyword",
+      "louding": "Please wait"
+    },
+    "channel": {
+      "screen": "✍️ Send group ID or username",
+      "louding": "Please wait"
+    }
+  },
+  "analytics": {
+    "screen": "📊 Select type of analysis",
+    "screen_info": "✍️ Send ID or username",
+    "no_prise": "Not enough crystals to perform the request. Get free crystals or subscribe to premium for automatic daily refill.",
+    "louding": "Please wait",
+    "inline": {
+      "user": "👤 User",
+      "channel": "📢 Channels / 💬 Chats",
+      "user_7": "📑 Report 1d (1💎)",
+      "user_30": "📑 Report 30d (1💎)",
+      "user_365": "📑 Report 365d (2💎)",
+      "basic_metrics_7": "📈 Metrics 1d (1💎)",
+      "basic_metrics_30": "📈 Metrics 30d (1💎)",
+      "funnel_7": "🛠️ Funnel 1d (1💎)",
+      "funnel_30": "🛠️ Funnel 30d (1💎)",
+      "audience_quality_7": "🎯 Audience 1d (1💎)",
+      "audience_quality_30": "🎯 Audience 30d (1💎)",
+      "leaders_7": "👑 Leaders 1d (1💎)",
+      "leaders_30": "👑 Leaders 30d (1💎)",
+      "full_report_7": "📑 Full report 1d (3💎)",
+      "full_report_30": "📑 Full report 30d (3💎)"
+    },
+    "user": {
+      "screen": "👤 <b>User profile</b>\n<code>————————————</code>\n\n🆔 <b>ID:</b> <code>:id_user</code>\n\n👤 <b>Name:</b>\n<b>:first_name :last_name</b>\n\n🔗 <b>Username:</b> @:username\n\n📝 <b>About:</b>\n:about\n\n🎂 <b>Birthday:</b> <code>:birthday</code>\n"
+    },
+    "channel": {
+      "screen": "👥 <b>Group profile</b>\n<code>————————————</code>\n\n<b>Group ID:</b> <code>:id</code>\n\n🏷 <b>Title:</b>\n<b>:title</b>\n\n👤 <b>Participants:</b> <code>:participants</code>\n\n📌 <b>Type:</b> :type\n\n📅 <b>Created:</b> <code>:created</code>\n"
     }
   },
   "account": {
-    "screen": "👤 Profile",
+    "screen": "👤 Account",
     "inline": {
       "profile": "👤 Profile",
       "plans": "💳 Plans",
-      "stats": "📈 Statistics"
-    }
-  },
-  "profile": {
-    "screen": "👤 <b>User Profile</b>\n<code>————————————</code>\n\n<b>User ID:</b> :id\n💎 <b>Premium status:</b> :premium\n\n⏳ <b>Active until:</b> :end\n\n📩 <b>Remaining requests:</b> <code>:requests</code>\n",
-    "inline": {
-      "free": "🎁 Бессплатные запросы",
-      "back": "⬅️ Back"
+      "stats": "📈 Stats"
+    },
+    "profile": {
+      "screen": "👤 <b>User profile</b>\n<code>————————————</code>\n\n<b>ID:</b> :id\n⭐ <b>Premium:</b> :premium\n\n⏳ <b>Active until:</b> :end\n\n💎 <b>Remaining crystals:</b> <code>:requests</code>\n\n🎁 <b>Free crystals:</b> :free_requests\n<b>Available in:</b> <code>:time</code>",
+      "inline": {
+        "free": "🎁 Get free crystals",
+        "back": "⬅️ Back"
+      }
+    },
+    "plans": {
+      "screen": "You can subscribe to premium to unlock all bot features or buy requests for information searches.",
+      "inline": {
+        "back": "⬅️ Back"
+      }
     }
   },
   "settings": {
-    "screen": "Settings",
+    "screen": "⚙️ Settings",
     "inline": {
-      "language": "🌐 Language",
-      "notifications": "🔔 Notifications"
+      "language": "🌐 Language"
     },
     "language": {
-      "screen": "Make language",
+      "screen": "🌐 Select language",
       "ru": "🇷🇺 Russian",
-      "en": "🇺🇸 English"
+      "en": "🇺🇸 English",
+      "back": "⬅️ Back"
     }
   },
   "help": {
+    "screen": "❓ Help",
     "inline": {
-      "how_it_works": "📘 How the Bot Works",
+      "how_it_works": "📘 How the bot works",
       "examples": "📌 Examples",
       "faq": "❓ FAQ",
       "support": "📩 Support",
