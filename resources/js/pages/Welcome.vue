@@ -1,6 +1,18 @@
 <script setup lang="ts">
-import { dashboard, login, register } from '@/routes';
+import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { dashboard } from '@/routes';
 import { Head, Link } from '@inertiajs/vue3';
+import { computed, reactive, ref } from 'vue';
 
 withDefaults(
     defineProps<{
@@ -10,76 +22,153 @@ withDefaults(
         canRegister: true,
     },
 );
+
+const state = reactive({
+    groupUsername: '',
+    keywords: '',
+});
+
+const normalizedGroupUsername = computed(() =>
+    state.groupUsername.trim().replace(/^@+/, ''),
+);
+
+const keywordsList = computed(() =>
+    state.keywords
+        .split(/[\s,]+/g)
+        .map((word) => word.trim())
+        .filter(Boolean),
+);
+
+const canSubmit = computed(() => normalizedGroupUsername.value.length > 0);
+
+const lastRequest = ref<string | null>(null);
+
+function onSubmit() {
+    lastRequest.value = JSON.stringify(
+        {
+            source: 'telegram',
+            groupUsername: normalizedGroupUsername.value,
+            keywords: keywordsList.value,
+        },
+        null,
+        2,
+    );
+}
 </script>
 
 <template>
-    <Head title="Project Analytics">
+    <Head title="Telegram поиск">
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     </Head>
 
-    <div class="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
-        <!-- Навигация -->
-        <header class="mb-6 w-full max-w-[335px] text-sm lg:max-w-4xl">
-            <nav class="flex items-center justify-end gap-4">
+    <div class="min-h-screen bg-background text-foreground">
+        <header class="border-b">
+            <nav
+                class="mx-auto flex h-14 max-w-4xl items-center justify-end gap-2 px-4"
+            >
                 <Link
                     v-if="$page.props.auth.user"
                     :href="dashboard()"
-                    class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                    class="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:hover:bg-input/50"
                 >
                     Dashboard
                 </Link>
                 <template v-else>
-                    <Link
-                        :href="login()"
-                        class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
+                    <Button
+                        variant="ghost"
+                        disabled
+                        title="Скоро"
+                        aria-disabled="true"
                     >
                         Log in
-                    </Link>
-                    <Link
+                    </Button>
+                    <Button
                         v-if="canRegister"
-                        :href="register()"
-                        class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                        variant="outline"
+                        disabled
+                        title="Скоро"
+                        aria-disabled="true"
                     >
                         Register
-                    </Link>
+                    </Button>
                 </template>
             </nav>
         </header>
 
-        <!-- Основной контент аналитики -->
-        <div class="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-            <main class="flex w-full max-w-[335px] flex-col overflow-hidden rounded-lg lg:max-w-4xl lg:flex-row">
+        <main class="mx-auto w-full max-w-4xl px-4 py-6">
+            <div class="mb-4">
+                <h1 class="text-2xl font-semibold tracking-tight">
+                    Добро пожаловать
+                </h1>
+                <p class="mt-1 text-sm text-muted-foreground">
+                    Поиск по Telegram: username группы + слова (опционально).
+                </p>
+            </div>
 
-                <!-- Панель аналитики -->
-                <div class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 shadow-md lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC]">
-                    <h1 class="mb-4 text-xl font-bold">Project Analytics Dashboard</h1>
-                    <p class="mb-6 text-[#706f6c] dark:text-[#A1A09A]">
-                        Monitor your project's key metrics and insights in real-time.
-                    </p>
+            <Card>
+                <CardHeader class="pb-4">
+                    <CardTitle>Поиск</CardTitle>
+                    <CardDescription>
+                        Источник: Telegram. Username можно вводить с
+                        <span class="font-medium">@</span>.
+                    </CardDescription>
+                </CardHeader>
 
-                    <!-- Пример статистики -->
-                    <ul class="space-y-4">
-                        <li class="flex justify-between border-b border-[#e3e3e0] pb-2 dark:border-[#3E3E3A]">
-                            <span>Active Users</span>
-                            <span class="font-medium">1,245</span>
-                        </li>
-                        <li class="flex justify-between border-b border-[#e3e3e0] pb-2 dark:border-[#3E3E3A]">
-                            <span>Page Views</span>
-                            <span class="font-medium">12,389</span>
-                        </li>
-                        <li class="flex justify-between border-b border-[#e3e3e0] pb-2 dark:border-[#3E3E3A]">
-                            <span>New Signups</span>
-                            <span class="font-medium">312</span>
-                        </li>
-                    </ul>
+                <CardContent>
+                    <form class="space-y-4" @submit.prevent="onSubmit">
+                        <div class="grid gap-4 md:grid-cols-2">
+                            <div class="space-y-2">
+                                <Label for="groupUsername"
+                                    >Username группы</Label
+                                >
+                                <Input
+                                    id="groupUsername"
+                                    v-model="state.groupUsername"
+                                    autocomplete="off"
+                                    placeholder="@my_group или my_group"
+                                />
+                            </div>
 
-                    <!-- Место для графика/чартов -->
-                    <div class="mt-8 h-48 w-full bg-[#f5f5f5] dark:bg-[#252524] rounded-lg flex items-center justify-center">
-                        <span class="text-[#706f6c] dark:text-[#A1A09A]">[Chart Placeholder]</span>
-                    </div>
-                </div>
-            </main>
-        </div>
+                            <div class="space-y-2">
+                                <Label for="keywords">Поиск по словам</Label>
+                                <Input
+                                    id="keywords"
+                                    v-model="state.keywords"
+                                    autocomplete="off"
+                                    placeholder="доставка, скидка…"
+                                />
+                                <p class="text-xs text-muted-foreground">
+                                    Слова через пробел или запятую.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
+                        >
+                            <div class="text-sm text-muted-foreground">
+                                Группа:
+                                <span class="font-medium">@</span
+                                >{{ normalizedGroupUsername || '—' }}
+                            </div>
+                            <Button type="submit" :disabled="!canSubmit">
+                                Искать
+                            </Button>
+                        </div>
+                    </form>
+                </CardContent>
+
+                <CardFooter
+                    v-if="lastRequest"
+                    class="flex flex-col items-start gap-2"
+                >
+                    <div class="text-sm font-medium">Запрос (черновик)</div>
+                    <pre
+                        class="w-full overflow-auto rounded-md border border-input bg-background p-3 text-xs text-muted-foreground"
+                    ><code>{{ lastRequest }}</code></pre>
+                </CardFooter>
+            </Card>
+        </main>
     </div>
 </template>
