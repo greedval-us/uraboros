@@ -46,6 +46,7 @@ class ChannelJob implements ShouldQueue
 
         if(empty($group) || $group == null) {
             $this->botServices->sendText($this->chat, 'todo нет группы');
+            $this->botServices->delete($this->chat, $this->messageID);
             return;
         }
 

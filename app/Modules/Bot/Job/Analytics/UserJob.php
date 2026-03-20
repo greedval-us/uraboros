@@ -44,7 +44,8 @@ class UserJob implements ShouldQueue
         }
 
         if(empty($user) || $user == null) {
-            $this->botServices->sendText($this->chat, 'todo нет группы');
+            $this->botServices->sendText($this->chat, 'todo нет пользователя с таким id');
+            $this->botServices->delete($this->chat, $this->messageID);
             return;
         }
 
