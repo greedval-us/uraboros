@@ -39,6 +39,20 @@ const keywordsList = computed(() =>
         .filter(Boolean),
 );
 
+const keyword = computed({
+    get() {
+        return state.keywords;
+    },
+    set(value: string) {
+        state.keywords =
+            value
+                .trim()
+                .split(/[\s,]+/g)
+                .map((word) => word.trim())
+                .filter(Boolean)[0] ?? '';
+    },
+});
+
 const canSubmit = computed(() => normalizedGroupUsername.value.length > 0);
 
 const lastRequest = ref<string | null>(null);
@@ -48,7 +62,7 @@ function onSubmit() {
         {
             source: 'telegram',
             groupUsername: normalizedGroupUsername.value,
-            keywords: keywordsList.value,
+            keyword: keywordsList.value[0] ?? null,
         },
         null,
         2,
@@ -134,12 +148,12 @@ function onSubmit() {
                                 <Label for="keywords">Поиск по словам</Label>
                                 <Input
                                     id="keywords"
-                                    v-model="state.keywords"
+                                    v-model="keyword"
                                     autocomplete="off"
                                     placeholder="доставка, скидка…"
                                 />
                                 <p class="text-xs text-muted-foreground">
-                                    Слова через пробел или запятую.
+                                    Только одно слово.
                                 </p>
                             </div>
                         </div>
