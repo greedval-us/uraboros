@@ -23,6 +23,8 @@ use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Enums\CommandKey;
 use App\Modules\Bot\Routes\AnalyticsRouter;
 use App\Modules\Bot\Routes\PlansRouter;
+use App\Modules\Bot\Services\BotLogService;
+use App\Modules\Bot\Services\BotLogMetaFactory;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,6 +36,8 @@ class Handler extends WebhookHandler
         private readonly BotActionService $botActionService,
         private readonly DataBaseService $dataBaseService,
         private readonly StorageService $storageService,
+        private readonly BotLogService $botLogService,
+        private readonly BotLogMetaFactory $botLogMetaFactory,
         private readonly MonitoringRouter $monitoringRouter,
         private readonly ChannelsMonitoringRouter $channelsMonitoringRouter,
         private readonly SearchRouter $searchRouter,
@@ -52,6 +56,14 @@ class Handler extends WebhookHandler
 
     public function start(string $payload = '')
     {
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('start', ['payload' => $payload], $meta);
         $this->dataBaseService->createUser($this->message->from(), $payload);
         $this->storageService->setMany($this->chat, [
             StorageKey::LANG->value => Lang::RU->value,
@@ -71,6 +83,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('monitoring', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->monitoringRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -81,6 +101,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('channels_monitoring', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->channelsMonitoringRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -91,6 +119,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('my_channels', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->myChannelsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -101,6 +137,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('card_channel', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->cardChannelRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -111,6 +155,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('search', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->searchRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -121,6 +173,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('analytics', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->analyticsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -131,6 +191,14 @@ class Handler extends WebhookHandler
         $query = $this->callbackQuery->data()->get('query');
         $param = $this->callbackQuery->data()->get('param');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('report', ['callback' => $callback, 'lang' => $lang, 'query' => $query, 'param' => $param], $meta);
         $this->reportRouter->handle(chat: $this->chat, callback: $callback,param: $param, query: $query,  lang: $lang);
     }
 
@@ -141,6 +209,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('account', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->accountRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -151,6 +227,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('profile', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->profileRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -161,6 +245,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('plans', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->plansRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -171,6 +263,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('settings', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->settingsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -181,6 +281,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('language', ['callback' => $callback, 'current_lang' => $lang], $meta);
         $this->languageRouter->handle(chat: $this->chat, callback: $callback, currentLang: $lang);
     }
 
@@ -191,6 +299,14 @@ class Handler extends WebhookHandler
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
         $callback = $this->callbackQuery->data()->get('type');
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('help', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->helpRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
@@ -200,6 +316,18 @@ class Handler extends WebhookHandler
 
         $text = (string) $text;
         $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('chat_message', [
+            'lang' => $lang,
+            'text' => mb_substr($text, 0, 500),
+        ], $meta);
 
         $this->botActionService->delete($this->chat, $this->messageId);
         $this->clearMessage();
@@ -220,6 +348,15 @@ class Handler extends WebhookHandler
             throw $throwable;
         }
 
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->error($throwable, [], $meta);
+
         if ($throwable instanceof HttpExceptionInterface) {
             Log::warning('Bot HTTP exception', [
                 'status' => $throwable->getStatusCode(),
@@ -235,4 +372,5 @@ class Handler extends WebhookHandler
             __('bot.errors.generic')
         );
     }
+
 }
