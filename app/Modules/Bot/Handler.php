@@ -14,6 +14,7 @@ use App\Modules\Bot\Routes\ProfileRouter;
 use App\Modules\Bot\Routes\ReportRouter;
 use App\Modules\Bot\Routes\SearchRouter;
 use App\Modules\Bot\Routes\SettingsRouter;
+use App\Modules\Bot\Routes\StatsRouter;
 use App\Modules\Bot\Services\BotActionService;
 use App\Modules\Bot\Services\DataBaseService;
 use App\Modules\Bot\Services\StorageService;
@@ -51,6 +52,7 @@ class Handler extends WebhookHandler
         private readonly CardChannelRouter $cardChannelRouter,
         private readonly AnalyticsRouter $analyticsRouter,
         private readonly PlansRouter $plansRouter,
+        private readonly StatsRouter $statsRouter,
         private readonly ReportRouter $reportRouter,
     ) {}
 
@@ -254,6 +256,24 @@ class Handler extends WebhookHandler
 
         $this->botLogService->action('plans', ['callback' => $callback, 'lang' => $lang], $meta);
         $this->plansRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
+    }
+
+    public function stats()
+    {
+        response()->noContent()->send();
+        $this->clearMessage();
+        $lang = $this->storageService->get($this->chat, StorageKey::LANG->value);
+        $callback = $this->callbackQuery->data()->get('type');
+
+        $meta = $this->botLogMetaFactory->make(
+            $this->message ?? null,
+            $this->chat ?? null,
+            $this->messageId ?? null,
+            $this->callbackQuery ?? null,
+        );
+
+        $this->botLogService->action('stats', ['callback' => $callback, 'lang' => $lang], $meta);
+        $this->statsRouter->handle(chat: $this->chat, callback: $callback, lang: $lang);
     }
 
     public function settings()

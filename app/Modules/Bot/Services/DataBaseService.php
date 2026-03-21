@@ -52,6 +52,12 @@ class DataBaseService
     {
         return ChennelMonitoring::where('telegram_id', $id)->get();
     }
+
+    public function countMyChannels(int $id): int
+    {
+        return ChennelMonitoring::where('telegram_id', $id)->count();
+    }
+
     public function getMyChannel(int $id): ChennelMonitoring
     {
         return ChennelMonitoring::where('id', $id)->first();

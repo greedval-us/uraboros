@@ -3,6 +3,7 @@
 use App\Modules\Bot\Enums\KeyboardKey;
 use App\Modules\Bot\Keyboards\Account\PlansKeyboard;
 use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
+use App\Modules\Bot\Keyboards\Account\StatsKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
 use App\Modules\Bot\Keyboards\Analytics\ChannelAnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\Analytics\UserAnalyticsKeyboard;
@@ -34,6 +35,7 @@ return [
         KeyboardKey::UserA->value => UserAnalyticsKeyboard::class,
         KeyboardKey::ChannelA->value => ChannelAnalyticsKeyboard::class,
         KeyboardKey::Plans->value => PlansKeyboard::class,
+        KeyboardKey::Stats->value => StatsKeyboard::class,
     ],
 
     'messages' => [
@@ -88,8 +90,8 @@ return [
             'reply_keyboard' => KeyboardKey::Plans->value,
         ],
         'stats' => [
-            'text' => 'account.screen',
-            'reply_keyboard' => KeyboardKey::Account->value,
+            'text' => "<b>Stats</b>\n\nTotal spent: <code>:total_requests</code>\nAvailable now: <code>:available_requests</code>\nMonitoring channels: <code>:channels_count</code>\nReferrals: <code>:referrals_count</code>\nLast request: <code>:last_request_at</code>",
+            'reply_keyboard' => KeyboardKey::Stats->value,
         ],
         'settings' => [
             'text' => 'settings.screen',
