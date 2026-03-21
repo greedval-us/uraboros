@@ -138,8 +138,14 @@
         "inline": {
             "back": "⬅️ Назад"
             }
-        }
-    },
+        },
+    "stats": {
+      "screen": "<b>Статистика</b>\n\nВсего потрачено запросов: <code>:total_requests</code>\nДоступно сейчас: <code>:available_requests</code>\nКаналов в мониторинге: <code>:channels_count</code>\nРефералов: <code>:referrals_count</code>\nПоследний запрос: <code>:last_request_at</code>",
+      "inline": {
+        "back": "⬅️ Назад"
+      }
+    }
+  },
   "settings": {
     "screen": "⚙️ Настройки",
     "inline": {

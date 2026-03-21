@@ -90,7 +90,7 @@ return [
             'reply_keyboard' => KeyboardKey::Plans->value,
         ],
         'stats' => [
-            'text' => "<b>Stats</b>\n\nTotal spent: <code>:total_requests</code>\nAvailable now: <code>:available_requests</code>\nMonitoring channels: <code>:channels_count</code>\nReferrals: <code>:referrals_count</code>\nLast request: <code>:last_request_at</code>",
+            'text' => 'account.stats.screen',
             'reply_keyboard' => KeyboardKey::Stats->value,
         ],
         'settings' => [

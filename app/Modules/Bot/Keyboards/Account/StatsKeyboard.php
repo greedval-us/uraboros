@@ -18,7 +18,7 @@ class StatsKeyboard implements KeyboardBuilderInterface
         $t = fn (string $key) => $this->langService->get($lang, $key);
 
         return Keyboard::make()->buttons([
-            Button::make($t('main_menu.buttons.back'))->action('stats')->param('type', 'back'),
+            Button::make($t('account.stats.inline.back'))->action('stats')->param('type', 'back'),
         ]);
     }
 }
