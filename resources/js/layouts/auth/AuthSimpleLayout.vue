@@ -11,20 +11,24 @@ defineProps<{
 
 <template>
     <div
-        class="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10"
+        class="welkome-shell flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10"
     >
+        <div class="welkome-orb welkome-orb-one"></div>
+        <div class="welkome-orb welkome-orb-two"></div>
+
         <div class="w-full max-w-sm">
-            <div class="flex flex-col gap-8">
+            <div class="glass-panel rounded-3xl p-6 sm:p-8">
+                <div class="flex flex-col gap-8">
                 <div class="flex flex-col items-center gap-4">
                     <Link
                         :href="home()"
                         class="flex flex-col items-center gap-2 font-medium"
                     >
                         <div
-                            class="mb-1 flex h-9 w-9 items-center justify-center rounded-md"
+                            class="mb-1 flex h-9 w-9 items-center justify-center rounded-md border border-cyan-200/35 bg-cyan-400/20"
                         >
                             <AppLogoIcon
-                                class="size-9 fill-current text-[var(--foreground)] dark:text-white"
+                                class="size-9 fill-current text-cyan-100"
                             />
                         </div>
                         <span class="sr-only">{{ title }}</span>
@@ -37,6 +41,7 @@ defineProps<{
                     </div>
                 </div>
                 <slot />
+                </div>
             </div>
         </div>
     </div>
