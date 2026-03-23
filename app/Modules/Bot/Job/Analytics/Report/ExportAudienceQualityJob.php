@@ -46,8 +46,8 @@ class ExportAudienceQualityJob implements ShouldQueue
         try {
             $days = (int) $this->param;
 
-            $to = Carbon::now('UTC');
-            $from = Carbon::now('UTC')->subDays($days);
+            $to = Carbon::yesterday('UTC')->endOfDay();
+            $from = $to->copy()->subDays($days);
 
             $group = $this->apiServices->get('analytics/getGroup/' . $this->query);
             $analytic = $this->apiServices->get('analytics/getAudienceQuality', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
