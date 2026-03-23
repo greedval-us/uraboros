@@ -11,12 +11,11 @@ class UserLeadersSection implements PdfSectionContract
 {
     public function __construct(
         protected UserLeadersContextDTO|FullReportContextDTO $userLeaders,
-        protected string $lang = 'ru'
     ) {}
 
     public function view(): string
     {
-        return "pdf.{$this->lang}.sections.user-leaders";
+        return "pdf.{$this->userLeaders->lang}.sections.user-leaders";
     }
 
     public function data(): array

@@ -20,7 +20,7 @@ class AudienceQualityTableHelper
 
             $rows[] = [
                 'day' => Carbon::parse($day)->format('d.m'),
-                'value' => round(($value  ?? 0), 6) * 100,
+                'value' => round(($value  ?? 0), 6),
             ];
         }
 

@@ -14,6 +14,7 @@ use App\Modules\Report\Sections\IntroSection;
 use App\Modules\Report\Sections\NetworkMetricsSection;
 use App\Modules\Report\Sections\RetentionSection;
 use App\Modules\Report\Sections\UserLeadersSection;
+use App\Modules\Report\Sections\UserSection;
 
 class ReportSectionsResolver
 {
@@ -76,6 +77,12 @@ class ReportSectionsResolver
                 new FunnelSection($context),
                 new AudienceQualitySection($context),
                 new UserLeadersSection ($context),
+                new FooterSection($context),
+            ],
+
+            ReportType::USERREPORT => [
+                new HeaderSection($context),
+                new UserSection($context),
                 new FooterSection($context),
             ],
 

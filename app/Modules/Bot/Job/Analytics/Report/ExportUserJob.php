@@ -2,10 +2,11 @@
 
 namespace App\Modules\Bot\Job\Analytics\Report;
 
-use App\Modules\Bot\DTO\AnalyticDTO;
-use App\Modules\Bot\DTO\GroupDTO;
+use App\Modules\Bot\DTO\ChangedUserDTO;
+use App\Modules\Bot\DTO\UserAnalyticsDTO;
+use App\Modules\Bot\DTO\UserDTO;
 use App\Modules\Bot\Job\JobTrait;
-use App\Modules\Report\DTO\ReportContextDTO;
+use App\Modules\Report\DTO\UserContextDTO;
 use App\Modules\Report\Enums\ReportType;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -14,7 +15,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ExportUserJob implements ShouldQueue
@@ -52,7 +52,7 @@ class ExportUserJob implements ShouldQueue
 
             $user = $this->apiServices->get("analytics/getUser/{$this->query}");
             $analytic = $this->apiServices->get('analytics/getBaseAnalyticUser', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_user' => $this->query]);
-            $changedUser = $this->apiServices->get('analytics/getUserChanged', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_user' => $this->query]);
+            $changed = $this->apiServices->get('analytics/getUserChanged', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_user' => $this->query]);
 
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
@@ -66,15 +66,27 @@ class ExportUserJob implements ShouldQueue
             return;
         }
 
-        Log::info($analytic);
-        Log::info($changedUser);
-        /*$pdf = $this->pdfReportServices->generate($context, ReportType::RETENTION);
+        $user = UserDTO::fromApi($user);
+        $analyticUser = UserAnalyticsDTO::fromApi($analytic);
+        $changedUser = ChangedUserDTO::fromApiList($changed);
 
-        $filePath = "reports/{$this->chatID}/group_{$groupDto->idGroup}_{$to}.pdf";
+        $context = new UserContextDTO(
+            $user,
+            $analyticUser,
+            $changedUser,
+            lang: $this->lang,
+            days: $days,
+            to: $to,
+            from: $from,
+        );
+
+        $pdf = $this->pdfReportServices->generate($context, ReportType::USERREPORT);
+
+        $filePath = "reports/{$this->chatID}/user{$user->idUser}_{$to}.pdf";
 
         Storage::disk('private')->put($filePath, $pdf->output());
 
         $this->botServices->delete($this->chat, $this->messageID);
-        $this->botServices->sendFile($this->chat, $filePath);*/
+        $this->botServices->sendFile($this->chat, $filePath);
     }
 }

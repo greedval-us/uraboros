@@ -26,8 +26,8 @@ public function data(): array
     $periodStart = $this->context->from;
     $periodEnd   = $this->context->to;
 
-    $writerToMembersAll = ($analytic->writerToMembersAll ?? 0) * 100;
-    $writerToShareAll   = ($analytic->writerToShareAll ?? 0) * 100;
+    $writerToMembersAll = ($analytic->writerToMembersAll ?? 0);
+    $writerToShareAll   = ($analytic->writerToShareAll ?? 0);
 
     $writerToMembersAllChart = ChartHelper::pie(
         [
