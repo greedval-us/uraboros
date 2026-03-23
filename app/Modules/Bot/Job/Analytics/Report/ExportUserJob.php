@@ -51,8 +51,8 @@ class ExportUserJob implements ShouldQueue
             $from = Carbon::now('UTC')->subDays($days);
 
             $user = $this->apiServices->get("analytics/getUser/{$this->query}");
-            $analytic = $this->apiServices->get('analytics/getBaseAnalyticUser', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
-            $changedUser = $this->apiServices->get('analytics/getUserChanged', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
+            $analytic = $this->apiServices->get('analytics/getBaseAnalyticUser', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_user' => $this->query]);
+            $changedUser = $this->apiServices->get('analytics/getUserChanged', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_user' => $this->query]);
 
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
