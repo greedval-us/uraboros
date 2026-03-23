@@ -4,6 +4,7 @@ namespace App\Modules\Report\Sections;
 
 use App\Modules\Report\Contracts\PdfSectionContract;
 use App\Modules\Report\DTO\UserContextDTO;
+use App\Modules\Report\Helper\UserTableHelper;
 
 class UserSection implements PdfSectionContract
 {
@@ -18,6 +19,16 @@ class UserSection implements PdfSectionContract
 
     public function data(): array
     {
+
+        $a = $this->context;
+
+        $periodStart = $this->context->from;
+        $periodEnd   = $this->context->to;
+
+        $activityPeriod = UserTableHelper::buildActivityPeriod(
+            $a->userAnalytic->activityPeriod,
+        );
+
 
         return [
 

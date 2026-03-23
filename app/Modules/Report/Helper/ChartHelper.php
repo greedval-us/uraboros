@@ -22,7 +22,7 @@ class ChartHelper
                 'label' => $labels[$i] ?? $field,
                 'data' => array_map(
                     fn(array $row): float =>
-                        round((float)($row[$field] ?? 0) * 100, 2),
+                        round((float)($row[$field] ?? 0), 2),
                     $data
                 ),
                 'borderColor' => $colors[$i] ?? '#999999',
