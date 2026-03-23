@@ -35,24 +35,52 @@ class UserDTO
             birthday: $data['birthday'] ?? null,
             botInfo: $data['bot_info'] ?? null,
             firstName: $data['first_name'] ?? null,
-            flags: $data['flags'] ?? null,
-            flags2: $data['flags2'] ?? null,
-            flags2Full: $data['flags2_full'] ?? null,
-            flagsFull: $data['flags_full'] ?? null,
+
+            flags: self::normalizeArray($data['flags'] ?? null),
+            flags2: self::normalizeArray($data['flags2'] ?? null),
+            flags2Full: self::normalizeArray($data['flags2_full'] ?? null),
+            flagsFull: self::normalizeArray($data['flags_full'] ?? null),
+
             id: isset($data['id']) ? (int)$data['id'] : null,
             idUser: isset($data['id_user']) ? (int)$data['id_user'] : null,
             isBot: isset($data['is_bot']) ? (bool)$data['is_bot'] : null,
             isGeo: isset($data['is_geo']) ? (bool)$data['is_geo'] : null,
+
             lastName: $data['last_name'] ?? null,
             location: $data['location'] ?? null,
             locationAddress: $data['location_address'] ?? null,
             locationRadius: isset($data['location_radius']) ? (float)$data['location_radius'] : null,
+
             number: $data['number'] ?? null,
             personalChannelId: isset($data['personal_channel_id']) ? (int)$data['personal_channel_id'] : null,
-            pgTags: $data['pg_tags'] ?? null,
+
+            pgTags: self::normalizeArray($data['pg_tags'] ?? null),
+
             updatedAt: $data['updated_at'] ?? null,
             username: $data['username'] ?? null,
         );
+    }
+
+    private static function normalizeArray(mixed $value): ?array
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                return $decoded;
+            }
+
+            return [$value];
+        }
+        return null;
     }
 
     public function toArray(): array

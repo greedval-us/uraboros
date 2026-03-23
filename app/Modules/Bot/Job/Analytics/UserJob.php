@@ -11,7 +11,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 class UserJob implements ShouldQueue
 {
@@ -49,8 +48,6 @@ class UserJob implements ShouldQueue
             $this->botServices->delete($this->chat, $this->messageID);
             return;
         }
-
-        Log::info($user);
 
         $infoUser = $this->dataMapperService->getUserTitleData(UserDTO::fromApi($user));
 
