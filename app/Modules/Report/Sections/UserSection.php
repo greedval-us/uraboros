@@ -4,6 +4,7 @@ namespace App\Modules\Report\Sections;
 
 use App\Modules\Report\Contracts\PdfSectionContract;
 use App\Modules\Report\DTO\UserContextDTO;
+use App\Modules\Report\Helper\ChartHelper;
 use App\Modules\Report\Helper\UserTableHelper;
 
 class UserSection implements PdfSectionContract
@@ -29,9 +30,47 @@ class UserSection implements PdfSectionContract
             $a->userAnalytic->activityPeriod,
         );
 
+        $activityByGroups = UserTableHelper::buildActivityPeriod(
+            $a->userAnalytic->activityByGroups,
+        );
+
+        $activityPeriodChart = ChartHelper::line(
+            $activityPeriod,
+            ['allGifts','allMessages','allReactions'],
+            [
+                'Подарки',
+                'Публикация',
+                'Реакция',
+            ],
+            ['#ef4444','#3b82f6','#10b981'],
+            'Активность пользователя по дням'
+        );
+
+        $activityByGroupsChart = ChartHelper::bar(
+            $activityByGroups,
+            ['total','admin','users'],
+            [
+                'Подарки',
+                'Публикация',
+                'Реакция',
+            ],
+            ['#10b981','#ef4444','#3b82f6'],
+            'Активность пользователя по группам'
+        );
 
         return [
+            'periodStart' => $periodStart,
+            'periodEnd' => $periodEnd,
 
+            'activityPeriod' => $activityPeriod,
+            'activityByGroups' => $activityByGroups,
+
+            'activityPeriodChart' => $activityPeriodChart,
+            'activityByGroupsChart' => $activityByGroupsChart,
+
+            'allGifts' => $a->userAnalytic->allActivity['allGifts'] ?? 0,
+            'allMessages' => $a->userAnalytic->allActivity['allMessages'] ?? 0,
+            'allReactions' => $a->userAnalytic->allActivity['allReactions'] ?? 0,
         ];
     }
 }

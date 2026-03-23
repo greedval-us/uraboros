@@ -2,8 +2,6 @@
 
 namespace App\Modules\Bot\DTO;
 
-use Carbon\Carbon;
-
 class UserAnalyticsDTO
 {
     /** @var array<int, array> groupId => stats */
