@@ -52,7 +52,7 @@ class ExportFullReportJob implements ShouldQueue
             $to = Carbon::yesterday('UTC')->endOfDay();
             $from = $to->copy()->subDays($days);
 
-            $group = $this->apiServices->get('analytics/getGroup/' . $this->query);
+            $group = $this->apiServices->get('analytics/getGroup/', ['id_group' => $this->query]);
             $getBaseMetrics = $this->apiServices->get('analytics/getBaseMetrics', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
             $getAudienceQuality = $this->apiServices->get('analytics/getAudienceQuality', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
             $getEngagementFunnel = $this->apiServices->get('analytics/getEngagementFunnel', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);

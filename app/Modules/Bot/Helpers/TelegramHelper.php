@@ -21,11 +21,31 @@ class TelegramHelper
             'at_username' => '/^@(?<channelname>[a-zA-Z0-9_]{3,})$/',
 
             // просто username
-            'plain_username' => '/^(?<channelname>[a-zA-Z0-9_]{3,})$/',
+            'plain_username' => '/^(?=.*[a-zA-Z_])[a-zA-Z0-9_]{3,}$/',
 
             'user_id' => '/^\d+$/',
             'chat_id' => '/^-\d+$/',
         ];
+
+        // 6. numeric IDs (только если mode = 1)
+        if ($mode === 1) {
+
+            if (preg_match($patterns['user_id'], $input)) {
+                return [
+                    'channel' => '',
+                    'value' => $input,
+                    'type' => LinkType::UserId
+                ];
+            }
+
+            if (preg_match($patterns['chat_id'], $input)) {
+                return [
+                    'channel' => '',
+                    'value' => $input,
+                    'type' => LinkType::ChatId
+                ];
+            }
+        }
 
         // 1. joinchat hash
         if (preg_match($patterns['joinchat'], $input, $m)) {
@@ -70,26 +90,6 @@ class TelegramHelper
                 'value' => '',
                 'type' => LinkType::Channelname
             ];
-        }
-
-        // 6. numeric IDs (только если mode = 1)
-        if ($mode === 1) {
-
-            if (preg_match($patterns['user_id'], $input)) {
-                return [
-                    'channel' => '',
-                    'value' => $input,
-                    'type' => LinkType::UserId
-                ];
-            }
-
-            if (preg_match($patterns['chat_id'], $input)) {
-                return [
-                    'channel' => '',
-                    'value' => $input,
-                    'type' => LinkType::ChatId
-                ];
-            }
         }
 
         return [
