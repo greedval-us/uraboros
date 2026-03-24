@@ -5,6 +5,8 @@ namespace App\Modules\Bot\Job\Analytics;
 use App\Modules\Bot\DTO\UserDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Bot\Enums\CommandKey;
+use App\Modules\Bot\Enums\LinkType;
+use App\Modules\Bot\Helpers\TelegramHelper;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -35,11 +37,17 @@ class UserJob implements ShouldQueue
     public function handle(): void
     {
         $this->bootServices();
-        try {
-            $user = $this->apiServices->get("analytics/getUser/{$this->text}");
-        } catch (\Throwable $e) {
+
+        $info = TelegramHelper::extractInfo($this->text, 1);
+        $endpoint = 'analytics/getUser';
+
+        if (($info['type'] ?? null) === LinkType::Channelname && !empty($info['channel'])) {
+            $endpoint .= '?username=' . urlencode((string)$info['channel']);
+        } elseif (in_array(($info['type'] ?? null), [LinkType::UserId, LinkType::ChatId], true) && !empty($info['value'])) {
+            $endpoint .= '?id_user=' . urlencode((string)$info['value']);
+        } else {
             $this->botServices->delete($this->chat, $this->messageID);
-            $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
+            $this->botServices->sendText($this->chat, 'Неверная данные для получения информации о канале. Пожалуйста, убедитесь, что вы отправили правильную ссылку или идентификатор канала.');
             return;
         }
 
@@ -51,7 +59,7 @@ class UserJob implements ShouldQueue
 
         $infoUser = $this->dataMapperService->getUserTitleData(UserDTO::fromApi($user));
 
-        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat, $infoUser, ['user' => $this->text]);
+        $this->botServices->sendInline(CommandKey::UserA->value, $this->lang, $this->chat, $infoUser, ['user' => $infoUser['id_user']]);
         $this->botServices->delete($this->chat, $this->messageID);
     }
 }
