@@ -67,6 +67,10 @@ class UserSection implements PdfSectionContract
 
             'activityPeriodChart' => $activityPeriodChart,
             'activityByGroupsChart' => $activityByGroupsChart,
+            'changedUser' => $a->changedUser ?? [],
+
+            'user' => $a->user ?? [],
+            'groups' => $a->userAnalytic->groups ?? [],
 
             'allGifts' => $a->userAnalytic->allActivity['allGifts'] ?? 0,
             'allMessages' => $a->userAnalytic->allActivity['allMessages'] ?? 0,
