@@ -4,6 +4,8 @@ namespace App\Modules\Report\Helper;
 
 class ChartHelper
 {
+    private const MAX_LINE_POINTS = 40;
+
     public static function line(
         array $data,
         array $fields,
@@ -13,23 +15,39 @@ class ChartHelper
     ): string {
 
         // уменьшаем количество точек если их слишком много
-        $data = self::downsample($data, 40);
+        $data = self::downsample($data, self::MAX_LINE_POINTS);
 
         $datasets = [];
+        $maxValue = 0.0;
 
         foreach ($fields as $i => $field) {
+            $series = array_map(
+                fn(array $row): float =>
+                    round((float)($row[$field] ?? 0), 2),
+                $data
+            );
+
+            $seriesMax = $series ? max($series) : 0.0;
+            $maxValue = max($maxValue, (float)$seriesMax);
+
+            $borderColor = $colors[$i] ?? '#999999';
+
             $datasets[] = [
                 'label' => $labels[$i] ?? $field,
-                'data' => array_map(
-                    fn(array $row): float =>
-                        round((float)($row[$field] ?? 0), 2),
-                    $data
-                ),
-                'borderColor' => $colors[$i] ?? '#999999',
+                'data' => $series,
+                'borderColor' => $borderColor,
+                'backgroundColor' => self::hexToRgba($borderColor, 0.12),
                 'fill' => false,
-                'tension' => 0.3
+                'tension' => 0.25,
+                'borderWidth' => 2,
+                'pointRadius' => 2,
+                'pointHoverRadius' => 4,
+                'pointBorderWidth' => 2,
+                'pointBackgroundColor' => '#ffffff',
             ];
         }
+
+        $yTickSuffix = $maxValue <= 100.0 ? '%' : '';
 
         $config = [
             'type' => 'line',
@@ -40,28 +58,11 @@ class ChartHelper
                 ),
                 'datasets' => $datasets,
             ],
-            'options' => [
-                'elements' => [
-                    'point' => [
-                        'radius' => 2
-                    ]
-                ],
-                'scales' => [
-                    'y' => [
-                        'beginAtZero' => true,
-                        'ticks' => [
-                            'callback' => "function(value){return value + '%'}"
-                        ]
-                    ]
-                ],
-                'plugins' => [
-                    'legend' => ['display' => true],
-                    'title' => [
-                        'display' => true,
-                        'text' => $title
-                    ]
-                ]
-            ]
+            'options' => self::buildOptions(
+                title: $title,
+                yTickSuffix: $yTickSuffix,
+                isCategoryXAxis: true
+            ),
         ];
 
         return self::quickChartUrl($config);
@@ -78,6 +79,7 @@ class ChartHelper
         $datasets = [];
 
         foreach ($fields as $i => $field) {
+            $backgroundColor = $colors[$i] ?? '#999999';
             $datasets[] = [
                 'label' => $labels[$i] ?? $field,
                 'data' => array_map(
@@ -85,7 +87,11 @@ class ChartHelper
                         round((float)($row[$field] ?? 0), 2),
                     $data
                 ),
-                'backgroundColor' => $colors[$i] ?? '#999999',
+                'backgroundColor' => self::hexToRgba($backgroundColor, 0.75),
+                'borderColor' => $backgroundColor,
+                'borderWidth' => 1,
+                'borderRadius' => 4,
+                'borderSkipped' => false,
             ];
         }
 
@@ -98,18 +104,11 @@ class ChartHelper
                 ),
                 'datasets' => $datasets,
             ],
-            'options' => [
-                'scales' => [
-                    'y' => ['beginAtZero' => true]
-                ],
-                'plugins' => [
-                    'legend' => ['display' => true],
-                    'title' => [
-                        'display' => true,
-                        'text' => $title
-                    ]
-                ]
-            ]
+            'options' => self::buildOptions(
+                title: $title,
+                yTickSuffix: '',
+                isCategoryXAxis: true
+            ),
         ];
 
         return self::quickChartUrl($config);
@@ -139,21 +138,184 @@ class ChartHelper
                 'labels' => $segmentLabels,
                 'datasets' => [[
                     'data' => $values,
-                    'backgroundColor' => $backgroundColors,
+                    'backgroundColor' => array_map(
+                        fn(string $hex): string => self::hexToRgba($hex, 0.85),
+                        $backgroundColors
+                    ),
+                    'borderColor' => '#ffffff',
+                    'borderWidth' => 2,
                 ]]
             ],
-            'options' => [
-                'plugins' => [
-                    'legend' => ['display' => true],
-                    'title' => [
-                        'display' => true,
-                        'text' => $title
-                    ]
-                ]
-            ]
+            'options' => self::buildPieOptions($title),
         ];
 
         return self::quickChartUrl($config);
+    }
+
+    private static function buildOptions(string $title, string $yTickSuffix, bool $isCategoryXAxis): array
+    {
+        $options = [
+            'responsive' => true,
+            'maintainAspectRatio' => false,
+            'devicePixelRatio' => 2,
+            'animation' => false,
+            'layout' => [
+                'padding' => [
+                    'top' => 8,
+                    'right' => 12,
+                    'bottom' => 6,
+                    'left' => 12,
+                ],
+            ],
+            'interaction' => [
+                'mode' => 'index',
+                'intersect' => false,
+            ],
+            'plugins' => [
+                'legend' => [
+                    'display' => true,
+                    'position' => 'bottom',
+                    'labels' => [
+                        'usePointStyle' => true,
+                        'boxWidth' => 10,
+                        'padding' => 14,
+                        'font' => [
+                            'size' => 11,
+                        ],
+                    ],
+                ],
+                'title' => [
+                    'display' => true,
+                    'text' => $title,
+                    'font' => [
+                        'size' => 14,
+                        'weight' => 'bold',
+                    ],
+                    'padding' => [
+                        'top' => 6,
+                        'bottom' => 10,
+                    ],
+                ],
+                'tooltip' => [
+                    'enabled' => true,
+                    'backgroundColor' => 'rgba(15, 23, 42, 0.92)',
+                    'titleColor' => '#ffffff',
+                    'bodyColor' => '#ffffff',
+                    'padding' => 10,
+                    'cornerRadius' => 6,
+                ],
+            ],
+            'scales' => [
+                'x' => [
+                    'grid' => [
+                        'display' => false,
+                    ],
+                    'ticks' => [
+                        'autoSkip' => true,
+                        'maxRotation' => 45,
+                        'minRotation' => 0,
+                        'maxTicksLimit' => 12,
+                        'color' => '#334155',
+                        'font' => [
+                            'size' => 11,
+                        ],
+                    ],
+                ],
+                'y' => [
+                    'beginAtZero' => true,
+                    'grid' => [
+                        'color' => 'rgba(148, 163, 184, 0.25)',
+                    ],
+                    'ticks' => [
+                        'color' => '#334155',
+                        'font' => [
+                            'size' => 11,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        if ($isCategoryXAxis) {
+            $options['scales']['x']['type'] = 'category';
+        }
+
+        if ($yTickSuffix !== '') {
+            $suffix = addslashes($yTickSuffix);
+            $options['scales']['y']['ticks']['callback'] = "function(value){return value + '{$suffix}'}";
+        }
+
+        return $options;
+    }
+
+    private static function buildPieOptions(string $title): array
+    {
+        return [
+            'responsive' => true,
+            'maintainAspectRatio' => false,
+            'devicePixelRatio' => 2,
+            'animation' => false,
+            'layout' => [
+                'padding' => [
+                    'top' => 8,
+                    'right' => 12,
+                    'bottom' => 6,
+                    'left' => 12,
+                ],
+            ],
+            'plugins' => [
+                'legend' => [
+                    'display' => true,
+                    'position' => 'bottom',
+                    'labels' => [
+                        'padding' => 14,
+                        'font' => [
+                            'size' => 11,
+                        ],
+                    ],
+                ],
+                'title' => [
+                    'display' => true,
+                    'text' => $title,
+                    'font' => [
+                        'size' => 14,
+                        'weight' => 'bold',
+                    ],
+                    'padding' => [
+                        'top' => 6,
+                        'bottom' => 10,
+                    ],
+                ],
+                'tooltip' => [
+                    'enabled' => true,
+                    'backgroundColor' => 'rgba(15, 23, 42, 0.92)',
+                    'titleColor' => '#ffffff',
+                    'bodyColor' => '#ffffff',
+                    'padding' => 10,
+                    'cornerRadius' => 6,
+                ],
+            ],
+        ];
+    }
+
+    private static function hexToRgba(string $hex, float $alpha): string
+    {
+        $hex = ltrim(trim($hex), '#');
+
+        if (strlen($hex) === 3) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+
+        if (!preg_match('/^[0-9a-fA-F]{6}$/', $hex)) {
+            return 'rgba(153, 153, 153, ' . max(0, min(1, $alpha)) . ')';
+        }
+
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+        $a = max(0, min(1, $alpha));
+
+        return "rgba({$r}, {$g}, {$b}, {$a})";
     }
 
     /**
