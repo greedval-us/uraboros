@@ -20,7 +20,6 @@ class UserSection implements PdfSectionContract
 
     public function data(): array
     {
-
         $a = $this->context;
 
         $periodStart = $this->context->from;
@@ -30,16 +29,33 @@ class UserSection implements PdfSectionContract
             $a->userAnalytic->activityPeriod,
         );
 
-        $activityByGroups = UserTableHelper::buildActivityPeriod(
+        $activityByGroups = UserTableHelper::buildActivityByGroups(
             $a->userAnalytic->activityByGroups,
         );
+
+        $groupTitlesById = [];
+        foreach (($a->userAnalytic->groups ?? []) as $group) {
+            $groupId = $group['idGroup'] ?? $group['id'] ?? null;
+            if ($groupId === null) {
+                continue;
+            }
+
+            $groupTitlesById[(int)$groupId] = (string)($group['titleGroup'] ?? ('#' . $groupId));
+        }
+
+        foreach ($activityByGroups as &$row) {
+            $groupId = (int)($row['day'] ?? 0);
+            $row['groupId'] = $groupId;
+            $row['day'] = $groupTitlesById[$groupId] ?? ('#' . $groupId);
+        }
+        unset($row);
 
         $activityPeriodChart = ChartHelper::line(
             $activityPeriod,
             ['allGifts','allMessages','allReactions'],
             [
                 'Подарки',
-                'Публикация',
+                'Сообщения',
                 'Реакция',
             ],
             ['#ef4444','#3b82f6','#10b981'],
@@ -48,13 +64,13 @@ class UserSection implements PdfSectionContract
 
         $activityByGroupsChart = ChartHelper::bar(
             $activityByGroups,
-            ['total','admin','users'],
+            ['allGifts','allMessages','allReactions'],
             [
                 'Подарки',
-                'Публикация',
-                'Реакция',
+                'Сообщения',
+                'Реакции',
             ],
-            ['#10b981','#ef4444','#3b82f6'],
+            ['#ef4444','#3b82f6','#10b981'],
             'Активность пользователя по группам'
         );
 
