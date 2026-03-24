@@ -41,11 +41,12 @@ class ChannelJob implements ShouldQueue
 
         $info = TelegramHelper::extractInfo($this->text, 1);
         $endpoint = 'analytics/getGroup';
+        $params = [];
 
         if (($info['type'] ?? null) === LinkType::Channelname && !empty($info['channel'])) {
-            $endpoint .= '?username=' . urlencode((string)$info['channel']);
+            $params = ['username' => (string)$info['channel']];
         } elseif (in_array(($info['type'] ?? null), [LinkType::UserId, LinkType::ChatId], true) && !empty($info['value'])) {
-            $endpoint .= '?id_group=' . urlencode((string)$info['value']);
+            $params = ['id_group' => (string)$info['value']];
         } else {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Неверная данные для получения информации о канале. Пожалуйста, убедитесь, что вы отправили правильную ссылку или идентификатор канала.');
@@ -53,7 +54,7 @@ class ChannelJob implements ShouldQueue
         }
 
         try {
-            $group = $this->apiServices->get($endpoint);
+            $group = $this->apiServices->get($endpoint, $params);
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
