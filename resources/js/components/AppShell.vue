@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { usePage } from '@inertiajs/vue3';
+import CookieConsentBanner from '@/components/CookieConsentBanner.vue';
 
 interface Props {
     variant?: 'header' | 'sidebar';
@@ -19,6 +20,7 @@ const isOpen = usePage().props.sidebarOpen;
         <div class="welkome-orb welkome-orb-one"></div>
         <div class="welkome-orb welkome-orb-two"></div>
         <slot />
+        <CookieConsentBanner />
     </div>
     <div v-else class="welkome-shell min-h-screen">
         <div class="welkome-orb welkome-orb-one"></div>
@@ -26,5 +28,6 @@ const isOpen = usePage().props.sidebarOpen;
         <SidebarProvider :default-open="isOpen">
             <slot />
         </SidebarProvider>
+        <CookieConsentBanner />
     </div>
 </template>
