@@ -46,7 +46,7 @@ class DataMapperService
             'id' => $group->idGroup,
             'title' => $group->titleGroup ?? 'Без названия',
             'participants' => $group->participantsCount ?? 0,
-            'type' => $group->type,
+            'type' => $group->type == 0 ? 'Chat' : 'Channel',
             'created' => $group->createdDate?->format('d.m.Y'),
         ];
     }
