@@ -21,18 +21,30 @@
 
     @if(!empty($activityChart))
         <div class="report-chart">
-            <div class="report-chart-title">График активности</div>
+            <div class="report-chart-title">📊 График активности пользователей</div>
             <img src="{{ $activityChart }}" style="width:100%; margin-top:10px;">
         </div>
     @endif
 
-    <p>
-        Общие данные за период:
-        <br>Всего активных уникальных пользователей: <strong>{{ $totalActive ?? 0 }}</strong>
-        <br>Оставили хотя бы один комментарий: <strong>{{ $commenters ?? 0 }}</strong>
-        <br>Оставили хотя бы одну реакцию: <strong>{{ $reactors ?? 0 }}</strong>
-        <br>Оставили хотя бы один комментарий и реакцию: <strong>{{ $both ?? 0 }}</strong>
-    </p>
+    <div class="metrics-box">
+        <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">Общие данные за период</div>
+        <div class="metric-row">
+            <span class="metric-label">Всего активных уникальных пользователей</span>
+            <span class="metric-value">{{ $totalActive ?? 0 }}</span>
+        </div>
+        <div class="metric-row">
+            <span class="metric-label">Оставили хотя бы один комментарий</span>
+            <span class="metric-value">{{ $commenters ?? 0 }}</span>
+        </div>
+        <div class="metric-row">
+            <span class="metric-label">Оставили хотя бы одну реакцию</span>
+            <span class="metric-value">{{ $reactors ?? 0 }}</span>
+        </div>
+        <div class="metric-row">
+            <span class="metric-label">Оставили комментарий и реакцию</span>
+            <span class="metric-value">{{ $both ?? 0 }}</span>
+        </div>
+    </div>
     <div class="report-section page-break">
         <div class="report-subsection-title">1.2 Частота публикаций</div>
 
@@ -48,17 +60,26 @@
 
         @if(!empty($postsChart))
             <div class="report-chart">
-                <div class="report-chart-title">График публикаций</div>
+                <div class="report-chart-title">📈 График публикаций</div>
                 <img src="{{ $postsChart }}" style="width:100%; margin-top:10px;">
             </div>
         @endif
 
-        <p>
-            Общие данные за период:
-            <br>Всего публикаций: <strong>{{ $totalPosts ?? 0 }}</strong>
-            <br>Администратор: <strong>{{ $adminPosts ?? 0 }}</strong>
-            <br>Пользователи: <strong>{{ $userPosts ?? 0 }}</strong>
-        </p>
+        <div class="metrics-box">
+            <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">Общие данные за период</div>
+            <div class="metric-row">
+                <span class="metric-label">Всего публикаций</span>
+                <span class="metric-value">{{ $totalPosts ?? 0 }}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Администраторов</span>
+                <span class="metric-value">{{ $adminPosts ?? 0 }}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">От пользователей</span>
+                <span class="metric-value">{{ $userPosts ?? 0 }}</span>
+            </div>
+        </div>
     </div>
     <div class="report-section page-break">
         <div class="report-subsection-title">1.3 Средняя вовлеченность на пост</div>
@@ -73,17 +94,26 @@
 
         @if(!empty($engagementChart))
             <div class="report-chart">
-                <div class="report-chart-title">График вовлеченности</div>
+                <div class="report-chart-title">📊 График вовлеченности</div>
                 <img src="{{ $engagementChart }}" style="width:100%; margin-top:10px;">
             </div>
         @endif
 
-        <p>
-            Общие данные за период:
-            <br>Средняя вовлеченность: <strong>{{ $avgEngagement ?? 0 }}</strong>
-            <br>Публикаций/пост: <strong>{{ $avgPostsPerPost ?? 0 }}</strong>
-            <br>Реакций/пост: <strong>{{ $avgReactionsPerPost ?? 0 }}</strong>
-        </p>
+        <div class="metrics-box">
+            <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">Общие данные за период</div>
+            <div class="metric-row">
+                <span class="metric-label">Средняя вовлеченность</span>
+                <span class="metric-value">{{ $avgEngagement ?? 0 }}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Публикаций/пост</span>
+                <span class="metric-value">{{ $avgPostsPerPost ?? 0 }}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Реакций/пост</span>
+                <span class="metric-value">{{ $avgReactionsPerPost ?? 0 }}</span>
+            </div>
+        </div>
     </div>
 
     <div class="report-section page-break">
@@ -102,15 +132,10 @@
 
         @if(!empty($participantChangedChart))
             <div class="report-chart">
-                <div class="report-chart-title">График изменения аудитории</div>
+                <div class="report-chart-title">📈 График изменения аудитории</div>
                 <img src="{{ $participantChangedChart }}" style="width:100%; margin-top:10px;">
             </div>
         @endif
-
-        <p>
-            Числовые значения метрики по дням представлены в конце отчета
-            в таблице №1.4 «Изменения аудитории за период».
-        </p>
 
         <p>Значения показателя могут свидетельствовать о:</p>
 
@@ -121,15 +146,17 @@
             <li>краткосрочных колебаниях численности аудитории, вызванных информационными событиями или изменением активности сообщества.</li>
         </ul>
 
-
+        <p style="margin-top: 15px; padding: 12px; background-color: #f0f9ff; border-left: 4px solid #0ea5e9; border-radius: 4px;">
+            💡 <strong>Примечание:</strong> Числовые значения метрики по дням представлены в конце отчета в таблице №1.4.
+        </p>
     </div>
 </div>
 
 <div class="report-section page-break">
-    <div class="report-section-title">Таблицы с данными по дням</div>
+    <div class="report-section-title">📊 Таблицы с детальными данными</div>
 
     @if(!empty($activityByDay))
-        <div class="report-table-title">Таблица №1.1 «Активность по пользователям»</div>
+        <div class="report-table-title">Таблица №1.1 — Активность по пользователям</div>
         <table class="report-table">
             <thead>
                 <tr>
@@ -153,75 +180,72 @@
             </tbody>
         </table>
     @endif
+
     @if(!empty($postsByDay))
-        <div class="report-section page-break">
-            <div class="report-table-title">Таблица №1.2 «Частота публикаций»</div>
-            <table class="report-table">
-                <thead>
+        <div class="report-table-title" style="margin-top: 25px;">Таблица №1.2 — Частота публикаций</div>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>День</th>
+                    <th>Общее</th>
+                    <th>Администратор</th>
+                    <th>Пользователи</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($postsByDay as $row)
                     <tr>
-                        <th>День</th>
-                        <th>Общее</th>
-                        <th>Администратор</th>
-                        <th>Пользователи</th>
+                        <td>{{ $row['day'] ?? '?' }}</td>
+                        <td>{{ $row['total'] ?? 0 }}</td>
+                        <td>{{ $row['admin'] ?? 0 }}</td>
+                        <td>{{ $row['users'] ?? 0 }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach($postsByDay as $row)
-                        <tr>
-                            <td>{{ $row['day'] ?? '?' }}</td>
-                            <td>{{ $row['total'] ?? 0 }}</td>
-                            <td>{{ $row['admin'] ?? 0 }}</td>
-                            <td>{{ $row['users'] ?? 0 }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                @endforeach
+            </tbody>
+        </table>
     @endif
+
     @if(!empty($engagementByDay))
-        <div class="report-section page-break">
-            <div class="report-table-title">Таблица №1.3 «Средняя вовлеченность»</div>
-            <table class="report-table">
-                <thead>
+        <div class="report-table-title" style="margin-top: 25px;">Таблица №1.3 — Средняя вовлеченность</div>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>День</th>
+                    <th>Средняя вовлеченность</th>
+                    <th>Среднее публикаций/пост</th>
+                    <th>Среднее реакций/пост</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($engagementByDay as $row)
                     <tr>
-                        <th>День</th>
-                        <th>Средняя вовлеченность</th>
-                        <th>Среднее публикаций/пост</th>
-                        <th>Среднее реакций/пост</th>
+                        <td>{{ $row['day'] ?? '?' }}</td>
+                        <td>{{ $row['engagement'] ?? 0 }}</td>
+                        <td>{{ $row['postsPerPost'] ?? 0 }}</td>
+                        <td>{{ $row['reactionsPerPost'] ?? 0 }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach($engagementByDay as $row)
-                        <tr>
-                            <td>{{ $row['day'] ?? '?' }}</td>
-                            <td>{{ $row['engagement'] ?? 0 }}</td>
-                            <td>{{ $row['postsPerPost'] ?? 0 }}</td>
-                            <td>{{ $row['reactionsPerPost'] ?? 0 }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                @endforeach
+            </tbody>
+        </table>
     @endif
+
     @if(!empty($participantChanged))
-        <div class="report-section page-break">
-            <div class="report-table-title">Таблица №1.4 «Изменения аудитории»</div>
-            <table class="report-table">
-                <thead>
+        <div class="report-table-title" style="margin-top: 25px;">Таблица №1.4 — Изменения аудитории</div>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>День</th>
+                    <th>Кол-во участников</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($participantChanged as $row)
                     <tr>
-                        <th>День</th>
-                        <th>Кол-во участников</th>
+                        <td>{{ $row['day'] ?? '?' }}</td>
+                        <td>{{ $row['value'] ?? 0 }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach($participantChanged as $row)
-                        <tr>
-                            <td>{{ $row['day'] ?? '?' }}</td>
-                            <td>{{ $row['value'] ?? 0 }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                @endforeach
+            </tbody>
+        </table>
     @endif
 </div>
