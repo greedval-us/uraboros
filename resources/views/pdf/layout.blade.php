@@ -11,8 +11,8 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'DejaVu Sans', sans-serif;
-    font-size: 11px;
+    font-family: 'DejaVu Sans', Arial, sans-serif;
+    font-size: 12px;
     color: #374151;
     line-height: 1.6;
     background-color: #f9fafb;
@@ -93,7 +93,7 @@ body {
 .report-section p {
     margin-bottom: 12px;
     text-align: justify;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.65;
 }
 
@@ -103,12 +103,14 @@ body {
 
 .report-section ul {
     margin: 12px 0 12px 20px;
-    padding-left: 10px;
+    padding-left: 5px;
+    font-size: 12px;
 }
 
 .report-section li {
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     list-style-type: disc;
+    font-size: 12px;
 }
 
 /* ### TITLES ### */
@@ -145,7 +147,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 6px 0;
-    font-size: 11px;
+    font-size: 12px;
     border-bottom: 1px dotted #cbd5e1;
 }
 
@@ -200,7 +202,7 @@ body {
 .report-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 10px;
+    font-size: 11px;
     margin: 15px 0;
     page-break-inside: avoid;
 }
@@ -217,15 +219,16 @@ body {
 
 .report-table th {
     text-align: left;
-    padding: 10px 12px;
+    padding: 8px 10px;
     background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     color: #ffffff;
     font-weight: 700;
     border: none;
+    font-size: 11px;
 }
 
 .report-table td {
-    padding: 8px 12px;
+    padding: 6px 10px;
     border-bottom: 1px solid #e5e7eb;
     color: #374151;
 }
