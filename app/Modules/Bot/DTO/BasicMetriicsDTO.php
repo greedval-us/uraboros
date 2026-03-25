@@ -120,7 +120,6 @@ class BasicMetriicsDTO
 
         foreach ($data as $item) {
             if (!is_array($item)) {
-                // защищаемся от ситуаций, где API возвращает float/number вместо массива
                 continue;
             }
 
