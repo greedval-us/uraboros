@@ -127,4 +127,18 @@ return [
         ],
 
     ],
+
+    'analytics' => [
+        'report_costs' => [
+            'default' => 1,
+            'audience_quality' => 1,
+            'basic_metrics' => 1,
+            'network_metrics' => 1,
+            'funnel' => 1,
+            'retention' => 1,
+            'user' => 1,
+            'user_leaders' => 1,
+            'full_report' => 3,
+        ],
+    ],
 ];
