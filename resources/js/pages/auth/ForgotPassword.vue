@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Spinner } from '@/components/ui/spinner';
-import { home, login } from '@/routes';
-import { email } from '@/routes/password';
-import { Form, Head, Link } from '@inertiajs/vue3';
+import InputError from "@/components/InputError.vue";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
+import { home, login } from "@/routes";
+import { email } from "@/routes/password";
+import { Form, Head, Link } from "@inertiajs/vue3";
 
 defineProps<{
     status?: string;
@@ -16,11 +16,7 @@ defineProps<{
 <template>
     <Head title="Forgot password - uraboros">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossorigin="anonymous"
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         <link
             href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
             rel="stylesheet"
@@ -46,14 +42,8 @@ defineProps<{
                         U
                     </span>
                     <div>
-                        <p
-                            class="text-sm font-semibold tracking-[0.2em] uppercase"
-                        >
-                            uraboros
-                        </p>
-                        <p class="text-xs text-slate-300/80">
-                            messenger analytics
-                        </p>
+                        <p class="text-sm font-semibold tracking-[0.2em] uppercase">uraboros</p>
+                        <p class="text-xs text-slate-300/80">messenger analytics</p>
                     </div>
                 </Link>
 
@@ -62,14 +52,12 @@ defineProps<{
                         Password recovery in the same welcome style.
                     </h1>
                     <p class="max-w-md text-slate-200/85">
-                        Enter your account email, and we will send a reset link
-                        immediately.
+                        Enter your account email, and we will send a reset link immediately.
                     </p>
                 </div>
 
                 <p class="text-xs text-slate-300/75">
-                    Quick recovery, minimal steps, consistent uraboros
-                    experience.
+                    Quick recovery, minimal steps, consistent uraboros experience.
                 </p>
             </section>
 
@@ -87,8 +75,7 @@ defineProps<{
                             >
                                 U
                             </span>
-                            <span
-                                class="text-xs font-semibold tracking-[0.2em] uppercase"
+                            <span class="text-xs font-semibold tracking-[0.2em] uppercase"
                                 >uraboros</span
                             >
                         </Link>
@@ -136,10 +123,7 @@ defineProps<{
 
                     <div class="mt-5 text-center text-sm text-slate-300/80">
                         Or, return to
-                        <Link
-                            :href="login()"
-                            class="text-cyan-200 transition hover:text-cyan-100"
-                        >
+                        <Link :href="login()" class="text-cyan-200 transition hover:text-cyan-100">
                             log in
                         </Link>
                     </div>
@@ -151,19 +135,11 @@ defineProps<{
 
 <style scoped>
 .auth-landing {
-    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
     position: relative;
     background:
-        radial-gradient(
-            circle at 12% 18%,
-            rgb(8 145 178 / 0.3),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 85% 12%,
-            rgb(30 58 138 / 0.35),
-            transparent 44%
-        ),
+        radial-gradient(circle at 12% 18%, rgb(8 145 178 / 0.3), transparent 40%),
+        radial-gradient(circle at 85% 12%, rgb(30 58 138 / 0.35), transparent 44%),
         linear-gradient(140deg, #020617 0%, #0f172a 50%, #082f49 100%);
 }
 

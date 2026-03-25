@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { SidebarInset } from '@/components/ui/sidebar';
-import { computed } from 'vue';
+import { SidebarInset } from "@/components/ui/sidebar";
+import { computed } from "vue";
 
 interface Props {
-    variant?: 'header' | 'sidebar';
+    variant?: "header" | "sidebar";
     class?: string;
 }
 
@@ -12,10 +12,7 @@ const className = computed(() => props.class);
 </script>
 
 <template>
-    <SidebarInset
-        v-if="props.variant === 'sidebar'"
-        :class="['bg-transparent', className]"
-    >
+    <SidebarInset v-if="props.variant === 'sidebar'" :class="['bg-transparent', className]">
         <slot />
     </SidebarInset>
     <main

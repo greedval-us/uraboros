@@ -1,22 +1,18 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Spinner } from '@/components/ui/spinner';
-import { home, login } from '@/routes';
-import { store } from '@/routes/register';
-import { Form, Head, Link } from '@inertiajs/vue3';
+import InputError from "@/components/InputError.vue";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
+import { home, login } from "@/routes";
+import { store } from "@/routes/register";
+import { Form, Head, Link } from "@inertiajs/vue3";
 </script>
 
 <template>
     <Head title="Регистрация - uraboros">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossorigin="anonymous"
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         <link
             href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
             rel="stylesheet"
@@ -42,31 +38,23 @@ import { Form, Head, Link } from '@inertiajs/vue3';
                         U
                     </span>
                     <div>
-                        <p
-                            class="text-sm font-semibold tracking-[0.2em] uppercase"
-                        >
-                            uraboros
-                        </p>
-                        <p class="text-xs text-slate-300/80">
-                            messenger analytics
-                        </p>
+                        <p class="text-sm font-semibold tracking-[0.2em] uppercase">uraboros</p>
+                        <p class="text-xs text-slate-300/80">messenger analytics</p>
                     </div>
                 </Link>
 
                 <div class="space-y-4">
                     <h1 class="text-4xl leading-tight font-bold">
-                        Создайте аккаунт и начните анализировать Telegram-каналы
-                        из одного кабинета.
+                        Создайте аккаунт и начните анализировать Telegram-каналы из одного кабинета.
                     </h1>
                     <p class="max-w-md text-slate-200/85">
-                        Регистрация занимает меньше минуты. После входа вы
-                        получите доступ к дашборду и отчетам.
+                        Регистрация занимает меньше минуты. После входа вы получите доступ к
+                        дашборду и отчетам.
                     </p>
                 </div>
 
                 <p class="text-xs text-slate-300/75">
-                    uraboros растет как платформа аналитики мессенджеров,
-                    начиная с Telegram.
+                    uraboros растет как платформа аналитики мессенджеров, начиная с Telegram.
                 </p>
             </section>
 
@@ -84,8 +72,7 @@ import { Form, Head, Link } from '@inertiajs/vue3';
                             >
                                 U
                             </span>
-                            <span
-                                class="text-xs font-semibold tracking-[0.2em] uppercase"
+                            <span class="text-xs font-semibold tracking-[0.2em] uppercase"
                                 >uraboros</span
                             >
                         </Link>
@@ -97,10 +84,7 @@ import { Form, Head, Link } from '@inertiajs/vue3';
 
                     <Form
                         v-bind="store.form()"
-                        :reset-on-success="[
-                            'password',
-                            'password_confirmation',
-                        ]"
+                        :reset-on-success="['password', 'password_confirmation']"
                         v-slot="{ errors, processing }"
                         class="flex flex-col gap-5"
                     >
@@ -152,9 +136,7 @@ import { Form, Head, Link } from '@inertiajs/vue3';
                             </div>
 
                             <div class="grid gap-2">
-                                <Label for="password_confirmation"
-                                    >Подтвердите пароль</Label
-                                >
+                                <Label for="password_confirmation">Подтвердите пароль</Label>
                                 <Input
                                     id="password_confirmation"
                                     type="password"
@@ -165,9 +147,7 @@ import { Form, Head, Link } from '@inertiajs/vue3';
                                     placeholder="Повторите пароль"
                                     class="border-white/20 bg-white/5 text-slate-100 placeholder:text-slate-400"
                                 />
-                                <InputError
-                                    :message="errors.password_confirmation"
-                                />
+                                <InputError :message="errors.password_confirmation" />
                             </div>
 
                             <Button
@@ -200,19 +180,11 @@ import { Form, Head, Link } from '@inertiajs/vue3';
 
 <style scoped>
 .auth-landing {
-    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
     position: relative;
     background:
-        radial-gradient(
-            circle at 12% 18%,
-            rgb(8 145 178 / 0.3),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 85% 12%,
-            rgb(30 58 138 / 0.35),
-            transparent 44%
-        ),
+        radial-gradient(circle at 12% 18%, rgb(8 145 178 / 0.3), transparent 40%),
+        radial-gradient(circle at 85% 12%, rgb(30 58 138 / 0.35), transparent 44%),
         linear-gradient(140deg, #020617 0%, #0f172a 50%, #082f49 100%);
 }
 

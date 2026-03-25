@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-    InputOTP,
-    InputOTPGroup,
-    InputOTPSlot,
-} from '@/components/ui/input-otp';
-import AuthLayout from '@/layouts/AuthLayout.vue';
-import { store } from '@/routes/two-factor/login';
-import { Form, Head } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import InputError from "@/components/InputError.vue";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import AuthLayout from "@/layouts/AuthLayout.vue";
+import { store } from "@/routes/two-factor/login";
+import { Form, Head } from "@inertiajs/vue3";
+import { computed, ref } from "vue";
 
 interface AuthConfigContent {
     title: string;
@@ -21,18 +17,17 @@ interface AuthConfigContent {
 const authConfigContent = computed<AuthConfigContent>(() => {
     if (showRecoveryInput.value) {
         return {
-            title: 'Recovery Code',
+            title: "Recovery Code",
             description:
-                'Please confirm access to your account by entering one of your emergency recovery codes.',
-            toggleText: 'login using an authentication code',
+                "Please confirm access to your account by entering one of your emergency recovery codes.",
+            toggleText: "login using an authentication code",
         };
     }
 
     return {
-        title: 'Authentication Code',
-        description:
-            'Enter the authentication code provided by your authenticator application.',
-        toggleText: 'login using a recovery code',
+        title: "Authentication Code",
+        description: "Enter the authentication code provided by your authenticator application.",
+        toggleText: "login using a recovery code",
     };
 });
 
@@ -41,17 +36,14 @@ const showRecoveryInput = ref<boolean>(false);
 const toggleRecoveryMode = (clearErrors: () => void): void => {
     showRecoveryInput.value = !showRecoveryInput.value;
     clearErrors();
-    code.value = '';
+    code.value = "";
 };
 
-const code = ref<string>('');
+const code = ref<string>("");
 </script>
 
 <template>
-    <AuthLayout
-        :title="authConfigContent.title"
-        :description="authConfigContent.description"
-    >
+    <AuthLayout :title="authConfigContent.title" :description="authConfigContent.description">
         <Head title="Two-Factor Authentication" />
 
         <div class="space-y-6">
@@ -64,9 +56,7 @@ const code = ref<string>('');
                     #default="{ errors, processing, clearErrors }"
                 >
                     <input type="hidden" name="code" :value="code" />
-                    <div
-                        class="flex flex-col items-center justify-center space-y-3 text-center"
-                    >
+                    <div class="flex flex-col items-center justify-center space-y-3 text-center">
                         <div class="flex w-full items-center justify-center">
                             <InputOTP
                                 id="otp"
@@ -86,9 +76,7 @@ const code = ref<string>('');
                         </div>
                         <InputError :message="errors.code" />
                     </div>
-                    <Button type="submit" class="w-full" :disabled="processing"
-                        >Continue</Button
-                    >
+                    <Button type="submit" class="w-full" :disabled="processing">Continue</Button>
                     <div class="text-center text-sm text-muted-foreground">
                         <span>or you can </span>
                         <button
@@ -117,9 +105,7 @@ const code = ref<string>('');
                         required
                     />
                     <InputError :message="errors.recovery_code" />
-                    <Button type="submit" class="w-full" :disabled="processing"
-                        >Continue</Button
-                    >
+                    <Button type="submit" class="w-full" :disabled="processing">Continue</Button>
 
                     <div class="text-center text-sm text-muted-foreground">
                         <span>or you can </span>

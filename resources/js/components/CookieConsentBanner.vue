@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { onMounted, ref, watch } from "vue";
 
-const storageKey = 'cookie_consent_status';
+const storageKey = "cookie_consent_status";
 const showBanner = ref(false);
-const consentStatus = ref<'accepted' | 'declined' | null>(null);
+const consentStatus = ref<"accepted" | "declined" | null>(null);
 
 const getCookie = (name: string): string | null => {
     const cookieString = document.cookie;
-    const cookieParts = cookieString.split('; ').map((cookie) => cookie.split('='));
+    const cookieParts = cookieString.split("; ").map((cookie) => cookie.split("="));
     const found = cookieParts.find(([cookieName]) => cookieName === name);
     return found ? decodeURIComponent(found[1]) : null;
 };
@@ -18,7 +18,7 @@ const readStatus = () => {
 
     const value = localValue || cookieValue;
 
-    if (value === 'accepted' || value === 'declined') {
+    if (value === "accepted" || value === "declined") {
         consentStatus.value = value;
     } else {
         consentStatus.value = null;
@@ -31,7 +31,7 @@ const setCookie = (name: string, value: string, days = 365) => {
     document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()}; path=/; SameSite=Lax;`;
 };
 
-const setStatus = (status: 'accepted' | 'declined') => {
+const setStatus = (status: "accepted" | "declined") => {
     consentStatus.value = status;
     localStorage.setItem(storageKey, status);
     setCookie(storageKey, status);
@@ -61,8 +61,8 @@ watch(consentStatus, (newValue) => {
                     Мы используем куки
                 </h3>
                 <p class="text-xs text-slate-600 dark:text-slate-300">
-                    Сайт использует обязательные куки для работы, аналитику и персонализацию.
-                    Вы можете принять или отклонить необязательные куки.
+                    Сайт использует обязательные куки для работы, аналитику и персонализацию. Вы
+                    можете принять или отклонить необязательные куки.
                 </p>
             </div>
 

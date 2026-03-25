@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Spinner } from '@/components/ui/spinner';
-import { home, register } from '@/routes';
-import { store } from '@/routes/login';
-import { request } from '@/routes/password';
-import { Form, Head, Link } from '@inertiajs/vue3';
+import InputError from "@/components/InputError.vue";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
+import { home, register } from "@/routes";
+import { store } from "@/routes/login";
+import { request } from "@/routes/password";
+import { Form, Head, Link } from "@inertiajs/vue3";
 
 defineProps<{
     status?: string;
@@ -20,11 +20,7 @@ defineProps<{
 <template>
     <Head title="Вход - uraboros">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossorigin="anonymous"
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         <link
             href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
             rel="stylesheet"
@@ -50,31 +46,23 @@ defineProps<{
                         U
                     </span>
                     <div>
-                        <p
-                            class="text-sm font-semibold tracking-[0.2em] uppercase"
-                        >
-                            uraboros
-                        </p>
-                        <p class="text-xs text-slate-300/80">
-                            messenger analytics
-                        </p>
+                        <p class="text-sm font-semibold tracking-[0.2em] uppercase">uraboros</p>
+                        <p class="text-xs text-slate-300/80">messenger analytics</p>
                     </div>
                 </Link>
 
                 <div class="space-y-4">
                     <h1 class="text-4xl leading-tight font-bold">
-                        Вход в аналитику, которая показывает реальную картину по
-                        Telegram.
+                        Вход в аналитику, которая показывает реальную картину по Telegram.
                     </h1>
                     <p class="max-w-md text-slate-200/85">
-                        Проверяйте динамику, отчеты и ключевые метрики в одном
-                        месте, без ручной рутины.
+                        Проверяйте динамику, отчеты и ключевые метрики в одном месте, без ручной
+                        рутины.
                     </p>
                 </div>
 
                 <p class="text-xs text-slate-300/75">
-                    Сейчас фокус на Telegram. Дальше добавим аналитику других
-                    мессенджеров.
+                    Сейчас фокус на Telegram. Дальше добавим аналитику других мессенджеров.
                 </p>
             </section>
 
@@ -92,15 +80,13 @@ defineProps<{
                             >
                                 U
                             </span>
-                            <span
-                                class="text-xs font-semibold tracking-[0.2em] uppercase"
+                            <span class="text-xs font-semibold tracking-[0.2em] uppercase"
                                 >uraboros</span
                             >
                         </Link>
                         <h2 class="text-2xl font-bold">Вход</h2>
                         <p class="text-sm text-slate-300/80">
-                            Введите email и пароль, чтобы перейти в личный
-                            кабинет.
+                            Введите email и пароль, чтобы перейти в личный кабинет.
                         </p>
                     </div>
 
@@ -160,15 +146,8 @@ defineProps<{
                             </div>
 
                             <div class="flex items-center justify-between">
-                                <Label
-                                    for="remember"
-                                    class="flex items-center space-x-3"
-                                >
-                                    <Checkbox
-                                        id="remember"
-                                        name="remember"
-                                        :tabindex="3"
-                                    />
+                                <Label for="remember" class="flex items-center space-x-3">
+                                    <Checkbox id="remember" name="remember" :tabindex="3" />
                                     <span>Запомнить меня</span>
                                 </Label>
                             </div>
@@ -185,10 +164,7 @@ defineProps<{
                             </Button>
                         </div>
 
-                        <div
-                            class="text-center text-sm text-slate-300/80"
-                            v-if="canRegister"
-                        >
+                        <div class="text-center text-sm text-slate-300/80" v-if="canRegister">
                             Нет аккаунта?
                             <Link
                                 :href="register()"
@@ -207,19 +183,11 @@ defineProps<{
 
 <style scoped>
 .auth-landing {
-    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
     position: relative;
     background:
-        radial-gradient(
-            circle at 12% 18%,
-            rgb(8 145 178 / 0.3),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 85% 12%,
-            rgb(30 58 138 / 0.35),
-            transparent 44%
-        ),
+        radial-gradient(circle at 12% 18%, rgb(8 145 178 / 0.3), transparent 40%),
+        radial-gradient(circle at 85% 12%, rgb(30 58 138 / 0.35), transparent 44%),
         linear-gradient(140deg, #020617 0%, #0f172a 50%, #082f49 100%);
 }
 

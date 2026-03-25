@@ -1,0 +1,10 @@
+node_modules
+vendor
+bootstrap
+storage
+dist
+build
+public
+.nuxt
+.next
+*.d.ts

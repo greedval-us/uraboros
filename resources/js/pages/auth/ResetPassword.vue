@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Spinner } from '@/components/ui/spinner';
-import AuthLayout from '@/layouts/AuthLayout.vue';
-import { update } from '@/routes/password';
-import { Form, Head } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import InputError from "@/components/InputError.vue";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
+import AuthLayout from "@/layouts/AuthLayout.vue";
+import { update } from "@/routes/password";
+import { Form, Head } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 const props = defineProps<{
     token: string;
@@ -18,10 +18,7 @@ const inputEmail = ref(props.email);
 </script>
 
 <template>
-    <AuthLayout
-        title="Reset password"
-        description="Please enter your new password below"
-    >
+    <AuthLayout title="Reset password" description="Please enter your new password below">
         <Head title="Reset password" />
 
         <Form
@@ -60,9 +57,7 @@ const inputEmail = ref(props.email);
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password_confirmation">
-                        Confirm Password
-                    </Label>
+                    <Label for="password_confirmation"> Confirm Password </Label>
                     <Input
                         id="password_confirmation"
                         type="password"

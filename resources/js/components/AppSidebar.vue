@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import NavFooter from '@/components/NavFooter.vue';
-import NavMain from '@/components/NavMain.vue';
-import NavUser from '@/components/NavUser.vue';
+import NavFooter from "@/components/NavFooter.vue";
+import NavMain from "@/components/NavMain.vue";
+import NavUser from "@/components/NavUser.vue";
 import {
     Sidebar,
     SidebarContent,
@@ -10,38 +10,31 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from '@/components/ui/sidebar';
-import { dashboard, telegram } from '@/routes';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import { LayoutGrid, Send } from 'lucide-vue-next';
-import AppLogo from './AppLogo.vue';
+} from "@/components/ui/sidebar";
+import { dashboard, telegram } from "@/routes";
+import { type NavItem } from "@/types";
+import { Link } from "@inertiajs/vue3";
+import { LayoutGrid, Send } from "lucide-vue-next";
+import AppLogo from "./AppLogo.vue";
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: "Dashboard",
         href: dashboard(),
         icon: LayoutGrid,
     },
     {
-        title: 'Telegram',
+        title: "Telegram",
         href: telegram(),
         icon: Send,
     },
 ];
 
-const footerNavItems: NavItem[] = [
-
-];
-
+const footerNavItems: NavItem[] = [];
 </script>
 
 <template>
-    <Sidebar
-        collapsible="icon"
-        variant="inset"
-        class="glass-panel border-border/70"
-    >
+    <Sidebar collapsible="icon" variant="inset" class="glass-panel border-border/70">
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
