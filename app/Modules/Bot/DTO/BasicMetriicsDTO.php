@@ -119,7 +119,16 @@ class BasicMetriicsDTO
         $result = [];
 
         foreach ($data as $item) {
+            if (!is_array($item)) {
+                // защищаемся от ситуаций, где API возвращает float/number вместо массива
+                continue;
+            }
+
             foreach ($item as $date => $value) {
+                if ($date === null || $value === null) {
+                    continue;
+                }
+
                 $result[$date] = $value;
             }
         }
