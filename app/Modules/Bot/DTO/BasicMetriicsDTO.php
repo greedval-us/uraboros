@@ -28,6 +28,9 @@ class BasicMetriicsDTO
         public ?float $engagementRate = null,
         public array $engagementRatePeriod = [],
 
+        public array $stickinessRatioPeriod = [],
+        public array $usageRegularityPeriod = [],
+
         public array $participantChanged = [],
 
         public ?int $publicationsFromAdmin = null,
@@ -56,6 +59,9 @@ class BasicMetriicsDTO
 
             allActiveUsers: $data['allActiveUsers'] ?? null,
             allActiveUsersPeriod: self::mapPeriod($data['allActiveUsersPeriod'] ?? []),
+
+            stickinessRatioPeriod: self::mapPeriod($data['stickinessRatioPeriod'] ?? []),
+            usageRegularityPeriod: self::mapPeriod($data['usageRegularityPeriod'] ?? []),
 
             allPublications: $data['allPublications'] ?? null,
             allPublicationsPeriod: self::mapPeriod($data['allPublicationsPeriod'] ?? []),

@@ -51,6 +51,16 @@ class BasicMetricsSection implements PdfSectionContract
 
         $participantChanged = PeriodTableHelper::buildParticipantChanged($a->participantChanged);
 
+        $stickinessRatioPeriod = PeriodTableHelper::build($a->stickinessRatioPeriod);
+
+        $stickinessRatioPeriodChart = ChartHelper::line(
+            $stickinessRatioPeriod,
+            ['total'],
+            ['Коэффициент вовлечённости аудитории'],
+            ['#ef4444'],
+            'Активность пользователей по дням'
+        );
+
         $activityChart = ChartHelper::line(
             $activityByDay,
             ['total','posts','reactions','both'],
@@ -113,6 +123,9 @@ class BasicMetricsSection implements PdfSectionContract
             'adminPosts' => $a->publicationsFromAdmin,
             'userPosts' => $a->publicationsFromUser,
             'participantChanged' => $participantChanged,
+
+            'stickinessRatioPeriod' => $stickinessRatioPeriod,
+            'stickinessRatioPeriodChart' => $stickinessRatioPeriodChart,
 
             'postsByDay' => $postsByDay,
 
