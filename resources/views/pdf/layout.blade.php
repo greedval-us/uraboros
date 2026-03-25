@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style>
 * {
@@ -11,7 +12,7 @@
 }
 
 body {
-    font-family: 'DejaVu Sans', Arial, sans-serif;
+    font-family: DejaVu Sans, serif;
     font-size: 12px;
     color: #374151;
     line-height: 1.6;

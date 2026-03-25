@@ -153,10 +153,9 @@
 </div>
 
 <div class="report-section page-break">
-    <div class="report-section-title">📊 Таблицы с детальными данными</div>
+    <div class="report-section-title">📊 Таблице №1.1 - Активность по пользователям</div>
 
     @if(!empty($activityByDay))
-        <div class="report-table-title">Таблица №1.1 — Активность по пользователям</div>
         <table class="report-table">
             <thead>
                 <tr>
@@ -180,9 +179,11 @@
             </tbody>
         </table>
     @endif
+</div>
 
-    @if(!empty($postsByDay))
-        <div class="report-table-title" style="margin-top: 25px;">Таблица №1.2 — Частота публикаций</div>
+@if(!empty($postsByDay))
+    <div class="report-section page-break">
+        <div class="report-section-title">📊 Таблица №1.2 - Частота публикаций</div>
         <table class="report-table">
             <thead>
                 <tr>
@@ -203,10 +204,12 @@
                 @endforeach
             </tbody>
         </table>
-    @endif
+    </div>
+@endif
 
-    @if(!empty($engagementByDay))
-        <div class="report-table-title" style="margin-top: 25px;">Таблица №1.3 — Средняя вовлеченность</div>
+@if(!empty($engagementByDay))
+    <div class="report-section page-break">
+        <div class="report-section-title">📊 Таблица №1.3 - Средняя вовлеченность</div>
         <table class="report-table">
             <thead>
                 <tr>
@@ -227,10 +230,12 @@
                 @endforeach
             </tbody>
         </table>
-    @endif
+    </div>
+@endif
 
-    @if(!empty($participantChanged))
-        <div class="report-table-title" style="margin-top: 25px;">Таблица №1.4 — Изменения аудитории</div>
+@if(!empty($participantChanged))
+    <div class="report-section page-break">
+        <div class="report-section-title">📊 Таблица №1.4 - Изменения аудитории</div>
         <table class="report-table">
             <thead>
                 <tr>
@@ -247,5 +252,5 @@
                 @endforeach
             </tbody>
         </table>
-    @endif
-</div>
+    </div>
+@endif
