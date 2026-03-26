@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+@font-face {
+    font-family: DejaVu Sans;
+    src: local('DejaVu Sans');
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +23,7 @@ html {
 }
 
 body {
-    font-family: DejaVu Sans, sans-serif;
+    font-family: 'DejaVu Sans', 'Liberation Sans', 'Noto Sans', 'Arial', sans-serif;
     font-size: 11px;
     color: #1f2937;
     line-height: 1.7;
