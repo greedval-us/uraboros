@@ -29,13 +29,24 @@ class DataMapperService
         ];
     }
 
+    public function getStatsData(BotUser $user, int $channelsCount): array
+    {
+        return [
+            'total_requests' => $user->count_requests,
+            'available_requests' => $user->requests,
+            'channels_count' => $channelsCount,
+            'referrals_count' => $user->referral_count,
+            'last_request_at' => optional($user->last_request_at)?->format('d.m.Y H:i') ?? '-',
+        ];
+    }
+
     public function getGroupTitleData(GroupDTO $group): array
     {
         return [
             'id' => $group->idGroup,
             'title' => $group->titleGroup ?? 'Без названия',
             'participants' => $group->participantsCount ?? 0,
-            'type' => $group->type,
+            'type' => $group->type == 0 ? 'Chat' : 'Channel',
             'created' => $group->createdDate?->format('d.m.Y'),
         ];
     }

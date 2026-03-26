@@ -1,9 +1,9 @@
-import { qrCode, recoveryCodes, secretKey } from '@/routes/two-factor';
-import { computed, ref } from 'vue';
+import { qrCode, recoveryCodes, secretKey } from "@/routes/two-factor";
+import { computed, ref } from "vue";
 
 const fetchJson = async <T>(url: string): Promise<T> => {
     const response = await fetch(url, {
-        headers: { Accept: 'application/json' },
+        headers: { Accept: "application/json" },
     });
 
     if (!response.ok) {
@@ -19,32 +19,28 @@ const qrCodeSvg = ref<string | null>(null);
 const recoveryCodesList = ref<string[]>([]);
 
 const hasSetupData = computed<boolean>(
-    () => qrCodeSvg.value !== null && manualSetupKey.value !== null,
+    () => qrCodeSvg.value !== null && manualSetupKey.value !== null
 );
 
 export const useTwoFactorAuth = () => {
     const fetchQrCode = async (): Promise<void> => {
         try {
-            const { svg } = await fetchJson<{ svg: string; url: string }>(
-                qrCode.url(),
-            );
+            const { svg } = await fetchJson<{ svg: string; url: string }>(qrCode.url());
 
             qrCodeSvg.value = svg;
         } catch {
-            errors.value.push('Failed to fetch QR code');
+            errors.value.push("Failed to fetch QR code");
             qrCodeSvg.value = null;
         }
     };
 
     const fetchSetupKey = async (): Promise<void> => {
         try {
-            const { secretKey: key } = await fetchJson<{ secretKey: string }>(
-                secretKey.url(),
-            );
+            const { secretKey: key } = await fetchJson<{ secretKey: string }>(secretKey.url());
 
             manualSetupKey.value = key;
         } catch {
-            errors.value.push('Failed to fetch a setup key');
+            errors.value.push("Failed to fetch a setup key");
             manualSetupKey.value = null;
         }
     };
@@ -68,11 +64,9 @@ export const useTwoFactorAuth = () => {
     const fetchRecoveryCodes = async (): Promise<void> => {
         try {
             clearErrors();
-            recoveryCodesList.value = await fetchJson<string[]>(
-                recoveryCodes.url(),
-            );
+            recoveryCodesList.value = await fetchJson<string[]>(recoveryCodes.url());
         } catch {
-            errors.value.push('Failed to fetch recovery codes');
+            errors.value.push("Failed to fetch recovery codes");
             recoveryCodesList.value = [];
         }
     };

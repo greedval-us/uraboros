@@ -3,6 +3,7 @@
 use App\Modules\Bot\Enums\KeyboardKey;
 use App\Modules\Bot\Keyboards\Account\PlansKeyboard;
 use App\Modules\Bot\Keyboards\Account\ProfileKeyboard;
+use App\Modules\Bot\Keyboards\Account\StatsKeyboard;
 use App\Modules\Bot\Keyboards\AccountKeyboard;
 use App\Modules\Bot\Keyboards\Analytics\ChannelAnalyticsKeyboard;
 use App\Modules\Bot\Keyboards\Analytics\UserAnalyticsKeyboard;
@@ -34,6 +35,7 @@ return [
         KeyboardKey::UserA->value => UserAnalyticsKeyboard::class,
         KeyboardKey::ChannelA->value => ChannelAnalyticsKeyboard::class,
         KeyboardKey::Plans->value => PlansKeyboard::class,
+        KeyboardKey::Stats->value => StatsKeyboard::class,
     ],
 
     'messages' => [
@@ -88,8 +90,8 @@ return [
             'reply_keyboard' => KeyboardKey::Plans->value,
         ],
         'stats' => [
-            'text' => 'account.screen',
-            'reply_keyboard' => KeyboardKey::Account->value,
+            'text' => 'account.stats.screen',
+            'reply_keyboard' => KeyboardKey::Stats->value,
         ],
         'settings' => [
             'text' => 'settings.screen',
@@ -124,5 +126,19 @@ return [
             'reply_keyboard' => KeyboardKey::Help->value,
         ],
 
+    ],
+
+    'analytics' => [
+        'report_costs' => [
+            'default' => 1,
+            'audience_quality' => 1,
+            'basic_metrics' => 1,
+            'network_metrics' => 1,
+            'funnel' => 1,
+            'retention' => 1,
+            'user' => 1,
+            'user_leaders' => 1,
+            'full_report' => 3,
+        ],
     ],
 ];

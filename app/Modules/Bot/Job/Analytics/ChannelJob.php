@@ -5,6 +5,8 @@ namespace App\Modules\Bot\Job\Analytics;
 use App\Modules\Bot\DTO\GroupDTO;
 use App\Modules\Bot\Job\JobTrait;
 use App\Modules\Bot\Enums\CommandKey;
+use App\Modules\Bot\Enums\LinkType;
+use App\Modules\Bot\Helpers\TelegramHelper;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -32,12 +34,27 @@ class ChannelJob implements ShouldQueue
         $this->messageID = $messageID;
         $this->text = $text;
     }
+
     public function handle(): void
     {
         $this->bootServices();
 
+        $info = TelegramHelper::extractInfo($this->text, 1);
+        $endpoint = 'analytics/getGroup';
+        $params = [];
+
+        if (($info['type'] ?? null) === LinkType::Channelname && !empty($info['channel'])) {
+            $params = ['username' => (string)$info['channel']];
+        } elseif (in_array(($info['type'] ?? null), [LinkType::UserId, LinkType::ChatId], true) && !empty($info['value'])) {
+            $params = ['id_group' => (string)$info['value']];
+        } else {
+            $this->botServices->delete($this->chat, $this->messageID);
+            $this->botServices->sendText($this->chat, 'Неверная данные для получения информации о канале. Пожалуйста, убедитесь, что вы отправили правильную ссылку или идентификатор канала.');
+            return;
+        }
+
         try {
-            $group = $this->apiServices->get("analytics/getGroup/{$this->text}");
+            $group = $this->apiServices->get($endpoint, $params);
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
@@ -52,7 +69,7 @@ class ChannelJob implements ShouldQueue
 
         $infoGroup = $this->dataMapperService->getGroupTitleData(GroupDTO::fromApi($group));
 
-        $this->botServices->sendInline(CommandKey::ChannelA->value, $this->lang, $this->chat, $infoGroup, ['group' => $this->text]);
+        $this->botServices->sendInline(CommandKey::ChannelA->value, $this->lang, $this->chat, $infoGroup, ['group' => $infoGroup['id']]);
         $this->botServices->delete($this->chat, $this->messageID);
     }
 }

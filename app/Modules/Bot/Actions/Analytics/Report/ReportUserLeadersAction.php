@@ -2,33 +2,23 @@
 
 namespace App\Modules\Bot\Actions\Analytics\Report;
 
-use App\Modules\Bot\Enums\StorageKey;
 use App\Modules\Bot\Job\Analytics\Report\ExportUserLeadersJob;
-use App\Modules\Bot\Services\BotActionService;
-use App\Modules\Bot\Services\DataBaseService;
-use App\Modules\Bot\Services\LangService;
-use App\Modules\Bot\Services\StorageService;
+use App\Modules\Bot\Services\AnalyticsReportAccessService;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
 class ReportUserLeadersAction
 {
     public function __construct(
-        private BotActionService $bot,
-        private LangService $langService,
-        private DataBaseService $dataBaseService,
-        private StorageService $storageService
+        private readonly AnalyticsReportAccessService $reportAccessService
     ) {}
 
     public function handle(TelegraphChat $chat, string $query, string $param, string $lang): void
     {
-        $prise = $this->dataBaseService->canMakeAction($chat->chat_id);
+        $messageId = $this->reportAccessService->startReport($chat, $lang, 'user_leaders');
 
-        if (!$prise) {
-            $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.no_prise'));
-            $this->storageService->set($chat, StorageKey::MESSAGE->value, $messageId);
+        if ($messageId === null) {
             return;
         }
-        $messageId = $this->bot->sendText($chat, $this->langService->get($lang, 'analytics.louding'));
 
         ExportUserLeadersJob::dispatch($lang, $chat, $chat->chat_id, $messageId, $query, $param);
     }

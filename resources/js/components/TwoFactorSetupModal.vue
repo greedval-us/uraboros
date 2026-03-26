@@ -1,26 +1,22 @@
 <script setup lang="ts">
-import AlertError from '@/components/AlertError.vue';
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
+import AlertError from "@/components/AlertError.vue";
+import InputError from "@/components/InputError.vue";
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
-} from '@/components/ui/dialog';
-import {
-    InputOTP,
-    InputOTPGroup,
-    InputOTPSlot,
-} from '@/components/ui/input-otp';
-import { Spinner } from '@/components/ui/spinner';
-import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
-import { confirm } from '@/routes/two-factor';
-import { Form } from '@inertiajs/vue3';
-import { useClipboard } from '@vueuse/core';
-import { Check, Copy, ScanLine } from 'lucide-vue-next';
-import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
+} from "@/components/ui/dialog";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { Spinner } from "@/components/ui/spinner";
+import { useTwoFactorAuth } from "@/composables/useTwoFactorAuth";
+import { confirm } from "@/routes/two-factor";
+import { Form } from "@inertiajs/vue3";
+import { useClipboard } from "@vueuse/core";
+import { Check, Copy, ScanLine } from "lucide-vue-next";
+import { computed, nextTick, ref, useTemplateRef, watch } from "vue";
 
 interface Props {
     requiresConfirmation: boolean;
@@ -28,16 +24,15 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const isOpen = defineModel<boolean>('isOpen');
+const isOpen = defineModel<boolean>("isOpen");
 
 const { copy, copied } = useClipboard();
-const { qrCodeSvg, manualSetupKey, clearSetupData, fetchSetupData, errors } =
-    useTwoFactorAuth();
+const { qrCodeSvg, manualSetupKey, clearSetupData, fetchSetupData, errors } = useTwoFactorAuth();
 
 const showVerificationStep = ref(false);
-const code = ref<string>('');
+const code = ref<string>("");
 
-const pinInputContainerRef = useTemplateRef('pinInputContainerRef');
+const pinInputContainerRef = useTemplateRef("pinInputContainerRef");
 
 const modalConfig = computed<{
     title: string;
@@ -46,26 +41,26 @@ const modalConfig = computed<{
 }>(() => {
     if (props.twoFactorEnabled) {
         return {
-            title: 'Two-Factor Authentication Enabled',
+            title: "Two-Factor Authentication Enabled",
             description:
-                'Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.',
-            buttonText: 'Close',
+                "Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.",
+            buttonText: "Close",
         };
     }
 
     if (showVerificationStep.value) {
         return {
-            title: 'Verify Authentication Code',
-            description: 'Enter the 6-digit code from your authenticator app',
-            buttonText: 'Continue',
+            title: "Verify Authentication Code",
+            description: "Enter the 6-digit code from your authenticator app",
+            buttonText: "Continue",
         };
     }
 
     return {
-        title: 'Enable Two-Factor Authentication',
+        title: "Enable Two-Factor Authentication",
         description:
-            'To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app',
-        buttonText: 'Continue',
+            "To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app",
+        buttonText: "Continue",
     };
 });
 
@@ -74,7 +69,7 @@ const handleModalNextStep = () => {
         showVerificationStep.value = true;
 
         nextTick(() => {
-            pinInputContainerRef.value?.querySelector('input')?.focus();
+            pinInputContainerRef.value?.querySelector("input")?.focus();
         });
 
         return;
@@ -90,7 +85,7 @@ const resetModalState = () => {
     }
 
     showVerificationStep.value = false;
-    code.value = '';
+    code.value = "";
 };
 
 watch(
@@ -104,7 +99,7 @@ watch(
         if (!qrCodeSvg.value) {
             await fetchSetupData();
         }
-    },
+    }
 );
 </script>
 
@@ -112,33 +107,25 @@ watch(
     <Dialog :open="isOpen" @update:open="isOpen = $event">
         <DialogContent class="sm:max-w-md">
             <DialogHeader class="flex items-center justify-center">
-                <div
-                    class="mb-3 w-auto rounded-full border border-border bg-card p-0.5 shadow-sm"
-                >
+                <div class="mb-3 w-auto rounded-full border border-border bg-card p-0.5 shadow-sm">
                     <div
                         class="relative overflow-hidden rounded-full border border-border bg-muted p-2.5"
                     >
-                        <div
-                            class="absolute inset-0 grid grid-cols-5 opacity-50"
-                        >
+                        <div class="absolute inset-0 grid grid-cols-5 opacity-50">
                             <div
                                 v-for="i in 5"
                                 :key="`col-${i}`"
                                 class="border-r border-border last:border-r-0"
                             />
                         </div>
-                        <div
-                            class="absolute inset-0 grid grid-rows-5 opacity-50"
-                        >
+                        <div class="absolute inset-0 grid grid-rows-5 opacity-50">
                             <div
                                 v-for="i in 5"
                                 :key="`row-${i}`"
                                 class="border-b border-border last:border-b-0"
                             />
                         </div>
-                        <ScanLine
-                            class="relative z-20 size-6 text-foreground"
-                        />
+                        <ScanLine class="relative z-20 size-6 text-foreground" />
                     </div>
                 </div>
                 <DialogTitle>{{ modalConfig.title }}</DialogTitle>
@@ -147,15 +134,11 @@ watch(
                 </DialogDescription>
             </DialogHeader>
 
-            <div
-                class="relative flex w-auto flex-col items-center justify-center space-y-5"
-            >
+            <div class="relative flex w-auto flex-col items-center justify-center space-y-5">
                 <template v-if="!showVerificationStep">
                     <AlertError v-if="errors?.length" :errors="errors" />
                     <template v-else>
-                        <div
-                            class="relative mx-auto flex max-w-md items-center overflow-hidden"
-                        >
+                        <div class="relative mx-auto flex max-w-md items-center overflow-hidden">
                             <div
                                 class="relative mx-auto aspect-square w-64 overflow-hidden rounded-lg border border-border"
                             >
@@ -165,10 +148,7 @@ watch(
                                 >
                                     <Spinner class="size-6" />
                                 </div>
-                                <div
-                                    v-else
-                                    class="relative z-10 overflow-hidden border p-5"
-                                >
+                                <div v-else class="relative z-10 overflow-hidden border p-5">
                                     <div
                                         v-html="qrCodeSvg"
                                         class="aspect-square w-full justify-center rounded-lg bg-white p-2 [&_svg]:size-full"
@@ -183,20 +163,14 @@ watch(
                             </Button>
                         </div>
 
-                        <div
-                            class="relative flex w-full items-center justify-center"
-                        >
-                            <div
-                                class="absolute inset-0 top-1/2 h-px w-full bg-border"
-                            />
+                        <div class="relative flex w-full items-center justify-center">
+                            <div class="absolute inset-0 top-1/2 h-px w-full bg-border" />
                             <span class="relative bg-card px-2 py-1"
                                 >or, enter the code manually</span
                             >
                         </div>
 
-                        <div
-                            class="flex w-full items-center justify-center space-x-2"
-                        >
+                        <div class="flex w-full items-center justify-center space-x-2">
                             <div
                                 class="flex w-full items-stretch overflow-hidden rounded-xl border border-border"
                             >
@@ -217,10 +191,7 @@ watch(
                                         @click="copy(manualSetupKey || '')"
                                         class="relative block h-auto border-l border-border px-3 hover:bg-muted"
                                     >
-                                        <Check
-                                            v-if="copied"
-                                            class="w-4 text-green-500"
-                                        />
+                                        <Check v-if="copied" class="w-4 text-green-500" />
                                         <Copy v-else class="w-4" />
                                     </button>
                                 </template>
@@ -238,10 +209,7 @@ watch(
                         v-slot="{ errors, processing }"
                     >
                         <input type="hidden" name="code" :value="code" />
-                        <div
-                            ref="pinInputContainerRef"
-                            class="relative w-full space-y-3"
-                        >
+                        <div ref="pinInputContainerRef" class="relative w-full space-y-3">
                             <div
                                 class="flex w-full flex-col items-center justify-center space-y-3 py-2"
                             >
@@ -260,10 +228,7 @@ watch(
                                     </InputOTPGroup>
                                 </InputOTP>
                                 <InputError
-                                    :message="
-                                        errors?.confirmTwoFactorAuthentication
-                                            ?.code
-                                    "
+                                    :message="errors?.confirmTwoFactorAuthentication?.code"
                                 />
                             </div>
 

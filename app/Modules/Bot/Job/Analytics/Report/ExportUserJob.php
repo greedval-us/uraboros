@@ -2,10 +2,11 @@
 
 namespace App\Modules\Bot\Job\Analytics\Report;
 
-use App\Modules\Bot\DTO\AnalyticDTO;
-use App\Modules\Bot\DTO\GroupDTO;
+use App\Modules\Bot\DTO\ChangedUserDTO;
+use App\Modules\Bot\DTO\UserAnalyticsDTO;
+use App\Modules\Bot\DTO\UserDTO;
 use App\Modules\Bot\Job\JobTrait;
-use App\Modules\Report\DTO\ReportContextDTO;
+use App\Modules\Report\DTO\UserContextDTO;
 use App\Modules\Report\Enums\ReportType;
 use Carbon\Carbon;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -16,7 +17,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 
-class ExportNetworkMetricsJob implements ShouldQueue
+class ExportUserJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, JobTrait;
 
@@ -46,11 +47,13 @@ class ExportNetworkMetricsJob implements ShouldQueue
         try {
             $days = (int) $this->param;
 
-            $to = Carbon::now('UTC');
-            $from = Carbon::now('UTC')->subDays($days);
+            $to = Carbon::yesterday('UTC')->endOfDay();
+            $from = $to->copy()->subDays($days);
 
-            $group = $this->apiServices->get('analytics/getGroup/' . $this->query);
-            $analytic = $this->apiServices->get('analytics/getGroupAnalytic', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_group' => $this->query]);
+            $user = $this->apiServices->get("analytics/getUser", ['id_user' => $this->query]);
+            $analytic = $this->apiServices->get('analytics/getBaseAnalyticUser', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_user' => $this->query]);
+            $changed = $this->apiServices->get('analytics/getUserChanged', ['from' => $from->toIso8601String(), 'to' => $to->toIso8601String(), 'id_user' => $this->query]);
+
         } catch (\Throwable $e) {
             $this->botServices->delete($this->chat, $this->messageID);
             $this->botServices->sendText($this->chat, 'Ошибка при получении данных');
@@ -59,25 +62,27 @@ class ExportNetworkMetricsJob implements ShouldQueue
 
         if(empty($analytic) || $analytic == null) {
             $this->botServices->delete($this->chat, $this->messageID);
-            $this->botServices->sendText($this->chat, 'Нет группы todo');
+            $this->botServices->sendText($this->chat, 'Нет данных todo');
             return;
         }
 
-        $groupDto = GroupDTO::fromApi($group);
-        $analyticDto = AnalyticDTO::fromApi($analytic);
+        $user = UserDTO::fromApi($user);
+        $analyticUser = UserAnalyticsDTO::fromApi($analytic);
+        $changedUser = ChangedUserDTO::fromApiList($changed);
 
-        $context = new ReportContextDTO(
-            group: $groupDto,
-            analytic: $analyticDto,
+        $context = new UserContextDTO(
+            $user,
+            $analyticUser,
+            $changedUser,
             lang: $this->lang,
             days: $days,
             to: $to,
             from: $from,
         );
 
-        $pdf = $this->pdfReportServices->generate($context, ReportType::NETWORK);
+        $pdf = $this->pdfReportServices->generate($context, ReportType::USERREPORT);
 
-        $filePath = "reports/{$this->chatID}/group_{$groupDto->idGroup}_{$to}.pdf";
+        $filePath = "reports/{$this->chatID}/user{$user->idUser}_{$to}.pdf";
 
         Storage::disk('private')->put($filePath, $pdf->output());
 

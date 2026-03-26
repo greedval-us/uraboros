@@ -14,4 +14,8 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('telegram', function () {
+    return Inertia::render('Telegram');
+})->middleware(['auth', 'verified'])->name('telegram');
+
 require __DIR__.'/settings.php';

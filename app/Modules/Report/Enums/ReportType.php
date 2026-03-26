@@ -11,5 +11,6 @@ enum ReportType: string
     case RETENTION = 'retention';
     case USERLEADERS = 'user_leaders';
     case FULLREPORT = 'full_report';
+    case USERREPORT = 'user_report';
     case DEFAULT = 'default';
 }
