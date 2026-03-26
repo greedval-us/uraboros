@@ -23,7 +23,7 @@ html {
 }
 
 body {
-    font-family: 'DejaVu Sans', 'Liberation Sans', 'Noto Sans', 'Arial', sans-serif;
+    font-family: Helvetica, 'Courier New', monospace;
     font-size: 11px;
     color: #1f2937;
     line-height: 1.7;
