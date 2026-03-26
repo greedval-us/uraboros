@@ -1,9 +1,9 @@
 <div class="report-section page-break">
 
-    <div class="report-section-title">2. Воронка вовлечённости</div>
+    <div class="report-section-title">2. Воронка вовлеченности</div>
 
     <p>
-        участники → просмотры → реакции → комментарии <br>
+        участники → просмотры → реакции → комментарии
         (ViewRate, ReactionRate, CommentRate, ERview)
     </p>
 
@@ -26,16 +26,16 @@
 
     @if(!empty($funnelChart))
         <div class="report-chart">
-            <div class="report-chart-title">Воронка вовлечённости в %</div>
-            <img src="{{ $funnelChart }}" style="width:100%; margin-top:10px;">
+            <div class="report-chart-title">Воронка вовлеченности в %</div>
+            <img src="{{ $funnelChart }}" style="width:100%;">
         </div>
     @endif
 
     <ul>
-        <li>общее количество просмотра публикаций (ViewRate) – <strong>{{ $avgViewRate ?? 0 }}%</strong></li>
-        <li>среднее количество реакций на публикации (ReactionRate) – <strong>{{ $avgReactionRate ?? 0 }}%</strong></li>
-        <li>среднее количество участий в обсуждении (CommentRate) – <strong>{{ $avgCommentRate ?? 0 }}%</strong></li>
-        <li>общий охват просмотров (ERview) – <strong>{{ $avgERview ?? 0 }}%</strong></li>
+        <li>общее количество просмотра публикаций (ViewRate) — <strong>{{ $avgViewRate ?? 0 }}%</strong></li>
+        <li>среднее количество реакций на публикации (ReactionRate) — <strong>{{ $avgReactionRate ?? 0 }}%</strong></li>
+        <li>среднее количество участий в обсуждении (CommentRate) — <strong>{{ $avgCommentRate ?? 0 }}%</strong></li>
+        <li>общий охват просмотров (ERview) — <strong>{{ $avgERview ?? 0 }}%</strong></li>
     </ul>
     <div class="report-section page-break">
 
@@ -59,14 +59,13 @@
         @if(!empty($viewRateChart))
             <div class="report-chart">
                 <div class="report-chart-title">Динамика просмотров публикаций</div>
-                <img src="{{ $viewRateChart }}" style="width:100%; margin-top:10px;">
+                <img src="{{ $viewRateChart }}" style="width:100%;">
             </div>
         @endif
 
-        <p>
-            Числовые значения метрики по сообщениям представлены в конце отчета
-            в таблице №2.1 «Просмотр публикаций (по публикациям)».
-        </p>
+        <div class="note-box">
+            Числовые значения метрики по сообщениям представлены в конце отчета в таблице 2.1 «Просмотр публикаций».
+        </div>
 
         <p>Значения показателя свидетельствуют о:</p>
 
@@ -97,14 +96,13 @@
         @if(!empty($reactionRateChart))
             <div class="report-chart">
                 <div class="report-chart-title">Динамика реакций</div>
-                <img src="{{ $reactionRateChart }}" style="width:100%; margin-top:10px;">
+                <img src="{{ $reactionRateChart }}" style="width:100%;">
             </div>
         @endif
 
-        <p>
-            Числовые значения метрики представлены в конце отчета
-            в таблице №2.2 «Доля реакций (по публикациям)».
-        </p>
+        <div class="note-box">
+            Числовые значения метрики представлены в конце отчета в таблице 2.2 «Доля реакций».
+        </div>
 
         <p>Значения показателя свидетельствуют о:</p>
 
@@ -129,14 +127,13 @@
         @if(!empty($commentRateChart))
             <div class="report-chart">
                 <div class="report-chart-title">Динамика комментариев</div>
-                <img src="{{ $commentRateChart }}" style="width:100%; margin-top:10px;">
+                <img src="{{ $commentRateChart }}" style="width:100%;">
             </div>
         @endif
 
-        <p>
-            Числовые значения метрики представлены в конце отчета
-            в таблице №2.3 «Доля комментариев (по публикациям)».
-        </p>
+        <div class="note-box">
+            Числовые значения метрики представлены в конце отчета в таблице 2.3 «Доля комментариев».
+        </div>
 
         <p>Значения показателя свидетельствуют о:</p>
 
@@ -167,14 +164,13 @@
         @if(!empty($erViewChart))
             <div class="report-chart">
                 <div class="report-chart-title">Динамика вовлеченности от просмотров</div>
-                <img src="{{ $erViewChart }}" style="width:100%; margin-top:10px;">
+                <img src="{{ $erViewChart }}" style="width:100%;">
             </div>
         @endif
 
-        <p>
-            Числовые значения метрики представлены в конце отчета
-            в таблице №2.4 «Вовлеченность от просмотров (по публикациям)».
-        </p>
+        <div class="note-box">
+            Числовые значения метрики представлены в конце отчета в таблице 2.4 «Вовлеченность от просмотров».
+        </div>
 
         <p>Значения показателя свидетельствуют о:</p>
 
@@ -188,7 +184,7 @@
 
     <div class="report-section page-break">
         @if(!empty($funnelByDay))
-            <div class="">Таблица 2. Воронка вовлечённости</div>
+            <div class="report-section-title">Таблица 2 — Воронка вовлеченности</div>
             <table class="report-table">
                 <thead>
                     <tr>
@@ -202,7 +198,7 @@
                 <tbody>
                     @foreach($funnelByDay as $row)
                         <tr>
-                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['day'] ?? '--' }}</td>
                             <td>{{ $row['viewRate'] ?? 0 }}</td>
                             <td>{{ $row['reactionRate'] ?? 0 }}</td>
                             <td>{{ $row['commentRate'] ?? 0 }}</td>
@@ -213,7 +209,7 @@
             </table>
         @endif
         @if(!empty($viewRatePeriod))
-            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <div class="report-table-title">Таблица 2.1 — Просмотр публикаций</div>
             <table class="report-table">
                 <thead>
                     <tr>
@@ -224,7 +220,7 @@
                 <tbody>
                     @foreach($viewRatePeriod as $row)
                         <tr>
-                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['day'] ?? '--' }}</td>
                             <td>{{ $row['value'] ?? 0 }}</td>
                         </tr>
                     @endforeach
@@ -232,18 +228,18 @@
             </table>
         @endif
         @if(!empty($reactionRatePeriod))
-            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <div class="report-table-title">Таблица 2.2 — Доля реакций</div>
             <table class="report-table">
                 <thead>
                     <tr>
                         <th>ID поста</th>
-                        <th>Просмотр публикации</th>
+                        <th>Доля реакций</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($reactionRatePeriod as $row)
                         <tr>
-                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['day'] ?? '--' }}</td>
                             <td>{{ $row['value'] ?? 0 }}</td>
                         </tr>
                     @endforeach
@@ -251,18 +247,18 @@
             </table>
         @endif
         @if(!empty($commentRatePeriod))
-            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <div class="report-table-title">Таблица 2.3 — Доля комментариев</div>
             <table class="report-table">
                 <thead>
                     <tr>
                         <th>ID поста</th>
-                        <th>Просмотр публикации</th>
+                        <th>Доля комментариев</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($commentRatePeriod as $row)
                         <tr>
-                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['day'] ?? '--' }}</td>
                             <td>{{ $row['value'] ?? 0 }}</td>
                         </tr>
                     @endforeach
@@ -270,18 +266,18 @@
             </table>
         @endif
         @if(!empty($ERviewPeriod))
-            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <div class="report-table-title">Таблица 2.4 — Вовлеченность от просмотров</div>
             <table class="report-table">
                 <thead>
                     <tr>
                         <th>ID поста</th>
-                        <th>Просмотр публикации</th>
+                        <th>Вовлеченность</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($ERviewPeriod as $row)
                         <tr>
-                            <td>{{ $row['day'] ?? '-- --' }}</td>
+                            <td>{{ $row['day'] ?? '--' }}</td>
                             <td>{{ $row['value'] ?? 0 }}</td>
                         </tr>
                     @endforeach

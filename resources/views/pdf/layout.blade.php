@@ -3,50 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Аналитический отчет</title>
 
 <style>
+/* === BASE RESET & TYPOGRAPHY === */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: DejaVu Sans, serif;
-    font-size: 12px;
-    color: #374151;
-    line-height: 1.6;
-    background-color: #f9fafb;
+html {
+    font-size: 11px;
 }
 
-/* ### HEADER & FOOTER ### */
+body {
+    font-family: "DejaVu Sans", sans-serif;
+    font-size: 11px;
+    color: #1a1a2e;
+    line-height: 1.6;
+    background-color: #ffffff;
+}
+
+/* === DOCUMENT HEADER === */
 .document-header {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-    color: white;
-    padding: 30px;
-    margin-bottom: 20px;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0ea5e9 100%);
+    color: #ffffff;
+    padding: 24px 28px;
+    margin-bottom: 16px;
     page-break-inside: avoid;
+    position: relative;
+    overflow: hidden;
+}
+
+.document-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05));
 }
 
 .header-top {
     display: flex;
     justify-content: space-between;
-    align-items: start;
-    margin-bottom: 20px;
+    align-items: flex-start;
+    margin-bottom: 16px;
 }
 
 .header-title {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+    color: #ffffff;
 }
 
 .header-subtitle {
-    font-size: 13px;
-    opacity: 0.95;
-    margin-bottom: 15px;
+    font-size: 11px;
+    opacity: 0.9;
+    margin-bottom: 0;
+    color: #e0f2fe;
+}
+
+.header-badge {
+    background: rgba(255,255,255,0.15);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .header-meta {
@@ -54,48 +83,56 @@ body {
     width: 100%;
     border-collapse: collapse;
     font-size: 10px;
-    opacity: 0.9;
 }
 
 .header-meta tr {
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.header-meta tr:last-child {
+    border-bottom: none;
 }
 
 .header-meta td {
-    padding: 6px 0;
-    padding-right: 20px;
+    padding: 8px 0;
+    vertical-align: top;
 }
 
-.header-date, .header-period {
-    font-weight: 500;
+.header-meta-label {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 2px;
 }
 
-/* ### PAGE BREAKS ### */
+.header-meta-value {
+    font-weight: 600;
+    font-size: 11px;
+}
+
+/* === PAGE BREAKS === */
 .page-break {
     page-break-before: always;
     margin-top: 0;
+    padding-top: 0;
 }
 
-/* ### SECTIONS ### */
+/* === SECTIONS === */
 .report-section {
-    margin-bottom: 25px;
-    padding: 25px;
+    margin-bottom: 16px;
+    padding: 20px 24px;
     background-color: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
     page-break-inside: avoid;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.report-section:first-of-type {
-    margin-top: 0;
 }
 
 .report-section p {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     text-align: justify;
-    font-size: 12px;
-    line-height: 1.65;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #374151;
 }
 
 .report-section p:last-child {
@@ -103,53 +140,63 @@ body {
 }
 
 .report-section ul {
-    margin: 12px 0 12px 20px;
-    padding-left: 5px;
-    font-size: 12px;
+    margin: 10px 0 10px 18px;
+    font-size: 11px;
 }
 
 .report-section li {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     list-style-type: disc;
-    font-size: 12px;
+    color: #374151;
 }
 
-/* ### TITLES ### */
+/* === SECTION TITLES === */
 .report-section-title {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
-    color: #111827;
-    margin-bottom: 15px;
-    padding-bottom: 12px;
-    border-bottom: 3px solid #3b82f6;
+    color: #0f172a;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #0ea5e9;
     display: block;
 }
 
 .report-subsection-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    color: #1f2937;
-    margin: 18px 0 10px;
-    padding-left: 12px;
-    border-left: 4px solid #60a5fa;
+    color: #1e3a5f;
+    margin: 16px 0 10px;
+    padding-left: 10px;
+    border-left: 3px solid #0ea5e9;
     display: block;
 }
 
-/* ### METRICS BOX ### */
+/* === METRICS BOX === */
 .metrics-box {
-    background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
-    border-left: 4px solid #0ea5e9;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 3px solid #0ea5e9;
+    padding: 14px 16px;
+    margin: 14px 0;
+    border-radius: 4px;
+}
+
+.metrics-box-title {
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .metric-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 6px 0;
-    font-size: 12px;
-    border-bottom: 1px dotted #cbd5e1;
+    font-size: 11px;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 .metric-row:last-child {
@@ -157,22 +204,22 @@ body {
 }
 
 .metric-label {
-    color: #6b7280;
-    font-weight: 500;
+    color: #64748b;
+    font-weight: 400;
 }
 
 .metric-value {
-    color: #111827;
+    color: #0f172a;
     font-weight: 700;
 }
 
-/* ### CHARTS ### */
+/* === CHARTS === */
 .report-chart {
-    margin: 20px 0;
-    padding: 15px;
+    margin: 16px 0;
+    padding: 14px;
     background-color: #f8fafc;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
     text-align: center;
     page-break-inside: avoid;
 }
@@ -180,129 +227,133 @@ body {
 .report-chart img {
     max-width: 100%;
     height: auto;
-    margin-top: 10px;
 }
 
 .report-chart-title {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    color: #1e3a8a;
+    color: #1e3a5f;
     margin-bottom: 10px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #bfdbfe;
+    border-bottom: 1px solid #cbd5e1;
+    text-align: left;
 }
 
 .report-caption {
-    font-size: 10px;
-    color: #6b7280;
+    font-size: 9px;
+    color: #64748b;
     margin-top: 8px;
     font-style: italic;
 }
 
-/* ### TABLES ### */
+/* === TABLES === */
 .report-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 11px;
-    margin: 15px 0;
-    page-break-inside: avoid;
+    font-size: 10px;
+    margin: 12px 0;
 }
 
 .report-table-title {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    color: #1f2937;
-    margin: 20px 0 10px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #3b82f6;
+    color: #0f172a;
+    margin: 16px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #cbd5e1;
     display: block;
 }
 
 .report-table th {
     text-align: left;
     padding: 8px 10px;
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    background-color: #0f172a;
     color: #ffffff;
     font-weight: 700;
-    border: none;
-    font-size: 11px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .report-table td {
-    padding: 6px 10px;
-    border-bottom: 1px solid #e5e7eb;
+    padding: 7px 10px;
+    border-bottom: 1px solid #e2e8f0;
     color: #374151;
-}
-
-.report-table tbody tr {
-    transition: background-color 0.1s;
+    font-size: 10px;
 }
 
 .report-table tbody tr:nth-child(odd) {
-    background-color: #f9fafb;
+    background-color: #f8fafc;
 }
 
 .report-table tbody tr:nth-child(even) {
     background-color: #ffffff;
 }
 
-.report-table tbody tr:hover {
-    background-color: #f0f9ff;
-}
-
 .report-table tbody tr:last-child td {
-    border-bottom: 2px solid #3b82f6;
+    border-bottom: 1px solid #cbd5e1;
 }
 
-/* ### SPECIAL TEXT ### */
+/* === SPECIAL BOXES === */
 .description-box {
-    background-color: #fef3c7;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 6px;
-    border-left: 4px solid #f59e0b;
+    background-color: #fffbeb;
+    padding: 14px 16px;
+    margin: 14px 0;
+    border-radius: 4px;
+    border-left: 3px solid #f59e0b;
 }
 
 .description-box pre,
 .description-box code {
-    font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+    font-family: "DejaVu Sans Mono", monospace;
     white-space: pre-wrap;
     word-wrap: break-word;
     margin: 0;
-    font-size: 10px;
+    font-size: 9px;
     color: #92400e;
 }
 
-/* ### FOOTER ### */
-.report-section-footer {
-    margin-top: 40px;
-    padding-top: 15px;
-    border-top: 2px solid #e5e7eb;
+.note-box {
+    background-color: #f0f9ff;
+    padding: 12px 14px;
+    margin: 14px 0;
+    border-radius: 4px;
+    border-left: 3px solid #0ea5e9;
     font-size: 10px;
-    color: #6b7280;
+    color: #0369a1;
+}
+
+/* === FOOTER === */
+.report-section-footer {
+    margin-top: 24px;
+    padding: 14px;
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    font-size: 9px;
+    color: #64748b;
     text-align: center;
     page-break-inside: avoid;
 }
 
 .footer-date {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-weight: 500;
 }
 
 .footer-page {
-    font-size: 9px;
+    font-size: 8px;
 }
 
-/* ### HIGHLIGHTS & BADGES ### */
+/* === BADGES === */
 .badge {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 3px 8px;
     background-color: #dbeafe;
-    color: #1e3a8a;
-    border-radius: 4px;
-    font-size: 10px;
+    color: #1e3a5f;
+    border-radius: 3px;
+    font-size: 9px;
     font-weight: 600;
-    margin: 0 4px 0 0;
+    margin: 0 3px 0 0;
 }
 
 .badge.success {
@@ -321,20 +372,18 @@ body {
 }
 
 strong {
-    color: #111827;
+    color: #0f172a;
     font-weight: 700;
 }
 
-/* ### PRINT OPTIMIZATION ### */
+/* === PRINT OPTIMIZATION === */
 @media print {
     body {
-        background-color: white;
+        background-color: #ffffff;
     }
 
     .report-section {
         page-break-inside: avoid;
-        box-shadow: none;
-        border: 1px solid #d1d5db;
     }
 
     .page-break {
