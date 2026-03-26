@@ -23,11 +23,32 @@ html {
 }
 
 body {
-    font-family: Helvetica, 'Courier New', monospace;
+    font-family: 'Times New Roman', Times-Roman, Times, serif;
     font-size: 11px;
     color: #1f2937;
     line-height: 1.7;
     background-color: white;
+}
+
+/* Cyrillic Support */
+p, div, span, td, th, li, h1, h2, h3, h4, h5, h6, strong, em {
+    font-family: 'Times New Roman', Times-Roman, Times, serif;
+}
+
+table, .report-table {
+    font-family: 'Times New Roman', Times-Roman, Times, serif;
+}
+
+.report-table th, .report-table td {
+    font-family: 'Times New Roman', Times-Roman, Times, serif;
+}
+
+.report-section, .report-subsection-title, .report-section-title {
+    font-family: 'Times New Roman', Times-Roman, Times, serif;
+}
+
+.metrics-box, .metric-label, .metric-value {
+    font-family: 'Times New Roman', Times-Roman, Times, serif;
 }
 
 /* ### HEADER & FOOTER ### */

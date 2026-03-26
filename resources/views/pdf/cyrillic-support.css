@@ -1,0 +1,114 @@
+/* =================================================================
+   CYRILLIC SUPPORT FOR DOMPDF - CSS ТОЛЬКО
+   ================================================================= */
+
+/* Встроенные PDF Base 14 шрифты с лучшей поддержкой кириллицы */
+@font-face {
+    font-family: 'CyrillicSerif';
+    src: local('Times New Roman'), local('Times-Roman'), local('Times');
+}
+
+@font-face {
+    font-family: 'CyrillicSerif';
+    font-weight: bold;
+    src: local('Times New Roman Bold'), local('Times-Bold'), local('Times');
+}
+
+@font-face {
+    font-family: 'CyrillicSerif';
+    font-style: italic;
+    src: local('Times New Roman Italic'), local('Times-Italic'), local('Times');
+}
+
+@font-face {
+    font-family: 'CyrillicSerif';
+    font-weight: bold;
+    font-style: italic;
+    src: local('Times New Roman Bold Italic'), local('Times-BoldItalic'), local('Times');
+}
+
+/* Основные элементы используют CyrillicSerif */
+body {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+/* Всех текст - явно на serif */
+p, div, span, td, th, li, h1, h2, h3, h4, h5, h6 {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+/* Таблицы особенно важны */
+table, .report-table {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+.report-table th {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+.report-table td {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+/* Блоки текста */
+.report-section, .report-subsection-title, .report-section-title {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+/* Метрики */
+.metrics-box, .metric-label, .metric-value {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+/* Заголовки */
+.header-title, .header-subtitle, .header-meta {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+/* Pre и code блоки */
+pre {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Футер */
+.report-section-footer, .footer-date {
+    font-family: 'CyrillicSerif', 'Times New Roman', Times-Roman, Times, serif;
+}
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ ===== */
+
+/* Typography для лучшей читаемости */
+body {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* Убедимся что перевод строк правильный */
+p {
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Таблицы не должны ломаться */
+table {
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+td, th {
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+/* Текст в таблицах */
+.report-table td, .report-table th {
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
