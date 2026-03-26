@@ -6,22 +6,18 @@
             <td class="report-table-label">Название</td>
             <td class="report-table-value">{{ $title }}</td>
         </tr>
-
         <tr>
             <td class="report-table-label">Username</td>
             <td class="report-table-value">{{ $username ?? '—' }}</td>
         </tr>
-
         <tr>
             <td class="report-table-label">Количество участников</td>
             <td class="report-table-value">{{ number_format($participants ?? 0, 0, '.', ' ') }}</td>
         </tr>
-
         <tr>
             <td class="report-table-label">Дата создания</td>
             <td class="report-table-value">{{ $createdAt ?? '—' }}</td>
         </tr>
-
         <tr>
             <td class="report-table-label">Последнее обновление</td>
             <td class="report-table-value">{{ $lastUpdate ?? '—' }}</td>
@@ -29,15 +25,15 @@
     </table>
 
     @if(!empty($description))
-        <div class="report-description" style="margin-top:15px;">
-            <strong>Описание</strong>
+        <div class="report-description" style="margin-top:20px;">
+            <strong>Описание группы</strong>
             <pre>{{ $description }}</pre>
         </div>
     @endif
 
     @if(!empty($flags))
-        <div class="report-tags" style="margin-top:10px;">
-            <strong>Флаги:</strong><br>
+        <div class="report-tags" style="margin-top:15px;">
+            <strong>Характеристики:</strong><br>
             @foreach(explode(',', $flags) as $flag)
                 <span class="report-tag">{{ trim($flag) }}</span>
             @endforeach

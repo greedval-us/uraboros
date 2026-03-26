@@ -32,14 +32,14 @@
 
     @if(!empty($writerToMembersAllChart))
         <div class="report-chart">
-            <div class="report-chart-title">Структура аудитории (WriterToMembers)</div>
+            <div class="report-chart-title">📊 Структура аудитории (WriterToMembers)</div>
             <img src="{{ $writerToMembersAllChart }}" style="width:100%; margin-top:10px;">
         </div>
     @endif
 
     @if(!empty($writerToShareAllChart))
         <div class="report-chart">
-            <div class="report-chart-title">Структура активной аудитории (WriterShare)</div>
+            <div class="report-chart-title">📊 Структура активной аудитории (WriterShare)</div>
             <img src="{{ $writerToShareAllChart }}" style="width:100%; margin-top:10px;">
         </div>
     @endif
@@ -82,7 +82,7 @@
     @if(!empty($writerToMembersChart))
         <div class="report-chart">
             <div class="report-chart-title">
-                График доли пишущих от аудитории
+                📈 График доли пишущих от аудитории
             </div>
 
             <img src="{{ $writerToMembersChart }}" style="width:100%; margin-top:10px;">
@@ -126,7 +126,7 @@
     @if(!empty($writerShareChart))
         <div class="report-chart">
             <div class="report-chart-title">
-                График доли пишущих среди активных
+                📈 График доли пишущих среди активных
             </div>
 
             <img src="{{ $writerShareChart }}" style="width:100%; margin-top:10px;">
@@ -170,7 +170,7 @@
     @if(!empty($timeBurstIndexChart))
         <div class="report-chart">
             <div class="report-chart-title">
-                График индекса временных всплесков
+                📈 График индекса временных всплесков
             </div>
 
             <img src="{{ $timeBurstIndexChart }}" style="width:100%; margin-top:10px;">

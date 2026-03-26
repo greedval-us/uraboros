@@ -188,7 +188,7 @@
 
     <div class="report-section page-break">
         @if(!empty($funnelByDay))
-            <div class="">Таблица 2. Воронка вовлечённости</div>
+            <div class="report-table-title">Таблица 2. Воронка вовлечённости</div>
             <table class="report-table">
                 <thead>
                     <tr>
@@ -212,8 +212,11 @@
                 </tbody>
             </table>
         @endif
+    </div>
+
+    <div class="report-section page-break">
         @if(!empty($viewRatePeriod))
-            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <div class="report-table-title">Таблица 2.1 - Просмотр публикаций</div>
             <table class="report-table">
                 <thead>
                     <tr>
@@ -231,13 +234,16 @@
                 </tbody>
             </table>
         @endif
+    </div>
+
+    <div class="report-section page-break">
         @if(!empty($reactionRatePeriod))
-            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <div class="report-table-title">Таблица 2.2 - Доля реакций</div>
             <table class="report-table">
                 <thead>
                     <tr>
                         <th>ID поста</th>
-                        <th>Просмотр публикации</th>
+                        <th>Доля реакций</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -250,13 +256,16 @@
                 </tbody>
             </table>
         @endif
+    </div>
+
+    <div class="report-section page-break">
         @if(!empty($commentRatePeriod))
-            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <div class="report-table-title">Таблица 2.3 - Доля комментариев</div>
             <table class="report-table">
                 <thead>
                     <tr>
                         <th>ID поста</th>
-                        <th>Просмотр публикации</th>
+                        <th>Доля комментариев</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -269,13 +278,16 @@
                 </tbody>
             </table>
         @endif
+    </div>
+
+    <div class="report-section page-break">
         @if(!empty($ERviewPeriod))
-            <div class="report-section-title">Таблица 2.1 Просмотр публикаций </div>
+            <div class="report-table-title">Таблица 2.4 - Вовлеченность от просмотров</div>
             <table class="report-table">
                 <thead>
                     <tr>
                         <th>ID поста</th>
-                        <th>Просмотр публикации</th>
+                        <th>Вовлеченность от просмотров</th>
                     </tr>
                 </thead>
                 <tbody>
