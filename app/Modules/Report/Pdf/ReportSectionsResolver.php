@@ -11,8 +11,6 @@ use App\Modules\Report\Sections\FunnelSection;
 use App\Modules\Report\Sections\GroupInfoSection;
 use App\Modules\Report\Sections\HeaderSection;
 use App\Modules\Report\Sections\IntroSection;
-use App\Modules\Report\Sections\NetworkMetricsSection;
-use App\Modules\Report\Sections\RetentionSection;
 use App\Modules\Report\Sections\UserLeadersSection;
 use App\Modules\Report\Sections\UserSection;
 
@@ -50,22 +48,6 @@ class ReportSectionsResolver
                 new IntroSection($context),
                 new GroupInfoSection($context),
                 new UserLeadersSection ($context),
-                new FooterSection($context),
-            ],
-
-            ReportType::NETWORK => [
-                new HeaderSection($context),
-                new IntroSection($context),
-                new GroupInfoSection($context),
-                new NetworkMetricsSection($context),
-                new FooterSection($context),
-            ],
-
-            ReportType::RETENTION => [
-                new HeaderSection($context),
-                new IntroSection($context),
-                new GroupInfoSection($context),
-                new RetentionSection($context),
                 new FooterSection($context),
             ],
 
