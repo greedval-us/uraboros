@@ -1,4 +1,4 @@
-<div class="report-section page-break">
+<div class="report-section">
 
     <div class="report-section-title">1. Базовые метрики</div>
 
@@ -45,111 +45,113 @@
             <span class="metric-value">{{ $both ?? 0 }}</span>
         </div>
     </div>
-    <div class="report-section page-break">
-        <div class="report-subsection-title">1.2 Частота публикаций</div>
+</div>
 
-        <p>
-            Метрика характеризует интенсивность публикационной активности и позволяет оценить регулярность появления нового контента.
-            Разделяет публикации по источнику:
-        </p>
+<div class="report-section page-break">
+    <div class="report-subsection-title">1.2 Частота публикаций</div>
 
-        <ul>
-            <li>публикации администраторов (AdminPosts)</li>
-            <li>публикации пользователей (UserPosts)</li>
-        </ul>
+    <p>
+        Метрика характеризует интенсивность публикационной активности и позволяет оценить регулярность появления нового контента.
+        Разделяет публикации по источнику:
+    </p>
 
-        @if(!empty($postsChart))
-            <div class="report-chart">
-                <div class="report-chart-title">📈 График публикаций</div>
-                <img src="{{ $postsChart }}" style="width:100%; margin-top:10px;">
-            </div>
-        @endif
+    <ul>
+        <li>публикации администраторов (AdminPosts)</li>
+        <li>публикации пользователей (UserPosts)</li>
+    </ul>
 
-        <div class="metrics-box">
-            <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">Общие данные за период</div>
-            <div class="metric-row">
-                <span class="metric-label">Всего публикаций</span>
-                <span class="metric-value">{{ $totalPosts ?? 0 }}</span>
-            </div>
-            <div class="metric-row">
-                <span class="metric-label">Администраторов</span>
-                <span class="metric-value">{{ $adminPosts ?? 0 }}</span>
-            </div>
-            <div class="metric-row">
-                <span class="metric-label">От пользователей</span>
-                <span class="metric-value">{{ $userPosts ?? 0 }}</span>
-            </div>
+    @if(!empty($postsChart))
+        <div class="report-chart">
+            <div class="report-chart-title">📈 График публикаций</div>
+            <img src="{{ $postsChart }}" style="width:100%; margin-top:10px;">
+        </div>
+    @endif
+
+    <div class="metrics-box">
+        <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">Общие данные за период</div>
+        <div class="metric-row">
+            <span class="metric-label">Всего публикаций</span>
+            <span class="metric-value">{{ $totalPosts ?? 0 }}</span>
+        </div>
+        <div class="metric-row">
+            <span class="metric-label">Администраторов</span>
+            <span class="metric-value">{{ $adminPosts ?? 0 }}</span>
+        </div>
+        <div class="metric-row">
+            <span class="metric-label">От пользователей</span>
+            <span class="metric-value">{{ $userPosts ?? 0 }}</span>
         </div>
     </div>
-    <div class="report-section page-break">
-        <div class="report-subsection-title">1.3 Средняя вовлеченность на пост</div>
+</div>
 
-        <p>Метрика показывает, насколько аудитория взаимодействует с контентом:</p>
+<div class="report-section page-break">
+    <div class="report-subsection-title">1.3 Средняя вовлеченность на пост</div>
 
-        <ul>
-            <li>интерес аудитории к контенту (ReactionsPerPost)</li>
-            <li>активность пользователей в комментариях (CommentsPerPost)</li>
-            <li>общее вовлечение аудитории (EngagementRate)</li>
-        </ul>
+    <p>Метрика показывает, насколько аудитория взаимодействует с контентом:</p>
 
-        @if(!empty($engagementChart))
-            <div class="report-chart">
-                <div class="report-chart-title">📊 График вовлеченности</div>
-                <img src="{{ $engagementChart }}" style="width:100%; margin-top:10px;">
-            </div>
-        @endif
+    <ul>
+        <li>интерес аудитории к контенту (ReactionsPerPost)</li>
+        <li>активность пользователей в комментариях (CommentsPerPost)</li>
+        <li>общее вовлечение аудитории (EngagementRate)</li>
+    </ul>
 
-        <div class="metrics-box">
-            <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">Общие данные за период</div>
-            <div class="metric-row">
-                <span class="metric-label">Средняя вовлеченность</span>
-                <span class="metric-value">{{ $avgEngagement ?? 0 }}</span>
-            </div>
-            <div class="metric-row">
-                <span class="metric-label">Публикаций/пост</span>
-                <span class="metric-value">{{ $avgPostsPerPost ?? 0 }}</span>
-            </div>
-            <div class="metric-row">
-                <span class="metric-label">Реакций/пост</span>
-                <span class="metric-value">{{ $avgReactionsPerPost ?? 0 }}</span>
-            </div>
+    @if(!empty($engagementChart))
+        <div class="report-chart">
+            <div class="report-chart-title">📊 График вовлеченности</div>
+            <img src="{{ $engagementChart }}" style="width:100%; margin-top:10px;">
+        </div>
+    @endif
+
+    <div class="metrics-box">
+        <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">Общие данные за период</div>
+        <div class="metric-row">
+            <span class="metric-label">Средняя вовлеченность</span>
+            <span class="metric-value">{{ $avgEngagement ?? 0 }}</span>
+        </div>
+        <div class="metric-row">
+            <span class="metric-label">Публикаций/пост</span>
+            <span class="metric-value">{{ $avgPostsPerPost ?? 0 }}</span>
+        </div>
+        <div class="metric-row">
+            <span class="metric-label">Реакций/пост</span>
+            <span class="metric-value">{{ $avgReactionsPerPost ?? 0 }}</span>
         </div>
     </div>
+</div>
 
-    <div class="report-section page-break">
-        <div class="report-subsection-title">1.4 Изменения аудитории</div>
+<div class="report-section page-break">
+    <div class="report-subsection-title">1.4 Изменения аудитории</div>
 
-        <p>
-            Раздел отражает динамику численности аудитории сообщества за анализируемый период.
-            Показатель позволяет оценить темпы роста аудитории, а также выявить периоды ускоренного
-            роста или снижения активности пользователей.
-        </p>
+    <p>
+        Раздел отражает динамику численности аудитории сообщества за анализируемый период.
+        Показатель позволяет оценить темпы роста аудитории, а также выявить периоды ускоренного
+        роста или снижения активности пользователей.
+    </p>
 
-        <p>
-            Анализ данной метрики позволяет определить устойчивость развития сообщества,
-            характер притока новых участников и возможные периоды оттока аудитории.
-        </p>
+    <p>
+        Анализ данной метрики позволяет определить устойчивость развития сообщества,
+        характер притока новых участников и возможные периоды оттока аудитории.
+    </p>
 
-        @if(!empty($participantChangedChart))
-            <div class="report-chart">
-                <div class="report-chart-title">📈 График изменения аудитории</div>
-                <img src="{{ $participantChangedChart }}" style="width:100%; margin-top:10px;">
-            </div>
-        @endif
+    @if(!empty($participantChangedChart))
+        <div class="report-chart">
+            <div class="report-chart-title">📈 График изменения аудитории</div>
+            <img src="{{ $participantChangedChart }}" style="width:100%; margin-top:10px;">
+        </div>
+    @endif
 
-        <p>Значения показателя могут свидетельствовать о:</p>
+    <p>Значения показателя могут свидетельствовать о:</p>
 
-        <ul>
-            <li>стабильном органическом росте аудитории сообщества;</li>
-            <li>снижении интереса пользователей и постепенном оттоке подписчиков;</li>
-            <li>резких скачках роста аудитории, связанных с рекламными кампаниями, вирусным распространением контента или искусственным увеличением числа подписчиков;</li>
-            <li>краткосрочных колебаниях численности аудитории, вызванных информационными событиями или изменением активности сообщества.</li>
-        </ul>
+    <ul>
+        <li>стабильном органическом росте аудитории сообщества;</li>
+        <li>снижении интереса пользователей и постепенном оттоке подписчиков;</li>
+        <li>резких скачках роста аудитории, связанных с рекламными кампаниями, вирусным распространением контента или искусственным увеличением числа подписчиков;</li>
+        <li>краткосрочных колебаниях численности аудитории, вызванных информационными событиями или изменением активности сообщества.</li>
+    </ul>
 
-        <p style="margin-top: 15px; padding: 12px; background-color: #f0f9ff; border-left: 4px solid #0ea5e9; border-radius: 4px;">
-            💡 <strong>Примечание:</strong> Числовые значения метрики по дням представлены в конце отчета в таблице №1.4.
-        </p>
-    </div>
+    <p style="margin-top: 15px; padding: 12px; background-color: #f0f9ff; border-left: 4px solid #0ea5e9; border-radius: 0;">
+        💡 <strong>Примечание:</strong> Числовые значения метрики по дням представлены в конце отчета в таблице №1.4.
+    </p>
 </div>
 
 <div class="report-section page-break">
