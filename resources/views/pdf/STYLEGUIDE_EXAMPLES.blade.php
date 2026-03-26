@@ -1,5 +1,5 @@
 <!-- ============================================================================
-     КРАТКАЯ СПРАВКА ПО СТИЛЯМ PDF ОТЧЕТОВ
+     СПРАВКА ПО СТИЛЯМ PDF ОТЧЕТОВ
      Используйте эти готовые примеры при создании новых разделов
      ============================================================================ -->
 
@@ -15,9 +15,7 @@
     <div class="report-section-title">Ключевые показатели</div>
 
     <div class="metrics-box">
-        <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">
-            Общие данные
-        </div>
+        <div class="metrics-box-title">Общие данные</div>
         <div class="metric-row">
             <span class="metric-label">Показатель 1</span>
             <span class="metric-value">123</span>
@@ -35,8 +33,8 @@
     <div class="report-section-title">Анализ динамики</div>
 
     <div class="report-chart">
-        <div class="report-chart-title">📊 Названием диаграммы</div>
-        <img src="{{ $chartPath }}" style="width:100%; margin-top:10px;">
+        <div class="report-chart-title">Название диаграммы</div>
+        <img src="{{ $chartPath }}" style="width:100%;">
     </div>
 </div>
 
@@ -45,7 +43,7 @@
 <div class="report-section">
     <div class="report-section-title">Детальные данные</div>
 
-    <div class="report-table-title">Таблица №1 — Название</div>
+    <div class="report-table-title">Таблица 1 - Название</div>
     <table class="report-table">
         <thead>
             <tr>
@@ -85,14 +83,13 @@
 
     <p>Основной текст...</p>
 
-    <p style="margin-top: 15px; padding: 12px; background-color: #f0f9ff;
-        border-left: 4px solid #0ea5e9; border-radius: 4px;">
-        💡 <strong>Примечание:</strong> Важная информация для пользователя.
-    </p>
+    <div class="note-box">
+        <strong>Примечание:</strong> Важная информация для пользователя.
+    </div>
 </div>
 
 
-<!-- 7. КОМБИНИРОВАННЫЙ РАЗДЕЛ (ДИАГРАММА + МЕТРИКИ + ТАБЛИЦА) -->
+<!-- 7. КОМБИНИРОВАННЫЙ РАЗДЕЛ -->
 <div class="report-section page-break">
     <div class="report-section-title">3. Полный анализ</div>
 
@@ -100,15 +97,13 @@
 
     <!-- Диаграмма -->
     <div class="report-chart">
-        <div class="report-chart-title">📈 Траектория развития</div>
-        <img src="{{ $chartImage }}" style="width:100%; margin-top:10px;">
+        <div class="report-chart-title">Траектория развития</div>
+        <img src="{{ $chartImage }}" style="width:100%;">
     </div>
 
     <!-- Метрики -->
     <div class="metrics-box">
-        <div style="font-weight: 700; color: #1f2937; margin-bottom: 12px;">
-            Итоговые показатели
-        </div>
+        <div class="metrics-box-title">Итоговые показатели</div>
         <div class="metric-row">
             <span class="metric-label">Минимум</span>
             <span class="metric-value">15</span>
@@ -123,11 +118,11 @@
         </div>
     </div>
 
-    <!-- Подзаголовок для следующей части -->
+    <!-- Подзаголовок -->
     <div class="report-subsection-title">3.1 Детальный анализ</div>
 
     <!-- Таблица -->
-    <div class="report-table-title">Таблица №3 — Дневные значения</div>
+    <div class="report-table-title">Таблица 3 - Дневные значения</div>
     <table class="report-table">
         <thead>
             <tr>
@@ -149,40 +144,23 @@
 </div>
 
 
-<!-- 8. ПРИМЕРЫ ИКОНОК ДЛЯ ДИАГРАММ -->
-📊 Общая статистика / Диаграмма
-📈 График роста / Восходящая тенденция
-📉 График падения / Нисходящая тенденция
-📋 Отчет / Список
-⚠️ Важное предупреждение
-💡 Совет / Примечание
-✅ Успех / Завершено
-❌ Ошибка / Проблема
-🔍 Анализ / Исследование
-👥 Пользователи / Аудитория
-💰 Финансы / Бюджет
-🎯 Цели / Задачи
-📱 Мобильное
-🖥️ Десктоп
-🌐 Веб
-📲 Приложение
-
-
 <!-- ЛУЧШИЕ ПРАКТИКИ:
 
 1. ВСЕГДА используйте .report-section для основных блоков
-2. НАЗНАЧЬТЕ заголовок каждому разделу с .report-section-title
+2. НАЗНАЧАЙТЕ заголовок каждому разделу с .report-section-title
 3. ДЛЯ больших разделов используйте .page-break
-4. МЕТРИКИ оформляйте в .metrics-box
-5. ДИАГРАММЫ помещайте в .report-chart с иконкой в заголовке
-6. ТАБЛИЦЫ оформляйте правильно с .report-table-title
-7. ПРИМЕЧАНИЯ/ВАЖНОЕ оформляйте голубым блоком
-8. НЕ используйте встроенные стили, кроме как в исключениях
+4. МЕТРИКИ оформляйте в .metrics-box с .metrics-box-title
+5. ДИАГРАММЫ помещайте в .report-chart
+6. ТАБЛИЦЫ оформляйте с .report-table-title
+7. ПРИМЕЧАНИЯ оформляйте через .note-box
+8. НЕ используйте inline стили
+
+ШРИФТЫ:
+- Основной шрифт: DejaVu Sans (поддержка кириллицы)
+- Моноширинный: DejaVu Sans Mono
 
 ПРОВЕРКА:
-✓ Все тексты на кириллице отображаются правильно
-✓ Изображения высокого разрешения (300+ DPI)
-✓ Разрывы страниц на нужных местах
-✓ Таблицы не разбиваются через страницы
-✓ Цвета печатаются корректно в B&W режиме
+- Все тексты на кириллице отображаются правильно
+- Разрывы страниц на нужных местах
+- Таблицы не разбиваются через страницы
 -->

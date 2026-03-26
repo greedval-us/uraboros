@@ -3,43 +3,43 @@
 
     <table class="report-table">
         <tr>
-            <td class="report-table-label">Название</td>
-            <td class="report-table-value">{{ $title }}</td>
+            <td style="font-weight: 600; width: 40%;">Название</td>
+            <td>{{ $title }}</td>
         </tr>
 
         <tr>
-            <td class="report-table-label">Username</td>
-            <td class="report-table-value">{{ $username ?? '—' }}</td>
+            <td style="font-weight: 600;">Username</td>
+            <td>{{ $username ?? '—' }}</td>
         </tr>
 
         <tr>
-            <td class="report-table-label">Количество участников</td>
-            <td class="report-table-value">{{ number_format($participants ?? 0, 0, '.', ' ') }}</td>
+            <td style="font-weight: 600;">Количество участников</td>
+            <td>{{ number_format($participants ?? 0, 0, '.', ' ') }}</td>
         </tr>
 
         <tr>
-            <td class="report-table-label">Дата создания</td>
-            <td class="report-table-value">{{ $createdAt ?? '—' }}</td>
+            <td style="font-weight: 600;">Дата создания</td>
+            <td>{{ $createdAt ?? '—' }}</td>
         </tr>
 
         <tr>
-            <td class="report-table-label">Последнее обновление</td>
-            <td class="report-table-value">{{ $lastUpdate ?? '—' }}</td>
+            <td style="font-weight: 600;">Последнее обновление</td>
+            <td>{{ $lastUpdate ?? '—' }}</td>
         </tr>
     </table>
 
     @if(!empty($description))
-        <div class="report-description" style="margin-top:15px;">
+        <div class="description-box" style="margin-top: 14px;">
             <strong>Описание</strong>
-            <pre>{{ $description }}</pre>
+            <pre style="margin-top: 6px;">{{ $description }}</pre>
         </div>
     @endif
 
     @if(!empty($flags))
-        <div class="report-tags" style="margin-top:10px;">
+        <div style="margin-top: 10px;">
             <strong>Флаги:</strong><br>
             @foreach(explode(',', $flags) as $flag)
-                <span class="report-tag">{{ trim($flag) }}</span>
+                <span class="badge">{{ trim($flag) }}</span>
             @endforeach
         </div>
     @endif

@@ -17,9 +17,19 @@ class PdfBuilder
 
     public function build()
     {
-        return Pdf::loadView('pdf.layout', [
+        $pdf = Pdf::loadView('pdf.layout', [
             'sections' => $this->sections,
         ]);
+
+        $pdf->setOptions([
+            'defaultFont' => 'DejaVu Sans',
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+            'isFontSubsettingEnabled' => true,
+            'chroot' => realpath(base_path()),
+        ]);
+
+        return $pdf;
     }
 }
 

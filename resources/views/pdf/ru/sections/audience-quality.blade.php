@@ -11,7 +11,7 @@
 
     <p>
         Числовые значения метрики по сообщениям отображены в конце отчета
-        в таблице №3 «Качество аудитории».
+        в таблице 3 «Качество аудитории».
     </p>
 
     <p>
@@ -20,8 +20,8 @@
     </p>
 
     <ul>
-        <li>Доля пишущих от аудитории (WriterToMembers) – {{ $writerToMembers ?? 0 }} %</li>
-        <li>Доля пишущих среди активных (WriterShare) – {{ $writerShare ?? 0 }} %</li>
+        <li>Доля пишущих от аудитории (WriterToMembers) — {{ $writerToMembers ?? 0 }}%</li>
+        <li>Доля пишущих среди активных (WriterShare) — {{ $writerShare ?? 0 }}%</li>
     </ul>
 
     <p>
@@ -33,14 +33,14 @@
     @if(!empty($writerToMembersAllChart))
         <div class="report-chart">
             <div class="report-chart-title">Структура аудитории (WriterToMembers)</div>
-            <img src="{{ $writerToMembersAllChart }}" style="width:100%; margin-top:10px;">
+            <img src="{{ $writerToMembersAllChart }}" style="width:100%;">
         </div>
     @endif
 
     @if(!empty($writerToShareAllChart))
         <div class="report-chart">
             <div class="report-chart-title">Структура активной аудитории (WriterShare)</div>
-            <img src="{{ $writerToShareAllChart }}" style="width:100%; margin-top:10px;">
+            <img src="{{ $writerToShareAllChart }}" style="width:100%;">
         </div>
     @endif
 
@@ -66,10 +66,9 @@
         <li>соотношения активных авторов и пассивных читателей</li>
     </ul>
 
-    <p>
-        Числовые значения метрики по сообщениям отображены
-        в конце отчета в таблице №3.1 «Доля пишущих от аудитории».
-    </p>
+    <div class="note-box">
+        Числовые значения метрики по сообщениям отображены в конце отчета в таблице 3.1 «Доля пишущих от аудитории».
+    </div>
 
     <p>Значения показателя могут свидетельствовать о:</p>
 
@@ -81,11 +80,8 @@
 
     @if(!empty($writerToMembersChart))
         <div class="report-chart">
-            <div class="report-chart-title">
-                График доли пишущих от аудитории
-            </div>
-
-            <img src="{{ $writerToMembersChart }}" style="width:100%; margin-top:10px;">
+            <div class="report-chart-title">График доли пишущих от аудитории</div>
+            <img src="{{ $writerToMembersChart }}" style="width:100%;">
         </div>
     @endif
 
@@ -109,10 +105,9 @@
         и пользователями, участвующими в его создании.
     </p>
 
-    <p>
-        Числовые значения метрики по сообщениям отображены
-        в конце отчета в таблице №3.2 «Доля пишущих среди активных».
-    </p>
+    <div class="note-box">
+        Числовые значения метрики по сообщениям отображены в конце отчета в таблице 3.2 «Доля пишущих среди активных».
+    </div>
 
     <p>Значения показателя свидетельствуют о:</p>
 
@@ -125,11 +120,8 @@
 
     @if(!empty($writerShareChart))
         <div class="report-chart">
-            <div class="report-chart-title">
-                График доли пишущих среди активных
-            </div>
-
-            <img src="{{ $writerShareChart }}" style="width:100%; margin-top:10px;">
+            <div class="report-chart-title">График доли пишущих среди активных</div>
+            <img src="{{ $writerShareChart }}" style="width:100%;">
         </div>
     @endif
 
@@ -153,10 +145,9 @@
         нехарактерные для естественного поведения аудитории.
     </p>
 
-    <p>
-        Числовые значения метрики по сообщениям отображены
-        в конце отчета в таблице №3.3 «Индекс временных всплесков».
-    </p>
+    <div class="note-box">
+        Числовые значения метрики по сообщениям отображены в конце отчета в таблице 3.3 «Индекс временных всплесков».
+    </div>
 
     <p>Подобные всплески могут свидетельствовать о:</p>
 
@@ -169,11 +160,8 @@
 
     @if(!empty($timeBurstIndexChart))
         <div class="report-chart">
-            <div class="report-chart-title">
-                График индекса временных всплесков
-            </div>
-
-            <img src="{{ $timeBurstIndexChart }}" style="width:100%; margin-top:10px;">
+            <div class="report-chart-title">График индекса временных всплесков</div>
+            <img src="{{ $timeBurstIndexChart }}" style="width:100%;">
         </div>
     @endif
 
@@ -182,12 +170,8 @@
 
 <div class="report-section page-break">
 
-    <div class="report-section-title">
-        Таблицы с числовыми значениями
-    </div>
-    <div class="report-table-title">
-        Таблица №3 «Качество аудитории»
-    </div>
+    <div class="report-section-title">Таблицы с числовыми значениями</div>
+    <div class="report-table-title">Таблица 3 — Качество аудитории</div>
 
     <table class="report-table">
         <thead>
@@ -207,9 +191,7 @@
 
 <div class="report-section page-break">
 
-    <div class="report-table-title">
-        Таблица №3.1 «Доля пишущих от аудитории»
-    </div>
+    <div class="report-table-title">Таблица 3.1 — Доля пишущих от аудитории</div>
 
     <table class="report-table">
         <thead>
@@ -233,9 +215,7 @@
 
 <div class="report-section page-break">
 
-    <div class="report-table-title">
-        Таблица №3.2 «Доля пишущих среди активных»
-    </div>
+    <div class="report-table-title">Таблица 3.2 — Доля пишущих среди активных</div>
 
     <table class="report-table">
         <thead>
@@ -259,9 +239,7 @@
 
 <div class="report-section page-break">
 
-    <div class="report-table-title">
-        Таблица №3.3 «Индекс временных всплесков»
-    </div>
+    <div class="report-table-title">Таблица 3.3 — Индекс временных всплесков</div>
 
     <table class="report-table">
         <thead>

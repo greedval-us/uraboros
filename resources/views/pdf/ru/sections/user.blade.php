@@ -108,23 +108,23 @@
     </table>
 
     @if(!empty(data_get($user, 'about')))
-        <div class="report-description" style="margin-top:15px;">
+        <div class="description-box" style="margin-top: 14px;">
             <strong>О себе</strong>
-            <pre>{{ data_get($user, 'about') }}</pre>
+            <pre style="margin-top: 6px;">{{ data_get($user, 'about') }}</pre>
         </div>
     @endif
 
     @if(!empty($activityPeriodChart))
         <div class="report-chart">
             <div class="report-chart-title">График активности по дням</div>
-            <img src="{{ $activityPeriodChart }}" style="width:100%; margin-top:10px;">
+            <img src="{{ $activityPeriodChart }}" style="width:100%;">
         </div>
     @endif
 
     @if(!empty($activityByGroupsChart))
         <div class="report-chart">
             <div class="report-chart-title">График активности по группам</div>
-            <img src="{{ $activityByGroupsChart }}" style="width:100%; margin-top:10px;">
+            <img src="{{ $activityByGroupsChart }}" style="width:100%;">
         </div>
     @endif
 
@@ -134,7 +134,7 @@
     <div class="report-section-title">Таблицы с числовыми значениями</div>
 
     @if(!empty($activityPeriod))
-        <div class="report-table-title">Таблица №1.1 «Активность пользователя по дням»</div>
+        <div class="report-table-title">Таблица 1.1 — Активность пользователя по дням</div>
         <table class="report-table">
             <thead>
                 <tr>
@@ -159,7 +159,7 @@
 
     @if(!empty($activityByGroups))
         <div class="report-section page-break">
-            <div class="report-table-title">Таблица №1.2 «Активность пользователя по группам»</div>
+            <div class="report-table-title">Таблица 1.2 — Активность пользователя по группам</div>
             <table class="report-table">
                 <thead>
                     <tr>
