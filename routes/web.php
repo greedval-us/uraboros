@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\TelegramAnalyticsController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -17,5 +18,9 @@ Route::get('dashboard', function () {
 Route::get('telegram', function () {
     return Inertia::render('Telegram');
 })->middleware(['auth', 'verified'])->name('telegram');
+
+Route::post('telegram/analytics', [TelegramAnalyticsController::class, 'fetch'])
+    ->middleware(['auth', 'verified'])
+    ->name('telegram.analytics');
 
 require __DIR__.'/settings.php';
