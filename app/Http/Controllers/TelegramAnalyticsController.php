@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Modules\Analytics\TelegramAnalyticsService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -10,34 +11,36 @@ use Throwable;
 
 class TelegramAnalyticsController extends Controller
 {
-    public function __invoke(Request $request, TelegramAnalyticsService $service): Response
+    public function __invoke(Request $request): Response
     {
-        $validated = $request->validate([
-            'channel' => ['nullable', 'string', 'max:255'],
-            'days' => ['nullable', 'integer', 'in:7,14,30,90'],
-        ]);
-
-        $channel = trim((string) ($validated['channel'] ?? ''));
-        $days = (int) ($validated['days'] ?? 30);
-
-        $analytics = null;
-        $error = null;
-
-        if ($channel !== '') {
-            try {
-                $analytics = $service->getChannelAnalytics($channel, $days);
-            } catch (Throwable $exception) {
-                $error = $exception->getMessage();
-            }
-        }
-
         return Inertia::render('Telegram', [
             'filters' => [
-                'channel' => $channel,
-                'days' => $days,
+                'channel' => '',
+                'days' => 30,
             ],
-            'analytics' => $analytics,
-            'error' => $error,
         ]);
+    }
+
+    public function load(Request $request, TelegramAnalyticsService $service): JsonResponse
+    {
+        $validated = $request->validate([
+            'channel' => ['required', 'string', 'max:255'],
+            'days' => ['required', 'integer', 'in:7,14,30,90'],
+        ]);
+
+        try {
+            $analytics = $service->getChannelAnalytics(
+                trim((string) $validated['channel']),
+                (int) $validated['days'],
+            );
+
+            return response()->json([
+                'analytics' => $analytics,
+            ]);
+        } catch (Throwable $exception) {
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ], 422);
+        }
     }
 }

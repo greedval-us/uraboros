@@ -20,9 +20,17 @@ Route::get('telegram', TelegramAnalyticsController::class)
     ->middleware(['auth', 'verified'])
     ->name('telegram');
 
+Route::post('telegram/analytics/load', [TelegramAnalyticsController::class, 'load'])
+    ->middleware(['auth', 'verified'])
+    ->name('telegram.analytics.load');
+
 Route::post('telegram/reports/start', [TelegramReportController::class, 'start'])
     ->middleware(['auth', 'verified'])
     ->name('telegram.reports.start');
+
+Route::post('telegram/reports/preview', [TelegramReportController::class, 'preview'])
+    ->middleware(['auth', 'verified'])
+    ->name('telegram.reports.preview');
 
 Route::get('telegram/reports/status/{taskId}', [TelegramReportController::class, 'status'])
     ->middleware(['auth', 'verified'])

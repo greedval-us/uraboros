@@ -3,32 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\Analytics\GenerateTelegramReportJob;
+use App\Modules\Analytics\TelegramReportBuildService;
 use App\Modules\Analytics\TelegramReportTaskService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class TelegramReportController extends Controller
 {
     public function start(Request $request, TelegramReportTaskService $taskService): JsonResponse
     {
         $validated = $request->validate([
-            'channel' => ['required', 'string', 'max:255'],
+            'target' => ['required', 'string', 'max:255'],
             'days' => ['required', 'integer', 'in:7,14,30,90'],
-            'type' => ['required', 'string', 'in:basic,audience'],
+            'type' => ['required', 'string', 'in:basic,audience,funnel,user_leaders,full_report,user'],
             'lang' => ['nullable', 'string', 'in:ru,en'],
         ]);
 
         $task = $taskService->create(
             userId: (int) $request->user()->id,
-            channel: trim((string) $validated['channel']),
+            target: trim((string) $validated['target']),
             days: (int) $validated['days'],
             type: (string) $validated['type'],
         );
 
         GenerateTelegramReportJob::dispatch(
             taskId: $task['taskId'],
-            channel: $task['channel'],
+            target: $task['target'],
             days: $task['days'],
             type: $task['type'],
             userId: $task['userId'],
@@ -40,6 +42,36 @@ class TelegramReportController extends Controller
             'status' => $task['status'],
             'message' => $task['message'],
         ]);
+    }
+
+    public function preview(Request $request, TelegramReportBuildService $buildService): JsonResponse
+    {
+        $validated = $request->validate([
+            'target' => ['required', 'string', 'max:255'],
+            'days' => ['required', 'integer', 'in:7,14,30,90'],
+            'type' => ['required', 'string', 'in:basic,audience,funnel,user_leaders,full_report,user'],
+            'lang' => ['nullable', 'string', 'in:ru,en'],
+        ]);
+
+        try {
+            $build = $buildService->build(
+                type: (string) $validated['type'],
+                target: trim((string) $validated['target']),
+                days: (int) $validated['days'],
+                lang: (string) ($validated['lang'] ?? 'ru'),
+            );
+
+            return response()->json([
+                'type' => $validated['type'],
+                'entity' => $build['entity'],
+                'period' => $build['period'],
+                'viewData' => $build['viewData'],
+            ]);
+        } catch (Throwable $exception) {
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ], 422);
+        }
     }
 
     public function status(Request $request, string $taskId, TelegramReportTaskService $taskService): JsonResponse

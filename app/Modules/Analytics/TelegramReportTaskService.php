@@ -9,14 +9,14 @@ class TelegramReportTaskService
 {
     private const TTL_SECONDS = 7200;
 
-    public function create(int $userId, string $channel, int $days, string $type): array
+    public function create(int $userId, string $target, int $days, string $type): array
     {
         $taskId = (string) Str::uuid();
 
         $payload = [
             'taskId' => $taskId,
             'userId' => $userId,
-            'channel' => $channel,
+            'target' => $target,
             'days' => $days,
             'type' => $type,
             'status' => 'queued',
